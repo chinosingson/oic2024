@@ -1,0 +1,8 @@
+#block-howtoapply3rdcall a {
+    color: #1da695;
+    word-wrap: break-word;
+}
+
+#block-howtoapply3rdcall a:hover, #block-howtoapply3rdcall a:focus {
+    color: #5b9836;
+}

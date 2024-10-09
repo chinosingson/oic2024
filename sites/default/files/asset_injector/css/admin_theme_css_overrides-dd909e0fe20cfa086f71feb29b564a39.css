@@ -1,0 +1,14 @@
+.node-form:not([class^="node-events-"]) .field--type-smartdate .duration-wrapper,
+.node-form:not([class^="node-events-"]) .field--type-smartdate .time-end,
+.node-form:not([class^="node-events-"]) .field--type-smartdate h4.label {
+  display: none !important;
+}
+.node-form:not([class^="node-events-"]) .field--type-smartdate .allday-label {
+  margin: 0;
+}
+.node-form:not([class^="node-events-"]) .field--type-smartdate .allday {
+  margin-left: 0;
+}
+.node-form input[type="date"] {
+  line-height: initial;
+}
