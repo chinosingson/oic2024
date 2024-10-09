@@ -1,0 +1,12 @@
+{%
+  set classes = [
+    'x11',
+    'c-menu-type-classic',
+  ]
+%}
+
+<ul {{ attributes.addClass(classes) }}>
+  {% for row in rows %}
+    {{ row }}
+  {% endfor %}
+</ul>

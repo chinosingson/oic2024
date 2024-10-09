@@ -2,10 +2,10 @@
 error_log
 composer.json_*
 composer.lock_*
-sites/default/files
-sites/default/settings.php
-sites/default/settings.local.php
-sites/default/services.local.yml
+web/sites/default/files
+web/sites/default/settings.php
+web/sites/default/settings.local.php
+web/sites/default/services.local.yml
 *.DS_Store
 *.mysql
 *.gz

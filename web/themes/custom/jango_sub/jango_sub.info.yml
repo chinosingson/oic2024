@@ -1,0 +1,31 @@
+name: 'Ocean Innovation Challenge (OIC)'
+type: theme
+description: 'Ocean Innovation Challenge (OIC) Sub-Theme.'
+core_version_requirement: ^8.8 || ^9
+base theme: jango
+regions:
+  header: Header
+  highlighted: Highlighted
+  page_top: 'Page Top'
+  content: Content
+  sidebar: Sidebar
+  content_full: 'Content Full Width'
+  page_bottom: 'Page Bottom'
+  footer: Footer
+
+libraries:
+  - jango_sub/ammapjs
+  - jango_sub/match-height
+  - jango_sub/global-styling
+
+libraries-override:
+  jango/global-scripts:
+    js:
+      assets/plugins/jquery.easing.min.js: false
+      assets/plugins/gmaps/gmaps.js: false
+      assets/plugins/gmaps/api.js: false
+#libraries-override:
+#  global-scripts:
+#    js:
+#      assets/plugins/gmaps/gmaps.js: false
+#      assets/plugins/gmaps/api.js: false

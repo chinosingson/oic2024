@@ -1,0 +1,12 @@
+name: Duplicate Role
+type: module
+description: Allows duplicating an existing role and its permissions.
+package: Administration
+core: 8.x
+core_version_requirement: ^8 || ^9
+configure: duplicaterole.overview
+
+# Information added by Drupal.org packaging script on 2020-12-01
+version: '8.x-1.2'
+project: 'duplicate_role'
+datestamp: 1606812956

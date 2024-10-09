@@ -1,0 +1,337 @@
+/**
+ * @file
+ * Global utilities.
+ *
+ */
+(($, Drupal) => {
+  'use strict';
+
+  const $win = $(window);
+  const $doc = $(document);
+  
+  // BEGIN: Layout Go To Top override original function
+  $win[0].LayoutGo2Top = function() {
+    var handle = function () {
+      var currentWindowPosition = $(window).scrollTop(); // current vertical position
+      if (currentWindowPosition > 300) {
+        $(".c-layout-go2top").removeClass('hide').addClass('shown');
+      } else {
+        $(".c-layout-go2top").removeClass('shown').addClass('hide');
+      }
+    };
+
+    return {
+      //main function to initiate the module
+      init: function () {
+        handle(); // call headerFix() when the page was loaded
+
+        if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+          $(window).bind("touchend touchcancel touchleave", function (e) {
+            handle();
+          });
+        } else {
+          $(window).scroll(function () {
+            handle();
+          });
+        }
+
+        $(".c-layout-go2top").on('click', function (e) {
+          e.preventDefault();
+          $("html, body").animate({
+            scrollTop: 0
+          }, 600, 'linear');
+        });
+      }
+    };
+  }();
+
+  /*
+   * Document Ready
+   */
+  $doc.ready(() => {
+
+    // hide responsive_menu when item is clicked
+    $('.mm-listitem > a[href*="/#"]').on('click', function() {
+      setTimeout(function() { 
+        $('.mm-wrapper__blocker .mm-tabstart')[0].click();
+      }, 600);
+    });
+
+    // Add attribute to svg
+    // $('.a2a_svg svg').attr('xmlns:xlink', 'http://www.w3.org/1999/xlink').attr('aria-hidden', 'false').attr({
+    //   width: '32',
+    //   height: '32',
+    // });
+
+    $('.footer-newsletter .js-form-type-email').on('click', function() {
+      $('.my_modal_Launchdefaultmodal').modal('show');
+    });
+
+    AmCharts.makeChart("AMmap",{
+      "type": "map",
+      "pathToImages": "http://www.amcharts.com/lib/3/images/",
+      "addClassNames": true,
+      "fontSize": 14,
+      "color": "#000000",
+      "projection": "eckert3",
+      "backgroundAlpha": 1,
+      "backgroundColor": "rgba(246,248,250,1)",
+      "dataProvider": {
+        "map": "worldLow",
+        "getAreasFromMap": true,
+        "images": [
+          {
+            "selectable": true,
+            "longitude": -83.753426,
+            "latitude": 9.748917,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Promoting ocean laws - Costa Rica",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/promoting-laws-protect-our-oceans-support-civil-society-and-coastal-communities",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": -113.471191,
+            "latitude": 28.149503,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Nutrialgae fertilizers - Mexico",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/nutrialgae-novel-sustainable-algae-based-fertilizers",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": 73.22068,
+            "latitude": 3.202778,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: EPR - Maldives",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/developing-epr-scheme-plastic-and-packaging-waste-maldives",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": 13.404927,
+            "latitude": 52.520005,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: EPR - Maldives (Germany)",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/developing-epr-scheme-plastic-and-packaging-waste-maldives",
+            "urlTarget": "_self"
+          },		  
+          {
+            "selectable": true,
+            "longitude": 118.736473,
+            "latitude": 9.7423,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: PRIME - Philippines",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/plastic-reduction-marine-environment-prime-project-palawan-philippines",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": 43.7419,
+            "latitude": -12.2822,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: PET recovery, buy-back center - Comoros",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/establishment-pet-recovery-and-buy-back-center",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": -78.9427,
+            "latitude": 36.00483,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Global Plastics Policy Inventory - Global",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/tracking-government-responses-global-plastics-policy-inventory",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": 101.975769,
+            "latitude": 4.210484,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Fashion industry microfiber - Malaysia",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/tackling-microfibres-source-investigating-opportunities-reduce-microfibre",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": 113.921326,
+            "latitude": -0.789275,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Fashion industry microfiber - Indonesia",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/tackling-microfibres-source-investigating-opportunities-reduce-microfibre",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": 108.277199,
+            "latitude": 14.058324,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Fashion industry microfiber - Vietnam",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/tackling-microfibres-source-investigating-opportunities-reduce-microfibre",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": 103.819854,
+            "latitude": 1.352004,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Fashion industry microfiber - Singapore",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/tackling-microfibres-source-investigating-opportunities-reduce-microfibre",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": -23.5075,
+            "latitude": 14.9167,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Nutrient recycling - Cape Verde",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/phos-value-sustainable-solutions-nutrient-recycling",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": -9.259483,
+            "latitude": 39.088289,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Nutrient recycling - Portugal",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/phos-value-sustainable-solutions-nutrient-recycling",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": -6.200684,
+            "latitude": 35.245619,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Nutrialgae fertilizers - Morocco",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/nutrialgae-novel-sustainable-algae-based-fertilizers",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": -3.69976,
+            "latitude": 42.340889,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Nutrialgae fertilizers - (Spain - HQ?)",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/nutrialgae-novel-sustainable-algae-based-fertilizers",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": 121.774017,
+            "latitude": 12.879721,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Fortuna Coconut Coolers - Philippines",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/fortuna-coconut-coolers",
+            "urlTarget": "_self"
+          },
+          {
+            "selectable": true,
+            "longitude": -122.419418,
+            "latitude": 37.774929,
+            "svgPath": "M3.5,13.277C3.5,6.22,9.22,0.5,16.276,0.5C23.333,0.5,29.053,6.22,29.053,13.277C29.053,14.54,28.867,15.759,28.526,16.914C26.707,24.271,16.219,32.5,16.219,32.5C16.219,32.5,4.37,23.209,3.673,15.542C3.673,15.542,3.704,15.536,3.704,15.536C3.572,14.804,3.5,14.049,3.5,13.277C3.5,13.277,3.5,13.277,3.5,13.277M16.102,16.123C18.989,16.123,21.329,13.782,21.329,10.895C21.329,8.008,18.989,5.668,16.102,5.668C13.216,5.668,10.876,8.008,10.876,10.895C10.876,13.782,13.216,16.123,16.102,16.123C16.102,16.123,16.102,16.123,16.102,16.123",
+            "color": "rgba(227,175,32,1)",
+            "scale": 1,
+            "title": "SDG14.1: Fortuna Coconut Coolers - Phils (USA)",
+            "url": "/ocean-innovators#cbp=/ocean-innovations/fortuna-coconut-coolers",
+            "urlTarget": "_self"
+          }
+        ]
+      },
+      "balloon": {
+        "horizontalPadding": 10,
+        "borderAlpha": 0,
+        "borderThickness": 1,
+        "verticalPadding": 10,
+        "fontSize": 14
+      },
+      "areasSettings": {
+        "color": "rgba(62,131,203,1)",
+        "outlineColor": "rgba(255,255,255,1)",
+        "rollOverOutlineColor": "rgba(255,255,255,1)",
+        "rollOverBrightness": 20,
+        "selectedBrightness": 20,
+        "selectable": false,
+        "unlistedAreasAlpha": 0,
+        "unlistedAreasOutlineAlpha": 0,
+        "balloonText": ""
+      },
+      "imagesSettings": {
+        "alpha": 1,
+        "color": "rgba(62,131,203,1)",
+        "outlineAlpha": 0,
+        "rollOverOutlineAlpha": 0,
+        "outlineColor": "rgba(255,255,255,1)",
+        "rollOverBrightness": 20,
+        "selectedBrightness": 20,
+        "selectable": true
+      },
+      "linesSettings": {
+        "color": "rgba(62,131,203,1)",
+        "selectable": true,
+        "rollOverBrightness": 20,
+        "selectedBrightness": 20
+      },
+      "zoomControl": {
+        "zoomControlEnabled": true,
+        "homeButtonEnabled": true,
+        "panControlEnabled": false,
+        "left": 15,
+        "bottom": 50,
+        "minZoomLevel": 0.25,
+        "gridHeight": 100,
+        "gridAlpha": 0.1,
+        "gridBackgroundAlpha": 0,
+        "gridColor": "#FFFFFF",
+        "draggerAlpha": 1,
+        "buttonCornerRadius": 2
+      }
+    });
+  });
+
+
+  Drupal.behaviors.headerSeachIcon = {
+    attach: function (context, settings) {     
+      $('.c-layout-header', context).on('click', '.c-topbar .c-search-toggler', function(e) {
+        e.preventDefault();
+        $('body', context).addClass('c-layout-quick-search-shown');
+        console.log('test');
+        if (App.isIE() === false) {
+          $('.c-quick-search > .form-control').focus();
+        }
+      });
+    }
+  };
+
+})(jQuery, Drupal);

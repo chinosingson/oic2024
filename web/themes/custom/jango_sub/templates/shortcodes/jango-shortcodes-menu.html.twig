@@ -1,0 +1,136 @@
+<header class="c-layout-header test {{ class }}" data-minimize-offset="80">
+  <input type="hidden" id="body-classes" value="{{ body_classes }}"/>
+  {% if header_top %}
+    <div class="c-topbar c-topbar-{{ header_top_class }}">
+      <div class="container{{ width }}">
+
+
+        <!-- BEGIN: INLINE NAV -->
+        <nav class="c-top-menu c-pull-right">
+            
+              <ul class="c-ext c-theme-ul">
+                {# <li class="c-lang dropdown c-last">
+                  <div class="lang-select">
+                    <img src="/themes/custom/jango_sub/img/select-language.jpg" alt="Language Select" height="auto" width="100%">
+                  </div>
+                </li> #}
+                <li class="c-lang dropdown c-last">
+                  <a href="#">{{ 'Select Language' }}</a>
+                  <!-- Language list menu -->
+                  <ul class="language-switcher-language-url dropdown-menu pull-right">
+                    <li hreflang="fr" class="fr">
+                      <!-- <a href="https://translate.google.com/translate?hl=&sl=en&tl=fr&u=https://oceaninnovationchallenge.org" class="language-link" hreflang="fr" target="_blank">French</a> -->
+                      <a href="https://rua7oqtzgoqavgvbs6i7pu4fse-ac5fdsxevxq4s5y.translate.goog" class="language-link" hreflang="fr" target="_blank">French</a>
+                    </li>
+                    <li hreflang="es" class="es">
+                      <!-- <a href="https://translate.google.com/translate?hl=&sl=en&tl=es&u=https://oceaninnovationchallenge.org" class="language-link" hreflang="es" target="_blank">Spanish</a> -->
+                      <a href="https://vx6ixilarp2v6w7ujdmyullhhq-ac5fdsxevxq4s5y.translate.goog" class="language-link" hreflang="es" target="_blank">Spanish</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="c-divider">|</li>
+              {% if search %}
+                <li class="c-search-toggler-wrapper">
+                  <a href="#" class="c-btn-icon c-search-toggler">
+                    <i class="fa fa-search"></i>
+                  </a>
+                </li>
+              {% endif %}
+              </ul>
+
+        </nav>
+        <!-- END: INLINE NAV -->
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="c-navbar">
+    <div class="container{{ width }}">
+      <!-- BEGIN: BRAND -->
+      <div class="c-navbar-wrapper clearfix">
+        <div class="c-brand c-pull-left">
+          <a href="{{ url('<front>') }}" class="c-logo">
+            <img src="{{ logo }}" alt="{{ site_name }}" class="c-desktop-logo">
+            <img src="{{ logo }}" alt="{{ site_name }}" class="c-desktop-logo-inverse">
+            <img src="{{ logo }}" alt="{{ site_name }}" class="c-mobile-logo">
+          </a>
+
+          <a id="toggle-icon" class="toggle c-hor-nav-toggler responsive-menu-toggle" title="Menu" href="#off-canvas">
+            <span class="c-line"></span>
+            <span class="c-line"></span>
+            <span class="c-line"></span>
+          </a>
+          <button class="c-topbar-toggler" type="button">
+            <i class="fa fa-ellipsis-v"></i>
+          </button>
+          {# {% if search %}
+            <button class="c-search-toggler" type="button">
+              <i class="fa fa-search"></i>
+            </button>
+          {% endif %} #}
+          {% if cart %}
+            <button class="c-cart-toggler" type="button">
+              <i class="icon-handbag"></i>
+              <span class="c-cart-number c-theme-bg">{{ cart_count }}</span>
+            </button>
+          {% endif %}
+        </div>
+        {% if (search and search_block != FALSE) %}
+          {{ search_block }}
+        {% endif %}
+
+        <!-- Dropdown menu toggle on mobile: c-toggler class can be applied to the link arrow or link itself depending on toggle mode -->
+        <nav class="c-mega-menu c-pull-right c-mega-menu-{{ bg_color }} c-mega-menu-dark-mobile c-mega-menu-onepage" data-onepage-animation-speed="700">
+          <!-- Main Menu -->
+          <ul class="nav navbar-nav c-theme-nav">
+            {{ menu }}
+
+            {% if cart %}
+              <li class="c-cart-toggler-wrapper">
+                <a href="{{ url('commerce_cart.page') }}" class="c-btn-icon c-cart-toggler">
+                  <i class="icon-handbag c-cart-icon"></i>
+                  <span class="c-cart-number c-theme-bg">{{ cart_count }}</span>
+                </a>
+              </li>
+            {% endif %}
+
+            {% if login %}
+              <li>
+                {% if is_authenticated %}
+                  {% set user_menu_title = 'Account' %}
+                {% else %}
+                  {% set user_menu_title = 'Sign In' %}
+                {% endif %}
+                <a href="{{ url('user.page') }}"
+                   class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-dark c-btn-circle c-btn-uppercase c-btn-sbold">
+                  <i class="icon-user"></i> {{ user_menu_title|t }}
+                </a>
+              </li>
+            {% endif %}
+
+            {% if is_dev_host %}
+              <li class="c-quick-sidebar-toggler-wrapper">
+                <a href="#" class="c-quick-sidebar-toggler">
+                  <span class="c-line"></span>
+                  <span class="c-line"></span>
+                  <span class="c-line"></span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+
+      {% if cart_block != FALSE %}
+        <div{{ attributes.addClass(['c-cart-menu']) }}>
+          <div class="c-cart-menu-title">
+            <p class="c-cart-menu-float-l c-font-sbold">{{ count_text }}</p>
+            <p class="c-cart-menu-float-r c-theme-font c-font-sbold">{{ cart_total_price }}</p>
+          </div>
+          {{ cart_block }}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</header>

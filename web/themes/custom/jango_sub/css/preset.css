@@ -1,0 +1,46 @@
+
+/** PRESETS **/
+.z-index-up {
+  position: relative;
+  z-index: 4;
+}
+.pos-relative {position: relative;}
+
+/* Text Colors*/
+.text-white {color:#ffffff;}
+.text-blue-light {color:#32c5d2;}
+.text-blue-dark {color:#167bbb;}
+.text-gold {color:#edb70c;}
+.text-green {color:#5b9836;}
+
+
+/* Fonts */
+.c-font-medium {
+  font-family: 'Metropolis Medium';
+  font-style: normal;
+  font-weight: 500;
+}
+.c-font-light {
+  font-family: 'Metropolis Light';
+  font-style: normal;
+  font-weight: 300;
+}
+.c-font-regular {
+  font-family: 'Metropolis Regular';
+  font-style: normal;
+  font-weight: 300;
+}
+
+/* Text Alignments*/
+
+/* Paddings/Margins */
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.padding-right {
+  padding-right: 10px;
+}
+.padding-left {
+  padding-left: 10px;
+}
