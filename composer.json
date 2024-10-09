@@ -101,6 +101,7 @@
         "drupal/webform": "^6.0",
         "drupal/xmlsitemap": "^1.0",
         "drupal/yaml_editor": "^1.1",
+        "drush/drush": "^10",
         "phpmailer/phpmailer": "^6.3"
     },
     "conflict": {
@@ -173,7 +174,6 @@
         }
     },
     "require-dev": {
-        "drupal/core-dev": "^9",
-        "drush/drush": "^10"
+        "drupal/core-dev": "^9"
     }
 }
