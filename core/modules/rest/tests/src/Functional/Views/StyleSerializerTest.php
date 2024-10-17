@@ -70,9 +70,6 @@ class StyleSerializerTest extends ViewTestBase {
    */
   protected $renderer;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp($import_test_views = TRUE, $modules = ['rest_test_views']): void {
     parent::setUp($import_test_views, $modules);
 

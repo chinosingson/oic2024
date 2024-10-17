@@ -227,7 +227,7 @@ class DropzoneJsEbWidget extends WidgetBase {
    */
   protected function getFiles(array $form, FormStateInterface $form_state) {
     $config = $this->getConfiguration();
-    $additional_validators = ['file_validate_size' => [Bytes::toInt($config['settings']['max_filesize']), 0]];
+    $additional_validators = ['file_validate_size' => [Bytes::toNumber($config['settings']['max_filesize']), 0]];
 
     $files = $form_state->get(['dropzonejs', $this->uuid(), 'files']);
 
@@ -352,7 +352,7 @@ class DropzoneJsEbWidget extends WidgetBase {
    * Validate extension.
    *
    * Because while validating we don't have a file object yet, we can't use
-   * file_validate_extensions directly. That's why we make a copy of that
+   * FileExtension directly. That's why we make a copy of that
    * function here and switch the file argument with filename argument.
    *
    * @param string $filename
@@ -546,7 +546,7 @@ class DropzoneJsEbWidget extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function __sleep() {
+  public function __sleep(): array {
     return array_diff(parent::__sleep(), ['files']);
   }
 

@@ -5,7 +5,8 @@ namespace Drupal\Tests\system\Functional\UpdateSystem;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Tests the hook invocation for determining update dependencies.
+ * Tests that the hook invocation for determining update dependencies works
+ * correctly.
  *
  * @group Update
  */
@@ -27,9 +28,6 @@ class DependencyHookInvocationTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
     require_once $this->root . '/core/includes/update.inc';

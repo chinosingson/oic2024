@@ -39,11 +39,12 @@ class SelectWidget extends FivestarWidgetBase {
 
     $element['rating'] = [
       '#type' => 'select',
+      '#title' => $element['#title'],
       '#empty_option' => $this->t('Select rating:'),
       '#empty_value' => '-',
       '#options' => $options,
       '#required' => $items[$delta]->getFieldDefinition()->isRequired(),
-      '#default_value' => isset($items[$delta]->rating) ? $items[$delta]->rating : 0,
+      '#default_value' => $items[$delta]->rating ?? 0,
     ];
 
     return $element;

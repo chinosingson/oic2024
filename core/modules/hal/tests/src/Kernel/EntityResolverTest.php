@@ -30,9 +30,6 @@ class EntityResolverTest extends NormalizerTestBase {
    */
   protected $format = 'hal_json';
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 

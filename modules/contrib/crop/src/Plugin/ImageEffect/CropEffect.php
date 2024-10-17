@@ -118,12 +118,12 @@ class CropEffect extends ConfigurableImageEffectBase implements ContainerFactory
 
     if (!$image->crop($anchor['x'], $anchor['y'], $size['width'], $size['height'])) {
       $this->logger->error('Manual image crop failed using the %toolkit toolkit on %path (%mimetype, %width x %height)', [
-          '%toolkit' => $image->getToolkitId(),
-          '%path' => $image->getSource(),
-          '%mimetype' => $image->getMimeType(),
-          '%width' => $image->getWidth(),
-          '%height' => $image->getHeight(),
-        ]
+        '%toolkit' => $image->getToolkitId(),
+        '%path' => $image->getSource(),
+        '%mimetype' => $image->getMimeType(),
+        '%width' => $image->getWidth(),
+        '%height' => $image->getHeight(),
+      ]
       );
       return FALSE;
     }
@@ -222,7 +222,7 @@ class CropEffect extends ConfigurableImageEffectBase implements ContainerFactory
       /** @var \Drupal\crop\Entity\CropType $crop_type */
       $crop_type = $this->typeStorage->load($this->configuration['crop_type']);
       $automatic_crop_event = new AutomaticCrop($image, $crop_type, $this->configuration);
-      $this->eventDispatcher->dispatch(Events::AUTOMATIC_CROP, $automatic_crop_event);
+      $this->eventDispatcher->dispatch($automatic_crop_event, Events::AUTOMATIC_CROP);
       $this->crop = $automatic_crop_event->getCrop();
     }
 
@@ -264,7 +264,7 @@ class CropEffect extends ConfigurableImageEffectBase implements ContainerFactory
    */
   public function getAutomaticCropProvidersList() {
     $event = new AutomaticCropProviders();
-    $this->eventDispatcher->dispatch(Events::AUTOMATIC_CROP_PROVIDERS, $event);
+    $this->eventDispatcher->dispatch($event, Events::AUTOMATIC_CROP_PROVIDERS);
 
     return $event->getProviders();
   }

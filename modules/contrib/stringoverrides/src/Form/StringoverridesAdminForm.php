@@ -268,12 +268,12 @@ class StringoverridesAdminForm extends FormBase {
       case 'edit-submit':
         $config_disabled->set('contexts', $words[FALSE]);
         $config_disabled->save();
-        $this->messenger()->addStatus($this->t('Your changes have been saved.'));
+        $this->statusMessage($this->t('Your changes have been saved.'));
         break;
 
       case 'edit-remove':
         $config_disabled->delete();
-        $this->messenger()->addStatus($this->t('The disabled strings have been removed.'));
+        $this->statusMessage($this->t('The disabled strings have been removed.'));
         break;
     }
 
@@ -281,4 +281,17 @@ class StringoverridesAdminForm extends FormBase {
     \Drupal::cache()->delete('stringoverides:translation_for_' . $language);
   }
 
+  /**
+   * Displays a status message, checking for compatibility with drupal_set_message.
+   *
+   * @param $message The translated message to be displayed.
+   */
+  private function statusMessage(string $message) {
+    if (function_exists('drupal_set_message')) {
+      drupal_set_message($message);
+    }
+    else {
+      $this->messenger()->addStatus($message);
+    }
+  }
 }

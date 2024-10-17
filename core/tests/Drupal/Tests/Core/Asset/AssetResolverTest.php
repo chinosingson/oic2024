@@ -86,6 +86,9 @@ class AssetResolverTest extends UnitTestCase {
     $active_theme = $this->getMockBuilder('\Drupal\Core\Theme\ActiveTheme')
       ->disableOriginalConstructor()
       ->getMock();
+    $active_theme->expects($this->any())
+      ->method('getName')
+      ->willReturn('bartik');
     $this->themeManager->expects($this->any())
       ->method('getActiveTheme')
       ->willReturn($active_theme);

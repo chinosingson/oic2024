@@ -40,7 +40,8 @@ class TermStorage extends SqlContentEntityStorage implements TermStorageInterfac
   protected $trees = [];
 
   /**
-   * Term ancestry keyed by ancestor term ID, keyed by term ID.
+   * Array of all loaded term ancestry keyed by ancestor term ID, keyed by term
+   * ID.
    *
    * @var \Drupal\taxonomy\TermInterface[][]
    */
@@ -339,7 +340,7 @@ class TermStorage extends SqlContentEntityStorage implements TermStorageInterfac
   /**
    * {@inheritdoc}
    */
-  public function getNodeTerms(array $nids, array $vids = [], $langcode = NULL) {
+  public function getNodeTerms(array $nids, array $vocabs = [], $langcode = NULL) {
     $query = $this->database->select($this->getDataTable(), 'td');
     $query->innerJoin('taxonomy_index', 'tn', '[td].[tid] = [tn].[tid]');
     $query->fields('td', ['tid']);
@@ -348,8 +349,8 @@ class TermStorage extends SqlContentEntityStorage implements TermStorageInterfac
     $query->orderby('td.name');
     $query->condition('tn.nid', $nids, 'IN');
     $query->addTag('taxonomy_term_access');
-    if (!empty($vids)) {
-      $query->condition('td.vid', $vids, 'IN');
+    if (!empty($vocabs)) {
+      $query->condition('td.vid', $vocabs, 'IN');
     }
     if (!empty($langcode)) {
       $query->condition('td.langcode', $langcode);

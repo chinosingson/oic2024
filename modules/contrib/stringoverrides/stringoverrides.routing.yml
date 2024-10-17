@@ -2,6 +2,7 @@ stringoverrides.translations_form.default:
   path: '/admin/config/regional/stringoverrides'
   defaults:
     _controller: '\Drupal\stringoverrides\Controllers\GoToDefaultLanguage::go'
+    _title: 'String Overrides'
   requirements:
     _permission: 'administer string overrides'
 

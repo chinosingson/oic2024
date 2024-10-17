@@ -44,9 +44,6 @@ class BlockContentTypeTest extends BlockContentTestBase {
    */
   protected $autoCreateBasicBlockType = FALSE;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -207,7 +204,7 @@ class BlockContentTypeTest extends BlockContentTestBase {
       ->getStorage('block_content');
 
     // Install all themes.
-    $themes = ['olivero', 'stark', 'claro'];
+    $themes = ['bartik', 'olivero', 'seven', 'stark'];
     \Drupal::service('theme_installer')->install($themes);
     $theme_settings = $this->config('system.theme');
     foreach ($themes as $default_theme) {
@@ -223,7 +220,15 @@ class BlockContentTypeTest extends BlockContentTestBase {
         $this->drupalGet($path);
         $this->clickLink('Place block');
         $this->clickLink('Add custom block');
-        $this->clickLink('foo');
+        // The seven theme has markup inside the link, we cannot use clickLink().
+        if ($default_theme == 'seven') {
+          $options = $theme != $default_theme ? ['query' => ['theme' => $theme]] : [];
+          $this->assertSession()->linkByHrefExists(Url::fromRoute('block_content.add_form', ['block_content_type' => 'foo'], $options)->toString());
+          $this->drupalGet('block/add/foo', $options);
+        }
+        else {
+          $this->clickLink('foo');
+        }
         // Create a new block.
         $edit = ['info[0][value]' => $this->randomMachineName(8)];
         $this->submitForm($edit, 'Save');

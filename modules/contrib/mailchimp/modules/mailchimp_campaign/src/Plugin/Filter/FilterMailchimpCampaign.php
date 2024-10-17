@@ -66,7 +66,7 @@ class FilterMailchimpCampaign extends FilterBase {
       if (isset($build[$entity_type][$entity_id]['#contextual_links'])) {
         unset($build[$entity_type][$entity_id]['#contextual_links']);
       }
-      $content = render($build);
+      $content = \Drupal::service('renderer')->render($build);
     }
 
     return $content;
@@ -89,7 +89,7 @@ class FilterMailchimpCampaign extends FilterBase {
   private function convertUrl($text) {
     global $base_url;
     $matches = [];
-    preg_match_all('/<(a|img).*?(href|src)="(.*?)"/', $text, $matches);
+    preg_match_all('/<(a|img)[^>]*?(href|src)="(.*?)"/', $text, $matches);
     foreach ($matches[3] as $key => $url) {
       if ($url[0] == '/') {
         $new_url = $base_url . $url;

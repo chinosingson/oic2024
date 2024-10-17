@@ -39,9 +39,6 @@ abstract class BlockContentTestBase extends ViewTestBase {
     'block_content_test_views',
   ];
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp($import_test_views = TRUE, $modules = ['block_content_test_views']) {
     parent::setUp($import_test_views, $modules);
     // Ensure the basic bundle exists. This is provided by the standard profile.

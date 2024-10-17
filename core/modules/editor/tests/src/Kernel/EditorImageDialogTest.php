@@ -102,7 +102,7 @@ class EditorImageDialogTest extends EntityKernelTestBase {
       ],
       '_drupal_ajax' => '1',
       'ajax_page_state' => [
-        'theme' => 'olivero',
+        'theme' => 'bartik',
         'theme_token' => 'some-token',
         'libraries' => '',
       ],

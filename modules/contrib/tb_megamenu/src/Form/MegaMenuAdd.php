@@ -9,6 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\tb_megamenu\Entity\MegaMenuConfig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Component\Serialization\Json;
+use Drupal\system\Entity\Menu;
 
 /**
  * Form handler for adding MegaMenuConfig entities.
@@ -32,9 +33,9 @@ class MegaMenuAdd extends EntityForm {
   /**
    * Constructs a MegaMenuAdd object.
    *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+* @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration factory service.
-   * @param \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler
+* @param \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler
    *   The theme handler service.
    */
   public function __construct(ConfigFactoryInterface $config_factory, ThemeHandlerInterface $theme_handler) {
@@ -58,7 +59,10 @@ class MegaMenuAdd extends EntityForm {
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
-    $menus = menu_ui_get_menus();
+    $menus = array_map(function ($menu) {
+      return $menu->label();
+    }, Menu::loadMultiple());
+    asort($menus);
 
     $info = $this->themeHandler->listInfo();
     $themes = [];

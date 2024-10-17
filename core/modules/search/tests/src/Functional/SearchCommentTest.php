@@ -59,9 +59,6 @@ class SearchCommentTest extends BrowserTestBase {
    */
   protected $node;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 

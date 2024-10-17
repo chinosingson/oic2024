@@ -8,10 +8,11 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\BooleanType;
-use PHPStan\Type\Constant\ConstantBooleanType;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
+use function count;
+use function in_array;
 
 final class EntityAccessControlHandlerReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
@@ -32,13 +33,13 @@ final class EntityAccessControlHandlerReturnTypeExtension implements DynamicMeth
 
         $args = $methodCall->getArgs();
         $arg = null;
-        if ($methodReflection->getName() === 'access' && \count($args) === 4) {
+        if ($methodReflection->getName() === 'access' && count($args) === 4) {
             $arg = $args[3];
         }
-        if ($methodReflection->getName() === 'createAccess' && \count($args) === 4) {
+        if ($methodReflection->getName() === 'createAccess' && count($args) === 4) {
             $arg = $args[3];
         }
-        if ($methodReflection->getName() === 'fieldAccess' && \count($args) === 5) {
+        if ($methodReflection->getName() === 'fieldAccess' && count($args) === 5) {
             $arg = $args[4];
         }
 
@@ -47,9 +48,9 @@ final class EntityAccessControlHandlerReturnTypeExtension implements DynamicMeth
         }
 
         $returnAsObjectArg = $scope->getType($arg->value);
-        if (!$returnAsObjectArg instanceof ConstantBooleanType) {
+        if (!$returnAsObjectArg->isBoolean()->yes()) {
             return $returnType;
         }
-        return $returnAsObjectArg->getValue() ? new ObjectType(AccessResultInterface::class) : new BooleanType();
+        return $returnAsObjectArg->isTrue()->yes() ? new ObjectType(AccessResultInterface::class) : new BooleanType();
     }
 }

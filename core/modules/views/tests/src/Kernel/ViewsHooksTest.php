@@ -52,9 +52,6 @@ class ViewsHooksTest extends ViewsKernelTestBase {
    */
   protected $moduleHandler;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp($import_test_views = TRUE): void {
     parent::setUp();
 

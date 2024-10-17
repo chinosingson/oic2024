@@ -12,6 +12,7 @@ use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Constraint\IsNull;
 use PHPUnit\Framework\Constraint\LogicalNot;
 use WebDriver\Exception;
+use WebDriver\Exception\CurlExec;
 
 // cspell:ignore interactable
 
@@ -155,11 +156,23 @@ JS;
    *   The result of $callback.
    */
   private function waitForHelper(int $timeout, callable $callback) {
-    return $this->session->getPage()->waitFor($timeout / 1000, $callback);
+    WebDriverCurlService::disableRetry();
+    $wrapper = function (Element $element) use ($callback) {
+      try {
+        return call_user_func($callback, $element);
+      }
+      catch (CurlExec $e) {
+        return NULL;
+      }
+    };
+    $result = $this->session->getPage()->waitFor($timeout / 1000, $wrapper);
+    WebDriverCurlService::enableRetry();
+    return $result;
   }
 
   /**
-   * Waits for the button specified by the locator and returns it.
+   * Waits for a button (input[type=submit|image|button|reset], button) with
+   * specified locator and returns it.
    *
    * @param string $locator
    *   The button ID, value or alt string.

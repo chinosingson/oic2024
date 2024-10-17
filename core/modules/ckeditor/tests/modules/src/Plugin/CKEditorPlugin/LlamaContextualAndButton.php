@@ -9,7 +9,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\editor\Entity\Editor;
 
 /**
- * Defines a "LlamaContextualAndButton" plugin, with a "llama" feature.
+ * Defines a "LlamaContextualAndButton" plugin, with a contextually OR toolbar
+ * builder-enabled "llama" feature.
  *
  * @CKEditorPlugin(
  *   id = "llama_contextual_and_button",
@@ -40,7 +41,7 @@ class LlamaContextualAndButton extends Llama implements CKEditorPluginContextual
   public function getButtons() {
     return [
       'Llama' => [
-        'label' => $this->t('Insert Llama'),
+        'label' => t('Insert Llama'),
       ],
     ];
   }
@@ -64,7 +65,7 @@ class LlamaContextualAndButton extends Llama implements CKEditorPluginContextual
     }
 
     $form['ultra_llama_mode'] = [
-      '#title' => $this->t('Ultra llama mode'),
+      '#title' => t('Ultra llama mode'),
       '#type' => 'checkbox',
       '#default_value' => $config['ultra_llama_mode'],
     ];

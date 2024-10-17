@@ -16,7 +16,6 @@ use Drupal\Tests\node\Traits\NodeCreationTrait;
  * BigPipe regression test for CKEditor 4.
  *
  * @group legacy
- * @group legacy
  */
 class BigPipeRegressionTest extends WebDriverTestBase {
 
@@ -111,7 +110,7 @@ class BigPipeRegressionTest extends WebDriverTestBase {
     // Confirm that CKEditor loaded.
     $javascript = <<<JS
     (function(){
-      return window.CKEDITOR && Object.keys(CKEDITOR.instances).length > 0;
+      return Object.keys(CKEDITOR.instances).length > 0;
     }())
 JS;
     $this->assertJsCondition($javascript);

@@ -6,7 +6,7 @@ dependencies:
   - drupal:node
   - votingapi:votingapi
 
-# Information added by Drupal.org packaging script on 2021-12-15
-version: '8.x-3.0-beta3'
+# Information added by Drupal.org packaging script on 2024-08-25
+version: '8.x-3.0-beta5'
 project: 'votingapi'
-datestamp: 1639528057
+datestamp: 1724557649

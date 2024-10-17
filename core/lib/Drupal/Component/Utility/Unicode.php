@@ -77,7 +77,8 @@ EOD;
   const STATUS_SINGLEBYTE = 0;
 
   /**
-   * Indicates that full unicode support with PHP mbstring extension is used.
+   * Indicates that full unicode support with the PHP mbstring extension is
+   * being used.
    */
   const STATUS_MULTIBYTE = 1;
 
@@ -142,7 +143,7 @@ EOD;
   }
 
   /**
-   * Decodes UTF byte-order mark (BOM) to the encoding name.
+   * Decodes UTF byte-order mark (BOM) into the encoding's name.
    *
    * @param string $data
    *   The data possibly containing a BOM. This can be the entire contents of

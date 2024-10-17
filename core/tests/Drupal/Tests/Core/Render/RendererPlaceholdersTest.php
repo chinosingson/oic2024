@@ -477,7 +477,7 @@ class RendererPlaceholdersTest extends RendererTestBase {
     // - uncacheable
     $x = $base_element_b;
     $expected_placeholder_render_array = $x['#attached']['placeholders'][(string) $generate_placeholder_markup()];
-    $this->assertArrayNotHasKey('#cache', $expected_placeholder_render_array);
+    unset($x['#attached']['placeholders'][(string) $generate_placeholder_markup()]['#cache']);
     $cases[] = [
       $x,
       $args,
@@ -978,10 +978,9 @@ class RendererPlaceholdersTest extends RendererTestBase {
   }
 
   /**
-   * Tests the creation of an element with a child and a sub-child.
-   *
-   * Each element has the same #lazy_builder callback, but with different
-   * contexts. They don't modify markup, only attach additional drupalSettings.
+   * Create an element with a child and subchild. Each element has the same
+   * #lazy_builder callback, but with different contexts. They don't modify
+   * markup, only attach additional drupalSettings.
    *
    * @covers ::render
    * @covers ::doRender

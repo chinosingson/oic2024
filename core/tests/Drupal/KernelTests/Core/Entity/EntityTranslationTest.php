@@ -245,10 +245,11 @@ class EntityTranslationTest extends EntityLanguageTestBase {
     $storage = $this->container->get('entity_type.manager')
       ->getStorage($entity_type);
     $storage->create([
-      'user_id' => $properties[$langcode]['user_id'],
-      'name' => 'some name',
-      $langcode_key => LanguageInterface::LANGCODE_NOT_SPECIFIED,
-    ])->save();
+        'user_id' => $properties[$langcode]['user_id'],
+        'name' => 'some name',
+        $langcode_key => LanguageInterface::LANGCODE_NOT_SPECIFIED,
+      ])
+      ->save();
 
     $entities = $storage->loadMultiple();
     $this->assertCount(3, $entities, new FormattableMarkup('%entity_type: Three entities were created.', ['%entity_type' => $entity_type]));
@@ -827,7 +828,8 @@ class EntityTranslationTest extends EntityLanguageTestBase {
   }
 
   /**
-   * Tests that translation statuses are correct after removing translations.
+   * Tests if entity translation statuses are correct after removing two
+   * translation.
    */
   public function testDeleteEntityTranslation() {
     $entity_type = 'entity_test_mul';

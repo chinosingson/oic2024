@@ -179,7 +179,7 @@ class FinalExceptionSubscriber implements EventSubscriberInterface {
    * @param $error
    *   Optional error to examine for ERROR_REPORTING_DISPLAY_SOME.
    *
-   * @return array
+   * @return
    *   The updated $error.
    */
   protected function simplifyFileInError($error) {

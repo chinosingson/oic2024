@@ -2,6 +2,8 @@
 
 namespace Drupal\votingapi\Commands;
 
+// cspell:ignore genv vcalc vflush vtype etype resultfunction
+
 use Drush\Commands\DrushCommands;
 use Drupal\votingapi\Entity\Vote;
 
@@ -115,7 +117,7 @@ class VotingApiCommands extends DrushCommands {
       $cache = \Drupal::database()->delete('votingapi_result');
       $votes = \Drupal::database()->delete('votingapi_vote');
 
-      if (!empty($entity_type)) {
+      if ($entity_type !== 'all') {
         $cache->condition('entity_type', $entity_type);
         $votes->condition('entity_type', $entity_type);
       }
@@ -157,6 +159,7 @@ class VotingApiCommands extends DrushCommands {
         ->execute();
     }
     $uids = \Drupal::entityQuery('user')
+      ->accessCheck(TRUE)
       ->condition('status', 1)
       ->execute();
     $query = \Drupal::database()->select($entity_type, 'e')

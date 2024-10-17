@@ -6,7 +6,8 @@ use Drupal\Tests\BrowserTestBase;
 use Drupal\block\Entity\Block;
 
 /**
- * Tests per-language block configuration.
+ * Tests if a block can be configured to be only visible on a particular
+ * language.
  *
  * @group block
  */
@@ -29,9 +30,6 @@ class BlockLanguageTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -137,7 +135,8 @@ class BlockLanguageTest extends BrowserTestBase {
     // Ensure that the block visibility for language is gone from the UI.
     $this->drupalGet('admin/structure/block');
     $this->clickLink('Configure');
-    $this->assertSession()->elementNotExists('xpath', '//details[@id="edit-visibility-language"]');
+    $elements = $this->xpath('//details[@id="edit-visibility-language"]');
+    $this->assertEmpty($elements);
   }
 
   /**

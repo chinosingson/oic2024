@@ -21,6 +21,8 @@ class TimeZoneWithOffsetWidget extends WidgetBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @phpstan-ignore-next-line Core has not yet documented this method properly.
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $element['value'] = $element + [
@@ -37,14 +39,23 @@ class TimeZoneWithOffsetWidget extends WidgetBase {
    * @param bool $blank
    *   Whether to include empty timezone to the list.
    *
-   * @return array
+   * @return mixed[]
    *   Array of timezones with offsets sorted by offsets.
    */
   public function getTimezonesList(bool $blank): array {
     // Get offsets for timezones.
     $offsets = [];
     $now = new \DateTime();
+    $exclude = $this->getFieldSetting('exclude');
+    if (!is_array($exclude)) {
+      $exclude = [];
+    }
     foreach (\DateTimeZone::listIdentifiers() as $timezone) {
+      if ($exclude) {
+        if (in_array($timezone, $exclude)) {
+          continue;
+        }
+      }
       $tz = new \DateTimeZone($timezone);
       $offsets[$timezone] = $tz->getOffset($now);
     }

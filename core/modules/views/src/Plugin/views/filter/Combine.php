@@ -14,7 +14,7 @@ use Drupal\Core\Form\FormStateInterface;
 class Combine extends StringFilter {
 
   /**
-   * @var \Drupal\views\Plugin\views\query\QueryPluginBase
+   * @var views_plugin_query_default
    */
   public $query;
 
@@ -71,7 +71,7 @@ class Combine extends StringFilter {
       $field = $this->view->field[$id];
       // Always add the table of the selected fields to be sure a table alias exists.
       $field->ensureMyTable();
-      if (!empty($field->tableAlias) && !empty($field->realField)) {
+      if (!empty($field->field_alias) && !empty($field->field_alias)) {
         $fields[] = "$field->tableAlias.$field->realField";
       }
     }
@@ -128,13 +128,12 @@ class Combine extends StringFilter {
   }
 
   /**
-   * {@inheritdoc}
+   * By default things like opEqual uses add_where, that doesn't support
+   * complex expressions, so override opEqual (and all operators below).
    */
   public function opEqual($expression) {
-    // By default, things like opEqual uses add_where, that doesn't support
-    // complex expressions, so override opEqual (and all operators below).
     $placeholder = $this->placeholder();
-    $operator = $this->getConditionOperator($this->operator());
+    $operator = $this->getConditionOperator('LIKE');
     $this->query->addWhereExpression($this->options['group'], "$expression $operator $placeholder", [$placeholder => $this->value]);
   }
 

@@ -7,7 +7,8 @@ use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Test date formatting and time zone handling, including daylight saving time.
+ * Configure date and time settings. Test date formatting and time zone
+ * handling, including daylight saving time.
  *
  * @group system
  */
@@ -33,9 +34,6 @@ class DateTimeTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -175,7 +173,7 @@ class DateTimeTest extends BrowserTestBase {
       'id' => 'xss_short',
       'label' => 'XSS format',
       'pattern' => '\<\s\c\r\i\p\t\>\a\l\e\r\t\(\'\X\S\S\'\)\;\<\/\s\c\r\i\p\t\>',
-    ]);
+      ]);
     $date_format->save();
 
     $this->drupalGet(Url::fromRoute('entity.date_format.collection'));

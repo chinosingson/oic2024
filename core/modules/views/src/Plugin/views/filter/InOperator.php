@@ -48,8 +48,6 @@ class InOperator extends FilterPluginBase {
   }
 
   /**
-   * Gets the value options.
-   *
    * Child classes should be used to override this function and set the
    * 'value options', unless 'options callback' is defined as a valid function
    * or static public method to generate these values.
@@ -74,7 +72,7 @@ class InOperator extends FilterPluginBase {
       }
     }
     else {
-      $this->valueOptions = [$this->t('Yes'), $this->t('No')];
+      $this->valueOptions = [t('Yes'), $this->t('No')];
     }
 
     return $this->valueOptions;
@@ -107,8 +105,6 @@ class InOperator extends FilterPluginBase {
   }
 
   /**
-   * Gets the operators.
-   *
    * This kind of construct makes it relatively easy for a child class
    * to add or remove functionality by overriding this function and
    * adding/removing items from this array.

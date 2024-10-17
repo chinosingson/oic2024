@@ -478,7 +478,7 @@ class ModuleHandlerTest extends UnitTestCase {
     $this->cacheBackend
       ->expects($this->exactly(2))
       ->method('get')
-      ->willReturn(NULL);
+      ->will($this->returnValue(NULL));
     $this->cacheBackend
       ->expects($this->exactly(2))
       ->method('set')

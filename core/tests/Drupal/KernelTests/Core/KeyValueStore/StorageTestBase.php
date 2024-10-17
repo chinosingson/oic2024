@@ -30,9 +30,6 @@ abstract class StorageTestBase extends KernelTestBase {
    */
   protected $factory = 'keyvalue';
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp() {
     parent::setUp();
 

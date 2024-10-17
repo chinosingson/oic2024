@@ -45,8 +45,6 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   public $tableAlias;
 
   /**
-   * The real field.
-   *
    * The actual field in the database table, maybe different
    * on other kind of query plugins/special handlers.
    *
@@ -360,8 +358,6 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   }
 
   /**
-   * Determines if the handler has extra options.
-   *
    * If a handler has 'extra options' it will get a little settings widget and
    * another form called extra_options.
    */
@@ -399,7 +395,8 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   }
 
   /**
-   * Set new exposed option defaults when exposed setting is flipped on.
+   * Set new exposed option defaults when exposed setting is flipped
+   * on.
    */
   public function defaultExposeOptions() {}
 
@@ -554,9 +551,8 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   public function adminSummary() {}
 
   /**
-   * Determine if this item is 'exposed'.
-   *
-   * Exposed means it provides form elements to let users modify the view.
+   * Determine if this item is 'exposed', meaning it provides form elements
+   * to let users modify the view.
    *
    * @return bool
    */
@@ -789,8 +785,6 @@ abstract class HandlerBase extends PluginBase implements ViewsHandlerInterface {
   }
 
   /**
-   * Submits a temporary form.
-   *
    * A submit handler that is used for storing temporary items when using
    * multi-step changes, such as ajax requests.
    */

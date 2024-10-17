@@ -44,7 +44,7 @@ class Schema extends DatabaseSchema {
   /**
    * Get information about the table and database name from the prefix.
    *
-   * @return array
+   * @return
    *   A keyed array with information about the database, table name and prefix.
    */
   protected function getPrefixInfo($table = 'default', $add_prefix = TRUE) {
@@ -88,7 +88,7 @@ class Schema extends DatabaseSchema {
    * @param $table
    *   A Schema API table definition array.
    *
-   * @return string[]
+   * @return
    *   An array of SQL statements to create the table.
    */
   protected function createTableSql($name, $table) {

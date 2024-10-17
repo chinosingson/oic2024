@@ -17,7 +17,7 @@ class IconTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'system',
     'embed',
     'embed_test',
@@ -26,7 +26,7 @@ class IconTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->installConfig('system');
     $this->installEntitySchema('embed_button');
@@ -46,7 +46,7 @@ class IconTest extends KernelTestBase {
       'type_id' => 'embed_test_default',
     ]);
     $this->assertEmpty($button->icon);
-    $this->assertIconUrl('/default.png', $button);
+    $this->assertIconUrl($this->container->get('extension.list.module')->getPath('embed_test') . '/default.png', $button);
 
     $uri = 'public://button.png';
     $image_contents = file_get_contents('core/misc/favicon.ico');
@@ -84,7 +84,8 @@ class IconTest extends KernelTestBase {
    *   The assertion message.
    */
   protected function assertIconUrl($uri, EmbedButtonInterface $button, string $message = '') {
-    $this->assertSame(file_url_transform_relative(file_create_url($uri)), $button->getIconUrl(), $message);
+    $file_generator = $this->container->get('file_url_generator');
+    $this->assertSame($file_generator->transformRelative($file_generator->generateAbsoluteString($uri)), $button->getIconUrl(), $message);
   }
 
 }

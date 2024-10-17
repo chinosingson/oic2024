@@ -39,7 +39,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @ingroup views_plugins
  */
-#[\AllowDynamicProperties]
 abstract class PluginBase extends ComponentPluginBase implements ContainerFactoryPluginInterface, ViewsPluginInterface, DependentPluginInterface, TrustedCallbackInterface {
 
   /**
@@ -89,7 +88,7 @@ abstract class PluginBase extends ComponentPluginBase implements ContainerFactor
   public $displayHandler;
 
   /**
-   * Plugins' definition.
+   * Plugins's definition.
    *
    * @var array
    */
@@ -137,7 +136,6 @@ abstract class PluginBase extends ComponentPluginBase implements ContainerFactor
    */
   public function init(ViewExecutable $view, DisplayPluginBase $display, array &$options = NULL) {
     $this->view = $view;
-    $this->options = $this->options ?? [];
     $this->setOptionDefaults($this->options, $this->defineOptions());
     $this->displayHandler = $display;
 
@@ -342,9 +340,8 @@ abstract class PluginBase extends ComponentPluginBase implements ContainerFactor
   }
 
   /**
-   * Replaces Views' tokens in a given string.
-   *
-   * The resulting string will be sanitized with Xss::filterAdmin.
+   * Replaces Views' tokens in a given string. The resulting string will be
+   * sanitized with Xss::filterAdmin.
    *
    * @param $text
    *   Unsanitized string with possible tokens.

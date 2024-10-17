@@ -35,11 +35,6 @@ class EntityValidationTest extends EntityKernelTestBase {
   protected $entityFieldText;
 
   /**
-   * @var array
-   */
-  protected $cachedDiscoveries;
-
-  /**
    * {@inheritdoc}
    */
   protected function setUp(): void {

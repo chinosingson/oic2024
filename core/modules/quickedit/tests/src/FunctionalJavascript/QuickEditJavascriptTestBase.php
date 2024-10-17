@@ -282,7 +282,6 @@ JS;
   protected function typeInPlainTextEditor($css_selector, $text) {
     $field = $this->getSession()->getPage()->find('css', $css_selector);
     $field->setValue(Key::END . $text);
-    $this->getSession()->evaluateScript("document.querySelector('$css_selector').dispatchEvent(new Event('blur', {bubbles:true}))");
   }
 
   /**

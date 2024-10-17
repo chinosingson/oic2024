@@ -26,7 +26,7 @@ class FieldRenderedEntityTranslationTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'starterkit_theme';
+  protected $defaultTheme = 'classy';
 
   /**
    * {@inheritdoc}

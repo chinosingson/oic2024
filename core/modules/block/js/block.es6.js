@@ -31,18 +31,18 @@
        *   A string with the summary.
        */
       function checkboxesSummary(context) {
-        const values = [];
+        const vals = [];
         const $checkboxes = $(context).find(
           'input[type="checkbox"]:checked + label',
         );
         const il = $checkboxes.length;
         for (let i = 0; i < il; i++) {
-          values.push($($checkboxes[i]).html());
+          vals.push($($checkboxes[i]).html());
         }
-        if (!values.length) {
-          values.push(Drupal.t('Not restricted'));
+        if (!vals.length) {
+          vals.push(Drupal.t('Not restricted'));
         }
-        return values.join(', ');
+        return vals.join(', ');
       }
 
       $(

@@ -30,9 +30,6 @@ class BlockStorageUnitTest extends KernelTestBase {
    */
   protected $controller;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 

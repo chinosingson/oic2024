@@ -48,9 +48,6 @@ class StatisticsAdminTest extends BrowserTestBase {
    */
   protected $client;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 

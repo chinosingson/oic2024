@@ -33,9 +33,6 @@ class ConfigImportAllTest extends ModuleTestBase {
    */
   protected $profile = 'standard';
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 

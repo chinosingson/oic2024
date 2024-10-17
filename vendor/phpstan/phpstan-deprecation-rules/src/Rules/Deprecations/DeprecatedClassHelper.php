@@ -2,8 +2,10 @@
 
 namespace PHPStan\Rules\Deprecations;
 
+use PHPStan\Broker\ClassNotFoundException;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
+use function sprintf;
 
 class DeprecatedClassHelper
 {
@@ -14,15 +16,6 @@ class DeprecatedClassHelper
 	public function __construct(ReflectionProvider $reflectionProvider)
 	{
 		$this->reflectionProvider = $reflectionProvider;
-	}
-
-	public function getClassType(ClassReflection $class): string
-	{
-		if ($class->isInterface()) {
-			return 'interface';
-		}
-
-		return 'class';
 	}
 
 	public function getClassDeprecationDescription(ClassReflection $class): string
@@ -45,7 +38,7 @@ class DeprecatedClassHelper
 		foreach ($referencedClasses as $referencedClass) {
 			try {
 				$class = $this->reflectionProvider->getClass($referencedClass);
-			} catch (\PHPStan\Broker\ClassNotFoundException $e) {
+			} catch (ClassNotFoundException $e) {
 				continue;
 			}
 

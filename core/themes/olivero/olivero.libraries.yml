@@ -3,6 +3,7 @@ global-styling:
   css:
     base:
       css/base/fonts.css: {}
+      css/base/variables.css: {}
       css/base/base.css: {}
       css/base/utility.css: {}
     layout:

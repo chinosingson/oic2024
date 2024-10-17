@@ -139,10 +139,23 @@ class DocCommentSniff implements Sniff
                 return;
             }
 
+            // If inheritDoc is found without curly braces it is identified as a T_DOC_COMMENT_TAG not a
+            // T_DOC_COMMENT_STRING. It would be misleading to give the 'Missing short description' error
+            // below, hence we give a more useful message and can fix it automatically.
+            if (stripos($tokens[$short]['content'], '@inheritdoc') === 0) {
+                $error = "{$tokens[$short]['content']} found. Did you mean {{$tokens[$short]['content']}}?";
+                $fix   = $phpcsFile->addFixableError($error, $short, 'InheritDocWithoutBraces');
+                if ($fix === true) {
+                    $phpcsFile->fixer->replaceToken($short, "{{$tokens[$short]['content']}}");
+                }
+
+                return;
+            }
+
             $error = 'Missing short description in doc comment';
             $phpcsFile->addError($error, $stackPtr, 'MissingShort');
             return;
-        }
+        }//end if
 
         if (isset($fileShort) === true) {
             $start = $fileShort;
@@ -211,7 +224,8 @@ class DocCommentSniff implements Sniff
         // Remove any trailing white spaces which are detected by other sniffs.
         $shortContent = trim($shortContent);
 
-        if (preg_match('|\p{Lu}|u', $shortContent[0]) === 0
+        if ($shortContent !== ''
+            && preg_match('|\p{Lu}|u', $shortContent[0]) === 0
             // Allow both variants of inheritdoc comments.
             && $shortContent !== '{@inheritdoc}'
             && $shortContent !== '{@inheritDoc}'
@@ -368,7 +382,8 @@ class DocCommentSniff implements Sniff
         // Break out the tags into groups and check alignment within each.
         // A tag group is one where there are no blank lines between tags.
         // The param tag group is special as it requires all @param tags to be inside.
-        $tagGroups    = [];
+        $tagGroups = [];
+        // cspell:ignore groupid
         $groupid      = 0;
         $paramGroupid = null;
         $currentTag   = null;
@@ -492,12 +507,12 @@ class DocCommentSniff implements Sniff
             }
         }//end foreach
 
-        // If there is a param group, it needs to be first; with the exception of
-        // @code, @todo and link tags.
+        // If there is a param group, it needs to be first; with the exception
+        // of @code, @todo and link tags.
         if ($paramGroupid !== null && $paramGroupid !== 0
             && in_array($tokens[$tokens[$commentStart]['comment_tags'][0]]['content'], ['@code', '@todo', '@link', '@endlink', '@codingStandardsIgnoreStart']) === false
             // In JSDoc we can have many other valid tags like @function or
-            // @constructor before the param tags.
+            // tags like @constructor before the param tags.
             && $phpcsFile->tokenizerType !== 'JS'
         ) {
             $error = 'Parameter tags must be defined first in a doc comment';

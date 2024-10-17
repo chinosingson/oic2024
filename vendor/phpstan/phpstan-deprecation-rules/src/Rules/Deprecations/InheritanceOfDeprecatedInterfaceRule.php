@@ -5,12 +5,16 @@ namespace PHPStan\Rules\Deprecations;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Interface_;
 use PHPStan\Analyser\Scope;
+use PHPStan\Broker\ClassNotFoundException;
 use PHPStan\Reflection\ReflectionProvider;
+use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
+use function sprintf;
 
 /**
- * @implements \PHPStan\Rules\Rule<Interface_>
+ * @implements Rule<Interface_>
  */
-class InheritanceOfDeprecatedInterfaceRule implements \PHPStan\Rules\Rule
+class InheritanceOfDeprecatedInterfaceRule implements Rule
 {
 
 	/** @var ReflectionProvider */
@@ -28,17 +32,13 @@ class InheritanceOfDeprecatedInterfaceRule implements \PHPStan\Rules\Rule
 
 	public function processNode(Node $node, Scope $scope): array
 	{
-		if ($node->extends === null) {
-			return [];
-		}
-
 		$interfaceName = isset($node->namespacedName)
 			? (string) $node->namespacedName
 			: (string) $node->name;
 
 		try {
 			$interface = $this->reflectionProvider->getClass($interfaceName);
-		} catch (\PHPStan\Broker\ClassNotFoundException $e) {
+		} catch (ClassNotFoundException $e) {
 			return [];
 		}
 
@@ -60,20 +60,20 @@ class InheritanceOfDeprecatedInterfaceRule implements \PHPStan\Rules\Rule
 
 				$description = $parentInterface->getDeprecatedDescription();
 				if ($description === null) {
-					$errors[] = sprintf(
+					$errors[] = RuleErrorBuilder::message(sprintf(
 						'Interface %s extends deprecated interface %s.',
 						$interfaceName,
 						$parentInterfaceName
-					);
+					))->identifier('interface.extendsDeprecatedInterface')->build();
 				} else {
-					$errors[] = sprintf(
+					$errors[] = RuleErrorBuilder::message(sprintf(
 						"Interface %s extends deprecated interface %s:\n%s",
 						$interfaceName,
 						$parentInterfaceName,
 						$description
-					);
+					))->identifier('interface.extendsDeprecatedInterface')->build();
 				}
-			} catch (\PHPStan\Broker\ClassNotFoundException $e) {
+			} catch (ClassNotFoundException $e) {
 				// Other rules will notify if the interface is not found
 			}
 		}

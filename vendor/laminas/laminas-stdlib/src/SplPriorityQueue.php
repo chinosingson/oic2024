@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Laminas\Stdlib;
 
-use ReturnTypeWillChange;
 use Serializable;
 use UnexpectedValueException;
 
 use function array_key_exists;
-use function get_debug_type;
+use function get_class;
+use function gettype;
 use function is_array;
+use function is_object;
 use function serialize;
 use function sprintf;
 use function unserialize;
@@ -22,10 +23,6 @@ use const PHP_INT_MAX;
  *
  * Also, provides predictable heap order for datums added with the same priority
  * (i.e., they will be emitted in the same order they are enqueued).
- *
- * @template TValue
- * @template TPriority of int
- * @extends \SplPriorityQueue<TPriority, TValue>
  */
 class SplPriorityQueue extends \SplPriorityQueue implements Serializable
 {
@@ -38,18 +35,16 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
      * Utilizes {@var $serial} to ensure that values of equal priority are
      * emitted in the same order in which they are inserted.
      *
-     * @param  TValue    $value
-     * @param  TPriority $priority
+     * @param  mixed $datum
+     * @param  mixed $priority
      * @return void
      */
-    #[ReturnTypeWillChange] // Inherited return type should be bool
-    public function insert($value, $priority)
+    public function insert($datum, $priority)
     {
         if (! is_array($priority)) {
             $priority = [$priority, $this->serial--];
         }
-
-        parent::insert($value, $priority);
+        parent::insert($datum, $priority);
     }
 
     /**
@@ -57,7 +52,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
      *
      * Array will be priority => data pairs
      *
-     * @return list<TValue>
+     * @return array
      */
     public function toArray()
     {
@@ -117,7 +112,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
     /**
      * Magic method used to rebuild an instance.
      *
-     * @param array<array-key, mixed> $data Data array.
+     * @param array $data Data array.
      * @return void
      */
     public function __unserialize($data)
@@ -129,7 +124,7 @@ class SplPriorityQueue extends \SplPriorityQueue implements Serializable
                 throw new UnexpectedValueException(sprintf(
                     'Cannot deserialize %s instance: corrupt item; expected array, received %s',
                     self::class,
-                    get_debug_type($item)
+                    is_object($item) ? get_class($item) : gettype($item)
                 ));
             }
 

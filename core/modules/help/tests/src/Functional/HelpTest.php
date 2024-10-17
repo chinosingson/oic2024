@@ -45,9 +45,6 @@ class HelpTest extends BrowserTestBase {
    */
   protected $anyUser;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -152,12 +149,6 @@ class HelpTest extends BrowserTestBase {
         // Ensure there are no double escaped '&' or '<' characters.
         $this->assertSession()->assertNoEscaped('&amp;');
         $this->assertSession()->assertNoEscaped('&lt;');
-
-        // The help for CKEditor 5 intentionally has escaped '<' so leave this
-        // iteration before the assertion below.
-        if ($module === 'ckeditor5') {
-          continue;
-        }
         // Ensure there are no escaped '<' characters.
         $this->assertSession()->assertNoEscaped('<');
       }

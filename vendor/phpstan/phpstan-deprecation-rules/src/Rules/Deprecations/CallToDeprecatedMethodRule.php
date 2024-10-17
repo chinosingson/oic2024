@@ -6,21 +6,30 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
+use PHPStan\Broker\ClassNotFoundException;
+use PHPStan\Reflection\MissingMethodFromReflectionException;
 use PHPStan\Reflection\ReflectionProvider;
-use PHPStan\Type\TypeUtils;
+use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
+use function sprintf;
+use function strtolower;
 
 /**
- * @implements \PHPStan\Rules\Rule<MethodCall>
+ * @implements Rule<MethodCall>
  */
-class CallToDeprecatedMethodRule implements \PHPStan\Rules\Rule
+class CallToDeprecatedMethodRule implements Rule
 {
 
 	/** @var ReflectionProvider */
 	private $reflectionProvider;
 
-	public function __construct(ReflectionProvider $reflectionProvider)
+	/** @var DeprecatedScopeHelper */
+	private $deprecatedScopeHelper;
+
+	public function __construct(ReflectionProvider $reflectionProvider, DeprecatedScopeHelper $deprecatedScopeHelper)
 	{
 		$this->reflectionProvider = $reflectionProvider;
+		$this->deprecatedScopeHelper = $deprecatedScopeHelper;
 	}
 
 	public function getNodeType(): string
@@ -30,7 +39,7 @@ class CallToDeprecatedMethodRule implements \PHPStan\Rules\Rule
 
 	public function processNode(Node $node, Scope $scope): array
 	{
-		if (DeprecatedScopeHelper::isScopeDeprecated($scope)) {
+		if ($this->deprecatedScopeHelper->isScopeDeprecated($scope)) {
 			return [];
 		}
 
@@ -40,7 +49,7 @@ class CallToDeprecatedMethodRule implements \PHPStan\Rules\Rule
 
 		$methodName = $node->name->name;
 		$methodCalledOnType = $scope->getType($node->var);
-		$referencedClasses = TypeUtils::getDirectClassNames($methodCalledOnType);
+		$referencedClasses = $methodCalledOnType->getObjectClassNames();
 
 		foreach ($referencedClasses as $referencedClass) {
 			try {
@@ -53,22 +62,28 @@ class CallToDeprecatedMethodRule implements \PHPStan\Rules\Rule
 
 				$description = $methodReflection->getDeprecatedDescription();
 				if ($description === null) {
-					return [sprintf(
-						'Call to deprecated method %s() of class %s.',
-						$methodReflection->getName(),
-						$methodReflection->getDeclaringClass()->getName()
-					)];
+					return [
+						RuleErrorBuilder::message(sprintf(
+							'Call to deprecated method %s() of %s %s.',
+							$methodReflection->getName(),
+							strtolower($methodReflection->getDeclaringClass()->getClassTypeDescription()),
+							$methodReflection->getDeclaringClass()->getName()
+						))->identifier('method.deprecated')->build(),
+					];
 				}
 
-				return [sprintf(
-					"Call to deprecated method %s() of class %s:\n%s",
-					$methodReflection->getName(),
-					$methodReflection->getDeclaringClass()->getName(),
-					$description
-				)];
-			} catch (\PHPStan\Broker\ClassNotFoundException $e) {
+				return [
+					RuleErrorBuilder::message(sprintf(
+						"Call to deprecated method %s() of %s %s:\n%s",
+						$methodReflection->getName(),
+						strtolower($methodReflection->getDeclaringClass()->getClassTypeDescription()),
+						$methodReflection->getDeclaringClass()->getName(),
+						$description
+					))->identifier('method.deprecated')->build(),
+				];
+			} catch (ClassNotFoundException $e) {
 				// Other rules will notify if the class is not found
-			} catch (\PHPStan\Reflection\MissingMethodFromReflectionException $e) {
+			} catch (MissingMethodFromReflectionException $e) {
 				// Other rules will notify if the the method is not found
 			}
 		}

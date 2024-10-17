@@ -546,7 +546,7 @@ class PathPluginBaseTest extends UnitTestCase {
       ->getMock();
     $view_entity->expects($this->any())
       ->method('id')
-      ->willReturn('test_id');
+      ->will($this->returnValue('test_id'));
 
     $view = $this->getMockBuilder('Drupal\views\ViewExecutable')
       ->disableOriginalConstructor()
@@ -554,12 +554,15 @@ class PathPluginBaseTest extends UnitTestCase {
 
     $view->storage = $view_entity;
 
+    // Skip views options caching.
+    $view->editing = TRUE;
+
     $access_plugin = $this->getMockBuilder('Drupal\views\Plugin\views\access\AccessPluginBase')
       ->disableOriginalConstructor()
       ->getMockForAbstractClass();
     $this->accessPluginManager->expects($this->any())
       ->method('createInstance')
-      ->willReturn($access_plugin);
+      ->will($this->returnValue($access_plugin));
 
     return [$view, $view_entity, $access_plugin];
   }

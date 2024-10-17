@@ -2,11 +2,13 @@
 
 namespace mglaman\PHPStanDrupal\Reflection;
 
+use LogicException;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\PropertiesClassReflectionExtension;
 use PHPStan\Reflection\PropertyReflection;
 use PHPStan\TrinaryLogic;
 use PHPStan\Type\ObjectType;
+use function array_key_exists;
 
 /**
  * Allows field access via magic methods
@@ -26,6 +28,12 @@ class EntityFieldsViaMagicReflectionExtension implements PropertiesClassReflecti
         if ($classReflection->hasNativeProperty($propertyName) || array_key_exists($propertyName, $classReflection->getPropertyTags())) {
             // Let other parts of PHPStan handle this.
             return false;
+        }
+
+        foreach ($classReflection->getAncestors() as $ancestor) {
+            if (array_key_exists($propertyName, $ancestor->getPropertyTags())) {
+                return false;
+            }
         }
 
         // We need to find a way to parse the entity annotation so that at the minimum the `entity_keys` are
@@ -52,7 +60,7 @@ class EntityFieldsViaMagicReflectionExtension implements PropertiesClassReflecti
             return new FieldItemListPropertyReflection($classReflection, $propertyName);
         }
 
-        throw new \LogicException($classReflection->getName() . "::$propertyName should be handled earlier.");
+        throw new LogicException($classReflection->getName() . "::$propertyName should be handled earlier.");
     }
 
     public static function classObjectIsSuperOfInterface(string $name, ObjectType $interfaceObject) : TrinaryLogic

@@ -14,7 +14,7 @@ class SettingsTest extends UITestBase {
   /**
    * Stores an admin user used by the different tests.
    *
-   * @var \Drupal\user\Entity\User
+   * @var \Drupal\user\User
    */
   protected $adminUser;
 

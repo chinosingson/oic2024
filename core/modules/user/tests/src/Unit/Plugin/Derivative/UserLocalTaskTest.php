@@ -22,9 +22,6 @@ class UserLocalTaskTest extends UnitTestCase {
    */
   protected $deriver;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 

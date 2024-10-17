@@ -108,10 +108,8 @@ class FormBuilder implements FormBuilderInterface, FormValidatorInterface, FormS
   protected $formCache;
 
   /**
-   * Defines callables that are safe to run with invalid CSRF tokens.
-   *
-   * These Element value callables are safe to run even when the form state has
-   * an invalid CSRF token.
+   * Defines element value callables which are safe to run even when the form
+   * state has an invalid CSRF token.
    *
    * Excluded from this list on purpose:
    *  - Drupal\file\Element\ManagedFile::valueCallback
@@ -195,11 +193,8 @@ class FormBuilder implements FormBuilderInterface, FormValidatorInterface, FormS
       $form_arg = $this->classResolver->getInstanceFromDefinition($form_arg);
     }
 
-    if (!is_object($form_arg)) {
-      throw new \InvalidArgumentException(("The form class $form_arg could not be found or loaded."));
-    }
-    elseif (!($form_arg instanceof FormInterface)) {
-      throw new \InvalidArgumentException('The form argument ' . get_class($form_arg) . ' must be an instance of \Drupal\Core\Form\FormInterface.');
+    if (!is_object($form_arg) || !($form_arg instanceof FormInterface)) {
+      throw new \InvalidArgumentException("The form argument $form_arg is not a valid form.");
     }
 
     // Add the $form_arg as the callback object and determine the form ID.

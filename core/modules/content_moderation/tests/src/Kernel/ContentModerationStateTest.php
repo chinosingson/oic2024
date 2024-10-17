@@ -57,20 +57,6 @@ class ContentModerationStateTest extends KernelTestBase {
   protected $entityTypeManager;
 
   /**
-   * The state object.
-   *
-   * @var \Drupal\Core\State\StateInterface
-   */
-  protected $state;
-
-  /**
-   * The entity definition update manager.
-   *
-   * @var \Drupal\Core\Entity\EntityDefinitionUpdateManagerInterface
-   */
-  protected $entityDefinitionUpdateManager;
-
-  /**
    * The ID of the revisionable entity type used in the tests.
    *
    * @var string
@@ -548,7 +534,8 @@ class ContentModerationStateTest extends KernelTestBase {
   }
 
   /**
-   * Tests moderation of a non-translatable entity type with no langcode.
+   * Tests that a non-translatable entity type without a langcode can be
+   * moderated.
    */
   public function testNonLangcodeEntityTypeModeration() {
     // Unset the langcode entity key for 'entity_test_rev'.

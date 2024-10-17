@@ -4,6 +4,7 @@
 * https://www.drupal.org/node/2815083
 * @preserve
 **/
+
 (function ($, Drupal, drupalSettings) {
   Drupal.color = {
     logoChanged: false,
@@ -12,9 +13,11 @@
         $('.color-preview .color-preview-logo img').attr('src', drupalSettings.color.logo);
         this.logoChanged = true;
       }
+
       if (drupalSettings.color.logo === null) {
         $('div').remove('.color-preview-logo');
       }
+
       var $colorPreview = $form.find('.color-preview');
       var $colorPalette = $form.find('.js-color-palette');
       $colorPreview.css('backgroundColor', $colorPalette.find('input[name="palette[bg]"]')[0].value);

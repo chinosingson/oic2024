@@ -36,9 +36,23 @@ class Truncate extends Query {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function compile(Connection $connection, PlaceholderInterface $queryPlaceholder) {
+    return $this->condition->compile($connection, $queryPlaceholder);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function compiled() {
+    return $this->condition->compiled();
+  }
+
+  /**
    * Executes the TRUNCATE query.
    *
-   * @return int|null
+   * @return
    *   Return value is dependent on whether the executed SQL statement is a
    *   TRUNCATE or a DELETE. TRUNCATE is DDL and no information on affected
    *   rows is available. DELETE is DML and will return the number of affected
@@ -56,8 +70,6 @@ class Truncate extends Query {
     catch (\Exception $e) {
       $this->connection->exceptionHandler()->handleExecutionException($e, $stmt, [], $this->queryOptions);
     }
-
-    return NULL;
   }
 
   /**

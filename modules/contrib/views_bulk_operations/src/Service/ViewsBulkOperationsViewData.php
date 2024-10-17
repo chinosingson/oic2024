@@ -2,68 +2,71 @@
 
 namespace Drupal\views_bulk_operations\Service;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Pager\PagerManagerInterface;
-use Drupal\views\ViewExecutable;
-use Drupal\views\Plugin\views\display\DisplayPluginBase;
-use Drupal\views\Views;
-use Drupal\views\ResultRow;
 use Drupal\Core\TypedData\TranslatableInterface;
+use Drupal\views\Plugin\views\display\DisplayPluginBase;
+use Drupal\views\ResultRow;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Views;
+use Drupal\views_bulk_operations\Form\ViewsBulkOperationsFormTrait;
 use Drupal\views_bulk_operations\ViewsBulkOperationsEvent;
+use Drupal\views_bulk_operations\ViewEntityDataEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Gets Views data needed by VBO.
  */
 class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterface {
 
+  use ViewsBulkOperationsFormTrait;
+
   /**
    * Event dispatcher service.
-   *
-   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
    */
-  protected $eventDispatcher;
+  protected EventDispatcherInterface $eventDispatcher;
 
   /**
    * Pager manager service.
-   *
-   * @var \Drupal\Core\Pager\PagerManagerInterface
    */
-  protected $pagerManager;
+  protected PagerManagerInterface $pagerManager;
 
   /**
    * The current view.
-   *
-   * @var \Drupal\views\ViewExecutable
    */
-  protected $view;
+  protected ViewExecutable $view;
+
+  /**
+   * The display handler.
+   */
+  protected DisplayPluginBase $displayHandler;
 
   /**
    * The relationship ID.
-   *
-   * @var string
    */
-  protected $relationship;
+  protected string $relationship;
 
   /**
    * Views data concerning the current view.
    *
    * @var array
    */
-  protected $data = [];
+  protected array $data = [];
 
   /**
    * Entity type ids returned by this view.
    *
    * @var array
    */
-  protected $entityTypeIds;
+  protected array $entityTypeIds;
 
   /**
    * Entity getter data.
    *
    * @var array
    */
-  protected $entityGetter;
+  protected array $entityGetter;
 
   /**
    * Object constructor.
@@ -84,7 +87,7 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
   /**
    * {@inheritdoc}
    */
-  public function init(ViewExecutable $view, DisplayPluginBase $display, $relationship) {
+  public function init(ViewExecutable $view, DisplayPluginBase $display, $relationship): void {
     $this->view = $view;
     $this->displayHandler = $display;
     $this->relationship = $relationship;
@@ -101,7 +104,7 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
   /**
    * {@inheritdoc}
    */
-  public function getEntityTypeIds() {
+  public function getEntityTypeIds(): array {
     return $this->entityTypeIds;
   }
 
@@ -111,7 +114,7 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
    * @return array
    *   Part of views data that refers to the current view.
    */
-  protected function getData() {
+  protected function getData(): array {
     $viewsData = Views::viewsData();
 
     if (!empty($this->relationship) && $this->relationship != 'none') {
@@ -123,7 +126,7 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
       $key = $this->view->storage->get('base_table');
     }
 
-    if (!array_key_exists($key, $this->data)) {
+    if (!\array_key_exists($key, $this->data)) {
       $this->data[$key] = $viewsData->get($key);
     }
 
@@ -133,18 +136,18 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
   /**
    * {@inheritdoc}
    */
-  public function getViewProvider() {
+  public function getViewProvider(): string {
     $views_data = $this->getData();
     if (isset($views_data['table']['provider'])) {
       return $views_data['table']['provider'];
     }
-    return FALSE;
+    return '';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getViewBaseField() {
+  public function getViewBaseField(): string {
     $views_data = $this->getData();
     if (isset($views_data['table']['base']['field'])) {
       return $views_data['table']['base']['field'];
@@ -155,17 +158,17 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
   /**
    * {@inheritdoc}
    */
-  public function getEntity(ResultRow $row) {
+  public function getEntity(ResultRow $row): ?EntityInterface {
     if (!empty($this->entityGetter['file'])) {
       require_once $this->entityGetter['file'];
     }
-    if (is_callable($this->entityGetter['callable'])) {
-      return call_user_func($this->entityGetter['callable'], $row, $this->relationship, $this->view);
+    if (\is_callable($this->entityGetter['callable'])) {
+      return \call_user_func($this->entityGetter['callable'], $row, $this->relationship, $this->view);
     }
     else {
-      if (is_array($this->entityGetter['callable'])) {
-        if (is_object($this->entityGetter['callable'][0])) {
-          $info = get_class($this->entityGetter['callable'][0]);
+      if (\is_array($this->entityGetter['callable'])) {
+        if (\is_object($this->entityGetter['callable'][0])) {
+          $info = \get_class($this->entityGetter['callable'][0]);
         }
         else {
           $info = $this->entityGetter['callable'][0];
@@ -175,7 +178,7 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
       else {
         $info = $this->entityGetter['callable'];
       }
-      throw new \Exception(sprintf("Entity getter method %s doesn't exist.", $info));
+      throw new \Exception(\sprintf("Entity getter method %s doesn't exist.", $info));
     }
   }
 
@@ -188,7 +191,7 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
    * @return int
    *   The total number of results this view displays.
    */
-  public function getTotalResults($clear_on_exposed = FALSE) {
+  public function getTotalResults($clear_on_exposed = FALSE): ?int {
     $total_results = NULL;
 
     if (!$clear_on_exposed && !empty($this->view->getExposedInput())) {
@@ -209,7 +212,6 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
       // We have to set exposed input to some value here, empty
       // value will be overwritten with query params by Views so
       // setting an empty array wouldn't work.
-      $pager = $view->getPager();
       $view->setExposedInput(['_views_bulk_operations_override' => TRUE]);
     }
     else {
@@ -236,7 +238,7 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
   /**
    * {@inheritdoc}
    */
-  public function getEntityDefault(ResultRow $row, $relationship_id, ViewExecutable $view) {
+  public function getEntityDefault(ResultRow $row, $relationship_id, ViewExecutable $view): ?FieldableEntityInterface {
     if ($relationship_id == 'none') {
       if (!empty($row->_entity)) {
         $entity = $row->_entity;
@@ -249,8 +251,8 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
       throw new \Exception('Unexpected view result row structure.');
     }
 
-    if (empty($entity)) {
-      return;
+    if (!$entity instanceof EntityInterface) {
+      return NULL;
     }
 
     if ($entity instanceof TranslatableInterface && $entity->isTranslatable()) {
@@ -282,6 +284,36 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
     }
 
     return $entity;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getViewEntityData(): array {
+    // Allow other modules to get bulk form keys and entity labels for
+    // possible performance improvements on non-standard views.
+    $event = new ViewEntityDataEvent($this->getViewProvider(), $this->getData(), $this->view);
+    $this->eventDispatcher->dispatch($event, ViewEntityDataEvent::NAME);
+    $view_entity_data = $event->getViewEntityData();
+    if (count($view_entity_data) !== 0) {
+      return $view_entity_data;
+    }
+
+    // If no data has been provided, get it the default way.
+    $base_field = $this->view->storage->get('base_field');
+    foreach ($this->view->result as $row_index => $row) {
+      if ($entity = $this->getEntity($row)) {
+        $view_entity_data[$row_index] = [
+          self::calculateEntityBulkFormKey(
+            $entity,
+            $row->{$base_field}
+          ),
+          $entity->label(),
+        ];
+      }
+    }
+
+    return $view_entity_data;
   }
 
 }

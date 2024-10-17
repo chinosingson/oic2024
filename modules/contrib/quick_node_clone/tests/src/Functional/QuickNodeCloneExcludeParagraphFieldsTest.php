@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\quick_node_clone\Functional;
 
-use Drupal\Tests\paragraphs\Functional\WidgetLegacy\ParagraphsTestBase;
 use Drupal\Tests\field_ui\Traits\FieldUiTestTrait;
+use Drupal\Tests\paragraphs\Functional\WidgetLegacy\ParagraphsTestBase;
 use Drupal\Tests\paragraphs\FunctionalJavascript\ParagraphsTestBaseTrait;
 
 /**
@@ -27,7 +27,7 @@ class QuickNodeCloneExcludeParagraphFieldsTest extends ParagraphsTestBase {
    *
    * @var array
    */
-  public static $modules = ['paragraphs', 'quick_node_clone'];
+  protected static $modules = ['paragraphs', 'quick_node_clone'];
 
   /**
    * {@inheritdoc}

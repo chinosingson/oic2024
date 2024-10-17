@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\duplicate_role\Functional;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\user\Entity\Role;
 
@@ -11,6 +12,8 @@ use Drupal\user\Entity\Role;
  * @group duplicate_role
  */
 class DuplicateRoleTest extends BrowserTestBase {
+
+  use StringTranslationTrait;
 
   /**
    * {@inheritdoc}
@@ -86,7 +89,7 @@ class DuplicateRoleTest extends BrowserTestBase {
       'id' => $new_role_name,
     ];
     $this->submitForm($edit, 'Duplicate');
-    $this->assertSession()->responseContains(t('Role %label has been added.', ['%label' => 123]));
+    $this->assertSession()->responseContains($this->t('Role %label has been added.', ['%label' => 123]));
     $this->assertSession()->addressEquals('/admin/people/roles');
     /** @var \Drupal\user\RoleInterface $new_role */
     $new_role = Role::load($new_role_name);
@@ -110,7 +113,7 @@ class DuplicateRoleTest extends BrowserTestBase {
       'id' => $new_role_name,
     ];
     $this->submitForm($edit, 'Duplicate');
-    $this->assertSession()->responseContains(t('Role %label has been added.', ['%label' => 'copy']));
+    $this->assertSession()->responseContains($this->t('Role %label has been added.', ['%label' => 'copy']));
     $new_role = Role::load($new_role_name);
     $this->assertIsObject($new_role);
 

@@ -52,9 +52,6 @@ class ContentTranslationSyncImageTest extends ContentTranslationTestBase {
     'field_ui',
   ];
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
     $this->files = $this->drupalGetTestFiles('image');

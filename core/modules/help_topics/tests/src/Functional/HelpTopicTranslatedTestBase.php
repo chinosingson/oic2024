@@ -30,16 +30,15 @@ abstract class HelpTopicTranslatedTestBase extends BrowserTestBase {
   protected function setUp() {
     parent::setUp();
 
-    // These tests rely on some markup from the 'Claro' theme, as well as an
-    // optional block added when Claro is enabled.
-    \Drupal::service('theme_installer')->install(['claro']);
+    // These tests rely on some markup from the 'Seven' theme.
+    \Drupal::service('theme_installer')->install(['seven']);
     \Drupal::configFactory()->getEditable('system.theme')
-      ->set('admin', 'claro')
+      ->set('admin', 'seven')
       ->save(TRUE);
 
     // Place various blocks.
     $settings = [
-      'theme' => 'claro',
+      'theme' => 'seven',
       'region' => 'help',
     ];
     $this->placeBlock('help_block', $settings);

@@ -82,15 +82,14 @@ trait FieldableEntityNormalizerTrait {
    * Denormalizes the bundle property so entity creation can use it.
    *
    * @param array $data
-   *   The data being denormalized. The bundle information will be removed.
+   *   The data being denormalized.
    * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type_definition
    *   The entity type definition.
    *
    * @throws \Symfony\Component\Serializer\Exception\UnexpectedValueException
-   *   If the bundle value is invalid or the bundle type is ineligible.
    *
-   * @return array
-   *   An array containing a single $bundle_key => $bundle_value pair.
+   * @return string
+   *   The valid bundle name.
    */
   protected function extractBundleData(array &$data, EntityTypeInterface $entity_type_definition) {
     $bundle_key = $entity_type_definition->getKey('bundle');

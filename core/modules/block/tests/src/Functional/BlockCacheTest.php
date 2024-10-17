@@ -52,9 +52,6 @@ class BlockCacheTest extends BrowserTestBase {
    */
   protected $block;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 

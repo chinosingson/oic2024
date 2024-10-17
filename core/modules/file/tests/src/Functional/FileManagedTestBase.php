@@ -8,7 +8,8 @@ use Drupal\file\FileInterface;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Provides a base class for testing files with the file_test module.
+ * Base class for file tests that use the file_test module to test uploads and
+ * hooks.
  */
 abstract class FileManagedTestBase extends BrowserTestBase {
 
@@ -19,9 +20,6 @@ abstract class FileManagedTestBase extends BrowserTestBase {
    */
   protected static $modules = ['file_test', 'file'];
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp() {
     parent::setUp();
     // Clear out any hook calls.
@@ -29,7 +27,8 @@ abstract class FileManagedTestBase extends BrowserTestBase {
   }
 
   /**
-   * Asserts that the specified file hooks were called only once.
+   * Assert that all of the specified hook_file_* hooks were called once, other
+   * values result in failure.
    *
    * @param string[] $expected
    *   An array of strings containing with the hook name; for example, 'load',
@@ -132,7 +131,8 @@ abstract class FileManagedTestBase extends BrowserTestBase {
   }
 
   /**
-   * Creates and saves a file, asserting that it was saved.
+   * Create a file and save it to the files table and assert that it occurs
+   * correctly.
    *
    * @param string $filepath
    *   Optional string specifying the file path. If none is provided then a

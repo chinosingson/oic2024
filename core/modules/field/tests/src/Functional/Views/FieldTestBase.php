@@ -34,15 +34,13 @@ abstract class FieldTestBase extends ViewTestBase {
   public $fieldStorages;
 
   /**
-   * Stores the fields of the field storage.
+   * Stores the fields of the field storage. They have the same keys as the
+   * field storages.
    *
    * @var array
    */
   public $fields;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp($import_test_views = TRUE, $modules = ['field_test_views']) {
     parent::setUp($import_test_views, $modules);
 

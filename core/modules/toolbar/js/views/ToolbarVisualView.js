@@ -4,6 +4,7 @@
 * https://www.drupal.org/node/2815083
 * @preserve
 **/
+
 (function ($, Drupal, drupalSettings, Backbone) {
   Drupal.toolbar.ToolbarVisualView = Backbone.View.extend({
     events: function events() {
@@ -11,6 +12,7 @@
         event.preventDefault();
         event.target.click();
       };
+
       return {
         'click .toolbar-bar .toolbar-tab .trigger': 'onTabClick',
         'click .toolbar-toggle-orientation button': 'onOrientationToggleClick',
@@ -49,9 +51,11 @@
       this.updateTrayOrientation();
       this.updateBarAttributes();
       $('body').removeClass('toolbar-loading');
+
       if (this.model.changed.orientation === 'vertical' || this.model.changed.activeTab) {
         this.loadSubtrees();
       }
+
       return this;
     },
     onTabClick: function onTabClick(event) {
@@ -67,11 +71,13 @@
       var orientation = this.model.get('orientation');
       var antiOrientation = orientation === 'vertical' ? 'horizontal' : 'vertical';
       var locked = antiOrientation === 'vertical';
+
       if (locked) {
         localStorage.setItem('Drupal.toolbar.trayVerticalLocked', 'true');
       } else {
         localStorage.removeItem('Drupal.toolbar.trayVerticalLocked');
       }
+
       this.model.set({
         locked: locked,
         orientation: antiOrientation
@@ -86,14 +92,18 @@
       var $tab = $(this.model.get('activeTab'));
       $(this.model.previous('activeTab')).removeClass('is-active').prop('aria-pressed', false);
       $(this.model.previous('activeTray')).removeClass('is-active');
+
       if ($tab.length > 0) {
         $tab.addClass('is-active').prop('aria-pressed', true);
         var name = $tab.attr('data-toolbar-tray');
         var id = $tab.get(0).id;
+
         if (id) {
           localStorage.setItem('Drupal.toolbar.activeTabID', JSON.stringify(id));
         }
+
         var $tray = this.$el.find("[data-toolbar-tray=\"".concat(name, "\"].toolbar-tray"));
+
         if ($tray.length) {
           $tray.addClass('is-active');
           this.model.set('activeTray', $tray.get(0));
@@ -107,11 +117,13 @@
     },
     updateBarAttributes: function updateBarAttributes() {
       var isOriented = this.model.get('isOriented');
+
       if (isOriented) {
         this.$el.find('.toolbar-bar').attr('data-offset-top', '');
       } else {
         this.$el.find('.toolbar-bar').removeAttr('data-offset-top');
       }
+
       this.$el.toggleClass('toolbar-oriented', isOriented);
     },
     updateTrayOrientation: function updateTrayOrientation() {
@@ -135,6 +147,7 @@
     },
     adjustPlacement: function adjustPlacement() {
       var $trays = this.$el.find('.toolbar-tray');
+
       if (!this.model.get('isOriented')) {
         $trays.removeClass('toolbar-tray-horizontal').addClass('toolbar-tray-vertical');
       }
@@ -142,6 +155,7 @@
     loadSubtrees: function loadSubtrees() {
       var $activeTab = $(this.model.get('activeTab'));
       var orientation = this.model.get('orientation');
+
       if (!this.model.get('areSubtreesLoaded') && typeof $activeTab.data('drupal-subtrees') !== 'undefined' && orientation === 'vertical') {
         var subtreesHash = drupalSettings.toolbar.subtreesHash;
         var theme = drupalSettings.ajaxPageState.theme;
@@ -149,6 +163,7 @@
         var cachedSubtreesHash = localStorage.getItem("Drupal.toolbar.subtreesHash.".concat(theme));
         var cachedSubtrees = JSON.parse(localStorage.getItem("Drupal.toolbar.subtrees.".concat(theme)));
         var isVertical = this.model.get('orientation') === 'vertical';
+
         if (isVertical && subtreesHash === cachedSubtreesHash && cachedSubtrees) {
           Drupal.toolbar.setSubtrees.resolve(cachedSubtrees);
         } else if (isVertical) {

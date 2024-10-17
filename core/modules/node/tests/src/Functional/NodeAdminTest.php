@@ -52,9 +52,6 @@ class NodeAdminTest extends NodeTestBase {
    */
   protected static $modules = ['views'];
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 

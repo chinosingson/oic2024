@@ -3,11 +3,12 @@
 namespace Drupal\duplicate_role\Form;
 
 use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Form\FormBase;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\user\Entity\Role;
-use Drupal\Core\Form\FormBase;
-use Drupal\Core\Form\FormStateInterface;
+use Drupal\user\RoleInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -64,11 +65,22 @@ class DuplicateRoleForm extends FormBase {
   }
 
   /**
+   * Retrieves the names of available roles.
+   *
+   * @return array
+   *   An associative array with the role id as the key and the role object as
+   *   value.
+   */
+  protected function roleNames(): array {
+    $roles = Role::loadMultiple();
+    return array_map(static fn(RoleInterface $role) => $role->label(), $roles);
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $note = NULL) {
-    $form = [];
-    $u_roles = user_role_names();
+    $u_roles = $this->roleNames();
     asort($u_roles);
 
     $options = [];
@@ -103,7 +115,7 @@ class DuplicateRoleForm extends FormBase {
       '#size' => 30,
       '#maxlength' => 64,
       '#machine_name' => [
-        'exists' => ['\Drupal\user\Entity\Role', 'load'],
+        'exists' => [Role::class, 'load'],
       ],
     ];
 
@@ -118,7 +130,7 @@ class DuplicateRoleForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $roles = user_role_names();
+    $roles = $this->roleNames();
     $base_role_id = $this->routeMatch->getParameter('role');
     if (!isset($roles[$base_role_id])) {
       $base_role_id = $form_state->getValue('base_role');
@@ -127,14 +139,18 @@ class DuplicateRoleForm extends FormBase {
     $new_role_name = $form_state->getValue('label');
     $new_role_id = $form_state->getValue('id');
 
-    $new_role = Role::create(['id' => $new_role_id, 'label' => $new_role_name]);
-    $new_role->save();
-
     /** @var \Drupal\user\RoleInterface $role */
     $base_role = $this->entityTypeManager->getStorage('user_role')->load($base_role_id);
-    user_role_grant_permissions($new_role->id(), $base_role->getPermissions());
-    $this->messenger->addStatus($this->t('Role %role_name has been added.', ['%role_name' => $new_role_name]));
-    $form_state->setRedirect('entity.user_role.collection');
+    if ($base_role !== NULL) {
+      $new_role = Role::create(['id' => $new_role_id, 'label' => $new_role_name]);
+      $new_role->save();
+      user_role_grant_permissions($new_role->id(), $base_role->getPermissions());
+      $this->messenger->addStatus($this->t('Role %role_name has been added.', ['%role_name' => $new_role_name]));
+      $form_state->setRedirect('entity.user_role.collection');
+    }
+    else {
+      $this->messenger->addError($this->t('Base role %base_role_id not found.', ['%base_role_id' => $base_role_id]));
+    }
   }
 
 }

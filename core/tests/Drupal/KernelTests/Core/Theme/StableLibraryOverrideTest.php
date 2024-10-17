@@ -6,7 +6,6 @@ namespace Drupal\KernelTests\Core\Theme;
  * Tests Stable's library overrides.
  *
  * @group Theme
- * @group legacy
  */
 class StableLibraryOverrideTest extends StableLibraryOverrideTestBase {
 
@@ -37,6 +36,16 @@ class StableLibraryOverrideTest extends StableLibraryOverrideTestBase {
    * @var string[]
    */
   protected $allModules;
+
+  /**
+   * A list of libraries to skip checking, in the format extension/library_name.
+   *
+   * @var string[]
+   */
+  protected $librariesToSkip = [
+    // This is a deprecated library that will trigger warnings.
+    'image/quickedit.inPlaceEditor.image',
+  ];
 
   /**
    * {@inheritdoc}
@@ -78,10 +87,6 @@ class StableLibraryOverrideTest extends StableLibraryOverrideTestBase {
       foreach ($libraries as $library_name => $library) {
         // Allow skipping libraries.
         if (in_array("$extension/$library_name", $this->librariesToSkip)) {
-          continue;
-        }
-        // Skip internal libraries.
-        if (substr($library_name, 0, 9) === 'internal.') {
           continue;
         }
         $library_after = $libraries_after[$extension][$library_name];

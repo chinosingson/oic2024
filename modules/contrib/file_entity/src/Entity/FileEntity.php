@@ -102,23 +102,6 @@ class FileEntity extends File implements FileEntityInterface {
     parent::__construct($values, $entity_type, $bundle, $translations);
   }
 
-
-  /**
-   * {@inheritdoc}
-   */
-  public function url($rel = 'canonical', $options = array()) {
-    // While self::urlInfo() will throw an exception if the entity is new,
-    // the expected result for a URL is always a string.
-    if ($this->isNew() || !$this->hasLinkTemplate($rel)) {
-      return '';
-    }
-
-    $uri = $this->toUrl($rel);
-    $options += $uri->getOptions();
-    $uri->setOptions($options);
-    return $uri->toString();
-  }
-
   /**
    * {@inheritdoc}
    */
@@ -139,7 +122,7 @@ class FileEntity extends File implements FileEntityInterface {
       $this->setSize(filesize($this->getFileUri()));
     }
 
-    $this->setMimeType(\Drupal::service('file.mime_type.guesser')->guess($this->getFileUri()));
+    $this->setMimeType(\Drupal::service('file.mime_type.guesser')->guessMimeType($this->getFileUri()));
 
     // Update the bundle.
     if ($this->bundle() === FILE_TYPE_NONE) {
@@ -189,7 +172,7 @@ class FileEntity extends File implements FileEntityInterface {
    *   The mimetype.
    */
   public function getMimeTypeType() {
-    list($type, $subtype) = explode('/', $this->getMimeType(), 2);
+    list($type) = explode('/', $this->getMimeType(), 2);
     return $type;
   }
 
@@ -254,6 +237,7 @@ class FileEntity extends File implements FileEntityInterface {
     foreach ($image_fields as $entity_type_id => $field_names) {
       foreach (array_keys($field_names) as $image_field) {
         $ids = \Drupal::entityQuery($entity_type_id)
+          ->accessCheck(FALSE)
           ->condition($image_field . '.target_id', $this->id())
           ->execute();
 
@@ -526,7 +510,7 @@ class FileEntity extends File implements FileEntityInterface {
     if ($update) {
       // Files don't have their own cache tags, instead, we invalidate cache
       // tags of entities that use that file.
-      foreach (\Drupal::service('file.usage')->listUsage($this) as $module => $module_references) {
+      foreach (\Drupal::service('file.usage')->listUsage($this) as $module_references) {
         foreach ($module_references as $type => $ids) {
           if ($this->entityTypeManager()->hasDefinition($type)) {
             $tags = Cache::mergeTags($tags, Cache::buildTags($type, array_keys($ids)));

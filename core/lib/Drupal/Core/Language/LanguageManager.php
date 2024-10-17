@@ -33,11 +33,6 @@ class LanguageManager implements LanguageManagerInterface {
   protected $defaultLanguage;
 
   /**
-   * Information about all defined language types.
-   */
-  protected $definedLanguageTypesInfo;
-
-  /**
    * Constructs the language manager.
    *
    * @param \Drupal\Core\Language\LanguageDefault $default_language
@@ -338,8 +333,9 @@ class LanguageManager implements LanguageManagerInterface {
   /**
    * The 6 official languages used at the United Nations.
    *
-   * This list is based on https://www.un.org/en/our-work/official-languages
-   * and it uses the same format as getStandardLanguageList().
+   * This list is based on
+   * http://www.un.org/en/sections/about-un/official-languages/index.html and it
+   * uses the same format as getStandardLanguageList().
    *
    * @return array
    *   An array with language codes as keys, and English and native language

@@ -34,15 +34,13 @@ class FilterTest extends ViewTestBase {
    */
   protected $defaultTheme = 'stark';
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp($import_test_views = TRUE, $modules = ['views_test_config']): void {
     parent::setUp($import_test_views, $modules);
 
     $this->enableViewsTestModule();
 
-    $this->drupalLogin($this->drupalCreateUser(['administer views']));
+    $this->adminUser = $this->drupalCreateUser(['administer views']);
+    $this->drupalLogin($this->adminUser);
     $this->drupalCreateContentType(['type' => 'article', 'name' => 'Article']);
     $this->drupalCreateContentType(['type' => 'page', 'name' => 'Page']);
   }
@@ -153,7 +151,8 @@ class FilterTest extends ViewTestBase {
   }
 
   /**
-   * Tests an exposed filter when all options are selected.
+   * Tests no error message is displayed when all options are selected in an
+   * exposed filter.
    */
   public function testInOperatorSelectAllOptions() {
     $row['row[type]'] = 'fields';

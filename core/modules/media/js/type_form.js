@@ -4,27 +4,30 @@
 * https://www.drupal.org/node/2815083
 * @preserve
 **/
+
 (function ($, Drupal) {
   Drupal.behaviors.mediaTypeFormSummaries = {
     attach: function attach(context) {
       var $context = $(context);
       $context.find('#edit-workflow').drupalSetSummary(function (context) {
-        var values = [];
+        var vals = [];
         $(context).find('input[name^="options"]:checked').parent().each(function () {
-          values.push(Drupal.checkPlain($(this).find('label')[0].textContent));
+          vals.push(Drupal.checkPlain($(this).find('label')[0].textContent));
         });
+
         if (!$(context).find('#edit-options-status').is(':checked')) {
-          values.unshift(Drupal.t('Not published'));
+          vals.unshift(Drupal.t('Not published'));
         }
-        return values.join(', ');
+
+        return vals.join(', ');
       });
       $(context).find('#edit-language').drupalSetSummary(function (context) {
-        var values = [];
-        values.push($(context).find('.js-form-item-language-configuration-langcode select option:selected')[0].textContent);
+        var vals = [];
+        vals.push($(context).find('.js-form-item-language-configuration-langcode select option:selected')[0].textContent);
         $(context).find('input:checked').next('label').each(function () {
-          values.push(Drupal.checkPlain(this.textContent));
+          vals.push(Drupal.checkPlain(this.textContent));
         });
-        return values.join(', ');
+        return vals.join(', ');
       });
     }
   };

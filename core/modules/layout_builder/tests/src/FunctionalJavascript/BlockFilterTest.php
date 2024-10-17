@@ -4,7 +4,6 @@ namespace Drupal\Tests\layout_builder\FunctionalJavascript;
 
 use Behat\Mink\Element\NodeElement;
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
-use Drupal\layout_builder\Entity\LayoutBuilderEntityViewDisplay;
 
 /**
  * Tests the JavaScript functionality of the block add filter.
@@ -34,16 +33,13 @@ class BlockFilterTest extends WebDriverTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-
-    $this->drupalLogin($this->drupalCreateUser([
+    $user = $this->drupalCreateUser([
       'configure any layout',
-    ]));
+      'administer node display',
+      'administer node fields',
+    ]);
+    $this->drupalLogin($user);
     $this->createContentType(['type' => 'bundle_with_section_field']);
-    LayoutBuilderEntityViewDisplay::load('node.bundle_with_section_field.default')
-      ->enableLayoutBuilder()
-      ->setOverridable()
-      ->save();
-    $this->createNode(['type' => 'bundle_with_section_field']);
   }
 
   /**
@@ -54,15 +50,22 @@ class BlockFilterTest extends WebDriverTestBase {
     $session = $this->getSession();
     $page = $session->getPage();
 
+    // From the manage display page, go to manage the layout.
+    $field_ui_prefix = 'admin/structure/types/manage/bundle_with_section_field';
+    $this->drupalGet("{$field_ui_prefix}/display/default");
+    $this->submitForm(['layout[enabled]' => TRUE], 'Save');
+    $assert_session->linkExists('Manage layout');
+    $this->clickLink('Manage layout');
+    $assert_session->addressEquals("$field_ui_prefix/display/default/layout");
+
     // Open the block listing.
-    $this->drupalGet('node/1/layout');
     $assert_session->linkExists('Add block');
     $this->clickLink('Add block');
     $assert_session->assertWaitOnAjaxRequest();
 
     // Get all blocks, for assertions later.
     $blocks = $page->findAll('css', '.js-layout-builder-block-link');
-    $categories = $page->findAll('css', '.js-layout-builder-categories li');
+    $categories = $page->findAll('css', '.js-layout-builder-category');
 
     $filter = $assert_session->elementExists('css', '.js-layout-builder-filter');
 
@@ -89,31 +92,15 @@ class BlockFilterTest extends WebDriverTestBase {
     $fewer_blocks_message = ' blocks are available in the modified list';
     $this->assertAnnounceContains($fewer_blocks_message);
     $visible_rows = $this->filterVisibleElements($blocks);
-    $this->assertCount(4, $visible_rows);
+    $this->assertGreaterThan(0, count($blocks));
+    $this->assertLessThan(count($blocks), count($visible_rows));
     $visible_categories = $this->filterVisibleElements($categories);
-    $this->assertCount(4, $visible_categories);
+    $this->assertGreaterThan(0, count($visible_categories));
+    $this->assertLessThan(count($categories), count($visible_categories));
 
     // Test Drupal.announce() message when multiple matches are present.
     $expected_message = count($visible_rows) . $fewer_blocks_message;
     $this->assertAnnounceContains($expected_message);
-
-    // Test 3 letter search.
-    $filter->setValue('adm');
-    $visible_rows = $this->filterVisibleElements($blocks);
-    $this->assertCount(3, $visible_rows);
-    $visible_categories = $this->filterVisibleElements($categories);
-    $this->assertCount(3, $visible_categories);
-
-    // Retest that blocks appear when reducing letters.
-    $filter->setValue('ad');
-    $visible_rows = $this->filterVisibleElements($blocks);
-    $this->assertCount(4, $visible_rows);
-    $visible_categories = $this->filterVisibleElements($categories);
-    $this->assertCount(4, $visible_categories);
-
-    // Test blocks reappear after being filtered by repeating search for "a".
-    $filter->setValue('a');
-    $this->assertAnnounceContains('All available blocks are listed.');
 
     // Test Drupal.announce() message when only one match is present.
     $filter->setValue('Powered by');

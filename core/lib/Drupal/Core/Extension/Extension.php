@@ -10,7 +10,6 @@ namespace Drupal\Core\Extension;
  *
  * @see https://bugs.php.net/bug.php?id=66052
  */
-#[\AllowDynamicProperties]
 class Extension {
 
   /**

@@ -12,9 +12,6 @@ use Drupal\Tests\Core\Menu\LocalTaskIntegrationTestBase;
  */
 class ShortcutLocalTasksTest extends LocalTaskIntegrationTestBase {
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     $this->directoryList = [
       'shortcut' => 'core/modules/shortcut',
@@ -26,7 +23,7 @@ class ShortcutLocalTasksTest extends LocalTaskIntegrationTestBase {
     $entity_type_manager = $this->createMock(EntityTypeManagerInterface::class);
     $entity_type_manager->expects($this->any())
       ->method('getDefinitions')
-      ->willReturn([]);
+      ->will($this->returnValue([]));
     $this->container->set('entity_type.manager', $entity_type_manager);
     $this->container->set('string_translation', $this->getStringTranslationStub());
   }

@@ -184,7 +184,9 @@ class ModulesListNonStableConfirmForm extends ModulesListConfirmForm {
         Url::fromUri($data[$machine_name]->info[ExtensionLifecycle::LIFECYCLE_LINK_IDENTIFIER], [
           'attributes' =>
             [
-              'aria-label' => ' ' . $this->t('about the status of the @name module', ['@name' => $name]),
+              'aria-label' => ' ' . $this->t('about the status of the @name module', [
+                  '@name' => $name,
+                ]),
             ],
         ])
       )->toString();

@@ -6,21 +6,30 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
+use PHPStan\Broker\ClassNotFoundException;
+use PHPStan\Reflection\MissingPropertyFromReflectionException;
 use PHPStan\Reflection\ReflectionProvider;
-use PHPStan\Type\TypeUtils;
+use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
+use function sprintf;
+use function strtolower;
 
 /**
- * @implements \PHPStan\Rules\Rule<PropertyFetch>
+ * @implements Rule<PropertyFetch>
  */
-class AccessDeprecatedPropertyRule implements \PHPStan\Rules\Rule
+class AccessDeprecatedPropertyRule implements Rule
 {
 
 	/** @var ReflectionProvider */
 	private $reflectionProvider;
 
-	public function __construct(ReflectionProvider $reflectionProvider)
+	/** @var DeprecatedScopeHelper */
+	private $deprecatedScopeHelper;
+
+	public function __construct(ReflectionProvider $reflectionProvider, DeprecatedScopeHelper $deprecatedScopeHelper)
 	{
 		$this->reflectionProvider = $reflectionProvider;
+		$this->deprecatedScopeHelper = $deprecatedScopeHelper;
 	}
 
 	public function getNodeType(): string
@@ -30,7 +39,7 @@ class AccessDeprecatedPropertyRule implements \PHPStan\Rules\Rule
 
 	public function processNode(Node $node, Scope $scope): array
 	{
-		if (DeprecatedScopeHelper::isScopeDeprecated($scope)) {
+		if ($this->deprecatedScopeHelper->isScopeDeprecated($scope)) {
 			return [];
 		}
 
@@ -40,7 +49,7 @@ class AccessDeprecatedPropertyRule implements \PHPStan\Rules\Rule
 
 		$propertyName = $node->name->name;
 		$propertyAccessedOnType = $scope->getType($node->var);
-		$referencedClasses = TypeUtils::getDirectClassNames($propertyAccessedOnType);
+		$referencedClasses = $propertyAccessedOnType->getObjectClassNames();
 
 		foreach ($referencedClasses as $referencedClass) {
 			try {
@@ -50,23 +59,29 @@ class AccessDeprecatedPropertyRule implements \PHPStan\Rules\Rule
 				if ($propertyReflection->isDeprecated()->yes()) {
 					$description = $propertyReflection->getDeprecatedDescription();
 					if ($description === null) {
-						return [sprintf(
-							'Access to deprecated property $%s of class %s.',
-							$propertyName,
-							$propertyReflection->getDeclaringClass()->getName()
-						)];
+						return [
+							RuleErrorBuilder::message(sprintf(
+								'Access to deprecated property $%s of %s %s.',
+								$propertyName,
+								strtolower($propertyReflection->getDeclaringClass()->getClassTypeDescription()),
+								$propertyReflection->getDeclaringClass()->getName()
+							))->identifier('property.deprecated')->build(),
+						];
 					}
 
-					return [sprintf(
-						"Access to deprecated property $%s of class %s:\n%s",
-						$propertyName,
-						$propertyReflection->getDeclaringClass()->getName(),
-						$description
-					)];
+					return [
+						RuleErrorBuilder::message(sprintf(
+							"Access to deprecated property $%s of %s %s:\n%s",
+							$propertyName,
+							strtolower($propertyReflection->getDeclaringClass()->getClassTypeDescription()),
+							$propertyReflection->getDeclaringClass()->getName(),
+							$description
+						))->identifier('property.deprecated')->build(),
+					];
 				}
-			} catch (\PHPStan\Broker\ClassNotFoundException $e) {
+			} catch (ClassNotFoundException $e) {
 				// Other rules will notify if the class is not found
-			} catch (\PHPStan\Reflection\MissingPropertyFromReflectionException $e) {
+			} catch (MissingPropertyFromReflectionException $e) {
 				// Other rules will notify if the property is not found
 			}
 		}

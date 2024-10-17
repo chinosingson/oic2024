@@ -7,15 +7,21 @@ use PhpParser\Node\Expr\StaticPropertyFetch;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
+use PHPStan\Broker\ClassNotFoundException;
+use PHPStan\Reflection\MissingPropertyFromReflectionException;
 use PHPStan\Reflection\ReflectionProvider;
+use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Rules\RuleLevelHelper;
 use PHPStan\Type\ErrorType;
 use PHPStan\Type\Type;
+use function sprintf;
+use function strtolower;
 
 /**
- * @implements \PHPStan\Rules\Rule<StaticPropertyFetch>
+ * @implements Rule<StaticPropertyFetch>
  */
-class AccessDeprecatedStaticPropertyRule implements \PHPStan\Rules\Rule
+class AccessDeprecatedStaticPropertyRule implements Rule
 {
 
 	/** @var ReflectionProvider */
@@ -24,10 +30,14 @@ class AccessDeprecatedStaticPropertyRule implements \PHPStan\Rules\Rule
 	/** @var RuleLevelHelper */
 	private $ruleLevelHelper;
 
-	public function __construct(ReflectionProvider $reflectionProvider, RuleLevelHelper $ruleLevelHelper)
+	/** @var DeprecatedScopeHelper */
+	private $deprecatedScopeHelper;
+
+	public function __construct(ReflectionProvider $reflectionProvider, RuleLevelHelper $ruleLevelHelper, DeprecatedScopeHelper $deprecatedScopeHelper)
 	{
 		$this->reflectionProvider = $reflectionProvider;
 		$this->ruleLevelHelper = $ruleLevelHelper;
+		$this->deprecatedScopeHelper = $deprecatedScopeHelper;
 	}
 
 	public function getNodeType(): string
@@ -37,7 +47,7 @@ class AccessDeprecatedStaticPropertyRule implements \PHPStan\Rules\Rule
 
 	public function processNode(Node $node, Scope $scope): array
 	{
-		if (DeprecatedScopeHelper::isScopeDeprecated($scope)) {
+		if ($this->deprecatedScopeHelper->isScopeDeprecated($scope)) {
 			return [];
 		}
 
@@ -49,13 +59,13 @@ class AccessDeprecatedStaticPropertyRule implements \PHPStan\Rules\Rule
 		$referencedClasses = [];
 
 		if ($node->class instanceof Name) {
-			$referencedClasses[] = (string) $node->class;
+			$referencedClasses[] = $scope->resolveName($node->class);
 		} else {
 			$classTypeResult = $this->ruleLevelHelper->findTypeToCheck(
 				$scope,
 				$node->class,
 				'', // We don't care about the error message
-				function (Type $type) use ($propertyName): bool {
+				static function (Type $type) use ($propertyName): bool {
 					return $type->canAccessProperties()->yes() && $type->hasProperty($propertyName)->yes();
 				}
 			);
@@ -71,28 +81,34 @@ class AccessDeprecatedStaticPropertyRule implements \PHPStan\Rules\Rule
 			try {
 				$class = $this->reflectionProvider->getClass($referencedClass);
 				$property = $class->getProperty($propertyName, $scope);
-			} catch (\PHPStan\Broker\ClassNotFoundException $e) {
+			} catch (ClassNotFoundException $e) {
 				continue;
-			} catch (\PHPStan\Reflection\MissingPropertyFromReflectionException $e) {
+			} catch (MissingPropertyFromReflectionException $e) {
 				continue;
 			}
 
 			if ($property->isDeprecated()->yes()) {
 				$description = $property->getDeprecatedDescription();
 				if ($description === null) {
-					return [sprintf(
-						'Access to deprecated static property $%s of class %s.',
-						$propertyName,
-						$referencedClass
-					)];
+					return [
+						RuleErrorBuilder::message(sprintf(
+							'Access to deprecated static property $%s of %s %s.',
+							$propertyName,
+							strtolower($property->getDeclaringClass()->getClassTypeDescription()),
+							$property->getDeclaringClass()->getName()
+						))->identifier('staticProperty.deprecated')->build(),
+					];
 				}
 
-				return [sprintf(
-					"Access to deprecated static property $%s of class %s:\n%s",
-					$propertyName,
-					$referencedClass,
-					$description
-				)];
+				return [
+					RuleErrorBuilder::message(sprintf(
+						"Access to deprecated static property $%s of %s %s:\n%s",
+						$propertyName,
+						strtolower($property->getDeclaringClass()->getClassTypeDescription()),
+						$property->getDeclaringClass()->getName(),
+						$description
+					))->identifier('staticProperty.deprecated')->build(),
+				];
 			}
 		}
 

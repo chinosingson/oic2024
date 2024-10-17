@@ -24,7 +24,7 @@ class ContextualFiltersStringTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'starterkit_theme';
+  protected $defaultTheme = 'classy';
 
   /**
    * Views used by this test.

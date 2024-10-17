@@ -15,6 +15,7 @@ class MegaMenuList extends ConfigEntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
+    $header = [];
     $header['menu'] = $this->t('Menu Name');
     $header['label'] = $this->t('Menu Title');
     $header['theme'] = $this->t('Theme Name');
@@ -25,6 +26,7 @@ class MegaMenuList extends ConfigEntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
+    $row = [];
     $menu_info = Menu::load($entity->menu);
     $row['menu'] = $entity->menu;
     $row['label'] = $menu_info !== NULL ? $menu_info->label() : "MISSING MENU! Was it deleted?";

@@ -4,6 +4,8 @@ namespace Drupal\fivestar\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Security\TrustedCallbackInterface;
+use Drupal\fivestar\Form\FivestarForm;
 
 /**
  * Plugin implementation of the 'fivestar_stars' formatter.
@@ -17,7 +19,7 @@ use Drupal\Core\Form\FormStateInterface;
  *   weight = 1
  * )
  */
-class StarsFormatter extends FivestarFormatterBase {
+class StarsFormatter extends FivestarFormatterBase implements TrustedCallbackInterface {
 
   /**
    * {@inheritdoc}
@@ -50,7 +52,10 @@ class StarsFormatter extends FivestarFormatterBase {
         [$this, 'previewsExpand'],
       ],
       '#attached' => [
-        'library' => ['fivestar/fivestar.admin'],
+        'library' => [
+          'fivestar/fivestar.admin',
+          'fivestar/fivestar.base',
+        ],
       ],
     ];
 
@@ -79,6 +84,13 @@ class StarsFormatter extends FivestarFormatterBase {
   /**
    * {@inheritdoc}
    */
+  public static function trustedCallbacks() {
+    return ['previewsExpand'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function settingsSummary() {
     $summary[] = $this->t('Style: @widget', [
       '@widget' => $this->widgetManager->getWidgetLabel($this->getSelectedWidgetKey()),
@@ -101,6 +113,8 @@ class StarsFormatter extends FivestarFormatterBase {
     $widget_active_key = $this->getSelectedWidgetKey();
     $display_settings = [
       'name' => $this->widgetManager->getWidgetInfo($widget_active_key) ? $widget_active_key : 'default',
+      'entity_type_id' => $items->getEntity()->getEntityTypeId(),
+      'entity_id' => $items->getEntity()->id(),
     ] + $this->getSettings();
 
     if (!$items->isEmpty()) {
@@ -113,7 +127,7 @@ class StarsFormatter extends FivestarFormatterBase {
         ];
 
         $elements[$delta] = $form_builder->getForm(
-          '\Drupal\fivestar\Form\FivestarForm', $context
+          FivestarForm::class, $context
         );
       }
     }
@@ -129,7 +143,7 @@ class StarsFormatter extends FivestarFormatterBase {
       ];
 
       $elements[] = $form_builder->getForm(
-        '\Drupal\fivestar\Form\FivestarForm', $context
+        FivestarForm::class, $context
       );
     }
 

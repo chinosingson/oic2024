@@ -7,15 +7,21 @@ use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
+use PHPStan\Broker\ClassNotFoundException;
+use PHPStan\Reflection\MissingMethodFromReflectionException;
 use PHPStan\Reflection\ReflectionProvider;
+use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Rules\RuleLevelHelper;
 use PHPStan\Type\ErrorType;
 use PHPStan\Type\Type;
+use function sprintf;
+use function strtolower;
 
 /**
- * @implements \PHPStan\Rules\Rule<StaticCall>
+ * @implements Rule<StaticCall>
  */
-class CallToDeprecatedStaticMethodRule implements \PHPStan\Rules\Rule
+class CallToDeprecatedStaticMethodRule implements Rule
 {
 
 	/** @var ReflectionProvider */
@@ -24,10 +30,14 @@ class CallToDeprecatedStaticMethodRule implements \PHPStan\Rules\Rule
 	/** @var RuleLevelHelper */
 	private $ruleLevelHelper;
 
-	public function __construct(ReflectionProvider $reflectionProvider, RuleLevelHelper $ruleLevelHelper)
+	/** @var DeprecatedScopeHelper */
+	private $deprecatedScopeHelper;
+
+	public function __construct(ReflectionProvider $reflectionProvider, RuleLevelHelper $ruleLevelHelper, DeprecatedScopeHelper $deprecatedScopeHelper)
 	{
 		$this->reflectionProvider = $reflectionProvider;
 		$this->ruleLevelHelper = $ruleLevelHelper;
+		$this->deprecatedScopeHelper = $deprecatedScopeHelper;
 	}
 
 	public function getNodeType(): string
@@ -37,7 +47,7 @@ class CallToDeprecatedStaticMethodRule implements \PHPStan\Rules\Rule
 
 	public function processNode(Node $node, Scope $scope): array
 	{
-		if (DeprecatedScopeHelper::isScopeDeprecated($scope)) {
+		if ($this->deprecatedScopeHelper->isScopeDeprecated($scope)) {
 			return [];
 		}
 
@@ -55,7 +65,7 @@ class CallToDeprecatedStaticMethodRule implements \PHPStan\Rules\Rule
 				$scope,
 				$node->class,
 				'', // We don't care about the error message
-				function (Type $type) use ($methodName): bool {
+				static function (Type $type) use ($methodName): bool {
 					return $type->canCallMethods()->yes() && $type->hasMethod($methodName)->yes();
 				}
 			);
@@ -73,27 +83,29 @@ class CallToDeprecatedStaticMethodRule implements \PHPStan\Rules\Rule
 			try {
 				$class = $this->reflectionProvider->getClass($referencedClass);
 				$methodReflection = $class->getMethod($methodName, $scope);
-			} catch (\PHPStan\Broker\ClassNotFoundException $e) {
+			} catch (ClassNotFoundException $e) {
 				continue;
-			} catch (\PHPStan\Reflection\MissingMethodFromReflectionException $e) {
+			} catch (MissingMethodFromReflectionException $e) {
 				continue;
 			}
 
 			if ($class->isDeprecated()) {
 				$classDescription = $class->getDeprecatedDescription();
 				if ($classDescription === null) {
-					$errors[] = sprintf(
-						'Call to method %s() of deprecated class %s.',
+					$errors[] = RuleErrorBuilder::message(sprintf(
+						'Call to method %s() of deprecated %s %s.',
 						$methodReflection->getName(),
+						strtolower($methodReflection->getDeclaringClass()->getClassTypeDescription()),
 						$methodReflection->getDeclaringClass()->getName()
-					);
+					))->identifier(sprintf('staticMethod.deprecated%s', $methodReflection->getDeclaringClass()->getClassTypeDescription()))->build();
 				} else {
-					$errors[] = sprintf(
-						"Call to method %s() of deprecated class %s:\n%s",
+					$errors[] = RuleErrorBuilder::message(sprintf(
+						"Call to method %s() of deprecated %s %s:\n%s",
 						$methodReflection->getName(),
+						strtolower($methodReflection->getDeclaringClass()->getClassTypeDescription()),
 						$methodReflection->getDeclaringClass()->getName(),
 						$classDescription
-					);
+					))->identifier(sprintf('staticMethod.deprecated%s', $methodReflection->getDeclaringClass()->getClassTypeDescription()))->build();
 				}
 			}
 
@@ -103,18 +115,20 @@ class CallToDeprecatedStaticMethodRule implements \PHPStan\Rules\Rule
 
 			$description = $methodReflection->getDeprecatedDescription();
 			if ($description === null) {
-				$errors[] = sprintf(
-					'Call to deprecated method %s() of class %s.',
+				$errors[] = RuleErrorBuilder::message(sprintf(
+					'Call to deprecated method %s() of %s %s.',
 					$methodReflection->getName(),
+					strtolower($methodReflection->getDeclaringClass()->getClassTypeDescription()),
 					$methodReflection->getDeclaringClass()->getName()
-				);
+				))->identifier('staticMethod.deprecated')->build();
 			} else {
-				$errors[] = sprintf(
-					"Call to deprecated method %s() of class %s:\n%s",
+				$errors[] = RuleErrorBuilder::message(sprintf(
+					"Call to deprecated method %s() of %s %s:\n%s",
 					$methodReflection->getName(),
+					strtolower($methodReflection->getDeclaringClass()->getClassTypeDescription()),
 					$methodReflection->getDeclaringClass()->getName(),
 					$description
-				);
+				))->identifier('staticMethod.deprecated')->build();
 			}
 		}
 

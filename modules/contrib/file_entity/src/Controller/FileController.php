@@ -2,7 +2,6 @@
 
 namespace Drupal\file_entity\Controller;
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CloseDialogCommand;
 use Drupal\Core\Ajax\OpenDialogCommand;
@@ -84,9 +83,6 @@ class FileController extends ControllerBase {
     }
 
     $headers = array(
-      'Content-Type' => Unicode::mimeHeaderEncode($file->getMimeType()),
-      'Content-Disposition' => 'attachment; filename="' . Unicode::mimeHeaderEncode($this->fileSystem->basename($file->getFileUri())) . '"',
-      'Content-Length' => $file->getSize(),
       'Content-Transfer-Encoding' => 'binary',
       'Pragma' => 'no-cache',
       'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
@@ -100,7 +96,7 @@ class FileController extends ControllerBase {
     \Drupal::moduleHandler()->invokeAll('file_transfer', array($file->getFileUri(), $headers));
 
     try {
-      return new BinaryFileResponse($file->getFileUri(), 200, $headers);
+      return new BinaryFileResponse($file->getFileUri(), 200, $headers, FALSE, 'attachment');
     }
     catch (FileNotFoundException $e) {
       return new Response(t('File @uri not found', array('@uri' =>$file->getFileUri())), 404);
@@ -128,17 +124,19 @@ class FileController extends ControllerBase {
     $form = $this->formBuilder()->buildForm($form_object, $form_state);
     $dialog_selector = '#file-entity-inline-edit-' . $file->id();
 
+    // Setup ajax response.
+    $response = new AjaxResponse();
+
     // Return a response, depending on whether it's successfully submitted.
     if (!$form_state->isExecuted()) {
       // Return the form as a modal dialog.
       $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
       $title = $this->t('Edit file @file', ['@file' => $file->label()]);
-      $response = AjaxResponse::create()->addCommand(new OpenDialogCommand($dialog_selector, $title, $form, ['width' => 800]));
-      return $response;
+      return $response->addCommand(new OpenDialogCommand($dialog_selector, $title, $form, ['width' => 800]));
     }
     else {
       // Return command for closing the modal.
-      return AjaxResponse::create()->addCommand(new CloseDialogCommand($dialog_selector));
+      return $response->addCommand(new CloseDialogCommand($dialog_selector));
     }
   }
 }

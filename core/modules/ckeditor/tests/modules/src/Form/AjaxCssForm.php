@@ -34,7 +34,7 @@ class AjaxCssForm extends FormBase {
   }
 
   /**
-   * {@inheritdoc}
+   * @inheritDoc
    */
   public static function create(ContainerInterface $container) {
     return new static($container->get('file_url_generator'));

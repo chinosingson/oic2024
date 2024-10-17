@@ -10,8 +10,6 @@ use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\ManyToOneHelper;
 
 /**
- * Argument handler for string.
- *
  * Basic argument handler to implement string arguments that may have length
  * limits.
  *

@@ -6,8 +6,8 @@
 		"MIT"
 	],
 	"require": {
-		"php": "^7.1 || ^8.0",
-		"phpstan/phpstan": "^1.0"
+		"php": "^7.2 || ^8.0",
+		"phpstan/phpstan": "^1.12"
 	},
 	"require-dev": {
 		"php-parallel-lint/php-parallel-lint": "^1.2",
@@ -21,9 +21,6 @@
 		"sort-packages": true
 	},
 	"extra": {
-		"branch-alias": {
-			"dev-master": "1.0-dev"
-		},
 		"phpstan": {
 			"includes": [
 				"rules.neon"

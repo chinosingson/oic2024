@@ -95,7 +95,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @link https://www.drupal.org/docs/8/api/migrate-api Migrate API handbook. @endlink
  */
-#[\AllowDynamicProperties]
 class Migration extends PluginBase implements MigrationInterface, RequirementsInterface, ContainerFactoryPluginInterface {
 
   /**
@@ -205,7 +204,8 @@ class Migration extends PluginBase implements MigrationInterface, RequirementsIn
   protected $destinationIds = [];
 
   /**
-   * The source_row_status for the current map row.
+   * Specify value of source_row_status for current map row. Usually set by
+   * MigrateFieldHandler implementations.
    *
    * @var int
    */
@@ -495,7 +495,7 @@ class Migration extends PluginBase implements MigrationInterface, RequirementsIn
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public function getRequirements(): array {
     return $this->requirements;

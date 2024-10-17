@@ -2,8 +2,6 @@
 
 namespace Drupal\Component\Transliteration;
 
-// cspell:ignore vibber
-
 /**
  * Implements transliteration without using the PECL extensions.
  *

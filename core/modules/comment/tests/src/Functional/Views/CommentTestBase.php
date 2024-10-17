@@ -55,9 +55,6 @@ abstract class CommentTestBase extends ViewTestBase {
    */
   protected $comment;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp($import_test_views = TRUE, $modules = ['comment_test_views']) {
     parent::setUp($import_test_views, $modules);
 

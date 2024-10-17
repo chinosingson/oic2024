@@ -7,14 +7,18 @@ use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
+use PHPStan\Broker\ClassNotFoundException;
 use PHPStan\Reflection\ReflectionProvider;
+use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Rules\RuleLevelHelper;
 use PHPStan\Type\ErrorType;
+use function sprintf;
 
 /**
- * @implements \PHPStan\Rules\Rule<New_>
+ * @implements Rule<New_>
  */
-class InstantiationOfDeprecatedClassRule implements \PHPStan\Rules\Rule
+class InstantiationOfDeprecatedClassRule implements Rule
 {
 
 	/** @var ReflectionProvider */
@@ -23,10 +27,14 @@ class InstantiationOfDeprecatedClassRule implements \PHPStan\Rules\Rule
 	/** @var RuleLevelHelper */
 	private $ruleLevelHelper;
 
-	public function __construct(ReflectionProvider $reflectionProvider, RuleLevelHelper $ruleLevelHelper)
+	/** @var DeprecatedScopeHelper */
+	private $deprecatedScopeHelper;
+
+	public function __construct(ReflectionProvider $reflectionProvider, RuleLevelHelper $ruleLevelHelper, DeprecatedScopeHelper $deprecatedScopeHelper)
 	{
 		$this->reflectionProvider = $reflectionProvider;
 		$this->ruleLevelHelper = $ruleLevelHelper;
+		$this->deprecatedScopeHelper = $deprecatedScopeHelper;
 	}
 
 	public function getNodeType(): string
@@ -36,7 +44,7 @@ class InstantiationOfDeprecatedClassRule implements \PHPStan\Rules\Rule
 
 	public function processNode(Node $node, Scope $scope): array
 	{
-		if (DeprecatedScopeHelper::isScopeDeprecated($scope)) {
+		if ($this->deprecatedScopeHelper->isScopeDeprecated($scope)) {
 			return [];
 		}
 
@@ -55,7 +63,7 @@ class InstantiationOfDeprecatedClassRule implements \PHPStan\Rules\Rule
 				$scope,
 				$node->class,
 				'', // We don't care about the error message
-				function (): bool {
+				static function (): bool {
 					return true;
 				}
 			);
@@ -72,7 +80,7 @@ class InstantiationOfDeprecatedClassRule implements \PHPStan\Rules\Rule
 		foreach ($referencedClasses as $referencedClass) {
 			try {
 				$class = $this->reflectionProvider->getClass($referencedClass);
-			} catch (\PHPStan\Broker\ClassNotFoundException $e) {
+			} catch (ClassNotFoundException $e) {
 				continue;
 			}
 
@@ -82,16 +90,16 @@ class InstantiationOfDeprecatedClassRule implements \PHPStan\Rules\Rule
 
 			$description = $class->getDeprecatedDescription();
 			if ($description === null) {
-				$errors[] = sprintf(
+				$errors[] = RuleErrorBuilder::message(sprintf(
 					'Instantiation of deprecated class %s.',
 					$referencedClass
-				);
+				))->identifier('new.deprecated')->build();
 			} else {
-				$errors[] = sprintf(
+				$errors[] = RuleErrorBuilder::message(sprintf(
 					"Instantiation of deprecated class %s:\n%s",
 					$referencedClass,
 					$description
-				);
+				))->identifier('new.deprecated')->build();
 			}
 		}
 

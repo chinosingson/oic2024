@@ -34,9 +34,6 @@ class ConfigImporterMissingContentTest extends KernelTestBase {
     'config_import_test',
   ];
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
     $this->installSchema('system', 'sequences');
@@ -65,8 +62,7 @@ class ConfigImporterMissingContentTest extends KernelTestBase {
       $this->container->get('module_installer'),
       $this->container->get('theme_handler'),
       $this->container->get('string_translation'),
-      $this->container->get('extension.list.module'),
-      $this->container->get('extension.list.theme')
+      $this->container->get('extension.list.module')
     );
   }
 

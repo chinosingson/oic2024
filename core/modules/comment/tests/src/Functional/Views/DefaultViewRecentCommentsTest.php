@@ -61,13 +61,10 @@ class DefaultViewRecentCommentsTest extends ViewTestBase {
   /**
    * Contains the node object used for comments of this test.
    *
-   * @var \Drupal\node\NodeInterface
+   * @var \Drupal\node\Node
    */
   public $node;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp($import_test_views = TRUE, $modules = []): void {
     parent::setUp($import_test_views, $modules);
 

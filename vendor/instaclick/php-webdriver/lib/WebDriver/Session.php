@@ -22,6 +22,8 @@
 
 namespace WebDriver;
 
+use WebDriver\Exception as WebDriverException;
+
 /**
  * WebDriver\Session class
  *
@@ -46,7 +48,6 @@ namespace WebDriver;
  * @method void postAlert_text($jsonText) Sends keystrokes to a JavaScript prompt() dialog.
  * @method void accept_alert() Accepts the currently displayed alert dialog.
  * @method void dismiss_alert() Dismisses the currently displayed alert dialog.
- * @method void moveto($jsonCoordinates) Move the mouse by an offset of the specified element (or current mouse cursor).
  * @method void click($jsonButton) Click any mouse button (at the coordinates set by the last moveto command).
  * @method void buttondown() Click and hold the left mouse button (at the coordinates set by the last moveto command).
  * @method void buttonup() Releases the mouse button previously held (where the mouse is currently at).
@@ -134,7 +135,7 @@ final class Session extends Container
      */
     public function capabilities()
     {
-        if (! isset($this->capabilities)) {
+        if ($this->capabilities === null) {
             $result = $this->curl('GET', '');
 
             $this->capabilities = $result['value'];
@@ -218,7 +219,7 @@ final class Session extends Container
     /**
      * window methods: /session/:sessionId/window (POST, DELETE)
      * - $session->window() - close current window
-     * - $session->window($name) - set focus
+     * - $session->window($window_handle) - set focus
      * - $session->window($window_handle)->method() - chaining
      *
      * @return \WebDriver\Window|\WebDriver\Session
@@ -233,7 +234,7 @@ final class Session extends Container
         }
 
         // set focus
-        $arg = func_get_arg(0); // window handle or name attribute
+        $arg = func_get_arg(0); // window handle
 
         if (is_array($arg)) {
             $this->curl('POST', '/window', $arg);
@@ -260,13 +261,13 @@ final class Session extends Container
     /**
      * Set focus to window: /session/:sessionId/window (POST)
      *
-     * @param mixed $name window handler or name attribute
+     * @param mixed $name window handle
      *
      * @return \WebDriver\Session
      */
     public function focusWindow($name)
     {
-        $this->curl('POST', '/window', array('name' => $name));
+        $this->curl('POST', '/window', array('handle' => $name, 'name' => $name));
 
         return $this;
     }
@@ -281,7 +282,7 @@ final class Session extends Container
     public function frame()
     {
         if (func_num_args() === 1) {
-            $arg = func_get_arg(0); // json
+            $arg = $this->serializeArguments(func_get_arg(0)); // json
 
             $this->curl('POST', '/frame', $arg);
 
@@ -290,6 +291,24 @@ final class Session extends Container
 
         // chaining
         return new Frame($this->url . '/frame');
+    }
+
+    /**
+     * moveto: /session/:sessionId/moveto (POST)
+     *
+     * @param array $parameters
+     *
+     * @return mixed
+     */
+    public function moveto($parameters)
+    {
+        try {
+            $result = $this->curl('POST', '/moveto', $parameters);
+        } catch (WebDriverException\ScriptTimeout $e) {
+            throw WebDriverException::factory(WebDriverException::UNKNOWN_ERROR);
+        }
+
+        return $result['value'];
     }
 
     /**
@@ -479,10 +498,10 @@ final class Session extends Container
                 // preferably we want to detect W3C support and never set nor parse
                 // LEGACY_ELEMENT_ID, until detection is implemented, serialize to both
                 // variants, tested with Selenium v2.53.1 and v3.141.59
-                $arguments[$key] = [
+                $arguments[$key] = array(
                     Container::WEBDRIVER_ELEMENT_ID => $value->getID(),
                     Container::LEGACY_ELEMENT_ID => $value->getID(),
-                ];
+                );
                 continue;
             }
 

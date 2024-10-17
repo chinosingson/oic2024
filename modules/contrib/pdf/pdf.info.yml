@@ -1,12 +1,11 @@
 name: PDF
 description: 'Display PDF file in Drupal without external readers and plugins.'
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9.3 || ^10
 dependencies:
   - drupal:file
 type: module
 
-# Information added by Drupal.org packaging script on 2020-12-09
-version: '8.x-1.1'
+# Information added by Drupal.org packaging script on 2023-07-14
+version: '8.x-1.2'
 project: 'pdf'
-datestamp: 1607548100
+datestamp: 1689358564

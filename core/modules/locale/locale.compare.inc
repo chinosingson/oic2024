@@ -191,7 +191,7 @@ function locale_translation_check_projects($projects = [], $langcodes = []) {
   else {
     // Retrieve and save the status of local translations only.
     locale_translation_check_projects_local($projects, $langcodes);
-    \Drupal::state()->set('locale.translation_last_checked', \Drupal::time()->getRequestTime());
+    \Drupal::state()->set('locale.translation_last_checked', REQUEST_TIME);
   }
 }
 
@@ -253,7 +253,8 @@ function locale_translation_batch_status_build($projects = [], $langcodes = []) 
 }
 
 /**
- * Constructs batch operations for checking remote translation status.
+ * Helper function to construct batch operations checking remote translation
+ * status.
  *
  * @param array $projects
  *   Array of project names to be processed.

@@ -63,11 +63,6 @@ class EntityController implements ContainerInjectionInterface {
   protected $renderer;
 
   /**
-   * The url generator.
-   */
-  protected $urlGenerator;
-
-  /**
    * Constructs a new EntityController.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -81,7 +76,7 @@ class EntityController implements ContainerInjectionInterface {
    * @param \Drupal\Core\StringTranslation\TranslationInterface $string_translation
    *   The string translation.
    * @param \Drupal\Core\Routing\UrlGeneratorInterface $url_generator
-   *   The URL generator.
+   *   The url generator.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityTypeBundleInfoInterface $entity_type_bundle_info, EntityRepositoryInterface $entity_repository, RendererInterface $renderer, TranslationInterface $string_translation, UrlGeneratorInterface $url_generator) {
     $this->entityTypeManager = $entity_type_manager;

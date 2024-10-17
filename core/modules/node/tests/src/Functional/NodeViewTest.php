@@ -2,6 +2,8 @@
 
 namespace Drupal\Tests\node\Functional;
 
+use Drupal\Component\Utility\Html;
+
 /**
  * Tests the node/{node} page.
  *
@@ -35,8 +37,16 @@ class NodeViewTest extends NodeTestBase {
    */
   public function testLinkHeader() {
     $node = $this->drupalCreateNode();
+
+    $expected = [
+      '<' . Html::escape($node->toUrl('canonical')->setAbsolute()->toString()) . '>; rel="canonical"',
+      '<' . Html::escape($node->toUrl('canonical', ['alias' => TRUE])->setAbsolute()->toString()) . '>; rel="shortlink"',
+    ];
+
     $this->drupalGet($node->toUrl());
-    $this->assertArrayNotHasKey('Link', $this->getSession()->getResponseHeaders());
+
+    $links = $this->getSession()->getResponseHeaders()['Link'];
+    $this->assertEquals($expected, $links);
   }
 
   /**

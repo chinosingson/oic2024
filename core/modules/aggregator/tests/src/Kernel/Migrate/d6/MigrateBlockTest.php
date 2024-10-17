@@ -8,6 +8,7 @@ use Drupal\block\Entity\Block;
  * Tests migration of aggregator block.
  *
  * @group aggregator
+ * @group legacy
  */
 class MigrateBlockTest extends MigrateDrupal6TestBase {
 
@@ -30,14 +31,14 @@ class MigrateBlockTest extends MigrateDrupal6TestBase {
     parent::setUp();
 
     // Install the themes used for this test.
-    $this->installEntitySchema('block_content');
-    $this->container->get('theme_installer')->install(['olivero', 'test_theme']);
+    $this->container->get('theme_installer')->install(['bartik', 'test_theme']);
 
+    $this->installEntitySchema('block_content');
     $this->installConfig(['block_content']);
 
-    // Set Olivero as the default public theme.
+    // Set Bartik as the default public theme.
     $config = $this->config('system.theme');
-    $config->set('default', 'olivero');
+    $config->set('default', 'bartik');
     $config->save();
 
     $this->executeMigrations([
@@ -91,7 +92,7 @@ class MigrateBlockTest extends MigrateDrupal6TestBase {
    */
   public function testBlockMigration() {
     $blocks = Block::loadMultiple();
-    $this->assertCount(25, $blocks);
+    $this->assertCount(14, $blocks);
 
     // Check aggregator block.
     $settings = [
@@ -102,7 +103,7 @@ class MigrateBlockTest extends MigrateDrupal6TestBase {
       'block_count' => 7,
       'feed' => '5',
     ];
-    $this->assertEntity('aggregator', [], 'sidebar', 'olivero', -2, $settings);
+    $this->assertEntity('aggregator', [], 'sidebar_second', 'bartik', -2, $settings);
   }
 
 }

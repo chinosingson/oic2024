@@ -53,9 +53,6 @@ class EntityFieldTest extends EntityKernelTestBase {
    */
   protected $entityFieldText;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -593,7 +590,8 @@ class EntityFieldTest extends EntityKernelTestBase {
   }
 
   /**
-   * Gets all contained strings recursively.
+   * Recursive helper for getting all contained strings,
+   * i.e. properties of type string.
    */
   public function getContainedStrings(TypedDataInterface $wrapper, $depth, array &$strings) {
 

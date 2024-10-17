@@ -20,16 +20,13 @@ class CommentPreviewTest extends CommentTestBase {
   }
 
   /**
-   * Modules to install.
+   * The profile to install as a basis for testing.
    *
-   * @var array
+   * Using the standard profile to test user picture display in comments.
+   *
+   * @var string
    */
-  protected static $modules = ['olivero_test', 'test_user_config'];
-
-  /**
-   * {@inheritdoc}
-   */
-  protected $defaultTheme = 'olivero';
+  protected $profile = 'standard';
 
   /**
    * Tests comment preview.
@@ -124,7 +121,8 @@ class CommentPreviewTest extends CommentTestBase {
     // Store the content of this page.
     $this->submitForm([], 'Save');
     $this->assertSession()->pageTextContains('Your comment has been posted.');
-    $this->assertSession()->elementsCount('xpath', '//section[contains(@class, "comments")]/article', 1);
+    $elements = $this->xpath('//section[contains(@class, "comments")]/article');
+    $this->assertCount(1, $elements);
 
     // Go back and re-submit the form.
     $this->getSession()->getDriver()->back();

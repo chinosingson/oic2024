@@ -10,8 +10,8 @@ use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Cache\DatabaseBackend;
 use Drupal\Core\Config\BootstrapConfigStorageFactory;
 use Drupal\Core\Config\NullStorage;
+use Drupal\Core\Database\Database;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\Component\DependencyInjection\ReverseContainer;
 use Drupal\Core\DependencyInjection\ServiceModifierInterface;
 use Drupal\Core\DependencyInjection\ServiceProviderInterface;
 use Drupal\Core\DependencyInjection\YamlFileLoader;
@@ -106,7 +106,7 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
   /**
    * Holds the container instance.
    *
-   * @var \Drupal\Component\DependencyInjection\ContainerInterface
+   * @var \Symfony\Component\DependencyInjection\ContainerInterface
    */
   protected $container;
 
@@ -230,12 +230,7 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
   protected static $isEnvironmentInitialized = FALSE;
 
   /**
-   * The site path directory.
-   *
-   * Site path is relative to the app root directory.
-   * Usually defined as "sites/default".
-   *
-   * By default, Drupal uses sites/default.
+   * The site directory.
    *
    * @var string
    */
@@ -247,16 +242,6 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
    * @var string
    */
   protected $root;
-
-  /**
-   * A mapping from service classes to service IDs.
-   *
-   * @deprecated in drupal:9.5.1 and is removed from drupal:11.0.0. Use the
-   *   'Drupal\Component\DependencyInjection\ReverseContainer' service instead.
-   *
-   * @see https://www.drupal.org/node/3327942
-   */
-  protected $serviceIdMapping = [];
 
   /**
    * Create a DrupalKernel object from a request.
@@ -711,11 +696,18 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
     static::bootEnvironment();
 
     try {
-      if (!$this->booted) {
-        $this->initializeSettings($request);
-        $this->boot();
+      $this->initializeSettings($request);
+
+      // Redirect the user to the installation script if Drupal has not been
+      // installed yet (i.e., if no $databases array has been defined in the
+      // settings.php file) and we are not already installing.
+      if (!Database::getConnectionInfo() && !InstallerKernel::installationAttempted() && PHP_SAPI !== 'cli') {
+        $response = new RedirectResponse($request->getBasePath() . '/core/install.php', 302, ['Cache-Control' => 'no-cache']);
       }
-      $response = $this->getHttpKernel()->handle($request, $type, $catch);
+      else {
+        $this->boot();
+        $response = $this->getHttpKernel()->handle($request, $type, $catch);
+      }
     }
     catch (\Exception $e) {
       if ($catch === FALSE) {
@@ -832,39 +824,6 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
   }
 
   /**
-   * Generate a unique hash for a service object.
-   *
-   * @param object $object
-   *   A service object.
-   *
-   * @return string
-   *   A unique hash value.
-   *
-   * @deprecated in drupal:9.5.1 and is removed from drupal:11.0.0. Use the
-   *   'Drupal\Component\DependencyInjection\ReverseContainer' service instead.
-   *
-   * @see https://www.drupal.org/node/3327942
-   */
-  public static function generateServiceIdHash($object) {
-    @trigger_error(__METHOD__ . "() is deprecated in drupal:9.5.1 and is removed from drupal:11.0.0. Use the 'Drupal\Component\DependencyInjection\ReverseContainer' service instead. See https://www.drupal.org/node/3327942", E_USER_DEPRECATED);
-    // Include class name as an additional namespace for the hash since
-    // spl_object_hash's return can be recycled. This still is not a 100%
-    // guarantee to be unique but makes collisions incredibly difficult and even
-    // then the interface would be preserved.
-    // @see https://php.net/spl_object_hash#refsect1-function.spl-object-hash-notes
-    return hash('sha256', get_class($object) . spl_object_hash($object));
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getServiceIdMapping() {
-    @trigger_error(__METHOD__ . "() is deprecated in drupal:9.5.1 and is removed from drupal:11.0.0. Use the 'Drupal\Component\DependencyInjection\ReverseContainer' service instead. See https://www.drupal.org/node/3327942", E_USER_DEPRECATED);
-    $this->collectServiceIdMapping();
-    return $this->serviceIdMapping;
-  }
-
-  /**
    * Returns the container cache key based on the environment.
    *
    * The 'environment' consists of:
@@ -909,12 +868,6 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
       if ($this->container->initialized('current_user')) {
         $current_user_id = $this->container->get('current_user')->id();
       }
-      // After rebuilding the container some objects will have stale services.
-      // Record a map of objects to service IDs prior to rebuilding the
-      // container in order to ensure
-      // \Drupal\Core\DependencyInjection\DependencySerializationTrait works as
-      // expected.
-      $this->container->get(ReverseContainer::class)->recordContainer();
 
       // If there is a session, close and save it.
       if ($this->container->initialized('session')) {
@@ -1035,14 +988,7 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
     }
 
     // Enforce E_STRICT, but allow users to set levels not part of E_STRICT.
-    $error_reporting = E_STRICT | E_ALL;
-
-    // Drupal 9 uses PHP syntax that's deprecated in PHP 8.2.
-    if (PHP_VERSION_ID >= 80200) {
-      $error_reporting &= ~E_DEPRECATED;
-    }
-
-    error_reporting($error_reporting);
+    error_reporting(E_STRICT | E_ALL);
 
     // Override PHP settings required for Drupal to work properly.
     // sites/default/default.settings.php contains more runtime settings.
@@ -1592,11 +1538,11 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
    * @return bool
    *   TRUE if the Host header is trusted, FALSE otherwise.
    *
-   * @see https://www.drupal.org/docs/installing-drupal/trusted-host-settings
+   * @see https://www.drupal.org/docs/8/install/trusted-host-settings
    * @see \Drupal\Core\Http\TrustedHostsRequestFactory
    */
   protected static function setupTrustedHosts(Request $request, $host_patterns) {
-    Request::setTrustedHosts($host_patterns);
+    $request->setTrustedHosts($host_patterns);
 
     // Get the host, which will validate the current request.
     try {
@@ -1627,23 +1573,6 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
    */
   protected function addServiceFiles(array $service_yamls) {
     $this->serviceYamls['site'] = array_filter($service_yamls, 'file_exists');
-  }
-
-  /**
-   * Collect a mapping between service to ids.
-   *
-   * @deprecated in drupal:9.5.1 and is removed from drupal:11.0.0. Use the
-   *   'Drupal\Component\DependencyInjection\ReverseContainer' service instead.
-   *
-   * @see https://www.drupal.org/node/3327942
-   */
-  protected function collectServiceIdMapping() {
-    @trigger_error(__METHOD__ . "() is deprecated in drupal:9.5.1 and is removed from drupal:11.0.0. Use the 'Drupal\Component\DependencyInjection\ReverseContainer' service instead. See https://www.drupal.org/node/3327942", E_USER_DEPRECATED);
-    if (isset($this->container)) {
-      foreach ($this->container->getServiceIdMappings() as $hash => $service_id) {
-        $this->serviceIdMapping[$hash] = $service_id;
-      }
-    }
   }
 
   /**

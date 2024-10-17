@@ -35,13 +35,6 @@ class TBMegaMenuAdminController extends ControllerBase {
   protected $renderer;
 
   /**
-   * The menu builder service.
-   *
-   * @var \Drupal\tb_megamenu\TBMegaMenuBuilderInterface
-   */
-  private $menuBuilder;
-
-  /**
    * Constructs a TBMegaMenuAdminController object.
    *
    * @param \Drupal\Core\Menu\MenuLinkTreeInterface $menu_tree
@@ -51,10 +44,9 @@ class TBMegaMenuAdminController extends ControllerBase {
    * @param \Drupal\tb_megamenu\TBMegaMenuBuilderInterface $menu_builder
    *   The menu builder service.
    */
-  public function __construct(MenuLinkTreeInterface $menu_tree, RendererInterface $renderer, TBMegaMenuBuilderInterface $menu_builder) {
+  public function __construct(MenuLinkTreeInterface $menu_tree, RendererInterface $renderer, private readonly TBMegaMenuBuilderInterface $menuBuilder) {
     $this->menuTree = $menu_tree;
     $this->renderer = $renderer;
-    $this->menuBuilder = $menu_builder;
   }
 
   /**
@@ -83,9 +75,17 @@ class TBMegaMenuAdminController extends ControllerBase {
     $data = NULL;
     $action = '';
     $result = 'Invalid TB Megamenu Ajax request!';
+    $format = NULL;
+
+    if (method_exists($request, 'getContentTypeFormat')) {
+      $format = $request->getContentTypeFormat();
+    }
+    else {
+      $format = $request->getContentType();
+    }
 
     // All ajax calls should use json data now.
-    if ($request->getContentType() == 'json') {
+    if ($format == 'json') {
       $data = Json::decode($request->getContent());
       $action = $data['action'];
     }
@@ -261,9 +261,9 @@ class TBMegaMenuAdminController extends ControllerBase {
    *   The message and status code indicating the result of the load attempt.
    */
   public function loadMenuBlock(array $data) {
-    $block_id = isset($data['block_id']) ? $data['block_id'] : NULL;
-    $id = isset($data['id']) ? $data['id'] : NULL;
-    $showblocktitle = isset($data['showblocktitle']) ? $data['showblocktitle'] : NULL;
+    $block_id = $data['block_id'] ?? NULL;
+    $id = $data['id'] ?? NULL;
+    $showblocktitle = $data['showblocktitle'] ?? NULL;
     $code = 200;
 
     // Attempt to render the specified block.
@@ -301,7 +301,7 @@ class TBMegaMenuAdminController extends ControllerBase {
    *   A string or null.
    */
   public function getMenuName(array $data) {
-    return isset($data['menu_name']) ? $data['menu_name'] : NULL;
+    return $data['menu_name'] ?? NULL;
   }
 
   /**
@@ -314,7 +314,7 @@ class TBMegaMenuAdminController extends ControllerBase {
    *   An string or null.
    */
   public function getTheme(array $data) {
-    return isset($data['theme']) ? $data['theme'] : NULL;
+    return $data['theme'] ?? NULL;
   }
 
   /**
@@ -327,7 +327,7 @@ class TBMegaMenuAdminController extends ControllerBase {
    *   An array or null.
    */
   public function getMenuConfig(array $data) {
-    return isset($data['menu_config']) ? $data['menu_config'] : NULL;
+    return $data['menu_config'] ?? NULL;
   }
 
   /**
@@ -340,13 +340,14 @@ class TBMegaMenuAdminController extends ControllerBase {
    *   An array or null.
    */
   public function getBlockConfig(array $data) {
-    return isset($data['block_config']) ? $data['block_config'] : NULL;
+    return $data['block_config'] ?? NULL;
   }
 
   /**
    * This is a menu page. To edit Mega Menu.
    */
   public function configMegaMenu(ConfigEntityInterface $tb_megamenu, Request $request) {
+    $page = [];
     // Add font-awesome library.
     $page['#attached']['library'][] = 'tb_megamenu/form.font-awesome';
     // Add chosen library.

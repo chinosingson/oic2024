@@ -105,7 +105,7 @@ class MegaMenuConfig extends ConfigEntityBase implements MegaMenuConfigInterface
    * @see \Drupal\tb_megamenu\MegaMenuConfigInterface::setTheme()
    */
   public function setTheme($themeName) {
-    if (isset($this->id) && isset($this->menu) && $this->id == $this - menu) {
+    if (isset($this->id) && isset($this->menu) && $this->id == $this->menu) {
       $this->id = $this->id . '__' . $themeName;
     }
     $this->theme = $themeName;

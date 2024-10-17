@@ -483,13 +483,14 @@ EOF;
   public function testGetTestsInProfiles() {
     $this->setupVfsWithTestClasses();
     $class_loader = $this->prophesize(ClassLoader::class);
+    $module_handler = $this->prophesize(ModuleHandlerInterface::class);
 
     $container = new Container();
     $container->set('kernel', new DrupalKernel('prod', new ClassLoader()));
     $container->setParameter('site.path', 'sites/default');
     \Drupal::setContainer($container);
 
-    $test_discovery = new TestDiscovery('vfs://drupal', $class_loader->reveal());
+    $test_discovery = new TestDiscovery('vfs://drupal', $class_loader->reveal(), $module_handler->reveal());
 
     $result = $test_discovery->getTestClasses('test_profile_module', ['PHPUnit-Kernel']);
     $expected = [

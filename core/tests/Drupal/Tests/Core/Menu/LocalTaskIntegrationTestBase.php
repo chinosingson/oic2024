@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Defines a base unit test for testing existence of local tasks.
  *
- * @todo Add tests for access checking and URL building,
+ * @todo Add tests for access checking and url building,
  *   https://www.drupal.org/node/2112245.
  */
 abstract class LocalTaskIntegrationTestBase extends UnitTestCase {
@@ -109,7 +109,7 @@ abstract class LocalTaskIntegrationTestBase extends UnitTestCase {
     $factory = $this->createMock('Drupal\Component\Plugin\Factory\FactoryInterface');
     $factory->expects($this->any())
       ->method('createInstance')
-      ->willReturn($plugin_stub);
+      ->will($this->returnValue($plugin_stub));
     $property = new \ReflectionProperty('Drupal\Core\Menu\LocalTaskManager', 'factory');
     $property->setAccessible(TRUE);
     $property->setValue($manager, $factory);

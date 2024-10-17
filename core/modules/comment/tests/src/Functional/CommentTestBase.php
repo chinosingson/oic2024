@@ -54,9 +54,6 @@ abstract class CommentTestBase extends BrowserTestBase {
    */
   protected $node;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp() {
     parent::setUp();
 
@@ -81,7 +78,7 @@ abstract class CommentTestBase extends BrowserTestBase {
       // permission is granted.
       'access user profiles',
       'access content',
-    ]);
+     ]);
     $this->webUser = $this->drupalCreateUser([
       'access comments',
       'post comments',

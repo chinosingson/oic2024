@@ -4,10 +4,12 @@
 * https://www.drupal.org/node/2815083
 * @preserve
 **/
+
 (function ($, Drupal) {
   Drupal.behaviors.menuUiChangeParentItems = {
     attach: function attach(context, settings) {
       var menu = once('menu-parent', '#edit-menu');
+
       if (menu.length) {
         var $menu = $(menu);
         Drupal.menuUiUpdateParentList();
@@ -15,6 +17,7 @@
       }
     }
   };
+
   Drupal.menuUiUpdateParentList = function () {
     var $menu = $('#edit-menu');
     var values = [];

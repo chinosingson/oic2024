@@ -27,21 +27,7 @@ class TBMegaMenuBlock extends BlockBase implements ContainerFactoryPluginInterfa
    *
    * @var string
    */
-  private $themeName;
-
-  /**
-   * The theme manager service.
-   *
-   * @var \Drupal\Core\Theme\ThemeManagerInterface
-   */
-  private $themeManager;
-
-  /**
-   * The menu builder service.
-   *
-   * @var \Drupal\tb_megamenu\TBMegaMenuBuilderInterface
-   */
-  private $menuBuilder;
+  private ?string $themeName = null;
 
   /**
    * Constructs a TBMegaMenuBlock.
@@ -57,10 +43,8 @@ class TBMegaMenuBlock extends BlockBase implements ContainerFactoryPluginInterfa
    * @param \Drupal\tb_megamenu\TBMegaMenuBuilderInterface $menu_builder
    *   The menu builder service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ThemeManagerInterface $theme_manager, TBMegaMenuBuilderInterface $menu_builder) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, private readonly ThemeManagerInterface $themeManager, private readonly TBMegaMenuBuilderInterface $menuBuilder) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->themeManager = $theme_manager;
-    $this->menuBuilder = $menu_builder;
   }
 
   /**

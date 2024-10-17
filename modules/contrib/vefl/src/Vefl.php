@@ -53,7 +53,7 @@ class Vefl {
     // Converts layouts array to options.
     $layout_options = [];
     foreach ($layouts as $key => $layout_definition) {
-      $optgroup = $this->t('Other');
+      $optgroup = (string) $this->t('Other');
 
       // Create new layout option group.
       if (!empty($layout_definition->getCategory())) {

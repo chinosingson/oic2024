@@ -23,9 +23,6 @@ class StandardTest extends UnitTestCase {
    */
   protected $format;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
 
     // Mock text format configuration entity object.
@@ -34,7 +31,7 @@ class StandardTest extends UnitTestCase {
       ->getMock();
     $this->format->expects($this->any())
       ->method('getFilterTypes')
-      ->willReturn([FilterInterface::TYPE_HTML_RESTRICTOR]);
+      ->will($this->returnValue([FilterInterface::TYPE_HTML_RESTRICTOR]));
     $restrictions = [
       'allowed' => [
         'p' => TRUE,
@@ -47,7 +44,7 @@ class StandardTest extends UnitTestCase {
     ];
     $this->format->expects($this->any())
       ->method('getHtmlRestrictions')
-      ->willReturn($restrictions);
+      ->will($this->returnValue($restrictions));
   }
 
   /**
@@ -107,7 +104,7 @@ class StandardTest extends UnitTestCase {
 
     // Default SRC tag by leaving it empty.
     // @see https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet#Default_SRC_tag_by_leaving_it_empty
-    $data[] = ['<IMG SRC= onmouseover="alert(\'xxs\')">', '<IMG>'];
+    $data[] = ['<IMG SRC= onmouseover="alert(\'xxs\')">', '<IMG nmouseover="alert(&#039;xxs&#039;)">'];
 
     // Default SRC tag by leaving it out entirely.
     // @see https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet#Default_SRC_tag_by_leaving_it_out_entirely

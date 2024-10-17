@@ -70,7 +70,7 @@ class ViewsDataTest extends UnitTestCase {
     $this->languageManager = $this->createMock('Drupal\Core\Language\LanguageManagerInterface');
     $this->languageManager->expects($this->any())
       ->method('getCurrentLanguage')
-      ->willReturn(new Language(['id' => 'en']));
+      ->will($this->returnValue(new Language(['id' => 'en'])));
 
     $this->viewsData = new ViewsData($this->cacheBackend, $this->configFactory, $this->moduleHandler, $this->languageManager);
   }
@@ -128,6 +128,8 @@ class ViewsDataTest extends UnitTestCase {
 
   /**
    * Mocks the basic module handler used for the test.
+   *
+   * @return \Drupal\Core\Extension\ModuleHandlerInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected function setupMockedModuleHandler(): void {
     $this->moduleHandler->expects($this->atLeastOnce())
@@ -190,7 +192,7 @@ class ViewsDataTest extends UnitTestCase {
     $this->cacheBackend->expects($this->once())
       ->method('get')
       ->with("views_data:en")
-      ->willReturn(FALSE);
+      ->will($this->returnValue(FALSE));
 
     $expected_views_data = $this->viewsDataWithProvider();
     $views_data = $this->viewsData->getAll();
@@ -279,7 +281,7 @@ class ViewsDataTest extends UnitTestCase {
     $this->cacheBackend->expects($this->once())
       ->method('get')
       ->with("views_data:en")
-      ->willReturn(FALSE);
+      ->will($this->returnValue(FALSE));
 
     $views_data = $this->viewsData->getAll();
     $this->assertSame($expected_views_data, $views_data);
@@ -402,7 +404,7 @@ class ViewsDataTest extends UnitTestCase {
     $this->cacheBackend->expects($this->once())
       ->method('get')
       ->with('views_data:views_test_data:en')
-      ->willReturn((object) ['data' => $expected_views_data['views_test_data']]);
+      ->will($this->returnValue((object) ['data' => $expected_views_data['views_test_data']]));
     $this->cacheBackend->expects($this->never())
       ->method('set');
 
@@ -510,7 +512,7 @@ class ViewsDataTest extends UnitTestCase {
     $this->cacheBackend->expects($this->once())
       ->method('get')
       ->with("views_data:$non_existing_table:en")
-      ->willReturn((object) ['data' => []]);
+      ->will($this->returnValue((object) ['data' => []]));
     $this->cacheBackend->expects($this->never())
       ->method('set');
 
@@ -563,7 +565,7 @@ class ViewsDataTest extends UnitTestCase {
     $this->cacheBackend->expects($this->once())
       ->method('get')
       ->with("views_data:en")
-      ->willReturn((object) ['data' => $expected_views_data]);
+      ->will($this->returnValue((object) ['data' => $expected_views_data]));
     $this->cacheBackend->expects($this->never())
       ->method('set');
 

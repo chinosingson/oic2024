@@ -3,8 +3,13 @@
 namespace Drupal\mailchimp;
 
 use Drupal\Core\Config\Config;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\Site\Settings;
+use Drupal\Core\State\StateInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\mailchimp\Exception\ClientFactoryException;
-use Mailchimp\Mailchimp;
+use Mailchimp\MailchimpApiInterface;
+use Mailchimp\MailchimpApiUser;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -12,19 +17,34 @@ use Psr\Log\LoggerInterface;
  */
 class ClientFactory {
 
+  use StringTranslationTrait;
   /**
    * Mailchimp Settings.
    *
    * @var \Drupal\Core\Config\Config
    */
-  protected $config;
+  protected Config $config;
+
+  /**
+   * StateService.
+   *
+   * @var \Drupal\Core\State\StateInterface
+   */
+  protected StateInterface $stateService;
 
   /**
    * Mailchimp logging interface.
    *
    * @var \Psr\Log\LoggerInterface
    */
-  protected $logger;
+  protected LoggerInterface $logger;
+
+  /**
+   * Messenger Service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected MessengerInterface $messenger;
 
   /**
    * Mailchimp Library instances, keyed by class name.
@@ -40,10 +60,16 @@ class ClientFactory {
    *   Mailchimp Settings.
    * @param \Psr\Log\LoggerInterface $logger
    *   Logging interface.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   Messenger Service.
+   * @param \Drupal\Core\State\StateInterface $stateService
+   *   State Service.
    */
-  public function __construct(Config $config, LoggerInterface $logger) {
+  public function __construct(Config $config, LoggerInterface $logger, MessengerInterface $messenger, StateInterface $stateService) {
     $this->config = $config;
     $this->logger = $logger;
+    $this->messenger = $messenger;
+    $this->stateService = $stateService;
   }
 
   /**
@@ -52,12 +78,12 @@ class ClientFactory {
    * @param string $classname
    *   Relative class name for a Mailchimp Library object.
    *
-   * @return \Mailchimp\Mailchimp
+   * @return \Mailchimp\MailchimpApiUser
    *   Mailchimp Library.
    *
    * @throws \Drupal\mailchimp\Exception\ClientFactoryException
    */
-  public function getByClassName(string $classname = 'Mailchimp'): Mailchimp {
+  public function getByClassName(string $classname = 'MailchimpApiUser'): MailchimpApiUser {
     return $this->getInstance($this->resolveClass($classname));
   }
 
@@ -67,10 +93,10 @@ class ClientFactory {
    * @param string $classname
    *   Relative class name for a Mailchimp Library object.
    *
-   * @return \Mailchimp\Mailchimp|null
+   * @return \Mailchimp\MailchimpApiUser|null
    *   Mailchimp Library or Null.
    */
-  public function getByClassNameOrNull(string $classname = 'Mailchimp') {
+  public function getByClassNameOrNull(string $classname = 'MailchimpApiUser') {
     try {
       return $this->getByClassName($classname);
     }
@@ -80,40 +106,29 @@ class ClientFactory {
   }
 
   /**
-   * Loads an instance of a Mailchimp Library object, creating if necessary.
+   * Returns an instance of the Mailchimp API class.
    *
-   * @param string $class
-   *   Explicit class name for a Mailchimp Library object.
-   *
-   * @return \Mailchimp\Mailchimp
-   *   Mailchimp Library.
+   * @return \Mailchimp\MailchimpApiInterface
+   *   Mailchimp Api Object.
    *
    * @throws \Drupal\mailchimp\Exception\ClientFactoryException
    */
-  protected function getInstance(string $class): Mailchimp {
-    if (!isset($this->instances[$class])) {
-      $this->instances[$class] = $this->createInstance($class);
+  public function getApiClass(): MailchimpApiInterface {
+    // If OAuth is enabled.
+    if ($this->config->get('use_oauth')) {
+      $api_class_name = '\Mailchimp\Mailchimp2';
+      $authentication_settings = [
+        'access_token' => $this->stateService->get('mailchimp_access_token'),
+        'data_center' => $this->stateService->get('mailchimp_data_center'),
+        'api_user' => 'oauth',
+      ];
     }
-
-    return $this->instances[$class];
-  }
-
-  /**
-   * Instantiates a new instance of a Mailchimp Library class.
-   *
-   * @param string $class
-   *   Relative class name for a Mailchimp Library object.
-   *
-   * @return \Mailchimp\Mailchimp
-   *   Mailchimp Library.
-   *
-   * @throws \Drupal\mailchimp\Exception\ClientFactoryException
-   */
-  protected function createInstance(string $class): Mailchimp {
-    $api_key = $this->config->get('api_key');
-    if (!strlen($api_key)) {
-      $this->logger->error('Mailchimp API Key cannot be blank.');
-      throw new ClientFactoryException('Mailchimp API Key cannot be blank');
+    else {
+      $api_class_name = $this->resolveClass('Mailchimp');
+      $authentication_settings = [
+        'api_key' => $this->config->get('api_key'),
+        'api_user' => 'api_key',
+      ];
     }
 
     $http_options = [
@@ -123,7 +138,54 @@ class ClientFactory {
       ],
     ];
 
-    return new $class($api_key, 'apikey', $http_options);
+    $http_client_config = Settings::get('http_client_config', []);
+    if (isset($http_client_config['proxy'])) {
+      $http_options['proxy'] = $http_client_config['proxy'];
+    }
+
+    $api_class = new $api_class_name($authentication_settings, $http_options);
+
+    if (!isset($api_class)) {
+      $this->logger->error('Mailchimp Authentication values cannot be blank.');
+      $this->messenger->addError($this->t('Mailchimp Authentication values are needed for functionality to work.'));
+      throw new ClientFactoryException('Mailchimp Authentication values cannot be blank');
+    }
+
+    return $api_class;
+  }
+
+  /**
+   * Loads an instance of a Mailchimp Api User object, creating if necessary.
+   *
+   * @param string $class
+   *   Explicit class name for a Mailchimp Library object.
+   *
+   * @return \Mailchimp\MailchimpApiUser
+   *   Mailchimp Library.
+   *
+   * @throws \Drupal\mailchimp\Exception\ClientFactoryException
+   */
+  protected function getInstance(string $class): MailchimpApiUser {
+    if (!isset($this->instances[$class])) {
+      $this->instances[$class] = $this->createInstance($class);
+    }
+
+    return $this->instances[$class];
+  }
+
+  /**
+   * Instantiates a new instance of a Mailchimp API User class.
+   *
+   * @param string $class
+   *   Explicit class name for a Mailchimp Library object.
+   *
+   * @return \Mailchimp\MailchimpApiUser
+   *   Mailchimp ApiUser Object.
+   *
+   * @throws \Drupal\mailchimp\Exception\ClientFactoryException
+   */
+  protected function createInstance(string $class): MailchimpApiUser {
+    return new $class($this->getApiClass());
   }
 
   /**

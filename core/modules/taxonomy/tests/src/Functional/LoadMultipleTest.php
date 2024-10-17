@@ -17,16 +17,14 @@ class LoadMultipleTest extends TaxonomyTestBase {
    */
   protected $defaultTheme = 'stark';
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
     $this->drupalLogin($this->drupalCreateUser(['administer taxonomy']));
   }
 
   /**
-   * Tests entity_load_multiple().
+   * Create a vocabulary and some taxonomy terms, ensuring they're loaded
+   * correctly using entity_load_multiple().
    */
   public function testTaxonomyTermMultipleLoad() {
     // Create a vocabulary.

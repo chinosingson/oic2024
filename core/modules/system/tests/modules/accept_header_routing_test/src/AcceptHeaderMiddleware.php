@@ -12,11 +12,6 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 class AcceptHeaderMiddleware implements HttpKernelInterface {
 
   /**
-   * The app kernel.
-   */
-  protected $app;
-
-  /**
    * Constructs a new AcceptHeaderMiddleware instance.
    *
    * @param \Symfony\Component\HttpKernel\HttpKernelInterface $app

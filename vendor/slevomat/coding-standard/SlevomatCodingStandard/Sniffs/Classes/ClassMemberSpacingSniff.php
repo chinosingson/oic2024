@@ -6,6 +6,7 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
 use SlevomatCodingStandard\Helpers\CommentHelper;
+use SlevomatCodingStandard\Helpers\FixerHelper;
 use SlevomatCodingStandard\Helpers\FunctionHelper;
 use SlevomatCodingStandard\Helpers\PropertyHelper;
 use SlevomatCodingStandard\Helpers\ScopeHelper;
@@ -14,12 +15,10 @@ use SlevomatCodingStandard\Helpers\StringHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use SlevomatCodingStandard\Helpers\UseStatementHelper;
 use function array_key_exists;
-use function array_merge;
 use function in_array;
 use function sprintf;
 use function str_repeat;
 use const T_ABSTRACT;
-use const T_ANON_CLASS;
 use const T_AS;
 use const T_ATTRIBUTE_END;
 use const T_CLOSE_CURLY_BRACKET;
@@ -37,7 +36,6 @@ use const T_STATIC;
 use const T_USE;
 use const T_VAR;
 use const T_VARIABLE;
-use const T_WHITESPACE;
 
 class ClassMemberSpacingSniff implements Sniff
 {
@@ -52,8 +50,7 @@ class ClassMemberSpacingSniff implements Sniff
 	 */
 	public function register(): array
 	{
-		/** @phpstan-var array<int, (int|string)> */
-		return array_merge(TokenHelper::$typeKeywordTokenCodes, [T_ANON_CLASS]);
+		return TokenHelper::$typeWithAnonymousClassKeywordTokenCodes;
 	}
 
 	/**
@@ -94,7 +91,7 @@ class ClassMemberSpacingSniff implements Sniff
 
 			$hasCommentWithNewLineAfterPreviousMember = false;
 
-			$commentPointerAfterPreviousMember = TokenHelper::findNextExcluding($phpcsFile, T_WHITESPACE, $previousMemberEndPointer + 1);
+			$commentPointerAfterPreviousMember = TokenHelper::findNextNonWhitespace($phpcsFile, $previousMemberEndPointer + 1);
 			if (
 				in_array($tokens[$commentPointerAfterPreviousMember]['code'], TokenHelper::$inlineCommentTokenCodes, true)
 				&& (
@@ -135,13 +132,13 @@ class ClassMemberSpacingSniff implements Sniff
 				$this->linesCountBetweenMembers + ($hasCommentWithNewLineAfterPreviousMember ? 0 : 1)
 			);
 
+			$firstPointerOnMemberLine = TokenHelper::findFirstTokenOnLine($phpcsFile, $memberStartPointer);
+
 			$phpcsFile->fixer->beginChangeset();
 
 			$phpcsFile->fixer->addContent($previousMemberEndPointer, $newLines);
 
-			for ($i = $previousMemberEndPointer + 1; $i < TokenHelper::findFirstTokenOnLine($phpcsFile, $memberStartPointer); $i++) {
-				$phpcsFile->fixer->replaceToken($i, '');
-			}
+			FixerHelper::removeBetween($phpcsFile, $previousMemberEndPointer, $firstPointerOnMemberLine);
 
 			$phpcsFile->fixer->endChangeset();
 
@@ -203,7 +200,7 @@ class ClassMemberSpacingSniff implements Sniff
 		$memberFirstCodePointer = $this->getMemberFirstCodePointer($phpcsFile, $memberPointer);
 
 		do {
-			$pointerBefore = TokenHelper::findPreviousExcluding($phpcsFile, T_WHITESPACE, $memberFirstCodePointer - 1);
+			$pointerBefore = TokenHelper::findPreviousNonWhitespace($phpcsFile, $memberFirstCodePointer - 1);
 
 			if ($tokens[$pointerBefore]['code'] === T_ATTRIBUTE_END) {
 				$memberFirstCodePointer = $tokens[$pointerBefore]['attribute_opener'];

@@ -2,8 +2,6 @@
 
 namespace Drupal\mailchimp;
 
-use ReflectionClass;
-
 /**
  * Classloader for Mailchimp test classes.
  */
@@ -32,11 +30,11 @@ class Autoload {
   public static function loadClass($class) {
     if (strpos($class, 'Mailchimp\\Tests') === 0 && class_exists('Mailchimp\\Mailchimp')) {
       // Find out where the mailchimp library is defined.
-      $reflector = new ReflectionClass('Mailchimp\\Mailchimp');
+      $reflector = new \ReflectionClass('Mailchimp\\Mailchimp');
       $library_dir = dirname(dirname($reflector->getFileName()));
 
       // Compose expected path to the test class.
-      $parts = explode('\\', $class);
+      $parts = explode('\\', (string) $class);
       $class_without_base = implode('\\', array_slice($parts, 2));
       $file = $library_dir . '/tests/src/' . strtr($class_without_base, '\\', '/') . '.php';
 

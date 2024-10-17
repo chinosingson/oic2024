@@ -75,20 +75,10 @@ class Drupal {
   /**
    * The current system version.
    */
-  const VERSION = '9.5.11';
+  const VERSION = '9.4.3';
 
   /**
    * Core API compatibility.
-   *
-   * This constant is set to '8.x' to provide legacy compatibility with
-   * extensions that use the '8.x-' prefix to denote Drupal core major version
-   * compatibility, for example '8.x-1.0'. These extensions can specify
-   * compatibility with multiple major versions of Drupal core by setting the
-   * version constraint in 'core_version_requirement'. Drupal does not support
-   * using this core major version number prefix with versions greater than 8.
-   * For example '9.x-' prefixed extensions are not supported.
-   *
-   * @todo Remove or rename this constant in https://www.drupal.org/i/3085662
    */
   const CORE_COMPATIBILITY = '8.x';
 
@@ -141,12 +131,12 @@ class Drupal {
    * message, but Drupal can still be installed. Used for (e.g.) PHP versions
    * that have reached their EOL or will in the near future.
    */
-  const RECOMMENDED_PHP = '8.1.6';
+  const RECOMMENDED_PHP = '8.1';
 
   /**
    * The currently active container object, or NULL if not initialized yet.
    *
-   * @var \Drupal\Component\DependencyInjection\ContainerInterface|null
+   * @var \Symfony\Component\DependencyInjection\ContainerInterface|null
    */
   protected static $container;
 
@@ -170,7 +160,7 @@ class Drupal {
   /**
    * Returns the currently active global container.
    *
-   * @return \Drupal\Component\DependencyInjection\ContainerInterface
+   * @return \Symfony\Component\DependencyInjection\ContainerInterface
    *
    * @throws \Drupal\Core\DependencyInjection\ContainerNotInitializedException
    */
@@ -575,10 +565,10 @@ class Drupal {
   }
 
   /**
-   * Returns the URL generator service.
+   * Returns the url generator service.
    *
    * @return \Drupal\Core\Routing\UrlGeneratorInterface
-   *   The URL generator service.
+   *   The url generator service.
    */
   public static function urlGenerator() {
     return static::getContainer()->get('url_generator');

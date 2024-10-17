@@ -32,9 +32,6 @@ class ForumIntegrationTest extends ViewTestBase {
    */
   public static $testViews = ['test_forum_index'];
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp($import_test_views = TRUE, $modules = ['forum_test_views']): void {
     parent::setUp($import_test_views, $modules);
   }

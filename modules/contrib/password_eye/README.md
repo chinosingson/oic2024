@@ -1,6 +1,7 @@
-###Password Eye
+### Password Eye
 
-Password Eye is a tiny module to add Eye Icon to password fields to show password.
+Password Eye is a tiny module to add Eye Icon to password fields
+to show password.
 
  * For a full description of the module, visit the project page:
    https://www.drupal.org/project/password_eye

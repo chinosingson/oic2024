@@ -2,8 +2,8 @@
 
 namespace Drupal\quick_node_clone\Form;
 
-use Drupal\node\NodeForm;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeForm;
 
 /**
  * Form controller for Quick Node Clone edit forms.
@@ -64,7 +64,8 @@ class QuickNodeCloneNodeForm extends NodeForm {
         // Add node to all the groups the original was in
         // (if group and gnode modules aren't installed then nothing should ever
         // be set in this array anyway)
-        $group->addContent($node, "group_node:" . $node->bundle());
+        $add_method = method_exists($group, 'addContent') ? 'addContent' : 'addRelationship';
+        $group->{$add_method}($node, 'group_node:' . $node->bundle());
       }
       if ($node->access('view')) {
         $form_state->setRedirect(

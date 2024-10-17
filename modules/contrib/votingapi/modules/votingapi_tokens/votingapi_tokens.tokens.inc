@@ -64,7 +64,7 @@ function votingapi_tokens_tokens($type, $tokens, array $data, array $options, Bu
       $votes = \Drupal::service('plugin.manager.votingapi.resultfunction')
         ->getResults($entity_type, $data[$entity_type]->id());
       foreach ($tokens as $name => $original) {
-        list($token_name, $vote_type) = explode(':', $name);
+        [$token_name, $vote_type] = explode(':', $name);
         switch ($token_name) {
           case 'vote_count':
             $replacements[$original] = $votes[$vote_type]['vote_count'];
@@ -128,6 +128,7 @@ function _votingapi_tokens_get_votes_per_entity($entity_type_id, $entity_id, $vo
     ->condition('entity_type', $entity_type_id)
     ->condition('entity_id', $entity_id)
     ->condition('type', $vote_type)
+    ->accessCheck(TRUE)
     ->execute();
   $vote_storage = \Drupal::entityTypeManager()->getStorage('vote');
   $values = [];

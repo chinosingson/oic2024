@@ -4,14 +4,41 @@ namespace Drupal\save_edit\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\node\Entity\NodeType;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class SettingsForm.
+ * Class of SettingsForm.
  *
  * @package Drupal\save_edit\Form
  */
 class SettingsForm extends ConfigFormBase {
+
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * Contructs SettingsForm.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager service.
+   */
+  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+    $this->entityTypeManager = $entityTypeManager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+     $container->get('entity_type.manager')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -34,6 +61,8 @@ class SettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('save_edit.settings');
+    $theme_config = $this->config('system.theme');
+    $theme_is_gin = $theme_config->get('admin') == 'gin' || (!$theme_config->get('admin') && $theme_config->get('default') == 'gin');
     $weights_range = range(-10, 10);
     $weights = array_combine($weights_range, $weights_range);
 
@@ -48,16 +77,18 @@ class SettingsForm extends ConfigFormBase {
     $form['button_weight'] = [
       '#type' => 'select',
       '#title' => $this->t('Save & Edit Button Weight'),
-      '#description' => $this->t('You can adjust the horizontal positioning in the button section (or vertical positioning when using the dropbutton setting).'),
+      '#description' => $this->t('You can adjust the horizontal positioning in the button section.'),
       '#options' => $weights,
       '#default_value' => $config->get('button_weight'),
     ];
-    $form['dropbutton'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Integrate into dropbutton'),
-      '#description' => $this->t('This setting will insert the Save &amp; Edit button into the save dropbutton.'),
-      '#default_value' => $config->get('dropbutton'),
-    ];
+    if ($theme_is_gin) {
+      $form['gin_primary'] = [
+        '#type' => 'checkbox',
+        '#title' => $this->t('Display as <em>Gin Admin</em> theme primary actions'),
+        '#description' => $this->t('Display button as <em>Gin Admin</em> theme primary actions instead of inside the secondary "More Actions" dropdown button.'),
+        '#default_value' => $config->get('gin_primary'),
+      ];
+    }
     $form['unpublish'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Auto Unpublish All Nodes'),
@@ -73,7 +104,7 @@ class SettingsForm extends ConfigFormBase {
     $form['hide_default_save'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Hide default Save button'),
-      '#description' => $this->t('This will hide the Save dropbutton.'),
+      '#description' => $this->t('This will hide the Save button.'),
       '#default_value' => $config->get('hide_default_save'),
     ];
 
@@ -95,19 +126,24 @@ class SettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('hide_default_delete'),
       '#description' => $this->t('This will hide the Delete button.'),
     ];
+    $form['enable_node_types_automatically'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable node types automatically'),
+      '#description' => $this->t('Automatically enables new node types in the configuration when they are created.'),
+      '#default_value' => $config->get('enable_node_types_automatically'),
+    ];
 
-    $node_types = NodeType::loadMultiple();
+    $node_types = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
     $keyed_node_types = [];
     foreach ($node_types as $content_type) {
       $keyed_node_types[$content_type->id()] = $content_type->label();
     }
-    $default_value_node_types = $config->get('node_types');
     $form['node_types'] = [
       '#type' => 'checkboxes',
       '#options' => $keyed_node_types,
       '#title' => $this->t('Node types'),
       '#description' => $this->t('Set the node types you want to display links for.'),
-      '#default_value' => isset($default_value_node_types) ? $default_value_node_types : [],
+      '#default_value' => array_keys(array_filter($config->get('node_types') ?? [])),
     ];
 
     return parent::buildForm($form, $form_state);
@@ -122,13 +158,14 @@ class SettingsForm extends ConfigFormBase {
     $this->config('save_edit.settings')
       ->set('button_value', $form_state->getValue('button_value'))
       ->set('button_weight', $form_state->getValue('button_weight'))
-      ->set('dropbutton', $form_state->getValue('dropbutton'))
+      ->set('gin_primary', !is_null($form_state->getValue('gin_primary')) ? $form_state->getValue('gin_primary') : FALSE)
       ->set('hide_default_save', $form_state->getValue('hide_default_save'))
       ->set('hide_default_publish', $form_state->getValue('hide_default_publish'))
       ->set('hide_default_preview', $form_state->getValue('hide_default_preview'))
       ->set('hide_default_delete', $form_state->getValue('hide_default_delete'))
       ->set('unpublish', $form_state->getValue('unpublish'))
       ->set('unpublish_new_only', $form_state->getValue('unpublish_new_only'))
+      ->set('enable_node_types_automatically', $form_state->getValue('enable_node_types_automatically'))
       ->set('node_types', $form_state->getValue('node_types'))
       ->save();
   }

@@ -157,8 +157,19 @@ class StateItem extends FieldItemBase implements StateItemInterface, OptionsProv
    * {@inheritdoc}
    */
   public function isValid() {
-    $allowed_states = $this->getAllowedStates($this->originalValue);
-    return isset($allowed_states[$this->value]);
+    $workflow = $this->getWorkflow();
+    if (!$workflow) {
+      return FALSE;
+    }
+    // Validate that the state update was allowed.
+    if ($this->value != $this->originalValue) {
+      $transition = $workflow->findTransition($this->originalValue, $this->value);
+      return $transition && $workflow->isTransitionAllowed($transition, $this->getEntity());
+    }
+
+    // Otherwise, if the state didn't change, simply validate that the current
+    // state belongs to the workflow.
+    return !empty($workflow->getState($this->value));
   }
 
   /**
@@ -197,6 +208,9 @@ class StateItem extends FieldItemBase implements StateItemInterface, OptionsProv
   public function getSettableOptions(AccountInterface $account = NULL) {
     // $this->value is unpopulated due to https://www.drupal.org/node/2629932
     $field_name = $this->getFieldDefinition()->getName();
+    if (!$this->getEntity()->hasField($field_name)) {
+      return [];
+    }
     $value = $this->getEntity()->get($field_name)->value;
     $allowed_states = $this->getAllowedStates($value);
     $state_labels = array_map(function (WorkflowState $state) {
@@ -317,8 +331,20 @@ class StateItem extends FieldItemBase implements StateItemInterface, OptionsProv
    * {@inheritdoc}
    */
   public function isTransitionAllowed($transition_id) {
-    $allowed_transitions = $this->getTransitions();
-    return isset($allowed_transitions[$transition_id]);
+    $workflow = $this->getWorkflow();
+    if (!$workflow) {
+      return FALSE;
+    }
+
+    // We first check that the transition passed is a "possible" transition.
+    // Note that we don't call the getTransitions() method on purpose since
+    // it loops over all transitions and invoke the guards on each of them.
+    $possible_transitions = $workflow->getPossibleTransitions($this->value);
+    if (!isset($possible_transitions[$transition_id])) {
+      return FALSE;
+    }
+
+    return $workflow->isTransitionAllowed($possible_transitions[$transition_id], $this->getEntity());
   }
 
   /**
@@ -353,7 +379,7 @@ class StateItem extends FieldItemBase implements StateItemInterface, OptionsProv
    * {@inheritdoc}
    */
   public function preSave() {
-    if ($this->value != $this->originalValue) {
+    if ($this->value != $this->originalValue || $this->transitionToApply !== NULL) {
       $this->dispatchTransitionEvent('pre_transition');
     }
   }
@@ -362,7 +388,7 @@ class StateItem extends FieldItemBase implements StateItemInterface, OptionsProv
    * {@inheritdoc}
    */
   public function postSave($update) {
-    if ($this->value != $this->originalValue) {
+    if ($this->value != $this->originalValue || $this->transitionToApply !== NULL) {
       $this->dispatchTransitionEvent('post_transition');
     }
     $this->originalValue = $this->value;

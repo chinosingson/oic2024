@@ -24,9 +24,6 @@ class AggregatorRenderingTest extends AggregatorTestBase {
    */
   protected $defaultTheme = 'stark';
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -103,8 +100,6 @@ class AggregatorRenderingTest extends AggregatorTestBase {
     $feed = $this->createFeed();
     $this->updateFeedItems($feed, 30);
 
-    // Request page with no feed items to ensure cache context is set correctly.
-    $this->drupalGet('aggregator', ['query' => ['page' => 2]]);
     // Check for presence of an aggregator pager.
     $this->drupalGet('aggregator');
     $this->assertSession()->elementExists('xpath', '//ul[contains(@class, "pager__items")]');

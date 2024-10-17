@@ -14,7 +14,7 @@ class CropEffectTest extends CropUnitTestBase {
    *
    * @var array
    */
-  public static $modules = ['user', 'image', 'crop', 'file', 'system'];
+  protected static $modules = ['user', 'image', 'crop', 'file', 'system'];
 
   /**
    * Tests manual crop image effect.
@@ -42,7 +42,7 @@ class CropEffectTest extends CropUnitTestBase {
     $derivative_uri = $this->testStyle->buildUri($file->getFileUri());
     $this->testStyle->createDerivative($file->getFileUri(), $derivative_uri);
 
-    $this->assertTrue(file_exists($derivative_uri), 'Image derivative file exists on the filesystem.');
+    $this->assertFileExists($derivative_uri, 'Image derivative file exists on the filesystem.');
 
     // Test if cropped version looks like expected. Basically loop pixels,
     // in derivative image and check if they look the same as pixels,
@@ -65,7 +65,7 @@ class CropEffectTest extends CropUnitTestBase {
   /**
    * Test image crop effect dimensions.
    */
-  public function testCropDimenssions() {
+  public function testCropDimensions() {
     // Create image to be cropped.
     $file = $this->getTestFile();
     $file->save();
@@ -88,7 +88,7 @@ class CropEffectTest extends CropUnitTestBase {
     $crop = $this->container->get('entity_type.manager')->getStorage('crop')->create($values);
     $crop->save();
 
-    /** @var $effect \Drupal\crop\Plugin\ImageEffect\CropEffect */
+    /** @var \Drupal\crop\Plugin\ImageEffect\CropEffect $effect */
     $effect = $this->imageEffectManager->createInstance('crop_crop', ['data' => ['crop_type' => $this->cropType->id()]]);
     $effect->transformDimensions($dimensions, $file_uri);
 

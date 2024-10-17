@@ -11,9 +11,9 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\ShouldNotHappenException;
-use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\ObjectType;
+use PHPStan\Type\Type;
 
 class EntityTypeManagerGetStorageDynamicReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
@@ -47,8 +47,12 @@ class EntityTypeManagerGetStorageDynamicReturnTypeExtension implements DynamicMe
         MethodReflection $methodReflection,
         MethodCall $methodCall,
         Scope $scope
-    ): \PHPStan\Type\Type {
-        $returnType = ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getReturnType();
+    ): Type {
+        $returnType = ParametersAcceptorSelector::selectFromArgs(
+            $scope,
+            $methodCall->getArgs(),
+            $methodReflection->getVariants()
+        )->getReturnType();
         if (!isset($methodCall->args[0])) {
             // Parameter is required.
             throw new ShouldNotHappenException();
@@ -71,13 +75,11 @@ class EntityTypeManagerGetStorageDynamicReturnTypeExtension implements DynamicMe
         }
 
         $type = $scope->getType($arg1);
-        if ($type instanceof ConstantStringType) {
-            $entityTypeId = $type->getValue();
-        } else {
-            // @todo determine what these types are, and try to resolve entity name from.
+        if (count($type->getConstantStrings()) === 0) {
             return $returnType;
         }
 
+        $entityTypeId = $type->getConstantStrings()[0]->getValue();
         $storageType = $this->entityDataRepository->get($entityTypeId)->getStorageType();
         if ($storageType !== null) {
             return $storageType;

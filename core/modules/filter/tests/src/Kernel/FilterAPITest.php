@@ -22,9 +22,6 @@ class FilterAPITest extends EntityKernelTestBase {
 
   protected static $modules = ['system', 'filter', 'filter_test', 'user'];
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -83,10 +80,9 @@ class FilterAPITest extends EntityKernelTestBase {
   }
 
   /**
-   * Tests that HTML restrictions and filter types are correct.
-   *
-   * @covers \Drupal\filter\Entity\FilterFormat::getHtmlRestrictions
-   * @covers \Drupal\filter\Entity\FilterFormat::getFilterTypes
+   * Tests the following functions for a variety of formats:
+   *   - \Drupal\filter\Entity\FilterFormatInterface::getHtmlRestrictions()
+   *   - \Drupal\filter\Entity\FilterFormatInterface::getFilterTypes()
    */
   public function testFilterFormatAPI() {
     // Test on filtered_html.
@@ -207,7 +203,7 @@ class FilterAPITest extends EntityKernelTestBase {
         'filter_html' => [
           'status' => 1,
           'settings' => [
-            'allowed_html' => '<a> <b class> <c class="*"> <d class="foo bar-* *"> <e *>',
+            'allowed_html' => '<a> <b class> <c class="*"> <d class="foo bar-* *">',
           ],
         ],
       ],
@@ -221,7 +217,6 @@ class FilterAPITest extends EntityKernelTestBase {
           'b' => ['class' => TRUE],
           'c' => ['class' => TRUE],
           'd' => ['class' => ['foo' => TRUE, 'bar-*' => TRUE]],
-          'e' => ['*' => TRUE],
           '*' => ['style' => FALSE, 'on*' => FALSE, 'lang' => TRUE, 'dir' => ['ltr' => TRUE, 'rtl' => TRUE]],
         ],
       ],

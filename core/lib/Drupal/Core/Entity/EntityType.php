@@ -200,15 +200,9 @@ class EntityType extends PluginDefinition implements EntityTypeInterface {
   /**
    * A definite singular/plural name of the type.
    *
-   * Needed keys: "singular" and "plural". Can also have key: "context".
-   * @code
-   * [
-   *    'singular' => '@count entity',
-   *    'plural' => '@count entities',
-   *    'context' => 'Entity context',
-   * ]
+   * Needed keys: "singular" and "plural".
    *
-   * @var string[]
+   * @var string|\Drupal\Core\StringTranslation\TranslatableMarkup
    *
    * @see \Drupal\Core\Entity\EntityTypeInterface::getCountLabel()
    */
@@ -225,8 +219,6 @@ class EntityType extends PluginDefinition implements EntityTypeInterface {
    * The machine name of the entity type group.
    *
    * @var string
-   *
-   * @see self::getGroup()
    */
   protected $group;
 

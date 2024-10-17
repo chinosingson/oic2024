@@ -27,6 +27,11 @@ class BadUnitTest extends CoderSniffUnitTest
     protected function getErrorList(string $testFile): array
     {
         switch ($testFile) {
+        case 'bad_crlf.inc':
+            return [
+                1 => 2,
+                8 => 1,
+            ];
         case 'bad.css':
             return [
                 1  => 1,
@@ -64,12 +69,13 @@ class BadUnitTest extends CoderSniffUnitTest
         case 'bad.module':
             return [
                 1  => 1,
-                12 => 1,
-                19 => 1,
-                26 => 1,
-                33 => 1,
-                44 => 1,
-                45 => 1,
+                7  => 1,
+                14 => 1,
+                21 => 1,
+                28 => 1,
+                35 => 1,
+                46 => 1,
+                47 => 1,
             ];
         case 'bad.php':
             return [
@@ -307,7 +313,6 @@ class BadUnitTest extends CoderSniffUnitTest
                 566 => 3,
                 575 => 1,
                 578 => 2,
-                581 => 1,
                 588 => 1,
                 590 => 1,
                 592 => 1,
@@ -358,7 +363,6 @@ class BadUnitTest extends CoderSniffUnitTest
                 750 => 1,
                 756 => 1,
                 765 => 1,
-                775 => 1,
                 791 => 1,
                 795 => 4,
                 796 => 1,
@@ -376,8 +380,11 @@ class BadUnitTest extends CoderSniffUnitTest
                 827 => 1,
                 829 => 1,
                 836 => 1,
-                846 => 2,
-                852 => 2,
+                838 => 1,
+                849 => 2,
+                860 => 2,
+                867 => 1,
+                871 => 2,
             ];
         }//end switch
 
@@ -400,7 +407,7 @@ class BadUnitTest extends CoderSniffUnitTest
     {
         switch ($testFile) {
         case 'bad.module':
-            return [7 => 1];
+            return [9 => 1];
         case 'bad.php':
             return [
                 14  => 1,
@@ -472,6 +479,22 @@ class BadUnitTest extends CoderSniffUnitTest
         return true;
 
     }//end checkAllSniffCodes()
+
+
+    /**
+     * Skip this test on PHP versions lower than 8 because of MultiLineTrailingCommaSniff.
+     *
+     * @return bool
+     */
+    protected function shouldSkipTest()
+    {
+        if (version_compare(PHP_VERSION, '8.0.0') < 0) {
+            return true;
+        }
+
+        return false;
+
+    }//end shouldSkipTest()
 
 
 }//end class

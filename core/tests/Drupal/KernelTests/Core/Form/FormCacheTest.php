@@ -9,10 +9,8 @@ use Drupal\Core\Site\Settings;
 use Drupal\KernelTests\KernelTestBase;
 
 /**
- * Tests FormBuilder caching.
- *
- * @covers \Drupal\Core\Form\FormBuilder::getCache
- * @covers \Drupal\Core\Form\FormBuilder::setCache
+ * Tests \Drupal::formBuilder()->setCache() and
+ * \Drupal::formBuilder()->getCache().
  *
  * @group Form
  */
@@ -40,9 +38,6 @@ class FormCacheTest extends KernelTestBase {
    */
   protected $formState;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
 

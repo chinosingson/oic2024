@@ -3,7 +3,6 @@
 namespace Drupal\crop\Form;
 
 use Drupal\Core\Entity\EntityConfirmFormBase;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\TranslationInterface;
 use Drupal\Core\Url;
@@ -67,6 +66,7 @@ class CropTypeDeleteForm extends EntityConfirmFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $count = $this->entityTypeManager->getStorage('crop')->getQuery()
       ->condition('type', $this->entity->id())
+      ->accessCheck(TRUE)
       ->count()
       ->execute();
     if ($count) {

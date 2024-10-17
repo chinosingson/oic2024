@@ -2,10 +2,12 @@
 
 namespace Drupal\tzfield\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Field\FormatterBase;
-use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Security\TrustedCallbackInterface;
 
 /**
  * Plugin implementation of the 'tzfield_date' formatter.
@@ -18,18 +20,20 @@ use Drupal\Core\Form\FormStateInterface;
  *   }
  * )
  */
-class TimeZoneFieldFormatter extends FormatterBase {
+class TimeZoneFieldFormatter extends FormatterBase implements TrustedCallbackInterface {
 
   /**
    * {@inheritdoc}
    */
   public function settingsSummary() {
-    $summary[] = $this->t('Date format string: :format', [':format' => $this->getSetting('format')]);
+    $summary[] = $this->t('Date format string: %format', ['%format' => $this->getSetting('format')]);
     return $summary;
   }
 
   /**
    * {@inheritdoc}
+   *
+   * @phpstan-ignore-next-line Core has not yet documented this method properly.
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $element = [];
@@ -38,15 +42,35 @@ class TimeZoneFieldFormatter extends FormatterBase {
         continue;
       }
       // Render each element as markup.
-      $dateTime = new DrupalDateTime();
-      $dateTime->setTimezone(new \DateTimeZone($item->value));
-      $element[$delta] = ['#markup' => $dateTime->format($this->getSetting('format'))];
+      $placeholder = Crypt::randomBytesBase64();
+      $element[$delta]['#markup'] = $placeholder;
+      $element[$delta]['#attached']['placeholders'][$placeholder]['#lazy_builder'] = [
+        [$this, 'getRenderableFormattedDate'], [$item->value],
+      ];
     }
     return $element;
   }
 
   /**
+   * Returns the formatted date as a renderable array.
+   *
+   * @return string[]
+   *   The renderable array.
+   */
+  public function getRenderableFormattedDate(string $timezone): array {
+    $dateTime = new DrupalDateTime();
+    $dateTime->setTimezone(new \DateTimeZone($timezone));
+    $format = $this->getSetting('format');
+    if (!is_string($format)) {
+      $format = 'T';
+    }
+    return ['#markup' => $dateTime->format($format)];
+  }
+
+  /**
    * {@inheritdoc}
+   *
+   * @phpstan-ignore-next-line Core has not yet documented this method properly.
    */
   public static function defaultSettings() {
     return [
@@ -56,6 +80,8 @@ class TimeZoneFieldFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @phpstan-ignore-next-line Core has not yet documented this method properly.
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
     $form = parent::settingsForm($form, $form_state);
@@ -66,6 +92,13 @@ class TimeZoneFieldFormatter extends FormatterBase {
       '#default_value' => $this->getSetting('format'),
     ];
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function trustedCallbacks() {
+    return ['getRenderableFormattedDate'];
   }
 
 }

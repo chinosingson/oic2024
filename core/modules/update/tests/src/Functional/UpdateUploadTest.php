@@ -30,9 +30,6 @@ class UpdateUploadTest extends UpdateUploaderTestBase {
    */
   protected $defaultTheme = 'stark';
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
     $admin_user = $this->drupalCreateUser([

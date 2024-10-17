@@ -163,7 +163,7 @@ class BlockTest extends BlockTestBase {
         'theme' => $default_theme,
       ]);
 
-      // Verify that one link is found, with the expected link text.
+      // Verify that one link is found, with the the expected link text.
       $xpath = $this->assertSession()->buildXPathQuery('//a[contains(@href, :href)]', [':href' => $add_url->toString()]);
       $this->assertSession()->elementsCount('xpath', $xpath, 1);
       $this->assertSession()->elementTextEquals('xpath', $xpath, 'Place block');
@@ -270,8 +270,9 @@ class BlockTest extends BlockTestBase {
   public function testBlockThemeSelector() {
     // Install all themes.
     $themes = [
+      'bartik',
       'olivero',
-      'claro',
+      'seven',
       'stark',
     ];
     \Drupal::service('theme_installer')->install($themes);
@@ -529,14 +530,14 @@ class BlockTest extends BlockTestBase {
     /** @var \Drupal\Core\Extension\ThemeInstallerInterface $theme_installer */
     $theme_installer = \Drupal::service('theme_installer');
 
-    $theme_installer->install(['claro']);
-    $this->config('system.theme')->set('default', 'claro')->save();
-    $block = $this->drupalPlaceBlock('system_powered_by_block', ['theme' => 'claro', 'region' => 'help']);
+    $theme_installer->install(['seven']);
+    $this->config('system.theme')->set('default', 'seven')->save();
+    $block = $this->drupalPlaceBlock('system_powered_by_block', ['theme' => 'seven', 'region' => 'help']);
     $this->drupalGet('<front>');
     $this->assertSession()->pageTextContains('Powered by Drupal');
 
     $this->config('system.theme')->set('default', 'stark')->save();
-    $theme_installer->uninstall(['claro']);
+    $theme_installer->uninstall(['seven']);
 
     // Ensure that the block configuration does not exist anymore.
     $this->assertNull(Block::load($block->id()));
@@ -586,34 +587,6 @@ class BlockTest extends BlockTestBase {
 
     $block = Block::load($block->id());
     $this->assertEquals([$role2->id() => $role2->id()], $block->getVisibility()['user_role']['roles']);
-  }
-
-  /**
-   * Tests block title.
-   */
-  public function testBlockTitle() {
-    // Create a custom title for the block.
-    $title = "This block's <b>great!</b>";
-    // Enable a standard block.
-    $default_theme = $this->config('system.theme')->get('default');
-    $edit = [
-      'id' => 'test',
-      'region' => 'sidebar_first',
-      'settings[label]' => $title,
-      'settings[label_display]' => TRUE,
-    ];
-    // Set the block to be shown only to authenticated users.
-    $edit['visibility[user_role][roles][' . RoleInterface::AUTHENTICATED_ID . ']'] = TRUE;
-    $this->drupalGet('admin/structure/block/add/foo/' . $default_theme);
-    $this->submitForm($edit, 'Save block');
-
-    // Ensure that the title is displayed as plain text.
-    $elements = $this->xpath('//table/tbody/tr//td[contains(@class, "block")]');
-    $this->assertEquals($title, $elements[0]->getText());
-
-    $this->clickLink('Disable');
-    $elements = $this->xpath('//table/tbody/tr//td[contains(@class, "block")]');
-    $this->assertEquals("$title (disabled)", $elements[0]->getText());
   }
 
 }

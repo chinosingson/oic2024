@@ -13,8 +13,6 @@ use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\node\Entity\NodeType;
 use Drupal\Tests\BrowserTestBase;
 
-// cspell:ignore viewsviewfiles
-
 /**
  * Translate settings and entities to various languages.
  *
@@ -80,9 +78,6 @@ class ConfigTranslationUiTest extends BrowserTestBase {
    */
   protected $localeStorage;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     parent::setUp();
     $translator_permissions = [
@@ -648,7 +643,8 @@ class ConfigTranslationUiTest extends BrowserTestBase {
   }
 
   /**
-   * Tests plural source elements in configuration translation forms.
+   * Tests the number of source elements for plural strings in config
+   * translation forms.
    */
   public function testPluralConfigStringsSourceElements() {
     $this->drupalLogin($this->adminUser);

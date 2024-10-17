@@ -14,6 +14,8 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\ObjectType;
+use PHPStan\Type\Type;
+use function in_array;
 
 final class GetQueryReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
@@ -25,21 +27,28 @@ final class GetQueryReturnTypeExtension implements DynamicMethodReturnTypeExtens
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return $methodReflection->getName() === 'getQuery';
+        return in_array($methodReflection->getName(), [
+            'getQuery',
+            'getAggregateQuery',
+        ], true);
     }
 
     public function getTypeFromMethodCall(
         MethodReflection $methodReflection,
         MethodCall $methodCall,
         Scope $scope
-    ): \PHPStan\Type\Type {
-        $returnType = ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getReturnType();
+    ): Type {
+        $returnType = ParametersAcceptorSelector::selectFromArgs(
+            $scope,
+            $methodCall->getArgs(),
+            $methodReflection->getVariants()
+        )->getReturnType();
         if (!$returnType instanceof ObjectType) {
             return $returnType;
         }
 
         $callerType = $scope->getType($methodCall->var);
-        if (!$callerType instanceof ObjectType) {
+        if (!$callerType->isObject()->yes()) {
             return $returnType;
         }
 

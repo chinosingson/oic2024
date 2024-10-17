@@ -156,7 +156,7 @@ function form_select_options($element, $choices = NULL) {
  * @param $key
  *   The key to look for.
  *
- * @return array|bool
+ * @return
  *   An array of indexes that match the given $key. Array will be
  *   empty if no elements were found. FALSE if optgroups were found.
  */
@@ -1011,7 +1011,7 @@ function _batch_populate_queue(&$batch, $set_id) {
  * @param $batch_set
  *   The batch set.
  *
- * @return \Drupal\Core\Queue\QueueInterface|null
+ * @return
  *   The queue object.
  */
 function _batch_queue($batch_set) {

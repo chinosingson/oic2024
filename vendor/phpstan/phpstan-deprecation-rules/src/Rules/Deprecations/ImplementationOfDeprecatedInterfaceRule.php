@@ -5,20 +5,28 @@ namespace PHPStan\Rules\Deprecations;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
+use PHPStan\Broker\ClassNotFoundException;
 use PHPStan\Reflection\ReflectionProvider;
+use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
+use function sprintf;
 
 /**
- * @implements \PHPStan\Rules\Rule<Class_>
+ * @implements Rule<Class_>
  */
-class ImplementationOfDeprecatedInterfaceRule implements \PHPStan\Rules\Rule
+class ImplementationOfDeprecatedInterfaceRule implements Rule
 {
 
 	/** @var ReflectionProvider */
 	private $reflectionProvider;
 
-	public function __construct(ReflectionProvider $reflectionProvider)
+	/** @var DeprecatedScopeHelper */
+	private $deprecatedScopeHelper;
+
+	public function __construct(ReflectionProvider $reflectionProvider, DeprecatedScopeHelper $deprecatedScopeHelper)
 	{
 		$this->reflectionProvider = $reflectionProvider;
+		$this->deprecatedScopeHelper = $deprecatedScopeHelper;
 	}
 
 	public function getNodeType(): string
@@ -28,7 +36,7 @@ class ImplementationOfDeprecatedInterfaceRule implements \PHPStan\Rules\Rule
 
 	public function processNode(Node $node, Scope $scope): array
 	{
-		if (DeprecatedScopeHelper::isScopeDeprecated($scope)) {
+		if ($this->deprecatedScopeHelper->isScopeDeprecated($scope)) {
 			return [];
 		}
 
@@ -40,7 +48,7 @@ class ImplementationOfDeprecatedInterfaceRule implements \PHPStan\Rules\Rule
 
 		try {
 			$class = $this->reflectionProvider->getClass($className);
-		} catch (\PHPStan\Broker\ClassNotFoundException $e) {
+		} catch (ClassNotFoundException $e) {
 			return [];
 		}
 
@@ -58,35 +66,35 @@ class ImplementationOfDeprecatedInterfaceRule implements \PHPStan\Rules\Rule
 					$description = $interface->getDeprecatedDescription();
 					if (!$class->isAnonymous()) {
 						if ($description === null) {
-							$errors[] = sprintf(
+							$errors[] = RuleErrorBuilder::message(sprintf(
 								'Class %s implements deprecated interface %s.',
 								$className,
 								$interfaceName
-							);
+							))->identifier('class.implementsDeprecatedInterface')->build();
 						} else {
-							$errors[] = sprintf(
+							$errors[] = RuleErrorBuilder::message(sprintf(
 								"Class %s implements deprecated interface %s:\n%s",
 								$className,
 								$interfaceName,
 								$description
-							);
+							))->identifier('class.implementsDeprecatedInterface')->build();
 						}
 					} else {
 						if ($description === null) {
-							$errors[] = sprintf(
+							$errors[] = RuleErrorBuilder::message(sprintf(
 								'Anonymous class implements deprecated interface %s.',
 								$interfaceName
-							);
+							))->identifier('class.implementsDeprecatedInterface')->build();
 						} else {
-							$errors[] = sprintf(
+							$errors[] = RuleErrorBuilder::message(sprintf(
 								"Anonymous class implements deprecated interface %s:\n%s",
 								$interfaceName,
 								$description
-							);
+							))->identifier('class.implementsDeprecatedInterface')->build();
 						}
 					}
 				}
-			} catch (\PHPStan\Broker\ClassNotFoundException $e) {
+			} catch (ClassNotFoundException $e) {
 				// Other rules will notify if the interface is not found
 			}
 		}

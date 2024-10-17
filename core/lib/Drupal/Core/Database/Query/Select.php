@@ -93,9 +93,8 @@ class Select extends Query implements SelectInterface {
   protected $range;
 
   /**
-   * An array whose elements specify a query to UNION, and the UNION type.
-   *
-   * The 'type' key may be '', 'ALL', or 'DISTINCT' to represent a 'UNION',
+   * An array whose elements specify a query to UNION, and the UNION type. The
+   * 'type' key may be '', 'ALL', or 'DISTINCT' to represent a 'UNION',
    * 'UNION ALL', or 'UNION DISTINCT' statement, respectively.
    *
    * All entries in this array will be applied from front to back, with the
@@ -118,16 +117,6 @@ class Select extends Query implements SelectInterface {
    * @var bool
    */
   protected $forUpdate = FALSE;
-
-  /**
-   * The query metadata for alter purposes.
-   */
-  public $alterMetaData;
-
-  /**
-   * The query tags.
-   */
-  public $alterTags;
 
   /**
    * Constructs a Select object.
@@ -878,10 +867,7 @@ class Select extends Query implements SelectInterface {
 
     // GROUP BY
     if ($this->group) {
-      $group_by_fields = array_map(function (string $field): string {
-        return $this->connection->escapeField($field);
-      }, $this->group);
-      $query .= "\nGROUP BY " . implode(', ', $group_by_fields);
+      $query .= "\nGROUP BY " . implode(', ', $this->group);
     }
 
     // HAVING

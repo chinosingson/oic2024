@@ -48,9 +48,6 @@ class TitleResolverTest extends UnitTestCase {
    */
   protected $titleResolver;
 
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp(): void {
     $this->controllerResolver = $this->createMock('\Drupal\Core\Controller\ControllerResolverInterface');
     $this->translationManager = $this->createMock('\Drupal\Core\StringTranslation\TranslationInterface');
@@ -68,17 +65,6 @@ class TitleResolverTest extends UnitTestCase {
     $request = new Request();
     $route = new Route('/test-route', ['_title' => 'static title']);
     $this->assertEquals(new TranslatableMarkup('static title', [], [], $this->translationManager), $this->titleResolver->getTitle($request, $route));
-  }
-
-  /**
-   * Tests a static title of '0'.
-   *
-   * @see \Drupal\Core\Controller\TitleResolver::getTitle()
-   */
-  public function testStaticTitleZero() {
-    $request = new Request();
-    $route = new Route('/test-route', ['_title' => '0', '_title_context' => '0']);
-    $this->assertEquals(new TranslatableMarkup('0', [], ['context' => '0'], $this->translationManager), $this->titleResolver->getTitle($request, $route));
   }
 
   /**
@@ -117,24 +103,21 @@ class TitleResolverTest extends UnitTestCase {
   }
 
   /**
-   * Tests a static title with a non-scalar value parameter.
+   * Tests a static title with a NULL value parameter.
    *
    * @see \Drupal\Core\Controller\TitleResolver::getTitle()
    */
-  public function testStaticTitleWithNullAndArrayValueParameter() {
-    $raw_variables = new ParameterBag(['test1' => NULL, 'test2' => ['foo' => 'bar'], 'test3' => 'value']);
+  public function testStaticTitleWithNullValueParameter() {
+    $raw_variables = new ParameterBag(['test' => NULL, 'test2' => 'value']);
     $request = new Request();
     $request->attributes->set('_raw_variables', $raw_variables);
 
-    $route = new Route('/test-route', ['_title' => 'static title %test1 @test1 %test2 @test2 %test3 @test3']);
+    $route = new Route('/test-route', ['_title' => 'static title %test @test']);
     $translatable_markup = $this->titleResolver->getTitle($request, $route);
-    $arguments = $translatable_markup->getArguments();
-    $this->assertNotContains('@test1', $arguments);
-    $this->assertNotContains('%test1', $arguments);
-    $this->assertNotContains('@test2', $arguments);
-    $this->assertNotContains('%test2', $arguments);
-    $this->assertSame('value', $translatable_markup->getArguments()['@test3']);
-    $this->assertSame('value', $translatable_markup->getArguments()['%test3']);
+    $this->assertSame('', $translatable_markup->getArguments()['@test']);
+    $this->assertSame('', $translatable_markup->getArguments()['%test']);
+    $this->assertSame('value', $translatable_markup->getArguments()['@test2']);
+    $this->assertSame('value', $translatable_markup->getArguments()['%test2']);
   }
 
   /**
@@ -150,11 +133,11 @@ class TitleResolverTest extends UnitTestCase {
     $this->controllerResolver->expects($this->once())
       ->method('getControllerFromDefinition')
       ->with('Drupal\Tests\Core\Controller\TitleCallback::example')
-      ->willReturn($callable);
+      ->will($this->returnValue($callable));
     $this->argumentResolver->expects($this->once())
       ->method('getArguments')
       ->with($request, $callable)
-      ->willReturn(['example']);
+      ->will($this->returnValue(['example']));
 
     $this->assertEquals('test example', $this->titleResolver->getTitle($request, $route));
   }

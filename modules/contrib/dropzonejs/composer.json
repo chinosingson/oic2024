@@ -39,7 +39,6 @@
             "role": "contributor"
         }
     ],
-    "require": {},
     "require-dev": {
         "drupal/entity_browser": "^2.5"
     },

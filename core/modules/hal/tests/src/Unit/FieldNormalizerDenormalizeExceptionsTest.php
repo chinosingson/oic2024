@@ -57,7 +57,7 @@ class FieldNormalizerDenormalizeExceptionsTest extends UnitTestCase {
       ->getMock();
     $mock->expects($this->any())
       ->method('getParent')
-      ->willReturn(NULL);
+      ->will($this->returnValue(NULL));
     return [
       [[]],
       [['target_instance' => $mock]],

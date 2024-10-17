@@ -148,8 +148,8 @@ class ShortcutLinksTest extends ShortcutTestBase {
    * Tests that the "add to shortcut" and "remove from shortcut" links work.
    */
   public function testShortcutQuickLink() {
-    \Drupal::service('theme_installer')->install(['claro']);
-    $this->config('system.theme')->set('admin', 'claro')->save();
+    \Drupal::service('theme_installer')->install(['seven']);
+    $this->config('system.theme')->set('admin', 'seven')->save();
     $this->config('node.settings')->set('use_admin_theme', '1')->save();
     $this->container->get('router.builder')->rebuild();
 
@@ -197,7 +197,7 @@ class ShortcutLinksTest extends ShortcutTestBase {
     $this->clickLink('Add to Default shortcuts');
     $this->assertSession()->pageTextContains('Added a shortcut for Create Article.');
 
-    $this->config('system.theme')->set('default', 'claro')->save();
+    $this->config('system.theme')->set('default', 'seven')->save();
     $this->drupalGet('node/' . $this->node->id());
     $title = $this->node->getTitle();
 
@@ -315,9 +315,9 @@ class ShortcutLinksTest extends ShortcutTestBase {
    */
   public function testNoShortcutLink() {
     // Change to a theme that displays shortcuts.
-    \Drupal::service('theme_installer')->install(['claro']);
+    \Drupal::service('theme_installer')->install(['seven']);
     $this->config('system.theme')
-      ->set('default', 'claro')
+      ->set('default', 'seven')
       ->save();
 
     $this->drupalGet('page-that-does-not-exist');
@@ -343,9 +343,9 @@ class ShortcutLinksTest extends ShortcutTestBase {
    */
   public function testAccessShortcutsPermission() {
     // Change to a theme that displays shortcuts.
-    \Drupal::service('theme_installer')->install(['claro']);
+    \Drupal::service('theme_installer')->install(['seven']);
     $this->config('system.theme')
-      ->set('default', 'claro')
+      ->set('default', 'seven')
       ->save();
 
     // Add cron to the default shortcut set.
@@ -403,7 +403,8 @@ class ShortcutLinksTest extends ShortcutTestBase {
   }
 
   /**
-   * Tests the 'access shortcuts' permission for shortcut set administration.
+   * Tests that the 'access shortcuts' permission is required for shortcut set
+   * administration page access.
    */
   private function verifyAccessShortcutsPermissionForEditPages() {
     // Create a user with customize links and switch sets permissions  but
@@ -426,7 +427,8 @@ class ShortcutLinksTest extends ShortcutTestBase {
   }
 
   /**
-   * Tests the 'access shortcuts' permission with the shortcut block.
+   * Tests that the 'access shortcuts' permission is required to access the
+   * shortcut block.
    */
   public function testShortcutBlockAccess() {
     // Creates a block instance and place in a region through api.

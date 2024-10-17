@@ -151,7 +151,7 @@ interface ViewsPluginInterface extends PluginInspectionInterface, DerivativeInsp
   /**
    * Validate that the plugin is correct and can be saved.
    *
-   * @return array|null
+   * @return
    *   An array of error strings to tell the user what is wrong with this
    *   plugin.
    */
@@ -163,10 +163,8 @@ interface ViewsPluginInterface extends PluginInspectionInterface, DerivativeInsp
   public function query();
 
   /**
-   * Unpacks options over our existing defaults.
-   *
-   * This will drill down into arrays so that defaults don't get totally blown
-   * away.
+   * Unpack options over our existing defaults, drilling down into arrays
+   * so that defaults don't get totally blown away.
    */
   public function unpackOptions(&$storage, $options, $definition = NULL, $all = TRUE, $check = TRUE);
 

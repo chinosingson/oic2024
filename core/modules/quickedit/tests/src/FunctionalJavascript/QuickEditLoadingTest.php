@@ -15,10 +15,10 @@ use Drupal\Tests\contextual\FunctionalJavascript\ContextualLinkClickTrait;
 use Drupal\Tests\TestFileCreationTrait;
 
 /**
- * Tests loading of in-place editing and lazy loading of in-place editors.
+ * Tests loading of in-place editing functionality and lazy loading of its
+ * in-place editors.
  *
  * @group quickedit
- * @group legacy
  */
 class QuickEditLoadingTest extends WebDriverTestBase {
 
@@ -44,7 +44,7 @@ class QuickEditLoadingTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'starterkit_theme';
+  protected $defaultTheme = 'classy';
 
   /**
    * A user with permissions to create and edit articles.
@@ -248,7 +248,8 @@ class QuickEditLoadingTest extends WebDriverTestBase {
   }
 
   /**
-   * Tests rendering of fields with editable display options.
+   * Tests that Quick Edit doesn't make fields rendered with display options
+   * editable.
    */
   public function testDisplayOptions() {
     $node = Node::load('1');
@@ -261,7 +262,8 @@ class QuickEditLoadingTest extends WebDriverTestBase {
   }
 
   /**
-   * Tests concurrent node edit.
+   * Tests Quick Edit on a node that was concurrently edited on the full node
+   * form.
    */
   public function testConcurrentEdit() {
     $nid = $this->testNode->id();

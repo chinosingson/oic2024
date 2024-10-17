@@ -194,6 +194,10 @@ class ManagedFile extends FormElement {
     if (isset($form['#file_upload_delta']) && $current_file_count < $form['#file_upload_delta']) {
       $form[$current_file_count]['#attributes']['class'][] = 'ajax-new-content';
     }
+    // Otherwise just add the new content class on a placeholder.
+    else {
+      $form['#suffix'] .= '<span class="ajax-new-content"></span>';
+    }
 
     $status_messages = ['#type' => 'status_messages'];
     $form['#prefix'] .= $renderer->renderRoot($status_messages);
@@ -411,8 +415,7 @@ class ManagedFile extends FormElement {
    * Render API callback: Validates the managed_file element.
    */
   public static function validateManagedFile(&$element, FormStateInterface $form_state, &$complete_form) {
-    $triggering_element = $form_state->getTriggeringElement();
-    $clicked_button = isset($triggering_element['#parents']) ? end($triggering_element['#parents']) : '';
+    $clicked_button = end($form_state->getTriggeringElement()['#parents']);
     if ($clicked_button != 'remove_button' && !empty($element['fids']['#value'])) {
       $fids = $element['fids']['#value'];
       foreach ($fids as $fid) {

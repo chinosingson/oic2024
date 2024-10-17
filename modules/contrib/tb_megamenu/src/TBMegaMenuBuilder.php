@@ -2,6 +2,7 @@
 
 namespace Drupal\tb_megamenu;
 
+use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Menu\MenuTreeParameters;
@@ -23,35 +24,7 @@ class TBMegaMenuBuilder implements TBMegaMenuBuilderInterface {
    *
    * @var \Psr\Log\LoggerInterface
    */
-  private $logger;
-
-  /**
-   * The menu link service.
-   *
-   * @var \Drupal\Core\Menu\MenuLinkTreeInterface
-   */
-  private $menuTree;
-
-  /**
-   * The entity manager service.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  private $entityTypeManager;
-
-  /**
-   * The path matcher service.
-   *
-   * @var \Drupal\Core\Path\PathMatcherInterface
-   */
-  private $pathMatcher;
-
-  /**
-   * The menu tree storage service.
-   *
-   * @var \Drupal\Core\Menu\MenuTreeStorageInterface
-   */
-  private $menuStorage;
+  private readonly LoggerChannelInterface $logger;
 
   /**
    * Constructs a TBMegaMenuBuilder.
@@ -67,12 +40,8 @@ class TBMegaMenuBuilder implements TBMegaMenuBuilderInterface {
    * @param \Drupal\Core\Menu\MenuTreeStorageInterface $menu_storage
    *   The menu tree storage service.
    */
-  public function __construct(LoggerChannelFactoryInterface $logger_factory, MenuLinkTreeInterface $menu_tree, EntityTypeManagerInterface $entity_manager, PathMatcherInterface $path_matcher, MenuTreeStorageInterface $menu_storage) {
+  public function __construct(LoggerChannelFactoryInterface $logger_factory, private readonly MenuLinkTreeInterface $menuTree, private readonly EntityTypeManagerInterface $entityTypeManager, private readonly PathMatcherInterface $pathMatcher, private readonly MenuTreeStorageInterface $menuStorage) {
     $this->logger = $logger_factory->get('tb_megamenu');
-    $this->menuTree = $menu_tree;
-    $this->entityTypeManager = $entity_manager;
-    $this->pathMatcher = $path_matcher;
-    $this->menuStorage = $menu_storage;
   }
 
   /**
@@ -309,7 +278,7 @@ class TBMegaMenuBuilder implements TBMegaMenuBuilderInterface {
    */
   public function syncConfigAll(array $menu_items, array &$menu_config, string $section) {
     foreach ($menu_items as $id => $menu_item) {
-      $item_config = isset($menu_config[$id]) ? $menu_config[$id] : [];
+      $item_config = $menu_config[$id] ?? [];
       if ($menu_item->hasChildren || $item_config) {
         self::syncConfig($menu_item->subtree, $item_config, $section);
         $menu_config[$id] = $item_config;

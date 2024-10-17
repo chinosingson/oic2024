@@ -2,18 +2,17 @@
 
 namespace Drupal\upgrade_status\Form;
 
-use Composer\Semver\Semver;
 use Drupal\Component\Serialization\Json;
+use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\DrupalKernelInterface;
 use Drupal\Core\Extension\Extension;
-use Drupal\Core\Extension\ModuleHandler;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Database\Connection;
-use Drupal\Core\Datetime\DateFormatter;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\KeyValueStore\KeyValueExpirableFactory;
+use Drupal\Core\KeyValueStore\KeyValueExpirableFactoryInterface;
 use Drupal\Core\Render\RendererInterface;
-use Drupal\Core\Routing\RedirectDestination;
+use Drupal\Core\Routing\RedirectDestinationInterface;
 use Drupal\Core\State\StateInterface;
 use Drupal\Core\Url;
 use Drupal\upgrade_status\CookieJar;
@@ -67,7 +66,7 @@ class UpgradeStatusForm extends FormBase {
   /**
    * The module handler service.
    *
-   * @var \Drupal\Core\Extension\ModuleHandler
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
   protected $moduleHandler;
 
@@ -88,14 +87,14 @@ class UpgradeStatusForm extends FormBase {
   /**
    * The date formatter.
    *
-   * @var \Drupal\Core\Datetime\DateFormatter
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
    */
   protected $dateFormatter;
 
   /**
    * The destination service.
    *
-   * @var \Drupal\Core\Routing\RedirectDestination
+   * @var \Drupal\Core\Routing\RedirectDestinationInterface
    */
   protected $destination;
 
@@ -145,7 +144,7 @@ class UpgradeStatusForm extends FormBase {
    *
    * @param \Drupal\upgrade_status\ProjectCollector $project_collector
    *   The project collector service.
-   * @param \Drupal\Core\KeyValueStore\KeyValueExpirableFactory $key_value_expirable
+   * @param \Drupal\Core\KeyValueStore\KeyValueExpirableFactoryInterface $key_value_expirable
    *   The expirable key/value storage.
    * @param \Drupal\upgrade_status\ScanResultFormatter $result_formatter
    *   The scan result formatter service.
@@ -153,15 +152,15 @@ class UpgradeStatusForm extends FormBase {
    *   The renderer service.
    * @param \Psr\Log\LoggerInterface $logger
    *   The logger.
-   * @param \Drupal\Core\Extension\ModuleHandler $module_handler
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler.
    * @param \Drupal\upgrade_status\DeprecationAnalyzer $deprecation_analyzer
    *   The deprecation analyzer.
    * @param \Drupal\Core\State\StateInterface $state
    *   The state service.
-   * @param \Drupal\Core\Datetime\DateFormatter $date_formatter
+   * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
    *   The date formatter.
-   * @param \Drupal\Core\Routing\RedirectDestination $destination
+   * @param  \Drupal\Core\Routing\RedirectDestinationInterface $destination
    *   The destination service.
    * @param \Drupal\Core\Database\Connection $connection
    *   The database connection.
@@ -170,15 +169,15 @@ class UpgradeStatusForm extends FormBase {
    */
   public function __construct(
     ProjectCollector $project_collector,
-    KeyValueExpirableFactory $key_value_expirable,
+    KeyValueExpirableFactoryInterface $key_value_expirable,
     ScanResultFormatter $result_formatter,
     RendererInterface $renderer,
     LoggerInterface $logger,
-    ModuleHandler $module_handler,
+    ModuleHandlerInterface $module_handler,
     DeprecationAnalyzer $deprecation_analyzer,
     StateInterface $state,
-    DateFormatter $date_formatter,
-    RedirectDestination $destination,
+    DateFormatterInterface $date_formatter,
+    RedirectDestinationInterface $destination,
     Connection $database,
     DrupalKernelInterface $kernel
   ) {
@@ -708,6 +707,12 @@ MARKUP
    *   environment requirements on a high level.
    */
   protected function buildEnvironmentChecks() {
+    if ($this->nextMajor == 11) {
+      return [
+        'description' => $this->t('<a href=":platform">Drupal 11 environment requirements are still to be defined</a>.', [':platform' => 'https://www.drupal.org/project/drupal/issues/3214954']),
+      ];
+    }
+
     $status = TRUE;
     $header = [
       'requirement' => ['data' => $this->t('Requirement'), 'class' => 'requirement-label'],
@@ -730,10 +735,10 @@ MARKUP
       $has_core_update = FALSE;
       $core_update_info = $this->releaseStore->get('drupal');
       if (isset($core_update_info['releases']) && is_array($core_update_info['releases'])) {
-        // Find the latest release that are higher than our current and is not beta/alpha/rc.
+        // Find the latest release that are higher than our current and is not beta/alpha/rc/dev.
         foreach ($core_update_info['releases'] as $version => $release) {
           $major_version = explode('.', $version)[0];
-          if ((version_compare($version, \Drupal::VERSION) > 0) && empty($release['version_extra']) && $major_version === '9') {
+          if ($major_version === '9' && !strpos($version, '-') && (version_compare($version, \Drupal::VERSION) > 0)) {
             $link = $core_update_info['link'] . '/releases/' . $version;
             $core_version_info = [
               '#type' => 'link',
@@ -789,7 +794,7 @@ MARKUP
         'data' => [
           'requirement' => [
             'class' => 'requirement-label',
-            'data' => $this->t('PHP version should be at least @minimum_php. Before updating to PHP 8, use <code>$ composer why-not php:8.1</code> to check if any projects need updating for compatibility. Also check custom projects manually.', ['@minimum_php' => $minimum_php]),
+            'data' => $this->t('PHP version should be at least @minimum_php. Before updating to PHP 8, use <code>$ composer why-not php 8.1</code> to check if any projects need updating for compatibility. Also check custom projects manually.', ['@minimum_php' => $minimum_php]),
           ],
           'status' => [
             'data' => $this->t('Version @version', ['@version' => $version]),
@@ -943,10 +948,10 @@ MARKUP
     $has_core_update = FALSE;
     $core_update_info = $this->releaseStore->get('drupal');
     if (isset($core_update_info['releases']) && is_array($core_update_info['releases'])) {
-      // Find the latest release that are higher than our current and is not beta/alpha/rc.
+      // Find the latest release that are higher than our current and is not beta/alpha/rc/dev.
       foreach ($core_update_info['releases'] as $version => $release) {
         $major_version = explode('.', $version)[0];
-        if ((version_compare($version, \Drupal::VERSION) > 0) && empty($release['version_extra']) && $major_version === '8') {
+        if ($major_version === '8' && !strpos($version, '-') && (version_compare($version, \Drupal::VERSION) > 0)) {
           $link = $core_update_info['link'] . '/releases/' . $version;
           $core_version_info = [
             '#type' => 'link',
