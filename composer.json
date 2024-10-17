@@ -36,7 +36,7 @@
         "drupal/commerce_variation_cart_form": "^1.2",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-project-message": "^9",
-        "drupal/core-recommended": "^9",
+        "drupal/core-recommended": "^9.5",
         "drupal/core-vendor-hardening": "^8.8",
         "drupal/crop": "^2.2",
         "drupal/ctools": "^3.7",
