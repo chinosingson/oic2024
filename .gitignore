@@ -9,5 +9,4 @@ sites/default/services.local.yml
 *.DS_Store
 *.mysql
 *.gz
-.lando.yml
 php_errorlog
