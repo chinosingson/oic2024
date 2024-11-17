@@ -71,9 +71,10 @@ class CommerceProductTaxonomyIndexTidDepth extends TaxonomyIndexTid {
     }
 
     // Now build the subqueries.
-    $subquery = db_select('taxonomy_index_commerce_product', 'tn');
+    $subquery = \Drupal::database()->select('taxonomy_index_commerce_product', 'tn');
     $subquery->addField('tn', 'product_id');
-    $where = db_or()->condition('tn.tid', $this->value, $operator);
+    $or = $subquery->orConditionGroup();
+    $or->condition('tn.tid', $this->value, $operator);
     $last = "tn";
 
     if ($this->options['depth'] > 0) {
@@ -81,19 +82,19 @@ class CommerceProductTaxonomyIndexTidDepth extends TaxonomyIndexTid {
       $last = "th";
       foreach (range(1, abs($this->options['depth'])) as $count) {
         $subquery->leftJoin('taxonomy_term_hierarchy', "th$count", "$last.parent = th$count.tid");
-        $where->condition("th$count.tid", $this->value, $operator);
+        $or->condition("th$count.tid", $this->value, $operator);
         $last = "th$count";
       }
     }
     elseif ($this->options['depth'] < 0) {
       foreach (range(1, abs($this->options['depth'])) as $count) {
         $subquery->leftJoin('taxonomy_term_hierarchy', "th$count", "$last.tid = th$count.parent");
-        $where->condition("th$count.tid", $this->value, $operator);
+        $or->condition("th$count.tid", $this->value, $operator);
         $last = "th$count";
       }
     }
 
-    $subquery->condition($where);
+    $subquery->condition($or);
     $this->query->addWhere($this->options['group'], "$this->tableAlias.$this->realField", $subquery, 'IN');
   }
 

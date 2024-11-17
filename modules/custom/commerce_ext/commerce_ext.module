@@ -47,8 +47,8 @@ function taxonomy_build_commerce_product_index($commerce_product) {
   // Insert index entries for all the commerce_product's terms.
   if (!empty($tid_all)) {
     foreach ($tid_all as $tid) {
-      db_merge('taxonomy_index_commerce_product')
-        ->key(array('product_id' => $commerce_product->id(), 'tid' => $tid))
+      \Drupal::database()->merge('taxonomy_index_commerce_product')
+        ->keys(array('product_id' => $commerce_product->id(), 'tid' => $tid))
         ->fields(array('created' => $commerce_product->getCreatedTime(), 'tid' => $tid))
         ->execute();
     }
@@ -76,7 +76,7 @@ function commerce_ext_commerce_product_predelete(EntityInterface $commerce_produ
  * Deletes taxonomy index entries for a given commerce_product.
  */
 function taxonomy_delete_commerce_product_index(EntityInterface $commerce_product) {
-  db_delete('taxonomy_index_commerce_product')->condition('product_id', $commerce_product->id())->execute();
+  \Drupal::database()->delete('taxonomy_index_commerce_product')->condition('product_id', $commerce_product->id())->execute();
 }
 
 /**
@@ -84,6 +84,6 @@ function taxonomy_delete_commerce_product_index(EntityInterface $commerce_produc
  */
 function commerce_ext_taxonomy_term_delete(Term $term) {
   // Clean up the {taxonomy_index} table when terms are deleted.
-  db_delete('taxonomy_index_commerce_product')->condition('tid', $term->id())->execute();
+  \Drupal::database()->delete('taxonomy_index_commerce_product')->condition('tid', $term->id())->execute();
 }
 

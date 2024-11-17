@@ -109,13 +109,13 @@ class NikaDevsCmsController extends ControllerBase {
       ])
       ->condition('uid', 1)->execute();
 
-    $res = \Drupal::database()->select('file_managed', 'f')->fields('f')->execute();
-    $module_path = drupal_get_path('module', 'nikadevs_cms');
-    foreach($res as $row) {
-      $file_name =  \Drupal::service('file_system')->realpath($row->uri);
-      unlink($file_name);
-      copy($module_path . '/img/upload_image.png', $file_name);
-    }
+//    $res = \Drupal::database()->select('file_managed', 'f')->fields('f')->execute();
+//    $module_path = \Drupal::service('extension.list.module')->getPath('nikadevs_cms');
+//    foreach($res as $row) {
+//      $file_name =  \Drupal::service('file_system')->realpath($row->uri);
+//      unlink($file_name);
+//      copy($module_path . '/img/upload_image.png', $file_name);
+//    }
 
     \Drupal::database()->delete('users')->condition('uid', array(0, 1), 'NOT IN')->execute();
     \Drupal::database()->delete('users_data')->condition('uid', array(0, 1), 'NOT IN')->execute();

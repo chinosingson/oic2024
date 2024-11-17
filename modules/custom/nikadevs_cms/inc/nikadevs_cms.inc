@@ -128,7 +128,9 @@ function _nikadevs_cms_active_layout($vars) {
       }
       $layout['regions'][$key]['attributes']['class'][] = isset($region['settings']['class']) ? $region['settings']['class'] : '';
       $layout['regions'][$key]['settings']['tag'] = isset($region['settings']['tag']) ? ($region['settings']['tag'] == 'none' ? '' : $region['settings']['tag']) : 'div';
-      $layout['regions'][$key]['content'] = isset($vars['page'][$key]) ? render($vars['page'][$key]) : '';
+      $layout['regions'][$key]['content'] = isset($vars['page'][$key])
+        ? \Drupal::service('renderer')->render($vars['page'][$key])
+        : '';
     }
   }
 

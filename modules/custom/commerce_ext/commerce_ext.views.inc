@@ -82,6 +82,6 @@ function commerce_ext_field_views_data_alter(array &$data, FieldStorageConfigInt
  */
 function commerce_ext_views_plugins_argument_validator_alter(array &$plugins) {
   $plugins['entity:taxonomy_term']['title'] = t('Taxonomy term ID');
-  $plugins['entity:taxonomy_term']['class'] = 'Drupal\taxonomy\Plugin\views\argument_validator\Term';
+  $plugins['entity:taxonomy_term']['class'] = 'Drupal\taxonomy\Plugin\views\argument_validator\TermName';
   $plugins['entity:taxonomy_term']['provider'] = 'taxonomy';
 }

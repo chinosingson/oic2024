@@ -9,7 +9,7 @@ nikadev_cms_page:
     - core/jquery
     - core/drupal
     - core/drupalSettings
-    - core/jquery.once
+    - core/once
 
 nikadev_cms_layout_builder:
   js:
@@ -24,8 +24,9 @@ nikadev_cms_layout_builder:
     - core/jquery
     - core/drupal
     - core/drupalSettings
-    - core/jquery.once
+    - core/once
     - core/jquery.ui.dialog
+    - jquery_ui_dialog/dialog
     - core/jquery.ui.theme
 
 nikadev_cms_builder:
@@ -40,4 +41,4 @@ nikadev_cms_builder:
     - core/jquery
     - core/drupal
     - core/drupalSettings
-    - core/jquery.once
+    - core/once

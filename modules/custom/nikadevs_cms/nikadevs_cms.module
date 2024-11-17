@@ -19,7 +19,7 @@ function nikadevs_cms_layout_builder() {
   $form['#attached']['library'][] = 'nikadevs_cms/nikadev_cms_layout_builder';
   $form['#attached']['library'][] = 'seven/seven.jquery.ui';
 
-  $module_dir = DRUPAL_ROOT . '/' . drupal_get_path('module', 'nikadevs_cms');
+  $module_dir = DRUPAL_ROOT . '/' . \Drupal::service('extension.list.module')->getPath('nikadevs_cms');
 
   //module_load_include('inc', 'nikadevs_cms', 'inc/nikadevs_cms');
   \Drupal::moduleHandler()->loadInclude('nikadevs_cms', 'inc', 'inc/nikadevs_cms');
