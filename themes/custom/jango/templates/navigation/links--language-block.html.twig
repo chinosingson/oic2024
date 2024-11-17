@@ -32,7 +32,7 @@
  */
 #}
 {% if links -%}
-  <ul{{ attributes.addClass(['dropdown-menu', 'pull-right']) }}>
+  <ul{{ attributes.addClass(['dropdown-menu', 'pull-right', 'c-content-pagination', 'c-theme']) }}>
     {%- for item in links -%}
       <li{{ item.attributes }}>
         {%- if item.link -%}

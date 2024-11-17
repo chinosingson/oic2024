@@ -23,8 +23,6 @@
 
   });
 
-
-
   Drupal.behaviors.webform_js = {
     attach: function (context, settings) {
        $('.js-form-item button', context).click(function() {

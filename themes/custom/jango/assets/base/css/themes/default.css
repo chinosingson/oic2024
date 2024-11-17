@@ -151,13 +151,13 @@ a {
   .c-content-pagination.c-theme > li:hover > a > i {
     color: #fff; }
 
-.c-content-pagination.c-theme > li.c-active > span,
-.c-content-pagination.c-theme > li.c-active > a {
+.c-content-pagination.c-theme > li.is-active > span,
+.c-content-pagination.c-theme > li.is-active > a {
   border-color: #32c5d2;
   background: #32c5d2;
   color: #fff; }
-  .c-content-pagination.c-theme > li.c-active > span > i,
-  .c-content-pagination.c-theme > li.c-active > a > i {
+  .c-content-pagination.c-theme > li.is-active > span > i,
+  .c-content-pagination.c-theme > li.is-active > a > i {
     color: #fff; }
 
 .c-theme-btn.btn {

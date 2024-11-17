@@ -59,7 +59,7 @@
       </div>
       <div>
         <div class="extra-components">
-          {{ product.variations }}
+          {{ product.variation_commerce_variation_cart_form }}
         </div>
         <span class="flag-outer flag-outer-compare">
           {{ product.flag_compare }}
@@ -67,7 +67,7 @@
         <span class="flag-outer flag-outer-wishlist">
           {{ product.flag_wishlist }}
         </span>
-        {{- product|without('variation_attributes', 'variations', 'variation_sku', 'title', 'variation_title', 'variation_field_stock_amount', 'variation_field_images', 'field_sale_label', 'field_new_label', 'variation_price', 'variation_field_old_price', 'field_short_description', 'flag_compare', 'flag_wishlist') -}}
+        {{- product|without('variation_attributes', 'variations', 'variation_commerce_variation_cart_form', 'variation_sku', 'title', 'variation_title', 'variation_field_stock_amount', 'variation_field_images', 'field_sale_label', 'field_new_label', 'variation_price', 'variation_field_old_price', 'field_short_description', 'flag_compare', 'flag_wishlist') -}}
       </div>
     </div>
   </div>
