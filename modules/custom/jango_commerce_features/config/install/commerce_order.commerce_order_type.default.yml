@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies: {  }
+id: default
+label: Default
+traits: {  }
+workflow: order_default
+refresh_mode: customer
+refresh_frequency: 300
+sendReceipt: true
+receiptBcc: ''

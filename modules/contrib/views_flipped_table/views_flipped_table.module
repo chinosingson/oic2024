@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Flipped table style plugin, flipping rows and columns.
@@ -14,16 +15,16 @@
  *   - view: A ViewExecutable object.
  *   - rows: The raw row data.
  */
-function template_preprocess_views_view_flipped_table(&$variables) {
+function template_preprocess_views_view_flipped_table(array &$variables) {
   \Drupal::moduleHandler()->loadInclude('views', 'inc', 'views.theme');
-  // Let the base table preprocessor act first
+  // Let the base table preprocessor act first.
   template_preprocess_views_view_table($variables);
 
-  $view     = $variables['view'];
-  $options  = $view->style_plugin->options;
+  $view = $variables['view'];
+  $options = $view->style_plugin->options;
 
   // Flip the table.
-  $variables['rows_flipped'] = array();
+  $variables['rows_flipped'] = [];
   foreach ($variables['rows'] as $row_index => $row) {
     foreach ($row['columns'] as $field_name => $value) {
       $variables['rows_flipped'][$field_name]['columns'][$row_index] = $value;
@@ -34,23 +35,23 @@ function template_preprocess_views_view_flipped_table(&$variables) {
   $variables['first_row_header'] = (boolean) $options['flipped_table_header_first_field'];
 
   if ($variables['first_row_header']) {
-    $variables['flipped_header'] = array();
+    $variables['flipped_header'] = [];
     $field_names = array_keys($variables['rows_flipped']);
     $field_name = reset($field_names);
 
-    // Flipped header gets the first column of items
-    foreach ($variables['rows_flipped'][$field_name]['columns'] as $index => $item) {
+    // Flipped header gets the first column of items.
+    foreach ($variables['rows_flipped'][$field_name]['columns'] as $item) {
       $variables['flipped_header'][] = $item;
     }
 
-    // Set the field name for the header row
+    // Set the field name for the header row.
     $variables['flipped_header_field_name'] = $field_name;
 
-    // Remove the first row
+    // Remove the first row.
     array_shift($variables['rows_flipped']);
   }
 
-  // Check if any of the columns have a label set
+  // Check if any of the columns have a label set.
   $variables['show_labels'] = FALSE;
   foreach ($variables['header'] as $item) {
     if (!empty($item['content'])) {

@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Js file to handle filter state.
+ */
+
 (function ($, Drupal) {
   'use strict';
   Drupal.behaviors.views_year_filter = {

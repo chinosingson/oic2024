@@ -20,14 +20,20 @@ use Drupal\views\Plugin\views\style\Table;
  */
 class FlippedTable extends Table {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function defineOptions() {
     $options = parent::defineOptions();
 
-    $options['flipped_table_header_first_field'] = array('default' => TRUE);
+    $options['flipped_table_header_first_field'] = ['default' => TRUE];
 
     return $options;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
 
@@ -36,12 +42,12 @@ class FlippedTable extends Table {
     $form['row_class']['#access'] = FALSE;
     $form['default_row_class']['#access'] = FALSE;
 
-    $form['flipped_table_header_first_field'] = array(
+    $form['flipped_table_header_first_field'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Show the first field as the table header'),
       '#default_value' => $this->options['flipped_table_header_first_field'],
       '#description' => $this->t("Outputs the flipped table's row for the first field inside a table header element."),
-    );
+    ];
   }
 
 }

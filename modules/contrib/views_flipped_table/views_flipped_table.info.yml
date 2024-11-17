@@ -3,13 +3,12 @@ description: Table style with rows and columns flipped.
 package: Views
 
 type: module
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10 || ^11
 
 dependencies:
   - drupal:views
 
-# Information added by Drupal.org packaging script on 2020-12-04
-version: '8.x-1.4'
+# Information added by Drupal.org packaging script on 2024-08-07
+version: '2.0.2'
 project: 'views_flipped_table'
-datestamp: 1607119585
+datestamp: 1723051635

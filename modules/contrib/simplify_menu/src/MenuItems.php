@@ -82,6 +82,9 @@ class MenuItems {
         'active' => FALSE,
       ];
 
+      // Allows modules to add items to the link.
+      \Drupal::moduleHandler()->alter('simplify_menu_simplified_link', $simplifiedLink, $link);
+
       $current_path = \Drupal::request()->getRequestUri();
       if ($current_path == $simplifiedLink['url']) {
         $simplifiedLink['active'] = TRUE;

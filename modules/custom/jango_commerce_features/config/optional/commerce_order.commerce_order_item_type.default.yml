@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - commerce_product
+id: default
+label: Default
+traits: {  }
+purchasableEntityType: commerce_product_variation
+orderType: default
