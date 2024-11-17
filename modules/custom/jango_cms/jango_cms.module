@@ -105,16 +105,14 @@ function jango_cms_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form
       $form['pass']['#nd_icon'] = 'glyphicon glyphicon-lock';
       $config = \Drupal::config('user.settings');
       $setting = $config->get('register');
-      if($setting != USER_REGISTER_ADMINISTRATORS_ONLY) {
-        $form['toggle_checkbox'] = [
-          '#type' => 'checkbox',
-          '#title' => t('Register Now!'),
-          '#ajax' => [
-            'callback' => 'jango_cms_ajax_user_register_form',
-          ],
-          '#default_value' => FALSE,
-        ];
-      }
+      $form['toggle_checkbox'] = [
+        '#type' => 'checkbox',
+        '#title' => t('Register Now!'),
+        '#ajax' => [
+          'callback' => 'jango_cms_ajax_user_register_form',
+        ],
+        '#default_value' => FALSE,
+      ];
       break;
 
     case 'user_pass':
@@ -259,7 +257,7 @@ function jango_cms_view_tabs_content_transfer(&$vars, $category_field_name, $ima
           if ($variation_fields[$image_field_name]->getFieldDefinition()->getType() == 'image') {
             $fid = $variation_fields[$image_field_name]->target_id;
             $uri = File::load($fid)->getFileUri();
-            $url = file_create_url($uri);
+            $url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
           }
         }
       }
@@ -280,7 +278,7 @@ function jango_cms_view_tabs_content_transfer(&$vars, $category_field_name, $ima
             default:
               $entity_type = $entity_type_id;
           }
-          $path = \Drupal::service('path.alias_manager')->getAliasByPath('/' . $entity_type . '/' . $entity->id());
+          $path = \Drupal::service('path_alias.manager')->getAliasByPath('/' . $entity_type . '/' . $entity->id());
           $theme_array = [
             '#theme' => 'jango_cms_view_tabs_content_transfer',
             '#path' => base_path() . ltrim($path, '/'),
@@ -311,14 +309,11 @@ function jango_cms_preprocess_views_view(&$variables) {
         case 'classic_porfolio_page':
         case 'page_2col_portfolio':
         case 'page_index_gallery':
-        case 'page_index_gallery_2':
-        case 'page_index_gallery_3':
-        case 'page_index_gallery_4':
         case 'page_lightbox_gallery':
         case 'page_masonry_portfolio':
         case 'page_1':
           jango_cms_view_tabs_transfer($variables, 'field_categories', $vid);
-          if ($current_display == 'page_1' || str_starts_with($current_display, 'page_index_gallery')) {
+          if ($current_display == 'page_1') {
             jango_cms_jango_isotope_gallery_transfer($variables);
           }
           break;

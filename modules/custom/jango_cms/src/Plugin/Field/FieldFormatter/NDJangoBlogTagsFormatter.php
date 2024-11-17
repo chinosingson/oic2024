@@ -67,24 +67,34 @@ class NDJangoBlogTagsFormatter extends FormatterBase implements ContainerFactory
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $element = [];
-
+  
     $list_items = [];
-    $tags = $items->getValue('target_id');
+    $tags = $items->getValue();
     foreach ($tags as $tag) {
       $term = Term::load($tag['target_id']);
       if ($term) {
-        $url = Url::fromRoute('entity.taxonomy_term.canonical', ['taxonomy_term' => $tag['target_id']]);
+        // Load the term with the current website's language.
+        $language_manager = \Drupal::languageManager();
+        $term = $term->hasTranslation($language_manager->getCurrentLanguage()->getId()) ? $term->getTranslation($language_manager->getCurrentLanguage()->getId()) : $term;
+  
+        $url = Url::fromRoute('entity.taxonomy_term.canonical', ['taxonomy_term' => $term->id()]);
         $list_items[] = Link::fromTextAndUrl($term->getName(), $url);
       }
     }
-    $list = [
-      '#theme' => 'item_list',
-      '#list_type' => 'ul',
-      '#items' => $list_items,
-      '#attributes' => ['class' => ['c-tags', 'c-theme-ul-bg']],
-    ];
-
-    $element[0]['#markup'] = \Drupal::service('renderer')->renderPlain($list);
+    
+    if (!empty($list_items)) {
+      $list = [
+        '#theme' => 'item_list',
+        '#list_type' => 'ul',
+        '#items' => $list_items,
+        '#attributes' => ['class' => ['c-tags', 'c-theme-ul-bg']],
+      ];
+  
+      $element[0] = [
+        '#markup' => \Drupal::service('renderer')->renderPlain($list),
+      ];
+    }
+  
     return $element;
   }
 }

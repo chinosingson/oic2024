@@ -98,7 +98,7 @@ class JangoCmsImageFieldAttributes extends FieldPluginBase {
           $file = File::load($fid);
           if ($file) {
             $uri = $file->getFileUri();
-            $return = file_create_url($uri);
+            $return = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
           }
         }
         break;

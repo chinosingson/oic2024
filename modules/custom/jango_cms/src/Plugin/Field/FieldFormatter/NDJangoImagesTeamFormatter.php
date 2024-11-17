@@ -38,7 +38,8 @@ class NDJangoImagesTeamFormatter extends ImageFormatterBase {
     $path = Url::fromRoute('entity.node.canonical', ['node' => $nid])->toString();
     $url = '';
     foreach ($files as $delta => $file) {
-      $url = file_create_url($file->getFileUri());
+      $file_uri = $file->getFileUri();
+      $url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
     }
 
     $theme_array = [

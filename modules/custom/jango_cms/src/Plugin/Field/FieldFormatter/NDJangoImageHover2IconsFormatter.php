@@ -133,8 +133,10 @@ class NDJangoImageHover2IconsFormatter extends ImageFormatter implements Contain
           'tags' => $cache_tags,
           'contexts' => $cache_contexts,
         ],
-      ];
-      $url = file_create_url($file->getFileUri());
+      ];   
+      $file_uri = $file->getFileUri();
+      $url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+
     }
 
     $theme_array = [

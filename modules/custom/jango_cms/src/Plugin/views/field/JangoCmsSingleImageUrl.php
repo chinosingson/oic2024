@@ -62,7 +62,7 @@ class JangoCmsSingleImageUrl extends FieldPluginBase {
       $file = File::load($fid);
       if ($file) {
         $uri = $file->getFileUri();
-        $file_url = file_create_url($uri);
+        $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
       }
     }
     return $file_url;

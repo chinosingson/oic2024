@@ -21,7 +21,7 @@ class JangoCMSController extends ControllerBase {
     $front_page_args = explode('/', $site_config->get('page.front'));  // "/node/170"
     $nid = isset($front_page_args[2]) && is_numeric($front_page_args[2]) ? $front_page_args[2] : 0;
     $node = Node::load($nid);
-    return node_view($node);
+    return \Drupal::entityTypeManager()->getViewBuilder('node')->view($node, 'full');
   }
 
   /**
@@ -30,7 +30,7 @@ class JangoCMSController extends ControllerBase {
    */
   public function onepage_variants($type) {
     $node = Node::load(156);
-    return node_view($node);
+    return \Drupal::entityTypeManager()->getViewBuilder('node')->view($node, 'full');
   }
 
   public function save_variable() {
@@ -59,6 +59,6 @@ class JangoCMSController extends ControllerBase {
    * @return array
    */
   public function view_mode_teaser(NodeInterface $node) {
-    return node_view($node);
+    return \Drupal::entityTypeManager()->getViewBuilder('node')->view($node, 'full');
   }
 }
