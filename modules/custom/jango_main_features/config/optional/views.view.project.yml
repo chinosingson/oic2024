@@ -29,57 +29,14 @@ description: ''
 tag: ''
 base_table: node_field_data
 base_field: nid
-core: 8.x
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: perm
-        options:
-          perm: 'access content'
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          disable_sql_rewrite: false
-          distinct: true
-          replica: false
-          query_comment: ''
-          query_tags: {  }
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: some
-        options:
-          items_per_page: 12
-          offset: 0
-      style:
-        type: grid
-        options:
-          grouping: {  }
-          columns: 4
-          automatic_width: true
-          alignment: horizontal
-          col_class_default: false
-          col_class_custom: ''
-          row_class_default: false
-          row_class_custom: ''
-      row:
-        type: fields
+      title: 'Full Width Gallery'
       fields:
         title:
           id: title
@@ -88,6 +45,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -143,9 +103,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_small_description:
           id: field_small_description
           table: node__field_small_description
@@ -153,6 +110,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -207,7 +165,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -215,6 +172,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -259,8 +217,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__600x600_
             image_link: ''
+            image_style: project__600x600_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: false
@@ -271,7 +231,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_image_field_attributes:
           id: jango_cms_image_field_attributes
           table: views
@@ -279,6 +238,7 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_images: URL'
+          plugin_id: jango_cms_image_field_attributes
           label: ''
           exclude: false
           alter:
@@ -322,7 +282,6 @@ display:
           hide_alter_empty: true
           field_machine_name: field_images
           attribute_name: url
-          plugin_id: jango_cms_image_field_attributes
         field_categories:
           id: field_categories
           table: node__field_categories
@@ -330,6 +289,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -385,7 +345,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_video:
           id: field_video
           table: node__field_video
@@ -393,6 +352,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -448,50 +408,97 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
-      filters:
-        status:
-          value: '1'
-          table: node_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: node
-          entity_field: status
-          id: status
-          expose:
-            operator: ''
-          group: 1
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          value:
-            nd_project: nd_project
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 12
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
       sorts:
         created:
           id: created
           table: node_field_data
           field: created
-          order: DESC
-          entity_type: node
-          entity_field: created
-          plugin_id: date
           relationship: none
           group_type: group
           admin_label: ''
-          exposed: false
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
           expose:
             label: ''
+            field_identifier: created
+          exposed: false
           granularity: second
-      title: 'Full Width Gallery'
+      arguments: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            nd_project: nd_project
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: 4
+          automatic_width: true
+          alignment: horizontal
+          row_class_custom: ''
+          row_class_default: false
+          col_class_custom: ''
+          col_class_default: false
+      row:
+        type: fields
+      query:
+        type: views_query
+        options:
+          query_comment: ''
+          disable_sql_rewrite: true
+          distinct: true
+          replica: false
+          query_tags: {  }
+      relationships: {  }
       header: {  }
       footer: {  }
-      empty: {  }
-      relationships: {  }
-      arguments: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -506,46 +513,22 @@ display:
         - 'config:field.storage.node.field_small_description'
         - 'config:field.storage.node.field_video'
   block_1:
-    display_plugin: block
     id: block_1
     display_title: '3 Columns, Small Images'
+    display_plugin: block
     position: 11
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: 'Latest Works'
-      defaults:
-        title: false
-        style: false
-        row: false
-        fields: false
-        pager: false
-      style:
-        type: grid
-        options:
-          grouping: {  }
-          columns: 3
-          automatic_width: true
-          alignment: horizontal
-          col_class_default: false
-          col_class_custom: ''
-          row_class_default: false
-          row_class_custom: ''
-      row:
-        type: fields
-        options:
-          default_field_elements: false
-          inline: {  }
-          separator: ''
-          hide_empty: false
       fields:
         path:
           id: path
           table: node
-          field: path
+          field: view_node
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          plugin_id: entity_link
           label: ''
           exclude: true
           alter:
@@ -587,9 +570,8 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
+          output_url_as_text: true
           absolute: true
-          entity_type: node
-          plugin_id: node_path
         field_images:
           id: field_images
           table: node__field_images
@@ -597,6 +579,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -641,8 +624,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__80x80_
             image_link: ''
+            image_style: project__80x80_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -653,12 +638,37 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
       pager:
         type: some
         options:
-          items_per_page: 9
           offset: 0
+          items_per_page: 9
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: 3
+          automatic_width: true
+          alignment: horizontal
+          row_class_custom: ''
+          row_class_default: false
+          col_class_custom: ''
+          col_class_default: false
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        title: false
+        pager: false
+        style: false
+        row: false
+        fields: false
+      display_description: ''
+      display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -669,17 +679,12 @@ display:
       tags:
         - 'config:field.storage.node.field_images'
   classic_porfolio_page:
-    display_plugin: page
     id: classic_porfolio_page
     display_title: '4 columns portfolio'
+    display_plugin: page
     position: 4
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: '4 Columns Portfolio'
-      defaults:
-        title: false
-        fields: false
       fields:
         title:
           id: title
@@ -688,6 +693,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -743,9 +751,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_small_description:
           id: field_small_description
           table: node__field_small_description
@@ -753,6 +758,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -807,7 +813,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -815,6 +820,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -859,8 +865,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: product_500x500
             image_link: ''
+            image_style: product_500x500
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: false
@@ -871,7 +879,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_image_field_attributes:
           id: jango_cms_image_field_attributes
           table: views
@@ -879,6 +886,7 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_images: URL'
+          plugin_id: jango_cms_image_field_attributes
           label: ''
           exclude: false
           alter:
@@ -922,7 +930,6 @@ display:
           hide_alter_empty: true
           field_machine_name: field_images
           attribute_name: url
-          plugin_id: jango_cms_image_field_attributes
         field_categories:
           id: field_categories
           table: node__field_categories
@@ -930,6 +937,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -985,7 +993,6 @@ display:
           multi_type: separator
           separator: '/ '
           field_api_classes: false
-          plugin_id: field
         field_video:
           id: field_video
           table: node__field_video
@@ -993,6 +1000,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -1048,7 +1056,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_entity_path:
           id: jango_cms_entity_path
           table: views
@@ -1056,6 +1063,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_entity_path
           label: ''
           exclude: false
           alter:
@@ -1098,17 +1106,21 @@ display:
           empty_zero: false
           hide_alter_empty: true
           base_path: 0
-          plugin_id: jango_cms_entity_path
+      defaults:
+        title: false
+        fields: false
+      display_description: ''
+      display_extenders: {  }
       path: page-4col-portfolio
       menu:
         type: normal
         title: '4 Columns Portfolio'
         description: ''
-        expanded: false
-        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
         weight: 15
-        context: '0'
+        expanded: false
         menu_name: main
+        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
@@ -1122,35 +1134,12 @@ display:
         - 'config:field.storage.node.field_small_description'
         - 'config:field.storage.node.field_video'
   extended_portfolio:
-    display_plugin: block
     id: extended_portfolio
     display_title: 'Extended portfolio'
+    display_plugin: block
     position: 2
     display_options:
-      display_extenders: {  }
-      display_description: page-extended-portfolio
       title: 'Latest Works'
-      defaults:
-        title: false
-        style: false
-        row: false
-        fields: false
-        link_display: false
-        link_url: false
-      style:
-        type: grid
-        options:
-          grouping: {  }
-          columns: 3
-          automatic_width: true
-          alignment: horizontal
-          col_class_default: true
-          col_class_custom: ''
-          row_class_default: true
-          row_class_custom: ''
-      row:
-        type: fields
-        options: {  }
       fields:
         title:
           id: title
@@ -1159,6 +1148,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -1214,9 +1206,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_small_description:
           id: field_small_description
           table: node__field_small_description
@@ -1224,6 +1213,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -1278,7 +1268,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -1286,6 +1275,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -1330,8 +1320,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: product_500x500
             image_link: ''
+            image_style: product_500x500
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: false
@@ -1342,7 +1334,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_image_field_attributes:
           id: jango_cms_image_field_attributes
           table: views
@@ -1350,6 +1341,7 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_images: URL'
+          plugin_id: jango_cms_image_field_attributes
           label: ''
           exclude: false
           alter:
@@ -1393,7 +1385,6 @@ display:
           hide_alter_empty: true
           field_machine_name: field_images
           attribute_name: url
-          plugin_id: jango_cms_image_field_attributes
         field_categories:
           id: field_categories
           table: node__field_categories
@@ -1401,6 +1392,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -1456,7 +1448,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_video:
           id: field_video
           table: node__field_video
@@ -1464,6 +1455,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -1519,7 +1511,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_entity_path:
           id: jango_cms_entity_path
           table: views
@@ -1527,6 +1518,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_entity_path
           label: ''
           exclude: false
           alter:
@@ -1569,10 +1561,32 @@ display:
           empty_zero: false
           hide_alter_empty: true
           base_path: 0
-          plugin_id: jango_cms_entity_path
-      block_description: 'Extended portfolio'
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: 3
+          automatic_width: true
+          alignment: horizontal
+          row_class_custom: ''
+          row_class_default: true
+          col_class_custom: ''
+          col_class_default: true
+      row:
+        type: fields
+        options: {  }
+      defaults:
+        title: false
+        link_display: false
+        link_url: false
+        style: false
+        row: false
+        fields: false
+      display_description: page-extended-portfolio
       link_display: masonry_gallery
       link_url: ''
+      display_extenders: {  }
+      block_description: 'Extended portfolio'
     cache_metadata:
       max-age: -1
       contexts:
@@ -1586,23 +1600,23 @@ display:
         - 'config:field.storage.node.field_small_description'
         - 'config:field.storage.node.field_video'
   full_width_gallery:
-    display_plugin: page
     id: full_width_gallery
     display_title: 'Full Width Gallery'
+    display_plugin: page
     position: 1
     display_options:
+      display_description: Masonry
       display_extenders: {  }
       path: page-fullwidth-gallery
-      display_description: Masonry
       menu:
         type: normal
         title: 'Full width gallery'
         description: ''
-        expanded: false
-        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
         weight: 12
-        context: '0'
+        expanded: false
         menu_name: main
+        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
@@ -1616,21 +1630,12 @@ display:
         - 'config:field.storage.node.field_small_description'
         - 'config:field.storage.node.field_video'
   isotope_grid:
-    display_plugin: page
     id: isotope_grid
     display_title: 'Isotope Grid: 4 Cols, Paddings, Borders'
+    display_plugin: page
     position: 17
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: 'Masonry Portfolio'
-      defaults:
-        title: false
-        fields: false
-        filters: false
-        filter_groups: false
-        sorts: false
-        pager: false
       fields:
         title:
           id: title
@@ -1639,6 +1644,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -1694,9 +1702,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -1704,6 +1709,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -1748,8 +1754,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__600x600_
             image_link: ''
+            image_style: project__600x600_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -1760,7 +1768,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         body:
           id: body
           table: node__body
@@ -1768,6 +1775,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -1823,7 +1831,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         nid:
           id: nid
           table: node_field_data
@@ -1831,6 +1838,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -1887,9 +1897,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: nid
-          plugin_id: field
         jango_cms_entity_path:
           id: jango_cms_entity_path
           table: views
@@ -1897,6 +1904,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_entity_path
           label: ''
           exclude: false
           alter:
@@ -1939,7 +1947,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           base_path: 1
-          plugin_id: jango_cms_entity_path
         jango_cms_single_image_fid:
           id: jango_cms_single_image_fid
           table: views
@@ -1947,6 +1954,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_single_image_fid
           label: ''
           exclude: false
           alter:
@@ -1989,7 +1997,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           image_field_name: field_images
-          plugin_id: jango_cms_single_image_fid
         jango_cms_user_access:
           id: jango_cms_user_access
           table: views
@@ -1997,6 +2004,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_user_access
           label: ''
           exclude: false
           alter:
@@ -2039,28 +2047,54 @@ display:
           empty_zero: false
           hide_alter_empty: true
           permission: 'use nikadevs cms'
-          plugin_id: jango_cms_user_access
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 5
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: created
+          exposed: false
+          granularity: second
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
-          group: 1
+            operator_limit_selection: false
+            operator_list: {  }
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            nd_project: nd_project
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            nd_project: nd_project
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
         field_images_target_id:
           id: field_images_target_id
           table: node__field_images
@@ -2068,6 +2102,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: numeric
           operator: 'not empty'
           value:
             min: ''
@@ -2081,12 +2116,17 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -2099,33 +2139,20 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: numeric
       filter_groups:
         operator: AND
         groups:
           1: AND
-      sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          granularity: second
-          entity_type: node
-          entity_field: created
-          plugin_id: date
+      defaults:
+        title: false
+        pager: false
+        fields: false
+        sorts: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
       path: page-isotope-grid
-      pager:
-        type: some
-        options:
-          items_per_page: 5
-          offset: 0
     cache_metadata:
       max-age: -1
       contexts:
@@ -2137,20 +2164,12 @@ display:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_images'
   isotope_grid_overlay:
-    display_plugin: page
     id: isotope_grid_overlay
     display_title: 'Isotope Grid: 4 Cols, Paddings, Overlay'
+    display_plugin: page
     position: 18
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: 'Masonry Portfolio'
-      defaults:
-        title: false
-        fields: false
-        filters: false
-        filter_groups: false
-        pager: false
       fields:
         title:
           id: title
@@ -2159,6 +2178,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -2214,9 +2236,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -2224,6 +2243,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -2268,8 +2288,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__600x600_
             image_link: ''
+            image_style: project__600x600_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -2280,7 +2302,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         body:
           id: body
           table: node__body
@@ -2288,6 +2309,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -2343,7 +2365,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         nid:
           id: nid
           table: node_field_data
@@ -2351,6 +2372,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -2407,9 +2431,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: nid
-          plugin_id: field
         jango_cms_entity_path:
           id: jango_cms_entity_path
           table: views
@@ -2417,6 +2438,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_entity_path
           label: ''
           exclude: false
           alter:
@@ -2459,7 +2481,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           base_path: 1
-          plugin_id: jango_cms_entity_path
         jango_cms_single_image_fid:
           id: jango_cms_single_image_fid
           table: views
@@ -2467,6 +2488,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_single_image_fid
           label: ''
           exclude: false
           alter:
@@ -2509,7 +2531,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           image_field_name: field_images
-          plugin_id: jango_cms_single_image_fid
         jango_cms_user_access:
           id: jango_cms_user_access
           table: views
@@ -2517,6 +2538,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_user_access
           label: ''
           exclude: false
           alter:
@@ -2559,28 +2581,37 @@ display:
           empty_zero: false
           hide_alter_empty: true
           permission: 'use nikadevs cms'
-          plugin_id: jango_cms_user_access
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 5
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
-          group: 1
+            operator_limit_selection: false
+            operator_list: {  }
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            nd_project: nd_project
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            nd_project: nd_project
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
         field_images_target_id:
           id: field_images_target_id
           table: node__field_images
@@ -2588,6 +2619,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: numeric
           operator: 'not empty'
           value:
             min: ''
@@ -2601,12 +2633,17 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -2619,17 +2656,19 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: numeric
       filter_groups:
         operator: AND
         groups:
           1: AND
+      defaults:
+        title: false
+        pager: false
+        fields: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
       path: page-isotope-grid-overlay
-      pager:
-        type: some
-        options:
-          items_per_page: 5
-          offset: 0
     cache_metadata:
       max-age: -1
       contexts:
@@ -2641,35 +2680,12 @@ display:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_images'
   latest_portfolio_block:
-    display_plugin: block
     id: latest_portfolio_block
     display_title: 'Block Latest Portfolio'
+    display_plugin: block
     position: 8
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: 'Latest Portfolio'
-      defaults:
-        title: false
-        style: false
-        row: false
-        fields: false
-        sorts: false
-        header: false
-        pager: false
-      style:
-        type: default
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: false
-      row:
-        type: fields
-        options:
-          default_field_elements: false
-          inline: {  }
-          separator: ''
-          hide_empty: false
       fields:
         nid:
           id: nid
@@ -2678,6 +2694,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -2734,9 +2753,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: nid
-          plugin_id: field
         title:
           id: title
           table: node_field_data
@@ -2744,6 +2760,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -2799,9 +2818,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_small_description:
           id: field_small_description
           table: node__field_small_description
@@ -2809,6 +2825,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -2863,7 +2880,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -2871,6 +2887,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -2915,8 +2932,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__600x600_
             image_link: ''
+            image_style: project__600x600_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: false
@@ -2927,7 +2946,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_categories:
           id: field_categories
           table: node__field_categories
@@ -2935,6 +2953,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -2990,7 +3009,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_video:
           id: field_video
           table: node__field_video
@@ -2998,6 +3016,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -3053,7 +3072,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images_1:
           id: field_images_1
           table: node__field_images
@@ -3061,6 +3079,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -3105,8 +3124,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: portfolio_long__285x590_
             image_link: ''
+            image_style: portfolio_long__285x590_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -3117,7 +3138,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_image_field_attributes:
           id: jango_cms_image_field_attributes
           table: views
@@ -3125,6 +3145,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_image_field_attributes
           label: 'Target ID'
           exclude: false
           alter:
@@ -3168,7 +3189,6 @@ display:
           hide_alter_empty: true
           field_machine_name: field_images
           attribute_name: _target_id
-          plugin_id: jango_cms_image_field_attributes
         jango_cms_image_field_attributes_1:
           id: jango_cms_image_field_attributes_1
           table: views
@@ -3176,6 +3196,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_image_field_attributes
           label: URL
           exclude: false
           alter:
@@ -3219,7 +3240,6 @@ display:
           hide_alter_empty: true
           field_machine_name: field_images
           attribute_name: url
-          plugin_id: jango_cms_image_field_attributes
         jango_cms_entity_path:
           id: jango_cms_entity_path
           table: views
@@ -3227,6 +3247,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_entity_path
           label: ''
           exclude: false
           alter:
@@ -3269,7 +3290,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           base_path: 0
-          plugin_id: jango_cms_entity_path
         jango_cms_user_access:
           id: jango_cms_user_access
           table: views
@@ -3277,6 +3297,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_user_access
           label: ''
           exclude: false
           alter:
@@ -3319,7 +3340,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           permission: 'use nikadevs cms'
-          plugin_id: jango_cms_user_access
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 7
       sorts:
         created:
           id: created
@@ -3328,59 +3353,15 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          granularity: second
           entity_type: node
           entity_field: created
           plugin_id: date
-      header:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content: "        <h3 class=\"c-center c-font-uppercase c-font-bold\">Latest Portfolio</h3>\n        <div class=\"c-line-center c-theme-bg\"></div>\n        <p class=\"c-center c-font-uppercase\">Showcasing your latest designs, sketches, photographs or videos.</p>\n "
-          plugin_id: text_custom
-      pager:
-        type: some
-        options:
-          items_per_page: 7
-          offset: 0
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.field_categories'
-        - 'config:field.storage.node.field_images'
-        - 'config:field.storage.node.field_small_description'
-        - 'config:field.storage.node.field_video'
-  latest_portfolio_block_fullwidth:
-    display_plugin: block
-    id: latest_portfolio_block_fullwidth
-    display_title: 'Block Latest Portfolio overflow-hide'
-    position: 9
-    display_options:
-      display_extenders: {  }
-      display_description: ''
-      title: 'Latest Portfolio (fullwidth)'
-      defaults:
-        title: false
-        style: false
-        row: false
-        fields: false
-        link_display: false
-        link_url: false
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: created
+          exposed: false
+          granularity: second
       style:
         type: default
         options:
@@ -3394,6 +3375,51 @@ display:
           inline: {  }
           separator: ''
           hide_empty: false
+      defaults:
+        title: false
+        pager: false
+        style: false
+        row: false
+        fields: false
+        sorts: false
+        header: false
+      display_description: ''
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: false
+          content: |2-
+                    <h3 class="c-center c-font-uppercase c-font-bold">Latest Portfolio</h3>
+                    <div class="c-line-center c-theme-bg"></div>
+                    <p class="c-center c-font-uppercase">Showcasing your latest designs, sketches, photographs or videos.</p>
+             
+          tokenize: false
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_categories'
+        - 'config:field.storage.node.field_images'
+        - 'config:field.storage.node.field_small_description'
+        - 'config:field.storage.node.field_video'
+  latest_portfolio_block_fullwidth:
+    id: latest_portfolio_block_fullwidth
+    display_title: 'Block Latest Portfolio overflow-hide'
+    display_plugin: block
+    position: 9
+    display_options:
+      title: 'Latest Portfolio (fullwidth)'
       fields:
         title:
           id: title
@@ -3402,6 +3428,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -3457,9 +3486,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_small_description:
           id: field_small_description
           table: node__field_small_description
@@ -3467,6 +3493,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -3521,7 +3548,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -3529,6 +3555,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -3573,8 +3600,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: large
             image_link: ''
+            image_style: large
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: false
@@ -3585,7 +3614,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_image_field_attributes:
           id: jango_cms_image_field_attributes
           table: views
@@ -3593,6 +3621,7 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_images: URL'
+          plugin_id: jango_cms_image_field_attributes
           label: ''
           exclude: false
           alter:
@@ -3636,7 +3665,6 @@ display:
           hide_alter_empty: true
           field_machine_name: field_images
           attribute_name: url
-          plugin_id: jango_cms_image_field_attributes
         field_categories:
           id: field_categories
           table: node__field_categories
@@ -3644,6 +3672,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -3699,7 +3728,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_video:
           id: field_video
           table: node__field_video
@@ -3707,6 +3735,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -3762,9 +3791,30 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: false
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      defaults:
+        title: false
+        link_display: false
+        link_url: false
+        style: false
+        row: false
+        fields: false
+      display_description: ''
       link_display: full_width_gallery
       link_url: ''
+      display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -3778,18 +3828,12 @@ display:
         - 'config:field.storage.node.field_small_description'
         - 'config:field.storage.node.field_video'
   masonry_gallery:
-    display_plugin: page
     id: masonry_gallery
     display_title: 'Masonry gallery'
+    display_plugin: page
     position: 3
     display_options:
-      display_extenders: {  }
-      display_description: Masonry
       title: 'Masonry gallery 16 Items'
-      defaults:
-        title: false
-        fields: false
-        pager: false
       fields:
         title:
           id: title
@@ -3798,6 +3842,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -3853,9 +3900,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_small_description:
           id: field_small_description
           table: node__field_small_description
@@ -3863,6 +3907,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -3917,7 +3962,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -3925,6 +3969,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -3961,7 +4006,7 @@ display:
           element_label_colon: false
           element_wrapper_type: '0'
           element_wrapper_class: ''
-          element_default_classes: true
+          element_default_classes: false
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -3969,19 +4014,20 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__600x600_
             image_link: ''
+            image_style: project__600x600_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
-          group_rows: false
-          delta_limit: 0
+          group_rows: true
+          delta_limit: 1
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: ', '
+          separator: ''
           field_api_classes: false
-          plugin_id: field
         jango_cms_image_field_attributes:
           id: jango_cms_image_field_attributes
           table: views
@@ -3989,6 +4035,7 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_images: URL'
+          plugin_id: jango_cms_image_field_attributes
           label: ''
           exclude: false
           alter:
@@ -4009,12 +4056,12 @@ display:
             target: ''
             nl2br: false
             max_length: 0
-            word_boundary: true
-            ellipsis: true
+            word_boundary: false
+            ellipsis: false
             more_link: false
             more_link_text: ''
             more_link_path: ''
-            strip_tags: false
+            strip_tags: true
             trim: false
             preserve_tags: ''
             html: false
@@ -4032,7 +4079,6 @@ display:
           hide_alter_empty: true
           field_machine_name: field_images
           attribute_name: url
-          plugin_id: jango_cms_image_field_attributes
         field_categories:
           id: field_categories
           table: node__field_categories
@@ -4040,6 +4086,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -4095,7 +4142,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_video:
           id: field_video
           table: node__field_video
@@ -4103,6 +4149,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -4158,7 +4205,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_entity_path:
           id: jango_cms_entity_path
           table: views
@@ -4166,6 +4212,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_entity_path
           label: ''
           exclude: false
           alter:
@@ -4208,22 +4255,79 @@ display:
           empty_zero: false
           hide_alter_empty: true
           base_path: 0
-          plugin_id: jango_cms_entity_path
+        jango_cms_single_image_url:
+          id: jango_cms_single_image_url
+          table: views
+          field: jango_cms_single_image_url
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: jango_cms_single_image_url
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: '0'
+          element_class: ''
+          element_label_type: '0'
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: '0'
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          image_field_name: field_images
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 16
+      defaults:
+        title: false
+        pager: false
+        relationships: false
+        fields: false
+      relationships: {  }
+      display_description: Masonry
+      display_extenders: {  }
       path: page-masonry-gallery
       menu:
         type: normal
         title: 'Masonry Gallery'
         description: ''
-        expanded: false
-        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
         weight: 13
-        context: '0'
+        expanded: false
         menu_name: main
-      pager:
-        type: some
-        options:
-          items_per_page: 16
-          offset: 0
+        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
@@ -4237,36 +4341,12 @@ display:
         - 'config:field.storage.node.field_small_description'
         - 'config:field.storage.node.field_video'
   page_1:
-    display_plugin: page
     id: page_1
     display_title: 'Isotope Gallery: Filter, 5 Cols, Borders'
+    display_plugin: page
     position: 12
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: 'Masonry Portfolio'
-      defaults:
-        title: false
-        style: false
-        row: false
-        fields: false
-        filters: false
-        filter_groups: false
-        pager: false
-      style:
-        type: grid
-        options:
-          grouping: {  }
-          columns: 5
-          automatic_width: true
-          alignment: horizontal
-          col_class_default: false
-          col_class_custom: ''
-          row_class_default: false
-          row_class_custom: ''
-      row:
-        type: fields
-        options: {  }
       fields:
         title:
           id: title
@@ -4275,6 +4355,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -4330,9 +4413,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -4340,6 +4420,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -4384,8 +4465,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__600x600_
             image_link: ''
+            image_style: project__600x600_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -4396,7 +4479,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_categories:
           id: field_categories
           table: node__field_categories
@@ -4404,6 +4486,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -4459,7 +4542,6 @@ display:
           multi_type: separator
           separator: '/ '
           field_api_classes: false
-          plugin_id: field
         body:
           id: body
           table: node__body
@@ -4467,6 +4549,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -4522,7 +4605,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         nid:
           id: nid
           table: node_field_data
@@ -4530,6 +4612,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -4586,9 +4671,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: nid
-          plugin_id: field
         jango_cms_single_image_fid:
           id: jango_cms_single_image_fid
           table: views
@@ -4596,6 +4678,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_single_image_fid
           label: ''
           exclude: false
           alter:
@@ -4638,7 +4721,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           image_field_name: field_images
-          plugin_id: jango_cms_single_image_fid
         jango_cms_single_image_url:
           id: jango_cms_single_image_url
           table: views
@@ -4646,6 +4728,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_single_image_url
           label: ''
           exclude: false
           alter:
@@ -4688,7 +4771,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           image_field_name: field_images
-          plugin_id: jango_cms_single_image_url
         jango_cms_user_access:
           id: jango_cms_user_access
           table: views
@@ -4696,6 +4778,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_user_access
           label: ''
           exclude: false
           alter:
@@ -4738,28 +4821,37 @@ display:
           empty_zero: false
           hide_alter_empty: true
           permission: 'use nikadevs cms'
-          plugin_id: jango_cms_user_access
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 9
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
-          group: 1
+            operator_limit_selection: false
+            operator_list: {  }
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            nd_project: nd_project
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            nd_project: nd_project
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
         field_images_target_id:
           id: field_images_target_id
           table: node__field_images
@@ -4767,6 +4859,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: numeric
           operator: 'not empty'
           value:
             min: ''
@@ -4780,12 +4873,17 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -4798,17 +4896,35 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: numeric
       filter_groups:
         operator: AND
         groups:
           1: AND
-      path: page-isotope-gallery
-      pager:
-        type: some
+      style:
+        type: grid
         options:
-          items_per_page: 9
-          offset: 0
+          grouping: {  }
+          columns: 5
+          automatic_width: true
+          alignment: horizontal
+          row_class_custom: ''
+          row_class_default: false
+          col_class_custom: ''
+          col_class_default: false
+      row:
+        type: fields
+        options: {  }
+      defaults:
+        title: false
+        pager: false
+        style: false
+        row: false
+        fields: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: page-isotope-gallery
     cache_metadata:
       max-age: -1
       contexts:
@@ -4821,20 +4937,12 @@ display:
         - 'config:field.storage.node.field_categories'
         - 'config:field.storage.node.field_images'
   page_2:
-    display_plugin: page
     id: page_2
     display_title: 'Isotope Gallery: 5 Cols, Borders, Paddings'
+    display_plugin: page
     position: 13
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: 'Masonry Portfolio'
-      defaults:
-        title: false
-        fields: false
-        filters: false
-        filter_groups: false
-        pager: false
       fields:
         title:
           id: title
@@ -4843,6 +4951,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -4898,9 +5009,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -4908,6 +5016,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -4952,8 +5061,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__600x600_
             image_link: ''
+            image_style: project__600x600_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -4964,7 +5075,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_single_image_url:
           id: jango_cms_single_image_url
           table: views
@@ -4972,6 +5082,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_single_image_url
           label: ''
           exclude: false
           alter:
@@ -5014,7 +5125,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           image_field_name: field_images
-          plugin_id: jango_cms_single_image_url
         body:
           id: body
           table: node__body
@@ -5022,6 +5132,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -5077,28 +5188,37 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 10
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
-          group: 1
+            operator_limit_selection: false
+            operator_list: {  }
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            nd_project: nd_project
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            nd_project: nd_project
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
         field_images_target_id:
           id: field_images_target_id
           table: node__field_images
@@ -5106,6 +5226,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: numeric
           operator: 'not empty'
           value:
             min: ''
@@ -5119,12 +5240,17 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -5137,17 +5263,19 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: numeric
       filter_groups:
         operator: AND
         groups:
           1: AND
+      defaults:
+        title: false
+        pager: false
+        fields: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
       path: page-isotope-gallery-portfolio
-      pager:
-        type: some
-        options:
-          items_per_page: 10
-          offset: 0
     cache_metadata:
       max-age: -1
       contexts:
@@ -5159,33 +5287,12 @@ display:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_images'
   page_2col_portfolio:
-    display_plugin: page
     id: page_2col_portfolio
     display_title: '2 Columns Portfolio'
+    display_plugin: page
     position: 5
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: '2 Columns Portfolio'
-      defaults:
-        title: false
-        style: false
-        row: false
-        fields: false
-      style:
-        type: grid
-        options:
-          grouping: {  }
-          columns: 2
-          automatic_width: true
-          alignment: horizontal
-          col_class_default: true
-          col_class_custom: ''
-          row_class_default: false
-          row_class_custom: row
-      row:
-        type: fields
-        options: {  }
       fields:
         title:
           id: title
@@ -5194,6 +5301,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -5249,9 +5359,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_small_description:
           id: field_small_description
           table: node__field_small_description
@@ -5259,6 +5366,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -5313,7 +5421,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -5321,6 +5428,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -5365,19 +5473,20 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: product_500x500
             image_link: ''
+            image_style: product_500x500
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
-          group_rows: false
-          delta_limit: 0
+          group_rows: true
+          delta_limit: 1
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_entity_path:
           id: jango_cms_entity_path
           table: views
@@ -5385,6 +5494,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_entity_path
           label: ''
           exclude: false
           alter:
@@ -5427,7 +5537,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           base_path: 0
-          plugin_id: jango_cms_entity_path
         field_categories:
           id: field_categories
           table: node__field_categories
@@ -5435,6 +5544,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -5490,7 +5600,6 @@ display:
           multi_type: separator
           separator: '/ '
           field_api_classes: false
-          plugin_id: field
         field_video:
           id: field_video
           table: node__field_video
@@ -5498,6 +5607,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -5553,17 +5663,37 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: 2
+          automatic_width: true
+          alignment: horizontal
+          row_class_custom: row
+          row_class_default: false
+          col_class_custom: ''
+          col_class_default: true
+      row:
+        type: fields
+        options: {  }
+      defaults:
+        title: false
+        style: false
+        row: false
+        fields: false
+      display_description: ''
+      display_extenders: {  }
       path: page-2col-portfolio
       menu:
         type: normal
         title: '2 Columns Portfolio'
         description: ''
-        expanded: false
-        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
         weight: 16
-        context: '0'
+        expanded: false
         menu_name: main
+        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
@@ -5577,21 +5707,12 @@ display:
         - 'config:field.storage.node.field_small_description'
         - 'config:field.storage.node.field_video'
   page_3:
-    display_plugin: page
     id: page_3
     display_title: 'Isotope Gallery: 5 Cols, No Borders, No Paddings'
+    display_plugin: page
     position: 14
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: 'Masonry Portfolio'
-      defaults:
-        title: false
-        fields: false
-        filters: false
-        filter_groups: false
-        sorts: false
-        pager: false
       fields:
         nid:
           id: nid
@@ -5600,6 +5721,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -5656,9 +5780,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: nid
-          plugin_id: field
         title:
           id: title
           table: node_field_data
@@ -5666,6 +5787,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -5721,9 +5845,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         body:
           id: body
           table: node__body
@@ -5731,6 +5852,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -5786,7 +5908,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -5794,6 +5915,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -5838,8 +5960,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__600x600_
             image_link: ''
+            image_style: project__600x600_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -5850,7 +5974,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_user_access:
           id: jango_cms_user_access
           table: views
@@ -5858,6 +5981,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_user_access
           label: ''
           exclude: false
           alter:
@@ -5900,7 +6024,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           permission: 'use nikadevs cms'
-          plugin_id: jango_cms_user_access
         jango_cms_single_image_fid:
           id: jango_cms_single_image_fid
           table: views
@@ -5908,6 +6031,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_single_image_fid
           label: ''
           exclude: false
           alter:
@@ -5950,7 +6074,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           image_field_name: field_images
-          plugin_id: jango_cms_single_image_fid
         jango_cms_single_image_url:
           id: jango_cms_single_image_url
           table: views
@@ -5958,6 +6081,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_single_image_url
           label: ''
           exclude: false
           alter:
@@ -6000,28 +6124,54 @@ display:
           empty_zero: false
           hide_alter_empty: true
           image_field_name: field_images
-          plugin_id: jango_cms_single_image_url
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 7
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: created
+          exposed: false
+          granularity: second
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
-          group: 1
+            operator_limit_selection: false
+            operator_list: {  }
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            nd_project: nd_project
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            nd_project: nd_project
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
         field_images_target_id:
           id: field_images_target_id
           table: node__field_images
@@ -6029,6 +6179,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: numeric
           operator: 'not empty'
           value:
             min: ''
@@ -6042,12 +6193,17 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -6060,33 +6216,20 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: numeric
       filter_groups:
         operator: AND
         groups:
           1: AND
-      sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          granularity: second
-          entity_type: node
-          entity_field: created
-          plugin_id: date
+      defaults:
+        title: false
+        pager: false
+        fields: false
+        sorts: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
       path: page-isotope-photography
-      pager:
-        type: some
-        options:
-          items_per_page: 7
-          offset: 0
     cache_metadata:
       max-age: -1
       contexts:
@@ -6098,21 +6241,12 @@ display:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_images'
   page_3_2:
-    display_plugin: page
     id: page_3_2
     display_title: 'Isotope Gallery: 5 Cols, No Borders, No Paddings, 10Items'
+    display_plugin: page
     position: 16
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: 'Masonry Portfolio'
-      defaults:
-        title: false
-        fields: false
-        filters: false
-        filter_groups: false
-        sorts: false
-        pager: false
       fields:
         nid:
           id: nid
@@ -6121,6 +6255,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -6177,9 +6314,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: nid
-          plugin_id: field
         title:
           id: title
           table: node_field_data
@@ -6187,6 +6321,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -6242,9 +6379,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         body:
           id: body
           table: node__body
@@ -6252,6 +6386,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -6307,7 +6442,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -6315,6 +6449,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -6359,8 +6494,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__900x900_
             image_link: ''
+            image_style: project__900x900_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -6371,7 +6508,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_user_access:
           id: jango_cms_user_access
           table: views
@@ -6379,6 +6515,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_user_access
           label: ''
           exclude: false
           alter:
@@ -6421,7 +6558,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           permission: 'use nikadevs cms'
-          plugin_id: jango_cms_user_access
         jango_cms_single_image_fid:
           id: jango_cms_single_image_fid
           table: views
@@ -6429,6 +6565,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_single_image_fid
           label: ''
           exclude: false
           alter:
@@ -6471,7 +6608,6 @@ display:
           empty_zero: false
           hide_alter_empty: true
           image_field_name: field_images
-          plugin_id: jango_cms_single_image_fid
         jango_cms_single_image_url:
           id: jango_cms_single_image_url
           table: views
@@ -6479,6 +6615,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_single_image_url
           label: ''
           exclude: false
           alter:
@@ -6521,28 +6658,54 @@ display:
           empty_zero: false
           hide_alter_empty: true
           image_field_name: field_images
-          plugin_id: jango_cms_single_image_url
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 9
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: created
+          exposed: false
+          granularity: second
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
-          group: 1
+            operator_limit_selection: false
+            operator_list: {  }
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            nd_project: nd_project
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            nd_project: nd_project
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
         field_images_target_id:
           id: field_images_target_id
           table: node__field_images
@@ -6550,6 +6713,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: numeric
           operator: 'not empty'
           value:
             min: ''
@@ -6563,12 +6727,17 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -6581,33 +6750,20 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: numeric
       filter_groups:
         operator: AND
         groups:
           1: AND
+      defaults:
+        title: false
+        pager: false
+        fields: false
+        sorts: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
       path: page-isotope-photography-wide
-      sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          granularity: second
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-      pager:
-        type: some
-        options:
-          items_per_page: 9
-          offset: 0
     cache_metadata:
       max-age: -1
       contexts:
@@ -6619,37 +6775,12 @@ display:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_images'
   page_4:
-    display_plugin: page
     id: page_4
     display_title: 'Isotope Gallery: 2 Cols, Video Popup'
+    display_plugin: page
     position: 15
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: 'Masonry Portfolio'
-      defaults:
-        title: false
-        style: false
-        row: false
-        fields: false
-        filters: false
-        filter_groups: false
-        sorts: false
-        pager: false
-      style:
-        type: grid
-        options:
-          grouping: {  }
-          columns: 2
-          automatic_width: true
-          alignment: horizontal
-          col_class_default: false
-          col_class_custom: ''
-          row_class_default: false
-          row_class_custom: ''
-      row:
-        type: fields
-        options: {  }
       fields:
         field_images:
           id: field_images
@@ -6658,6 +6789,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -6702,8 +6834,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__600x600_
             image_link: ''
+            image_style: project__600x600_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -6714,7 +6848,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_video:
           id: field_video
           table: node__field_video
@@ -6722,6 +6855,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -6777,28 +6911,54 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 4
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: created
+          exposed: false
+          granularity: second
       filters:
         status:
-          value: '1'
+          id: status
           table: node_field_data
           field: status
-          plugin_id: boolean
           entity_type: node
           entity_field: status
-          id: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
           expose:
             operator: ''
-          group: 1
+            operator_limit_selection: false
+            operator_list: {  }
         type:
           id: type
           table: node_field_data
           field: type
-          value:
-            nd_project: nd_project
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          value:
+            nd_project: nd_project
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
         field_images_target_id:
           id: field_images_target_id
           table: node__field_images
@@ -6806,6 +6966,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: numeric
           operator: 'not empty'
           value:
             min: ''
@@ -6819,12 +6980,17 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -6837,7 +7003,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: numeric
         field_video_value:
           id: field_video_value
           table: node__field_video
@@ -6845,6 +7010,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: string
           operator: 'not empty'
           value: ''
           group: 1
@@ -6855,12 +7021,15 @@ display:
             description: ''
             use_operator: false
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
             identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -6873,33 +7042,36 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: string
       filter_groups:
         operator: AND
         groups:
           1: AND
-      sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          granularity: second
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-      path: page-isotope-photography
-      pager:
-        type: some
+      style:
+        type: grid
         options:
-          items_per_page: 4
-          offset: 0
+          grouping: {  }
+          columns: 2
+          automatic_width: true
+          alignment: horizontal
+          row_class_custom: ''
+          row_class_default: false
+          col_class_custom: ''
+          col_class_default: false
+      row:
+        type: fields
+        options: {  }
+      defaults:
+        title: false
+        pager: false
+        style: false
+        row: false
+        fields: false
+        sorts: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: page-isotope-photography
     cache_metadata:
       max-age: -1
       contexts:
@@ -6911,27 +7083,12 @@ display:
         - 'config:field.storage.node.field_images'
         - 'config:field.storage.node.field_video'
   page_index_gallery:
-    display_plugin: page
     id: page_index_gallery
     display_title: 'Gallery Index'
+    display_plugin: page
     position: 6
     display_options:
-      display_extenders: {  }
-      display_description: Gallery
       title: 'Index Gallery'
-      defaults:
-        title: false
-        fields: false
-      path: page-index-gallery
-      menu:
-        type: normal
-        title: 'Gallery Index'
-        description: ''
-        expanded: false
-        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
-        weight: 14
-        context: '0'
-        menu_name: main
       fields:
         title:
           id: title
@@ -6940,6 +7097,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -6995,9 +7155,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_small_description:
           id: field_small_description
           table: node__field_small_description
@@ -7005,6 +7162,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -7059,7 +7217,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -7067,6 +7224,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -7111,8 +7269,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__600x600_
             image_link: ''
+            image_style: project__600x600_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: false
@@ -7123,7 +7283,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_categories:
           id: field_categories
           table: node__field_categories
@@ -7131,6 +7290,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -7186,7 +7346,6 @@ display:
           multi_type: separator
           separator: '/ '
           field_api_classes: false
-          plugin_id: field
         field_video:
           id: field_video
           table: node__field_video
@@ -7194,6 +7353,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -7249,7 +7409,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_entity_path:
           id: jango_cms_entity_path
           table: views
@@ -7257,6 +7416,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_entity_path
           label: ''
           exclude: false
           alter:
@@ -7299,7 +7459,21 @@ display:
           empty_zero: false
           hide_alter_empty: true
           base_path: 1
-          plugin_id: jango_cms_entity_path
+      defaults:
+        title: false
+        fields: false
+      display_description: Gallery
+      display_extenders: {  }
+      path: page-index-gallery
+      menu:
+        type: normal
+        title: 'Gallery Index'
+        description: ''
+        weight: 14
+        expanded: false
+        menu_name: main
+        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
@@ -7313,34 +7487,12 @@ display:
         - 'config:field.storage.node.field_small_description'
         - 'config:field.storage.node.field_video'
   page_lightbox_gallery:
-    display_plugin: page
     id: page_lightbox_gallery
     display_title: 'Lightbox Gallery'
+    display_plugin: page
     position: 7
     display_options:
-      display_extenders: {  }
-      display_description: Gallery
       title: 'Lightbox Gallery'
-      defaults:
-        title: false
-        style: false
-        row: false
-        fields: false
-        pager: false
-      style:
-        type: grid
-        options:
-          grouping: {  }
-          columns: 3
-          automatic_width: true
-          alignment: horizontal
-          col_class_default: false
-          col_class_custom: ''
-          row_class_default: false
-          row_class_custom: ''
-      row:
-        type: fields
-        options: {  }
       fields:
         title:
           id: title
@@ -7349,6 +7501,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -7404,9 +7559,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_small_description:
           id: field_small_description
           table: node__field_small_description
@@ -7414,6 +7566,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -7468,7 +7621,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -7476,6 +7628,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -7520,19 +7673,20 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__600x600_
             image_link: ''
+            image_style: project__600x600_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
-          group_rows: false
-          delta_limit: 0
+          group_rows: true
+          delta_limit: 1
           delta_offset: 0
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_categories:
           id: field_categories
           table: node__field_categories
@@ -7540,6 +7694,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -7595,7 +7750,6 @@ display:
           multi_type: separator
           separator: '/ '
           field_api_classes: false
-          plugin_id: field
         field_video:
           id: field_video
           table: node__field_video
@@ -7603,6 +7757,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: true
           alter:
@@ -7658,7 +7813,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_client:
           id: field_client
           table: node__field_client
@@ -7666,6 +7820,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -7721,7 +7876,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         nid:
           id: nid
           table: node_field_data
@@ -7729,6 +7883,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -7785,24 +7942,43 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: nid
-          plugin_id: field
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 9
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: 3
+          automatic_width: true
+          alignment: horizontal
+          row_class_custom: ''
+          row_class_default: false
+          col_class_custom: ''
+          col_class_default: false
+      row:
+        type: fields
+        options: {  }
+      defaults:
+        title: false
+        pager: false
+        style: false
+        row: false
+        fields: false
+      display_description: Gallery
+      display_extenders: {  }
       path: page-lightbox-gallery
       menu:
         type: normal
         title: 'Lightbox Gallery'
         description: ''
-        expanded: false
-        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
         weight: 11
-        context: '0'
+        expanded: false
         menu_name: main
-      pager:
-        type: some
-        options:
-          items_per_page: 9
-          offset: 0
+        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
@@ -7817,27 +7993,12 @@ display:
         - 'config:field.storage.node.field_small_description'
         - 'config:field.storage.node.field_video'
   page_masonry_portfolio:
-    display_plugin: page
     id: page_masonry_portfolio
     display_title: 'Masonry Portfolio'
+    display_plugin: page
     position: 10
     display_options:
-      display_extenders: {  }
-      display_description: ''
       title: 'Masonry Portfolio'
-      defaults:
-        title: false
-        fields: false
-      path: page-masonry-portfolio
-      menu:
-        type: normal
-        title: 'Masonry Portfolio'
-        description: ''
-        expanded: false
-        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
-        weight: 17
-        context: '0'
-        menu_name: main
       fields:
         title:
           id: title
@@ -7846,6 +8007,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -7901,9 +8065,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_small_description:
           id: field_small_description
           table: node__field_small_description
@@ -7911,6 +8072,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -7965,7 +8127,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         field_images:
           id: field_images
           table: node__field_images
@@ -7973,6 +8134,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -8017,8 +8179,10 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: project__600x600_
             image_link: ''
+            image_style: project__600x600_
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: false
@@ -8029,7 +8193,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_image_field_attributes:
           id: jango_cms_image_field_attributes
           table: views
@@ -8037,6 +8200,7 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_images: URL'
+          plugin_id: jango_cms_image_field_attributes
           label: ''
           exclude: false
           alter:
@@ -8080,7 +8244,6 @@ display:
           hide_alter_empty: true
           field_machine_name: field_images
           attribute_name: url
-          plugin_id: jango_cms_image_field_attributes
         field_categories:
           id: field_categories
           table: node__field_categories
@@ -8088,6 +8251,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -8143,7 +8307,6 @@ display:
           multi_type: separator
           separator: '/ '
           field_api_classes: false
-          plugin_id: field
         field_video:
           id: field_video
           table: node__field_video
@@ -8151,6 +8314,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: field
           label: ''
           exclude: false
           alter:
@@ -8206,7 +8370,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
         jango_cms_entity_path:
           id: jango_cms_entity_path
           table: views
@@ -8214,6 +8377,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: jango_cms_entity_path
           label: ''
           exclude: false
           alter:
@@ -8256,7 +8420,21 @@ display:
           empty_zero: false
           hide_alter_empty: true
           base_path: 0
-          plugin_id: jango_cms_entity_path
+      defaults:
+        title: false
+        fields: false
+      display_description: ''
+      display_extenders: {  }
+      path: page-masonry-portfolio
+      menu:
+        type: normal
+        title: 'Masonry Portfolio'
+        description: ''
+        weight: 17
+        expanded: false
+        menu_name: main
+        parent: 'menu_link_content:5b11b361-4ed0-4d31-8927-bd7603233d0f'
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:

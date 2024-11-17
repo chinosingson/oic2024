@@ -15,23 +15,25 @@ bundle: nd_clients
 mode: default
 content:
   description:
-    label: hidden
     type: text_default
-    weight: 1
-    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_image_client_logo:
-    weight: 0
+    type: image
     label: hidden
     settings:
-      image_style: ''
       image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    type: image
+    weight: 0
     region: content
   field_link:
-    weight: 2
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -40,7 +42,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 2
     region: content
 hidden:
   langcode: true

@@ -4,6 +4,8 @@ dependencies:
   module:
     - editor
     - entity_embed
+    - nd_visualshortcodes
+    - shortcode
 name: 'Basic HTML'
 format: basic_html
 weight: -8
@@ -12,32 +14,154 @@ filters:
     id: filter_html
     provider: filter
     status: true
-    weight: -10
+    weight: -50
     settings:
-      allowed_html: '<a href hreflang> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <p> <br> <span> <img src alt height width data-entity-type data-entity-uuid data-align data-caption><drupal-entity data-entity-type data-entity-uuid data-view-mode data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button>'
+      allowed_html: '<br> <p> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <cite> <dl> <dt> <dd> <span> <drupal-entity data-entity-type data-entity-uuid data-view-mode data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button> <a hreflang href> <blockquote cite> <ul type> <ol type start> <strong> <em> <code> <li> <img src alt height width data-entity-uuid data-entity-type data-caption data-align>'
       filter_html_help: false
       filter_html_nofollow: false
   filter_align:
     id: filter_align
     provider: filter
     status: true
-    weight: 7
+    weight: -49
     settings: {  }
   filter_caption:
     id: filter_caption
     provider: filter
     status: true
-    weight: 8
+    weight: -48
     settings: {  }
   editor_file_reference:
     id: editor_file_reference
     provider: editor
     status: true
-    weight: 11
+    weight: -47
     settings: {  }
   entity_embed:
     id: entity_embed
     provider: entity_embed
     status: true
-    weight: 0
+    weight: -45
+    settings: {  }
+  filter_image_lazy_load:
+    id: filter_image_lazy_load
+    provider: filter
+    status: true
+    weight: -46
+    settings: {  }
+  filter_url:
+    id: filter_url
+    provider: filter
+    status: false
+    weight: -42
+    settings:
+      filter_url_length: 72
+  shortcode:
+    id: shortcode
+    provider: shortcode
+    status: false
+    weight: -40
+    settings:
+      nd_accordion: '1'
+      nd_accordions: '1'
+      nd_alert: '1'
+      nd_animated_progress_bar: '1'
+      nd_app_showcase: '1'
+      nd_badge: '1'
+      nd_block: '1'
+      nd_breadcrumb: '1'
+      nd_button: '1'
+      nd_client: '1'
+      col: '1'
+      nd_container: '1'
+      nd_content_bar: '1'
+      nd_counters: '1'
+      nd_counter: '1'
+      nd_dividers: '1'
+      nd_div: '1'
+      nd_feature_blocks: '1'
+      nd_feature_block: '1'
+      nd_feature: '1'
+      nd_gmap_info: '1'
+      nd_gmap: '1'
+      nd_heading: '1'
+      html: '1'
+      nd_icon: '1'
+      nd_image: '1'
+      nd_label: '1'
+      nd_ul_list: '1'
+      nd_ul_list_item: '1'
+      nd_menu: '1'
+      nd_modal: '1'
+      nd_navigation: '1'
+      nd_node: '1'
+      nd_panel: '1'
+      nd_panel_group_list_item: '1'
+      nd_panel_group_list: '1'
+      nd_panel_child: '1'
+      nd_parallax: '1'
+      nd_pricing_table: '1'
+      nd_pricing_tables: '1'
+      nd_product: '1'
+      nd_products_filter: '1'
+      nd_progress: '1'
+      nd_quote: '1'
+      row: '1'
+      nd_services: '1'
+      nd_slider: '1'
+      nd_slider_item: '1'
+      nd_social_button: '1'
+      nd_social_icon: '1'
+      nd_steps: '1'
+      nd_step: '1'
+      nd_tabbeds: '1'
+      nd_tabbed: '1'
+      nd_table_row_td: '1'
+      nd_table_row: '1'
+      nd_table: '1'
+      nd_tabs: '1'
+      nd_tab: '1'
+      nd_testimonial: '1'
+      nd_testimonials: '1'
+      nd_title: '1'
+      nd_twitter: '1'
+      nd_video: '1'
+      nd_view: '1'
+      nd_webform: '1'
+      a_nd_saved: '1'
+  filter_autop:
+    id: filter_autop
+    provider: filter
+    status: false
+    weight: -43
+    settings: {  }
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: false
+    weight: -37
+    settings: {  }
+  filter_html_escape:
+    id: filter_html_escape
+    provider: filter
+    status: false
+    weight: -44
+    settings: {  }
+  filter_html_image_secure:
+    id: filter_html_image_secure
+    provider: filter
+    status: false
+    weight: -38
+    settings: {  }
+  dynamicshortcodes:
+    id: dynamicshortcodes
+    provider: nd_visualshortcodes
+    status: false
+    weight: -41
+    settings: {  }
+  shortcode_corrector:
+    id: shortcode_corrector
+    provider: shortcode
+    status: false
+    weight: -39
     settings: {  }

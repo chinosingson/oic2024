@@ -8,12 +8,12 @@ dependencies:
     - field.field.commerce_product.product_display.field_colors
     - field.field.commerce_product.product_display.field_new_label
     - field.field.commerce_product.product_display.field_product_category
-    - field.field.commerce_product.product_display.field_rating
+    - field.field.commerce_product.product_display.field_reviews
     - field.field.commerce_product.product_display.field_sale_label
     - field.field.commerce_product.product_display.field_short_description
     - field.field.commerce_product.product_display.field_sizes
-    - field.field.commerce_product.product_display.stores
-    - field.field.commerce_product.product_display.variations
+  module:
+    - commerce_product
 id: commerce_product.product_display.teaser
 targetEntityType: commerce_product
 bundle: product_display
@@ -21,44 +21,51 @@ mode: teaser
 content:
   field_new_label:
     type: boolean
+    label: hidden
+    settings:
+      format: custom
+      format_custom_false: ''
+      format_custom_true: New
+    third_party_settings: {  }
     weight: 1
     region: content
-    label: hidden
-    settings:
-      format: custom
-      format_custom_true: New
-      format_custom_false: ''
-    third_party_settings: {  }
   field_sale_label:
     type: boolean
-    weight: 0
-    region: content
     label: hidden
     settings:
       format: custom
-      format_custom_true: Sale
       format_custom_false: ''
+      format_custom_true: Sale
     third_party_settings: {  }
-  flag_wishlist:
-    weight: 3
+    weight: 0
     region: content
+  flag_wishlist:
     settings: {  }
     third_party_settings: {  }
-  variations:
-    type: entity_reference_entity_view
-    weight: 2
+    weight: 3
     region: content
+  title:
+    type: string
     label: hidden
     settings:
-      view_mode: teaser
-      link: false
+      link_to_entity: false
     third_party_settings: {  }
+    weight: -5
+    region: content
+  variations:
+    type: commerce_add_to_cart
+    label: hidden
+    settings:
+      combine: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
 hidden:
   body: true
   created: true
   field_colors: true
   field_product_category: true
-  field_rating: true
+  field_reviews: true
   field_short_description: true
   field_sizes: true
   flag_compare: true

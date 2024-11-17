@@ -3,6 +3,6 @@ status: true
 dependencies: {  }
 id: product
 label: Product
+traits: {  }
 orderItemType: default
 generateTitle: true
-traits: {  }

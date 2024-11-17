@@ -14,12 +14,9 @@ excluded:
   - field.field.commerce_product.product_display.body
   - field.field.commerce_product.product_display.field_colors
   - field.field.commerce_product.product_display.field_new_label
-  - field.field.commerce_product.product_display.field_rating
   - field.field.commerce_product.product_display.field_sale_label
   - field.field.commerce_product.product_display.field_short_description
   - field.field.commerce_product.product_display.field_sizes
-  - field.field.commerce_product.product_display.stores
-  - field.field.commerce_product.product_display.variations
   - field.field.commerce_product_variation.product.attribute_color
   - field.field.commerce_product_variation.product.attribute_size
   - field.field.commerce_product_variation.product.field_images
@@ -28,7 +25,6 @@ excluded:
   - field.storage.commerce_product.field_colors
   - field.storage.commerce_product.field_new_label
   - field.storage.commerce_product.field_product_category
-  - field.storage.commerce_product.field_rating
   - field.storage.commerce_product.field_sale_label
   - field.storage.commerce_product.field_short_description
   - field.storage.commerce_product.field_sizes
@@ -92,6 +88,7 @@ required:
   - core.entity_form_display.node.page.default
   - core.entity_form_display.taxonomy_term.happy_customers.default
   - core.entity_form_display.taxonomy_term.nd_clients.default
+  - core.entity_form_display.user.user.default
   - core.entity_view_display.block_content.basic.default
   - core.entity_view_display.node.article.default
   - core.entity_view_display.node.article.rss
@@ -114,6 +111,8 @@ required:
   - core.entity_view_display.taxonomy_term.happy_customers.default
   - core.entity_view_display.taxonomy_term.nd_clients.default
   - core.entity_view_display.file.image.thumbnail
+  - core.entity_view_display.user.user.compact
+  - core.entity_view_display.user.user.default
   - field.field.block_content.basic.body
   - field.field.node.article.body
   - field.field.node.article.comment
@@ -161,19 +160,14 @@ required:
   - image.style.project__80x80_
   - image.style.project__900x900_
   - image.style.thumbnail
-  - rdf.mapping.node.article
-  - rdf.mapping.node.page
-  - rdf.mapping.taxonomy_term.tags
   - taxonomy.vocabulary.blog_category
   - taxonomy.vocabulary.happy_customers
   - taxonomy.vocabulary.nd_clients
   - taxonomy.vocabulary.tags
   - taxonomy.vocabulary.taxonomy_categories
-  - editor.editor.ckeditor
   - editor.editor.basic_html
   - editor.editor.full_html
   - filter.format.basic_html
-  - filter.format.ckeditor
   - filter.format.full_html
   - filter.format.html
   - views.view.categories
@@ -192,3 +186,4 @@ required:
   - webform.webform.subscribe_inline
   - webform.webform.subscribe_inline_dark
   - webform.webform.webform_form_controls
+  - user.role.authenticated

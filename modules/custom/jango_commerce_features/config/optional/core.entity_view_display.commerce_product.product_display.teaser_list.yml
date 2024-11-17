@@ -8,12 +8,10 @@ dependencies:
     - field.field.commerce_product.product_display.field_colors
     - field.field.commerce_product.product_display.field_new_label
     - field.field.commerce_product.product_display.field_product_category
-    - field.field.commerce_product.product_display.field_rating
+    - field.field.commerce_product.product_display.field_reviews
     - field.field.commerce_product.product_display.field_sale_label
     - field.field.commerce_product.product_display.field_short_description
     - field.field.commerce_product.product_display.field_sizes
-    - field.field.commerce_product.product_display.stores
-    - field.field.commerce_product.product_display.variations
   module:
     - text
 id: commerce_product.product_display.teaser_list
@@ -22,57 +20,65 @@ bundle: product_display
 mode: teaser_list
 content:
   field_new_label:
-    weight: 4
+    type: boolean
     label: hidden
     settings:
       format: custom
-      format_custom_true: New
       format_custom_false: ''
+      format_custom_true: New
     third_party_settings: {  }
-    type: boolean
+    weight: 4
     region: content
   field_sale_label:
-    weight: 3
+    type: boolean
     label: hidden
     settings:
       format: custom
-      format_custom_true: Sale
       format_custom_false: ''
+      format_custom_true: Sale
     third_party_settings: {  }
-    type: boolean
+    weight: 3
     region: content
   field_short_description:
     type: text_default
-    weight: 5
-    region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 5
+    region: content
   flag_compare:
+    settings: {  }
+    third_party_settings: {  }
     weight: 1
     region: content
+  flag_wishlist:
     settings: {  }
     third_party_settings: {  }
-  flag_wishlist:
     weight: 2
     region: content
-    settings: {  }
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
+    weight: -5
+    region: content
   variations:
     type: entity_reference_entity_view
-    weight: 0
     label: hidden
     settings:
       view_mode: teaser_list
       link: false
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   body: true
   created: true
   field_colors: true
   field_product_category: true
-  field_rating: true
+  field_reviews: true
   field_sizes: true
   langcode: true
   stores: true

@@ -22,44 +22,44 @@ bundle: nd_blog
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 2
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 2
     region: content
   field_comments:
-    weight: 4
+    type: comment_default
     label: hidden
     settings:
       view_mode: default
       pager_id: 0
     third_party_settings: {  }
-    type: comment_default
+    weight: 4
     region: content
   field_images:
-    weight: 1
+    type: jango_cms_images_slider
     label: hidden
     settings:
       image_style: project__1200x900_
       height: '360'
       image_link: ''
     third_party_settings: {  }
-    type: jango_cms_images_slider
+    weight: 1
     region: content
   field_tags:
     type: jango_cms_blog_tags
-    weight: 3
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 3
     region: content
   field_video:
     type: jango_cms_vimeo_video
-    weight: 0
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   field_blog_category: true

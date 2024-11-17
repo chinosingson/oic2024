@@ -21,51 +21,51 @@ bundle: nd_project
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 0
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
     region: content
   field_categories:
-    weight: 3
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 3
     region: content
   field_client:
-    weight: 2
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 2
     region: content
   field_images:
-    weight: 4
+    type: jango_cms_project_image_slider
     label: hidden
     settings:
       image_style: project__1200x900_
       image_link: ''
     third_party_settings: {  }
-    type: jango_cms_project_image_slider
+    weight: 4
     region: content
   field_small_description:
-    weight: 1
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 1
     region: content
   field_url_the_site:
-    weight: 5
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 5
     region: content
 hidden:
   field_video: true

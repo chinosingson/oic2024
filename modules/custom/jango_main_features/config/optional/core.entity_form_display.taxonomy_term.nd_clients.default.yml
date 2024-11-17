@@ -22,32 +22,33 @@ content:
     weight: 4
     region: content
     settings:
-      placeholder: ''
       rows: 5
+      placeholder: ''
     third_party_settings: {  }
   field_image_client_logo:
+    type: image_image
     weight: 2
+    region: content
     settings:
-      preview_image_style: thumbnail
       progress_indicator: throbber
+      preview_image_style: thumbnail
     third_party_settings:
       imce:
         enabled: false
-    type: image_image
-    region: content
   field_link:
+    type: link_default
     weight: 3
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   langcode:
     type: language_select
     weight: 0
     region: content
-    settings: {  }
+    settings:
+      include_locked: true
     third_party_settings: {  }
   name:
     type: string_textfield

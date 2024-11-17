@@ -1,33 +1,37 @@
 name: 'Jango Commerce Features'
 description: 'Commerce views, content types and other settings for Jango theme shop.'
 type: module
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: '^9.4 || ^10'
 dependencies:
-  - commerce
-  - commerce_cart
-  - commerce_log
-  - commerce_order
-  - commerce_payment
-  - commerce_price
-  - commerce_product
-  - commerce_promotion
-  - commerce_store
-  - commerce_variation_cart_form
-  - entity_browser
-  - field
-  - file
-  - fivestar
-  - flag
-  - image
-  - inline_entity_form
-  - jango_cms
-  - jango_main_features
-  - options
-  - path
-  - system
-  - taxonomy
-  - text
-  - user
-  - views
-  - views_flipped_table
-version: 8.x-1.0
+  - 'NikaDevs:jango_cms'
+  - 'address:address'
+  - 'commerce:commerce'
+  - 'commerce:commerce_cart'
+  - 'commerce:commerce_log'
+  - 'commerce:commerce_order'
+  - 'commerce:commerce_payment'
+  - 'commerce:commerce_price'
+  - 'commerce:commerce_product'
+  - 'commerce:commerce_promotion'
+  - 'commerce:commerce_store'
+  - 'commerce_variation_cart_form:commerce_variation_cart_form'
+  - 'drupal:comment'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:image'
+  - 'drupal:language'
+  - 'drupal:options'
+  - 'drupal:path'
+  - 'drupal:system'
+  - 'drupal:taxonomy'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'entity_browser:entity_browser'
+  - 'entity_reference_revisions:entity_reference_revisions'
+  - 'fivestar:fivestar'
+  - 'flag:flag'
+  - 'inline_entity_form:inline_entity_form'
+  - 'state_machine:state_machine'
+  - 'views_flipped_table:views_flipped_table'
+version: 10.x-1.0

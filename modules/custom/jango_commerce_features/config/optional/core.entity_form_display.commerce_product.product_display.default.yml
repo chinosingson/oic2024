@@ -7,15 +7,13 @@ dependencies:
     - field.field.commerce_product.product_display.field_colors
     - field.field.commerce_product.product_display.field_new_label
     - field.field.commerce_product.product_display.field_product_category
-    - field.field.commerce_product.product_display.field_rating
+    - field.field.commerce_product.product_display.field_reviews
     - field.field.commerce_product.product_display.field_sale_label
     - field.field.commerce_product.product_display.field_short_description
     - field.field.commerce_product.product_display.field_sizes
-    - field.field.commerce_product.product_display.stores
-    - field.field.commerce_product.product_display.variations
   module:
+    - comment
     - commerce
-    - inline_entity_form
     - path
     - text
 id: commerce_product.product_display.default
@@ -26,109 +24,111 @@ content:
   body:
     type: text_textarea_with_summary
     weight: 4
+    region: content
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
+      show_summary: false
     third_party_settings: {  }
-    region: content
   created:
     type: datetime_timestamp
     weight: 12
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   field_colors:
-    weight: 5
-    settings: {  }
-    third_party_settings: {  }
     type: options_buttons
+    weight: 5
     region: content
-  field_new_label:
-    weight: 9
-    settings:
-      display_label: true
-    third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
-  field_product_category:
-    weight: 7
     settings: {  }
     third_party_settings: {  }
-    type: options_select
+  field_new_label:
+    type: boolean_checkbox
+    weight: 9
     region: content
-  field_sale_label:
-    weight: 10
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
+  field_product_category:
+    type: options_select
+    weight: 7
     region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_reviews:
+    type: comment_default
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_sale_label:
+    type: boolean_checkbox
+    weight: 10
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_short_description:
+    type: text_textarea
     weight: 3
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_sizes:
+    type: options_buttons
     weight: 6
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_buttons
-    region: content
   langcode:
     type: language_select
     weight: 0
-    settings: {  }
-    third_party_settings: {  }
     region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   path:
     type: path
     weight: 13
+    region: content
     settings: {  }
     third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 14
     region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   stores:
     type: commerce_entity_select
     weight: 8
+    region: content
     settings:
       autocomplete_threshold: 7
       autocomplete_size: 60
       autocomplete_placeholder: ''
     third_party_settings: {  }
-    region: content
   title:
     type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   uid:
     type: entity_reference_autocomplete
     weight: 11
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
-  variations:
-    type: inline_entity_form_complex
-    weight: 2
-    settings:
-      override_labels: true
-      label_singular: variation
-      label_plural: variations
-      form_mode: default
-      allow_new: true
-      allow_existing: false
-      match_operator: CONTAINS
-    third_party_settings: {  }
-    region: content
 hidden:
-  field_rating: true
-  status: true
+  variations: true

@@ -4,6 +4,8 @@ dependencies:
   config:
     - commerce_product.commerce_product_variation_type.product
     - core.entity_view_mode.commerce_product_variation.teaser_list
+    - field.field.commerce_product_variation.product.attribute_color
+    - field.field.commerce_product_variation.product.attribute_size
     - field.field.commerce_product_variation.product.field_images
     - field.field.commerce_product_variation.product.field_old_price
     - field.field.commerce_product_variation.product.field_stock_amount
@@ -14,69 +16,82 @@ dependencies:
     - image
 third_party_settings:
   commerce_variation_cart_form:
-    combine: '1'
+    combine: true
 id: commerce_product_variation.product.teaser_list
 targetEntityType: commerce_product_variation
 bundle: product
 mode: teaser_list
 content:
   commerce_variation_cart_form:
-    weight: 10
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 10
+    region: content
   field_images:
-    weight: 4
+    type: image
     label: hidden
     settings:
-      image_style: product__600x450_
       image_link: ''
+      image_style: product__600x450_
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    type: image
+    weight: 4
     region: content
   field_old_price:
-    weight: 3
+    type: commerce_price_default
     label: hidden
     settings:
       strip_trailing_zeroes: false
       display_currency_code: false
     third_party_settings: {  }
-    type: commerce_price_default
+    weight: 3
     region: content
   field_stock_amount:
-    weight: 5
+    type: number_integer
     label: above
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 5
+    region: content
+  list_price:
+    type: commerce_price_default
+    label: above
+    settings:
+      strip_trailing_zeroes: false
+      currency_display: symbol
+    third_party_settings: {  }
+    weight: -1
     region: content
   price:
-    label: hidden
     type: commerce_price_default
-    weight: 2
+    label: hidden
     settings:
       strip_trailing_zeroes: false
       display_currency_code: false
     third_party_settings: {  }
+    weight: 2
     region: content
   sku:
-    label: hidden
     type: string
-    weight: 1
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 1
     region: content
   title:
-    label: hidden
     type: string
-    weight: 0
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
+  attribute_color: true
+  attribute_size: true
   langcode: true
   product_id: true

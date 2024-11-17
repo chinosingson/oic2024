@@ -22,35 +22,38 @@ bundle: nd_project
 mode: teaser
 content:
   body:
-    label: hidden
     type: text_summary_or_trimmed
-    weight: 0
+    label: hidden
     settings:
       trim_length: 600
     third_party_settings: {  }
+    weight: 0
     region: content
   field_client:
-    type: jango_cms_vimeo_video
-    weight: 1
+    type: string
     label: hidden
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
+    weight: 1
     region: content
   field_images:
     type: jango_cms_images_slider
-    weight: 3
     label: hidden
     settings:
       image_style: project__600x300_
+      height: '500'
       image_link: ''
     third_party_settings: {  }
+    weight: 3
     region: content
   field_url_the_site:
-    type: jango_cms_vimeo_video
-    weight: 2
+    type: string
     label: hidden
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
+    weight: 2
     region: content
 hidden:
   field_categories: true

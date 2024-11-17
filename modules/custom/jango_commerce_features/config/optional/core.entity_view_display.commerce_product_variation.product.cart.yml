@@ -12,36 +12,36 @@ dependencies:
     - commerce_variation_cart_form
 third_party_settings:
   commerce_variation_cart_form:
-    combine: 0
+    combine: false
 id: commerce_product_variation.product.cart
 targetEntityType: commerce_product_variation
 bundle: product
 mode: cart
 content:
   price:
-    label: hidden
     type: commerce_price_default
-    weight: 2
+    label: hidden
     settings:
       strip_trailing_zeroes: false
       display_currency_code: false
     third_party_settings: {  }
+    weight: 2
     region: content
   sku:
-    label: hidden
     type: string
-    weight: 0
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 0
     region: content
   title:
-    label: hidden
     type: string
-    weight: 1
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   commerce_variation_cart_form: true

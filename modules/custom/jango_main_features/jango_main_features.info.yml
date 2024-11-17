@@ -1,36 +1,40 @@
 name: 'Jango Main Features'
 description: "Node types, views, image styles and other elements for Jango theme.\r\n"
 type: module
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: '^9.4 || ^10'
 dependencies:
-  - block
-  - block_content
-  - ckeditor
-  - comment
-  - editor
-  - entity_browser
-  - entity_embed
-  - field
-  - file
-  - filter
-  - image
-  - imce
-  - inline_entity_form
-  - jango_cms
-  - language
-  - link
-  - menu_ui
-  - node
-  - options
-  - path
-  - rdf
-  - shortcode
-  - system
-  - taxonomy
-  - text
-  - user
-  - views
-  - views_flipped_table
-  - webform
-version: 8.x-1.0
+  - 'NikaDevs:jango_cms'
+  - 'drupal:block'
+  - 'drupal:block_content'
+  - 'drupal:comment'
+  - 'drupal:editor'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:filter'
+  - 'drupal:image'
+  - 'drupal:language'
+  - 'drupal:link'
+  - 'drupal:menu_ui'
+  - 'drupal:node'
+  - 'drupal:options'
+  - 'drupal:path'
+  - 'drupal:search'
+  - 'drupal:shortcut'
+  - 'drupal:system'
+  - 'drupal:taxonomy'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'embed:embed'
+  - 'entity_browser:entity_browser'
+  - 'entity_embed:entity_embed'
+  - 'file_entity:file_entity'
+  - 'flag:flag'
+  - 'imce:imce'
+  - 'inline_entity_form:inline_entity_form'
+  - 'nd_visualshortcodes:nd_visualshortcodes'
+  - 'shortcode:shortcode'
+  - 'views_flipped_table:views_flipped_table'
+  - 'webform:webform'
+version: 10.x-1.0
 project: NikaDevs

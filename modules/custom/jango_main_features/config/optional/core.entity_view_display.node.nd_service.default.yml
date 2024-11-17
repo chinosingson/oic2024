@@ -19,44 +19,46 @@ bundle: nd_service
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 1
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 1
     region: content
   field_arrow:
     type: list_default
-    weight: 4
-    region: content
     label: inline
     settings: {  }
     third_party_settings: {  }
+    weight: 4
+    region: content
   field_background_and_arrow_color:
     type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
     weight: 2
     region: content
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_service_image:
     type: image
-    weight: 0
-    region: content
     label: hidden
     settings:
-      image_style: ''
       image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_text_color:
     type: string
-    weight: 3
-    region: content
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 3
+    region: content
 hidden:
   langcode: true
   links: true

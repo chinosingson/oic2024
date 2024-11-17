@@ -15,23 +15,25 @@ bundle: happy_customers
 mode: default
 content:
   description:
-    label: hidden
     type: text_default
-    weight: 0
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
     region: content
   field_image_client_logo:
-    weight: 2
+    type: image
     label: above
     settings:
-      image_style: ''
       image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    type: image
+    weight: 2
     region: content
   field_link:
-    weight: 1
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -40,7 +42,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 1
     region: content
 hidden:
   langcode: true

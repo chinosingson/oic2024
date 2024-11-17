@@ -4,5 +4,4 @@ dependencies: {  }
 name: 'Taxonomy Categories'
 vid: taxonomy_categories
 description: ''
-hierarchy: 0
 weight: 0
