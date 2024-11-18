@@ -47,7 +47,7 @@ class FeatureBlockItemShortcode extends ShortcodeBase {
         $url = '';
         if (isset($attrs['fid']) && !empty($attrs['fid'])) {
           $uri = File::load($attrs['fid'])->getFileUri();
-          $url = file_create_url($uri);
+          $url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
         }
         $theme_array = [
           '#theme' => 'jango_shortcodes_feature_block_item_type_3',

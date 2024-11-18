@@ -16,7 +16,8 @@
  */
 #}
 {# Remove whitespace between tags for even spacing between buttons. #}
-{% spaceless %}
+{# Updated to use apply instead of spaceless - vjg #}
+{% apply spaceless %}
 
   {% if button_setting != 'none' %}
     {% set universal_button %}
@@ -42,4 +43,4 @@
     {% endif %}
   </div>
 
-{% endspaceless %}
+{% endapply %}

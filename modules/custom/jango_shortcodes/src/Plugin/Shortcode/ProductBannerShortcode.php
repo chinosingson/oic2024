@@ -25,8 +25,9 @@ class ProductBannerShortcode extends ShortcodeBase {
    */
   public function process(array $attrs, $text, $langcode = Language::LANGCODE_NOT_SPECIFIED) {
     $type = isset($attrs['type']) ? $attrs['type'] : '';
-    $file = isset($attrs['fid']) && !empty($attrs['fid']) ? File::load($attrs['fid']) : '';
-    $filename = !empty($file) ? file_create_url($file->getFileUri()) : '';
+    $uri = isset($attrs['fid']) && !empty($attrs['fid']) ? File::load($attrs['fid'])->getFileUri() : '';
+    $filename = $uri ? \Drupal::service('file_url_generator')->generateAbsoluteString($uri) : '';
+    
     $button_link = isset($attrs['button_link']) ? restore_html_string($attrs['button_link']) : '';
     $title = isset($attrs['title']) ? restore_html_string($attrs['title']) : '';
 

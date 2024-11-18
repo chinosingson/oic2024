@@ -48,9 +48,10 @@ class ClientsShortcode extends ShortcodeBase {
           $file = File::load($image_id);
           if ($file) {
             $image_uri = $file->getFileUri();
+            $url = \Drupal::service('file_url_generator')->generateAbsoluteString($image_uri);
             $items[] = [
               'href' => Url::fromUri($uri)->toString(),
-              'src' => file_create_url($image_uri),
+              'src' => $url,
             ];
           }
         }
@@ -74,10 +75,11 @@ class ClientsShortcode extends ShortcodeBase {
           $file = File::load($image_id);
           if ($file) {
             $image_uri = $file->getFileUri();
+            $url = \Drupal::service('file_url_generator')->generateAbsoluteString($image_uri);
             $items[] = [
               'count' => $count,
               'href' => Url::fromUri($uri)->toString(),
-              'src' => file_create_url($image_uri),
+              'src' => $url,
             ];
             $count++;
           }

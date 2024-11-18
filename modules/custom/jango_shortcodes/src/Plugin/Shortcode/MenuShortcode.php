@@ -11,10 +11,13 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
 use Drupal\Core\Menu\MenuTreeParameters;
+use Drupal\Core\Render\RendererInterface;
+use Drupal\system\Entity\Menu;
 
 // Cart
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\commerce_cart\CartProviderInterface;
+use Drupal\commerce_cart\CartManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -56,8 +59,9 @@ class MenuShortcode extends ShortcodeBase implements ContainerFactoryPluginInter
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, $cart_provider = NULL, EntityTypeManagerInterface $entity_type_manager = NULL) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, RendererInterface $renderer = NULL, EntityTypeManagerInterface $entity_type_manager = NULL, $cart_provider) {
+    
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $renderer, $entity_type_manager);
 
     $this->cartProvider = $cart_provider;
     $this->entityTypeManager = $entity_type_manager;
@@ -71,40 +75,73 @@ class MenuShortcode extends ShortcodeBase implements ContainerFactoryPluginInter
       $configuration,
       $plugin_id,
       $plugin_definition,
-      \Drupal::moduleHandler()->moduleExists('commerce') ? $container->get('commerce_cart.cart_provider') : [],
-      $container->get('entity_type.manager')
+      $container->get('renderer'),
+      $container->get('entity_type.manager'),
+      \Drupal::moduleHandler()->moduleExists('commerce') ? $container->get('commerce_cart.cart_provider') : []
     );
   }
 
   /**
-   * @return int
-   */
-  protected function getCartCount() {
-    $cachable_metadata = new CacheableMetadata();
-    $cachable_metadata->addCacheContexts(['user', 'session']);
+ * Retrieves the cart item count.
+ *
+ * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+ *   The Drupal service container.
+ *
+ * @return int
+ *   The cart item count.
+ */
+function get_cart_item_count_old(ContainerInterface $container) {
 
-    /** @var \Drupal\commerce_order\Entity\OrderInterface[] $carts */
-    $carts = $this->cartProvider->getCarts();
-    $carts = array_filter($carts, function ($cart) {
-      /** @var \Drupal\commerce_order\Entity\OrderInterface $cart */
-      // There is a chance the cart may have converted from a draft order, but
-      // is still in session. Such as just completing check out. So we verify
-      // that the cart is still a cart.
-      return $cart->hasItems() && $cart->cart->value;
-    });
+  // Load the current user's shopping cart order.
+  $current_user = \Drupal::currentUser();
+  $order_storage = $container->get('entity_type.manager')->getStorage('commerce_order');
+  $orders = $order_storage->loadByProperties([
+    'uid' => $current_user->id(),
+    'state' => 'draft', // Assumes the cart order state is 'draft'.
+  ]);
 
-    $count = 0;
-    if (!empty($carts)) {
-      foreach ($carts as $cart_id => $cart) {
-        foreach ($cart->getItems() as $order_item) {
-          $count += (int) $order_item->getQuantity();
-        }
-        $cachable_metadata->addCacheableDependency($cart);
-      }
+  // Get the first cart order if it exists.
+  if (!empty($orders)) {
+    /** @var \Drupal\commerce_order\Entity\OrderInterface $cart_order */
+    $cart_order = reset($orders);
+    // Calculate the total quantity of items in the cart.
+    $item_count = 0;
+    foreach ($cart_order->getItems() as $order_item) {
+      $item_count += $order_item->getQuantity();
     }
-
-    return $count;
+    return $item_count;
   }
+
+  // If there's no cart order, return 0.
+  return 0;
+}
+
+function get_cart_item_count() {
+  $cacheable_metadata = new CacheableMetadata();
+  $cacheable_metadata->addCacheContexts(['user', 'session']);
+
+  /** @var \Drupal\commerce_order\Entity\OrderInterface[] $carts */
+  $carts = $this->cartProvider->getCarts();
+  $carts = array_filter($carts, function ($cart) {
+    /** @var \Drupal\commerce_order\Entity\OrderInterface $cart */
+    // There is a chance the cart may have converted from a draft order, but
+    // is still in session. Such as just completing check out. So we verify
+    // that the cart is still a cart.
+    return $cart->hasItems() && $cart->cart->value;
+  });
+
+  $count = 0;
+  if (!empty($carts)) {
+    foreach ($carts as $cart_id => $cart) {
+      foreach ($cart->getItems() as $order_item) {
+        $count += (int) $order_item->getQuantity();
+      }
+      $cacheable_metadata->addCacheableDependency($cart);
+    }
+  }
+
+  return $count;
+}
 
   /**
    * @return string
@@ -159,7 +196,6 @@ class MenuShortcode extends ShortcodeBase implements ContainerFactoryPluginInter
     $menu = $menu_tree->build($tree);
     $items = isset($menu['#items']) ? $menu['#items'] : [];
     $menu = _jango_shortcodes_simple_menu($items);
-
     return \Drupal::service('renderer')->render($menu);
   }
 
@@ -167,9 +203,16 @@ class MenuShortcode extends ShortcodeBase implements ContainerFactoryPluginInter
    * {@inheritdoc}
    */
   public function process(array $attrs, $text, $langcode = Language::LANGCODE_NOT_SPECIFIED) {
+    
     $menu_name = isset($attrs['menu']) ? $attrs['menu'] : 'main';
-    $file = isset($attrs['fid']) && !empty($attrs['fid']) ? File::load($attrs['fid']) : '';
-    $logo = isset($file->uri) ? file_create_url($file->getFileUri()) : theme_get_setting('logo.url');
+    
+    if (isset($attrs['fid']) && !empty($attrs['fid'])) {
+      $file_uri = File::load($attrs['fid']) ->getFileUri();
+      $logo = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+    }
+    else {
+      $logo = theme_get_setting('logo.url');
+    }
     $type = isset($attrs['type']) ? $attrs['type'] : '';
 
     if ($type == 'menu-drop-down') {
@@ -190,7 +233,7 @@ class MenuShortcode extends ShortcodeBase implements ContainerFactoryPluginInter
       if ((isset($attrs['search']) && $attrs['search']) && \Drupal::moduleHandler()->moduleExists('search')) {
         $form = \Drupal::formBuilder()->getForm(SearchBlockForm::class);
         $form['keys']['#attributes']['placeholder'] = t('Type to search...');
-        $search_block = render($form);
+        $search_block = $this->render($form);
       }
 
       // Menu.
@@ -199,7 +242,7 @@ class MenuShortcode extends ShortcodeBase implements ContainerFactoryPluginInter
           '#theme' => 'tb_megamenu',
           '#menu_name' => $menu_name,
         ];
-        $menu = render($tb_megamenu_theme);
+        $menu = $this->render($tb_megamenu_theme);
       }
       else {
         $menu = render_menu($menu_name);
@@ -215,9 +258,17 @@ class MenuShortcode extends ShortcodeBase implements ContainerFactoryPluginInter
       $count_text = '';
       $cart_total_price = '';
       $cart_block = FALSE;
+      
       if (\Drupal::moduleHandler()->moduleExists('commerce') && isset($attrs['cart']) && $attrs['cart']) {
-        // Get Cart block. Limited in opportunities.
-        $cart_count = $this->getCartCount();
+
+        /* @var CurrentStoreInterface $cs */
+        $cs = \Drupal::service('commerce_store.current_store');
+        /* @var CartProviderInterface $cpi */
+        $cpi = \Drupal::service('commerce_cart.cart_provider');
+        $cart = $cpi->getCart('default', $cs->getStore());
+        //$cart_count = $cart ? count($cart->getItems()) : 0;
+        $cart_count = $this->get_cart_item_count();
+
         $cart_total_price = $this->getCartTotalPrice();
         $count_text = $cart_count == 1 ? $cart_count . ' item' : $cart_count . ' items';
         $block = Block::load('cart');
@@ -260,7 +311,7 @@ class MenuShortcode extends ShortcodeBase implements ContainerFactoryPluginInter
         $block = \Drupal::entityTypeManager()->getStorage('block')->load('languageswitcher');
         if(method_exists($block, 'getPlugin')) {
           $block = $block->getPlugin()->build();
-          $language = render($block);
+          $language = \Drupal::service('renderer')->render($block);
           $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
         }
       }
@@ -314,7 +365,11 @@ class MenuShortcode extends ShortcodeBase implements ContainerFactoryPluginInter
    */
   public function settings(array $attrs, $text, $langcode = Language::LANGCODE_NOT_SPECIFIED) {
     $form = [];
-    $menus = menu_ui_get_menus();
+    $menuEntities = Menu::loadMultiple();
+    $menus = [];
+    foreach ($menuEntities as $id => $menuEntity) {
+        $menus[$menuEntity->id()] = $menuEntity->label();
+    }
     $form['menu'] = [
       '#type' => 'select',
       '#title' => t('Menu'),

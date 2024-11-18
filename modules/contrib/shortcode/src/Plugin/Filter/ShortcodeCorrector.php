@@ -14,7 +14,7 @@ use Drupal\filter\Plugin\FilterBase;
  *   module = "shortcode",
  *   title = @Translation("Shortcodes - html corrector"),
  *   description = @Translation("Trying to correct the html around shortcodes. Enable only if you using wysiwyg editor."),
- *   type = Drupal\filter\Plugin\FilterInterface::TYPE_MARKUP_LANGUAGE,
+ *   type = Drupal\filter\Plugin\FilterInterface::TYPE_TRANSFORM_IRREVERSIBLE,
  * )
  */
 class ShortcodeCorrector extends FilterBase {

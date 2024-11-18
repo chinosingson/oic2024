@@ -2,10 +2,9 @@
 
 namespace Drupal\nd_visualshortcodes\Form;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\filter\Entity\FilterFormat;
-use Drupal\filter\FilterFormatInterface;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\file\Entity\File;
 
@@ -28,25 +27,25 @@ class AjaxDackendShortcodeForm extends FormBase {
 
     $shortcode = $form_state->getValue('shortcode_name') ? $form_state->getValue('shortcode_name') : $extra['shortcode'];
 
-    if (isset($shortcodes[$shortcode]['class'])) {
-      $class = $shortcodes[$shortcode]['class'];
-      $obj = new $class(array(), 0, 0);
-      if (method_exists($obj, 'settings')) {
-        $short_form = $obj->settings($extra['attrs'], isset($extra['text']) ? $extra['text'] : '');
-        $form['shortcode_name'] = array(
-          '#type' => 'hidden',
-          '#value' => $shortcode
-        );
-        $form['shortcode'] = array(
-          '#type' => 'details',
-          '#title' => t('Shortcode'),
-          '#collapsible' => TRUE,
-          '#collapsed' => FALSE,
-          '#group' => 'additional_settings',
-          '#weight' => -5,
-        );
-        $form['shortcode']['settings'] = $short_form;
-      }
+    /** @var \Drupal\shortcode\ShortcodePluginManager $plugin_manager */
+    $plugin_manager = \Drupal::service('plugin.manager.shortcode');
+    $obj = $plugin_manager->createInstance($shortcode);
+
+    if (method_exists($obj, 'settings')) {
+      $short_form = $obj->settings($extra['attrs'], isset($extra['text']) ? $extra['text'] : '');
+      $form['shortcode_name'] = array(
+        '#type' => 'hidden',
+        '#value' => $shortcode
+      );
+      $form['shortcode'] = array(
+        '#type' => 'details',
+        '#title' => t('Shortcode'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        '#group' => 'additional_settings',
+        '#weight' => -5,
+      );
+      $form['shortcode']['settings'] = $short_form;
     }
 
     $attrs = $extra['attrs'];
@@ -261,14 +260,7 @@ class AjaxDackendShortcodeForm extends FormBase {
         )
       )
     );
-    $form['border_radius']['container']['style_border_radius_left'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Border Radius Left'),
-      '#default_value' => isset($attrs['style_border_radius_left']) ? $attrs['style_border_radius_left'] : '',
-      '#prefix' => '<div class = "col-xs-3 centered">',
-      '#suffix' => '</div>',
-      '#attributes' => array('class' => array('form-control'))
-    );
+
     $form['border_radius']['container']['style_border_radius_left'] = array(
       '#type' => 'textfield',
       '#title' => t('Border Radius Left'),
@@ -379,6 +371,7 @@ class AjaxDackendShortcodeForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // parent::submitForm($form, $form_state);
+//     parent::submitForm($form, $form_state);
   }
+
 }

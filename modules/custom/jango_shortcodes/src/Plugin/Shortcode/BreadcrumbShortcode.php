@@ -38,10 +38,16 @@ class BreadcrumbShortcode extends ShortcodeBase {
       $attrs['class'] .= ' c-bordered c-bordered-both';
     }
 
-    $breadcrumb = \Drupal::service('breadcrumb')->build(\Drupal::routeMatch())->toRenderable();
-    $breadcrumbs = \Drupal::service('renderer')->render($breadcrumb);
-    $breadcrumbs = str_replace('<ol', '<ol class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular"', $breadcrumbs);
-
+    global $breadcrumb_page_title;
+    $title = !is_null($breadcrumb_page_title) ? $breadcrumb_page_title : drupal_get_title();
+    if (isset($attrs['show_breadcrumbs']) && $attrs['show_breadcrumbs']) {
+      $breadcrumb = \Drupal::service('breadcrumb')->build(\Drupal::routeMatch())->toRenderable();
+      $breadcrumbs = \Drupal::service('renderer')->render($breadcrumb);
+      $breadcrumbs = str_replace('<ol', '<ol class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular"', $breadcrumbs);
+    }
+    else {
+      $breadcrumbs = '';
+    }
     global $breadcrumb_page_title;
     $title = !is_null($breadcrumb_page_title) ? $breadcrumb_page_title : drupal_get_title();
     $theme_array = [
@@ -131,6 +137,15 @@ class BreadcrumbShortcode extends ShortcodeBase {
       '#attributes' => ['class' => ['form-control']],
       '#prefix' => '<div class = "col-sm-3">',
       '#suffix' => '</div></div>',
+    ];
+
+    $form['show_breadcrumbs'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Show Breadcrumbs'),
+      '#default_value' => isset($attrs['show_breadcrumbs']) ? $attrs['show_breadcrumbs'] : true,
+      '#attributes' => ['class' => ['form-control']],
+      '#prefix' => '<div class = "col-sm-12">',
+      '#suffix' => '</div>',
     ];
 
     return $form;

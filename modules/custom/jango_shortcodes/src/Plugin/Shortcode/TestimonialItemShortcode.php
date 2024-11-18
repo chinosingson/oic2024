@@ -38,10 +38,10 @@ class TestimonialItemShortcode extends ShortcodeBase {
         $attrs['position'] = isset($attrs['position']) && $attrs['position'] ? $attrs['position'] : '';
         $url = '';
         if (isset($attrs['fid']) && $file = File::load($attrs['fid'])) {
+          // Get the file URI.
           $uri = $file->getFileUri();
-          $url = file_create_url($uri);
+          $url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
         }
-
         $theme_array = [
           '#theme' => 'jango_shortcodes_testimonial_item_slider',
           '#url' => $url,
@@ -90,7 +90,7 @@ class TestimonialItemShortcode extends ShortcodeBase {
         $url = '';
         if (isset($attrs['fid']) && $file = File::load($attrs['fid'])) {
           $uri = $file->getFileUri();
-          $url = file_create_url($uri);
+          $url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);          
         }
         $theme_array = [
           '#theme' => 'jango_shortcodes_testimonial_item_arrow',

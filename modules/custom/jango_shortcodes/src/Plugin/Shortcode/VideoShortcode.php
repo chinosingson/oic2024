@@ -49,28 +49,18 @@ class VideoShortcode extends ShortcodeBase {
     </div>';
     }
     else {
+
       $file = isset($attrs['fid']) && !empty($attrs['fid']) ? File::load($attrs['fid']) : '';
       $uri = !empty($file) && $file->getFileUri() ? $file->getFileUri() : '';
-      if (!$uri) {
-        return '';
-      }
-      if (strpos($file->getFileUri(), 'mp4') !== FALSE) {
-        $type = 'video/mp4';
-      }
-      else {
-        $type = 'video/webm';
-      }
-      $file = isset($attrs['vfid']) && !empty($attrs['vfid']) ? File::load($attrs['vfid']) : '';
-      if(!$file) {
-        return '';
-      }
-      $video_uri = $file->getFileUri() ? $file->getFileUri() : '';
-      if (!$video_uri) {
-        return '';
-      }
+      $image_url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
+      $type = strpos($image_url, 'mp4') !== FALSE ? 'video/mp4' : 'video/webm';
+
+      $video_uri = isset($attrs['vfid']) && !empty($attrs['vfid']) ? File::load($attrs['vfid'])->getFileUri() : '';
+      $video_url = \Drupal::service('file_url_generator')->generateAbsoluteString($video_uri);
+
       $text = '
-    <video ' . $width . ' ' . $height . 'poster="' . file_create_url($uri) . '" controls="controls">
-      <source type="' . $type . '" src="' . file_create_url($video_uri) . '"></source>
+    <video ' . $width . ' ' . $height . 'poster="' . $image_url . '" controls="controls">
+      <source type="' . $type . '" src="' . $video_url . '"></source>
       Your browser doesn\'t support HTML5 video.
     </video>';
     }

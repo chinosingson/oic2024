@@ -6,25 +6,12 @@
  *
  */
 
-
-use Drupal\Core\Database\Database;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Link;
-use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Url;
-use Drupal\Core\Template\Attribute;
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
-use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\UrlHelper;
 use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Template\Attribute;
 use Drupal\nd_visualshortcodes\Render\Element\TextFormat;
 
-
-// define('nd_visualshortcodes_EXTRA_CSS', drupal_get_path('module', 'rhythm_shortcodes') . '/css/rhythm_shortcodes.css');
-
 function nd_visualshortcodes_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-
   return $form;
 }
 
@@ -79,7 +66,9 @@ function nd_visualshortcodes_preview($el, $attrs, $text) {
     ))
   ) {
     if (method_exists($shortcodes[$el]['class'], "process")) {
-      $obj = new $shortcodes[$el]['class'](array(), 0, 0);
+      /** @var \Drupal\shortcode\ShortcodePluginManager $plugin_manager */
+      $plugin_manager = \Drupal::service('plugin.manager.shortcode');
+      $obj = $plugin_manager->createInstance($el);
       $preview = $obj->process($attrs, $text);
       //$preview = call_user_func($shortcodes[$el]['class']."::process" , $attrs, $text);
     }
@@ -144,6 +133,7 @@ function _nd_visualshortcodes_backend_description($attrs, $text) {
   $description = '';
   $shortcodeService = \Drupal::service('shortcode');
   $shortcodes = $shortcodeService->loadShortcodePlugins();
+
   if (isset($attrs['shortcode']) && isset($shortcodes[$attrs['shortcode']]['description_field'])) {
     $field = $shortcodes[$attrs['shortcode']]['description_field'];
     if (isset($attrs[$field]) && $attrs[$field]) {
@@ -151,11 +141,13 @@ function _nd_visualshortcodes_backend_description($attrs, $text) {
     }
   }
   elseif (isset($shortcodes[$attrs['shortcode']]) && method_exists($shortcodes[$attrs['shortcode']]['class'], "description")) {
-    $obj = new $shortcodes[$attrs['shortcode']]['class'](array(), 0, 0);
+    /** @var \Drupal\shortcode\ShortcodePluginManager $plugin_manager */
+    $plugin_manager = \Drupal::service('plugin.manager.shortcode');
+    $obj = $plugin_manager->createInstance($attrs['shortcode']);
     $text = $obj->description($attrs, $text);
-    //$text = call_user_func($shortcodes[$attrs['shortcode']]['class']."::description" , $attrs, $text);
     $description = $text ? ' <small>(' . $text . ')</small>' : '';
   }
+
   return $description;
 }
 
@@ -164,7 +156,7 @@ function _nd_visualshortcodes_backend_description($attrs, $text) {
  */
 function nd_visualshortcodes_element_info_alter(&$types) {
   $config = \Drupal::config('nd_visualshortcodes.settings');
-  if ($config->get("formats")) {
+  if ($config->get('formats')) {
     $types['text_format']['#pre_render'][] = [TextFormat::class, 'preRender'];
   }
 }
@@ -194,7 +186,7 @@ function nd_visualshortcodes_element_info_alter(&$types) {
   if (!isset($element['#format'])) {
     return $element;
   }
-// print_r($element['format']['format']);
+
   if ($init === FALSE) {
     $config = \Drupal::config('nd_visualshortcodes.settings');
     $element['#attached']['drupalSettings']['nd_visualshortcodes'] = array(
@@ -207,23 +199,51 @@ function nd_visualshortcodes_element_info_alter(&$types) {
     $init = TRUE;
   }
 
-  if (isset($element['value'])) {
-    if (!isset($element['format'])) {
-      return $element;
-    }
-    if (isset($element['summary']) && $element['summary']['#type'] == 'textarea') {
-      $element['value'] = nd_visualshortcodes_load_field($element['value'], $element['format']['format'], TRUE, $element['summary']['#id']);
-      $element['summary'] = nd_visualshortcodes_load_field($element['summary'], $element['format']['format'], FALSE);
-    }
-    else {
-      $element['value'] = nd_visualshortcodes_load_field($element['value'], $element['format']['format']);
-    }
-  }
-  else {
-    $element = nd_visualshortcodes_load_field($element, $element['#format']);
-  }
+//  if (isset($element['value'])) {
+//    if (!isset($element['format'])) {
+//      return $element;
+//    }
+//    if (isset($element['summary']) && $element['summary']['#type'] == 'textarea') {
+//      $element['value'] = nd_visualshortcodes_load_field($element['value'], $element['format']['format'], TRUE, $element['summary']['#id']);
+//      $element['summary'] = nd_visualshortcodes_load_field($element['summary'], $element['format']['format'], FALSE);
+//    }
+//    else {
+//      $element['value'] = nd_visualshortcodes_load_field($element['value'], $element['format']['format']);
+//    }
+//  }
+//  else {
+//    $element = nd_visualshortcodes_load_field($element, $element['#format']);
+//  }
   return $element;
 }*/
+
+/**
+ * Implements hook_field_widget_single_element_form_alter().
+ */
+function nd_visualshortcodes_field_widget_single_element_form_alter(array &$element, FormStateInterface $form_state, array $context): void {
+  if (!\Drupal::currentUser()->hasPermission('use nd nd_visualshortcodes')) {
+    return;
+  }
+
+  $route = \Drupal::routeMatch()->getRouteObject();
+  $is_admin = \Drupal::service('router.admin_context')->isAdminRoute($route);
+  if (!$is_admin) {
+    return;
+  }
+
+  if (!isset($element['#format'])) {
+    return;
+  }
+
+  $config = \Drupal::config('nd_visualshortcodes.settings');
+  $element['#attached']['drupalSettings']['nd_visualshortcodes'] = array(
+    "autostart" => $config->get("autostart"),
+    "formats" => $config->get("formats"),
+    "confirm_delete" => $config->get("confirm_delete"),
+    "html_default_format" => $config->get("html_default_format"),
+  );
+  $element['#attached']['library'][] = 'nd_visualshortcodes/shortcodes';
+}
 
 /**
  * Return array with region ID and his HTML class name
@@ -252,7 +272,6 @@ function nd_visualshortcodes_custom_theme() {
   }
   return $admin_theme;
 }
-
 
 function _nd_visualshortcodes_list_animations() {
   $animations = array(
@@ -326,7 +345,6 @@ function _nd_visualshortcodes_list_animations() {
   return array('' => t(' - None - ')) + array_combine($animations, $animations);
 }
 
-
 function nd_visualshortcodes_backend_nochilds($attrs, $text, $el = '') {
   $text = trim($text);
   $attrs = !is_array($attrs) ? array() : $attrs;
@@ -350,7 +368,6 @@ function nd_visualshortcodes_backend_nochilds($attrs, $text, $el = '') {
   $tt = new Attribute($attrs);
   return '<li ' . $tt . '><div class = "border-style border-none clearfix"><h3><i class="fa fa-arrows"></i><span>' . $shortcodes[$el]['title'] . _nd_visualshortcodes_backend_description($attrs, $text) . '</span><span class = "nd-visualshortcodes-settings-links"><i class="fa fa-copy nd-visualshortcodes-copy"></i><i class="fa fa-edit shortcode-settings"></i></span></h3><div class = "hidden">' . $text . '</div>' . $preview . '</div></li>';
 }
-
 
 function nd_visualshortcodes_shortcode_html_settings($attrs, $text) {
   $attrs = is_array($attrs) ? $attrs : array();

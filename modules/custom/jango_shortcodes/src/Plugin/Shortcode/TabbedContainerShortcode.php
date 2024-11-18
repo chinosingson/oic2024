@@ -41,7 +41,7 @@ class TabbedContainerShortcode extends ShortcodeBase {
           '#theme' => 'jango_shortcodes_tabbed_container_type_1',
           '#text' => $text,
           '#tabs_content' => $tabs_content,
-          '#url' => $uri ? file_create_url($uri) : '',
+          '#url' => $uri ? \Drupal::service('file_url_generator')->generateAbsoluteString($uri) : '',
           '#attrs' => $attributes
         ];
         $output = $this->render($theme_array);

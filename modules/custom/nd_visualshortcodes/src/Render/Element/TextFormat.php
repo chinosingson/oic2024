@@ -15,17 +15,16 @@ use Drupal\Core\Security\TrustedCallbackInterface;
  * )
  */
 
-
 class TextFormat implements TrustedCallbackInterface {
 
   /**
    * @inheritDoc
    */
   public static function trustedCallbacks() {
-      return ['preRender'];
+    return ['preRender'];
   }
 
- /**
+  /**
    * Pre-render callback to replace the default menu with a role specific menu.
    *
    * @param array $element
@@ -50,7 +49,7 @@ class TextFormat implements TrustedCallbackInterface {
     if (!isset($element['#format'])) {
       return $element;
     }
-    // print_r($element['format']['format']);
+
     if ($init === FALSE) {
       $config = \Drupal::config('nd_visualshortcodes.settings');
       $element['#attached']['drupalSettings']['nd_visualshortcodes'] = array(
@@ -92,7 +91,7 @@ class TextFormat implements TrustedCallbackInterface {
       $format_arr = $format;
       $format = isset($format_arr['#value']) ? $format_arr['#value'] : $format_arr['#default_value'];
     }
-    // print_r($format);
+
     if (!isset($field['#id'])) {
       return $field;
     }
@@ -119,7 +118,7 @@ class TextFormat implements TrustedCallbackInterface {
 
 
     if (!isset($processed_ids[$field['#id']])) {
-      $processed_ids[$field['#id']] = array();
+      $processed_ids[$field['#id']] = [];
     }
 
     $textarea_id = $field['#id'];
@@ -127,12 +126,15 @@ class TextFormat implements TrustedCallbackInterface {
     $class[] = 'ckeditor-mod';
     $_ckeditor_ids[] = $textarea_id;
 
-    $prefix = '<div class = "nd_visualshortcodes_links_wrap"><a class="nd_visualshortcodes_links btn btn-info btn-sm" href="#" data-disable-text = "' . str_replace("'", '"', t('Disable Visual Shortcodes')) . '" data-enable-text = "' . str_replace("'", '"', t('Enable Visual Shortcodes')) . '" data-id="' . $textarea_id . '" data-format = "' . $format . '">';
+    $prefix = '<div class="nd_visualshortcodes_links_wrap">';
+    $prefix .= '<a class="nd_visualshortcodes_links btn btn-info btn-sm" href="#" data-disable-text = "' . str_replace("'", '"', t('Disable Visual Shortcodes')) . '" data-enable-text = "' . str_replace("'", '"', t('Enable Visual Shortcodes')) . '" data-id="' . $textarea_id . '" data-format = "' . $format . '">';
     $prefix .= t('Loading...');
-    $prefix .= '</a><i class="fa fa-spinner fa-spin"></i></div>';
+    $prefix .= '</a>';
+    $prefix .= '<i class="fa fa-spinner fa-spin"></i>';
+    $prefix .= '</div>';
 
     $field['#prefix'] = (isset($field['#prefix']) ? $field['#prefix'] : '') . $prefix;
-    // dsm($field);
+
     return $field;
   }
 }

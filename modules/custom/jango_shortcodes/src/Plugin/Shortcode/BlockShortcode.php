@@ -23,18 +23,21 @@ class BlockShortcode extends ShortcodeBase {
    * {@inheritdoc}
    */
   public function process(array $attrs, $text, $langcode = Language::LANGCODE_NOT_SPECIFIED) {
-    $block = '';
-    if (strpos($attrs['admin_url'], 'admin/structure/block') !== FALSE) {
+
+    $output = '';
+    if (isset($attrs['admin_url']) && strpos($attrs['admin_url'], 'admin/structure/block') !== FALSE) {
       $block_name = substr($attrs['admin_url'], strpos($attrs['admin_url'], '/manage/') + 8);
-      $block = \Drupal::entityTypeManager()->getStorage('block')->load($block_name);
-      if (!$block) {
-        return;
+      $block = Block::load($block_name);
+
+      if (!is_null($block)) {
+        $view_block = \Drupal::entityTypeManager()
+          ->getViewBuilder('block')
+          ->view($block);
+        $output = \Drupal::service('renderer')->render($view_block);
       }
-      $block = $block->getPlugin()->build();
-      $block = render($block);
     }
     $attrs_output = _jango_shortcodes_shortcode_attributes($attrs);
-    return $attrs_output ? '<div ' . $attrs_output  . '>' . $block . '</div>' : $block;
+    return $attrs_output ? '<div ' . $attrs_output  . '>' . $output . '</div>' : $output;
   }
 
   /**
@@ -45,6 +48,7 @@ class BlockShortcode extends ShortcodeBase {
     $current_theme = \Drupal::config('system.theme')->get('default');
 
     $blocks = \Drupal::entityQuery('block')
+      ->accessCheck(FALSE)
       ->condition('theme', $current_theme)
       ->execute();
 

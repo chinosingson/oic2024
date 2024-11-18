@@ -4,6 +4,8 @@ use Drupal\file\Entity\File;
 use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Drupal\Core\Render\RendererInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Implements hook_theme().
@@ -774,7 +776,8 @@ function _jango_shortcodes_shortcode_attributes($attrs) {
       }
       elseif (strpos($value_style, 'image') !== FALSE) {
         $file = File::load($value);
-        $filename = $file ? file_create_url($file->getFileUri()) : '';
+        $uri = $file->getFileUri();
+        $filename = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
         $value = $value_style . ': url("' . $filename . '");';
       }
       else {
@@ -861,14 +864,18 @@ function _jango_shortcodes_simple_menu($menu_items, $child = 0) {
         $links[] = '</ul></li>';
       }
       else {
-        $link = Link::fromTextAndUrl($item['title'], $link_url)->toRenderable();
-        $links[] = '<li>' . render($link) . '</li>';
+        $generated_link = \Drupal::service('link_generator')
+          ->generate($item['title'], $link_url)
+          ->getGeneratedLink();
+        $links[] = '<li>' . $generated_link . '</li>';
       }
     }
+    //return '';
   }
   else {
     $links = ['<li class="expanded c-dropdown"><a href="#" class="c-toggler">' . t('No menu') . '</a></li>'];
   }
+
   return $child ? implode($links) : [
     '#theme' => 'jango_shortcodes_menu_drop_down',
     '#links' => $links,

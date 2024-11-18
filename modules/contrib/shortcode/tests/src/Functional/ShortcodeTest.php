@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\shortcode\Functional;
 
+use Drupal\filter\Entity\FilterFormat;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Core\Url;
 
@@ -18,18 +19,25 @@ class ShortcodeTest extends BrowserTestBase {
   protected $defaultTheme = 'stark';
 
   /**
-   * Modules to install.
+   * Use standard install profile that include page content type.
+   *
+   * @var string
+   */
+  protected $profile = 'standard';
+
+  /**
+   * Modules to enable.
    *
    * @var array
    */
-  public static $modules = ['filter', 'shortcode'];
+  protected static $modules = ['filter', 'shortcode', 'shortcode_basic_tags'];
 
   /**
-   * The shortcode service.
+   * The test user.
    *
-   * @var \Drupal\shortcode\ShortcodeService
+   * @var \Drupal\user\UserInterface
    */
-  private $shortcodeService;
+  protected $webUser;
 
   /**
    * Url of the site.
@@ -39,12 +47,73 @@ class ShortcodeTest extends BrowserTestBase {
   private $siteUrl;
 
   /**
+   * A session page.
+   *
+   * @var \Behat\Mink\Element\DocumentElement
+   */
+  private $session_page;
+
+  /**
    * Perform any initial set up tasks that run before every test method.
    */
-  public function setUp() {
+  protected function setUp(): void {
     parent::setUp();
-    $this->shortcodeService = $this->container->get('shortcode');
     $this->siteUrl = Url::fromRoute('<front>', [], ["absolute" => TRUE])->toString();
+
+    // Create a text format and enable the shortcode filter.
+    $format = FilterFormat::create([
+      'format' => 'custom_format',
+      'name' => 'Custom format',
+      'filters' => [
+        'filter_html' => [
+          'status' => 1,
+          'settings' => [
+            'allowed_html' => '<a href> <div class> <p> <br>',
+          ],
+        ],
+        'shortcode' => [
+          'status' => 1,
+          'settings' => [
+            'link' => 1,
+            'random' => 1,
+            'img' => 1,
+            'clear' => 1,
+            'dropcap' => 1,
+            'item' => 1,
+            'highlight' => 1,
+            'button' => 1,
+            'quote' => 1,
+            'block' => 1,
+          ],
+        ],
+      ],
+    ]);
+    $format->save();
+
+    // Create a user with required permissions.
+    $this->webUser = $this->drupalCreateUser([
+      'access content',
+      'create page content',
+      $format->getPermissionName(),
+    ]);
+    $this->drupalLogin($this->webUser);
+
+    $this->session_page = $this->getSession()->getPage();
+  }
+
+  /**
+   * Return test page with the given content.
+   */
+  private function createTestNode(string $contents): \Drupal\node\NodeInterface {
+    $settings = [];
+    $settings['type'] = 'page';
+    $settings['title'] = 'Test Button Link';
+    $settings['body'] = [
+      'value' => $contents,
+      'format' => 'custom_format',
+    ];
+
+    return $this->drupalCreateNode($settings);
   }
 
   /**
@@ -55,7 +124,7 @@ class ShortcodeTest extends BrowserTestBase {
     $sets = [
       [
         'input' => '[button]Label[/button]',
-        'output' => '<a href="' . $this->siteUrl . '" class="button" title="Label"><span>Label</span></a>',
+        'output' => '<a href="' . $this->siteUrl . '" class=" button" title="Label"><span>Label</span></a>',
         'message' => 'Button shortcode output matches.',
       ],
       [
@@ -71,8 +140,10 @@ class ShortcodeTest extends BrowserTestBase {
     ];
 
     foreach ($sets as $set) {
-      $output = $this->shortcodeService->process($set['input']);
-      $this->assertEqual($output, $set['output'], $set['message']);
+      $node = $this->createTestNode($set['input']);
+      $this->drupalGet('node/' . $node->id());
+      $element = $this->session_page->find('css', 'a.button');
+      $this->assertEquals($set['output'], $element->getOuterHtml(), $set['message']);
     }
   }
 
@@ -84,22 +155,22 @@ class ShortcodeTest extends BrowserTestBase {
     $sets = [
       [
         'input' => '[clear]<div>Other elements</div>[/clear]',
-        'output' => '<div class="clearfix"><div>Other elements</div></div>',
+        'output' => '<div class=" clearfix"><div>Other elements</div></div>',
         'message' => 'Clear shortcode output matches.',
       ],
       [
         'input' => '[clear type="s"]<div>Other elements</div>[/clear]',
-        'output' => '<span class="clearfix"><div>Other elements</div></span>',
+        'output' => '<span class=" clearfix"><div>Other elements</div></span>',
         'message' => 'Clear shortcode with custom type "s" output matches.',
       ],
       [
         'input' => '[clear type="span"]<div>Other elements</div>[/clear]',
-        'output' => '<span class="clearfix"><div>Other elements</div></span>',
+        'output' => '<span class=" clearfix"><div>Other elements</div></span>',
         'message' => 'Clear shortcode with custom type "span" output matches.',
       ],
       [
         'input' => '[clear type="d"]<div>Other elements</div>[/clear]',
-        'output' => '<div class="clearfix"><div>Other elements</div></div>',
+        'output' => '<div class=" clearfix"><div>Other elements</div></div>',
         'message' => 'Clear shortcode with custom type "d" output matches.',
       ],
       [
@@ -110,8 +181,10 @@ class ShortcodeTest extends BrowserTestBase {
     ];
 
     foreach ($sets as $set) {
-      $output = $this->shortcodeService->process($set['input']);
-      $this->assertEqual($output, $set['output'], $set['message']);
+      $node = $this->createTestNode($set['input']);
+      $this->drupalGet('node/' . $node->id());
+      $element = $this->session_page->find('css', '.clearfix');
+      $this->assertEquals($set['output'], $element->getOuterHtml(), $set['message']);
     }
   }
 
@@ -123,7 +196,7 @@ class ShortcodeTest extends BrowserTestBase {
     $sets = [
       [
         'input' => '[dropcap]text[/dropcap]',
-        'output' => '<span class="dropcap">text</span>',
+        'output' => '<span class=" dropcap">text</span>',
         'message' => 'Dropcap shortcode output matches.',
       ],
       [
@@ -134,8 +207,10 @@ class ShortcodeTest extends BrowserTestBase {
     ];
 
     foreach ($sets as $set) {
-      $output = $this->shortcodeService->process($set['input']);
-      $this->assertEqual($output, $set['output'], $set['message']);
+      $node = $this->createTestNode($set['input']);
+      $this->drupalGet('node/' . $node->id());
+      $element = $this->session_page->find('css', '.dropcap');
+      $this->assertEquals($set['output'], $element->getOuterHtml(), $set['message']);
     }
   }
 
@@ -144,15 +219,25 @@ class ShortcodeTest extends BrowserTestBase {
    */
   public function testHighlightShortcode() {
 
-    $test_input = '[highlight]highlighted text[/highlight]';
-    $expected_output = '<span class="highlight">highlighted text</span>';
-    $output = $this->shortcodeService->process($test_input);
-    $this->assertEqual($output, $expected_output, 'Highlight shortcode output matches.');
+    $sets = [
+      [
+        'input' => '[highlight]highlighted text[/highlight]',
+        'output' => '<span class=" highlight">highlighted text</span>',
+        'message' => 'Highlight shortcode output matches.',
+      ],
+      [
+        'input' => '[highlight class="custom-class"]highlighted text[/highlight]',
+        'output' => '<span class="custom-class highlight">highlighted text</span>',
+        'message' => 'Highlight shortcode with custom class output matches.',
+      ],
+    ];
 
-    $test_input = '[highlight class="custom-class"]highlighted text[/highlight]';
-    $expected_output = '<span class="custom-class highlight">highlighted text</span>';
-    $output = $this->shortcodeService->process($test_input);
-    $this->assertEqual($output, $expected_output, 'Highlight shortcode with custom class output matches.');
+    foreach ($sets as $set) {
+      $node = $this->createTestNode($set['input']);
+      $this->drupalGet('node/' . $node->id());
+      $element = $this->session_page->find('css', '.highlight');
+      $this->assertEquals($set['output'], $element->getOuterHtml(), $set['message']);
+    }
   }
 
   /**
@@ -163,19 +248,21 @@ class ShortcodeTest extends BrowserTestBase {
     $sets = [
       [
         'input' => '[img src="/abc.jpg" alt="Test image" /]',
-        'output' => '<img src="/abc.jpg" class="img" alt="Test image"/>',
+        'output' => '<img src="/abc.jpg" class=" img" alt="Test image">',
         'message' => 'Image shortcode output matches.',
       ],
       [
         'input' => '[img src="/abc.jpg" class="custom-class" alt="Test image" /]',
-        'output' => '<img src="/abc.jpg" class="custom-class img" alt="Test image"/>',
+        'output' => '<img src="/abc.jpg" class="custom-class img" alt="Test image">',
         'message' => 'Image shortcode with custom class output matches.',
       ],
     ];
 
     foreach ($sets as $set) {
-      $output = $this->shortcodeService->process($set['input']);
-      $this->assertEqual($output, $set['output'], $set['message']);
+      $node = $this->createTestNode($set['input']);
+      $this->drupalGet('node/' . $node->id());
+      $element = $this->session_page->find('css', '.img');
+      $this->assertEquals($set['output'], $element->getOuterHtml(), $set['message']);
     }
   }
 
@@ -186,30 +273,32 @@ class ShortcodeTest extends BrowserTestBase {
 
     $sets = [
       [
-        'input' => '[item]Item body here[/item]',
-        'output' => '<div>Item body here</div>',
+        'input' => '[item class="item-class-here"]Item body here[/item]',
+        'output' => '<div class="item-class-here">Item body here</div>',
         'message' => 'Item shortcode output matches.',
       ],
       [
-        'input' => '[item type="s"]Item body here[/item]',
-        'output' => '<span>Item body here</span>',
+        'input' => '[item type="s" class="item-class-here"]Item body here[/item]',
+        'output' => '<span class="item-class-here">Item body here</span>',
         'message' => 'Item shortcode with custom type "s" output matches.',
       ],
       [
-        'input' => '[item type="d" class="item-class-here" style="background-color:#F00"]Item body here[/item]',
+        'input' => '[item class="item-class-here" type="d" style="background-color:#F00"]Item body here[/item]',
         'output' => '<div class="item-class-here" style="background-color:#F00">Item body here</div>',
         'message' => 'Item shortcode with custom type "d" and class and styles output matches.',
       ],
       [
-        'input' => '[item type="s" class="item-class-here" style="background-color:#F00"]Item body here[/item]',
+        'input' => '[item class="item-class-here" type="s" style="background-color:#F00"]Item body here[/item]',
         'output' => '<span class="item-class-here" style="background-color:#F00">Item body here</span>',
         'message' => 'Item shortcode with custom type "s" and class and styles output matches.',
       ],
     ];
 
     foreach ($sets as $set) {
-      $output = $this->shortcodeService->process($set['input']);
-      $this->assertEqual($output, $set['output'], $set['message']);
+      $node = $this->createTestNode($set['input']);
+      $this->drupalGet('node/' . $node->id());
+      $element = $this->session_page->find('css', '.item-class-here');
+      $this->assertEquals($set['output'], $element->getOuterHtml(), $set['message']);
     }
   }
 
@@ -220,8 +309,8 @@ class ShortcodeTest extends BrowserTestBase {
 
     $sets = [
       [
-        'input' => '[link path="node/1"]Label[/link]',
-        'output' => '<a href="' . $this->siteUrl . 'node/1" title="Label">Label</a>',
+        'input' => '[link path="node/1" class="link-class"]Label[/link]',
+        'output' => '<a href="' . $this->siteUrl . 'node/1" class="link-class" title="Label">Label</a>',
         'message' => 'Link shortcode output matches.',
       ],
       [
@@ -242,8 +331,10 @@ class ShortcodeTest extends BrowserTestBase {
     ];
 
     foreach ($sets as $set) {
-      $output = $this->shortcodeService->process($set['input']);
-      $this->assertEqual($output, $set['output'], $set['message']);
+      $node = $this->createTestNode($set['input']);
+      $this->drupalGet('node/' . $node->id());
+      $element = $this->session_page->find('css', '.link-class');
+      $this->assertEquals($set['output'], $element->getOuterHtml(), $set['message']);
     }
   }
 
@@ -255,7 +346,7 @@ class ShortcodeTest extends BrowserTestBase {
     $sets = [
       [
         'input' => '[quote]This is by no one[/quote]',
-        'output' => '<span class="quote"> This is by no one </span>',
+        'output' => '<span class=" quote"> This is by no one </span>',
         'message' => 'Quote shortcode output matches.',
       ],
       [
@@ -271,9 +362,11 @@ class ShortcodeTest extends BrowserTestBase {
     ];
 
     foreach ($sets as $set) {
-      $output = $this->shortcodeService->process($set['input']);
-      $output = preg_replace('/\s+/', ' ', $output);
-      $this->assertEqual($output, $set['output'], $set['message']);
+      $node = $this->createTestNode($set['input']);
+      $this->drupalGet('node/' . $node->id());
+      $element = $this->session_page->find('css', '.quote');
+      $element = preg_replace('/\s+/', ' ', $element->getOuterHtml());
+      $this->assertEquals($set['output'], $element, $set['message']);
     }
   }
 
@@ -284,25 +377,27 @@ class ShortcodeTest extends BrowserTestBase {
 
     $sets = [
       [
-        'input' => '[random/]',
+        'input' => '<div class="random-shortcode">[random/]</div>',
         'output' => 8,
         'message' => 'Random shortcode self-closed, output length is correct.',
       ],
       [
-        'input' => '[random][/random]',
+        'input' => '<div class="random-shortcode">[random][/random]</div>',
         'output' => 8,
         'message' => 'Random shortcode output, length is correct.',
       ],
       [
-        'input' => '[random length=10][/random]',
+        'input' => '<div class="random-shortcode">[random length=10][/random]</div>',
         'output' => 10,
         'message' => 'Random shortcode with custom length, output length is correct.',
       ],
     ];
 
     foreach ($sets as $set) {
-      $output = $this->shortcodeService->process($set['input']);
-      $this->assertEqual(strlen($output), $set['output'], $set['message']);
+      $node = $this->createTestNode($set['input']);
+      $this->drupalGet('node/' . $node->id());
+      $element = $this->session_page->find('css', '.random-shortcode');
+      $this->assertEquals($set['output'], strlen($element->getText()), $set['message']);
     }
   }
 

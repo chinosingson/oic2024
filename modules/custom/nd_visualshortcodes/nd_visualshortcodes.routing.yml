@@ -57,12 +57,13 @@ nd_visualshortcodes_ajax_shortcodes_delete:
   requirements:
     _permission: 'use nd nd_visualshortcodes'
 
-nd_visualshortcodes_ajax_icons_autocomplete:
-  path: 'admin/ajax/nd_visualshortcodes/icons_autocomplete'
-  defaults:
-    _controller: '\Drupal\nd_visualshortcodes\Controller\nd_visualshortcodesController::nd_visualshortcodes_ajax_icons_autocomplete'
-  requirements:
-    _permission: 'use nd nd_visualshortcodes'
+# @todo: This route is unused.
+#nd_visualshortcodes_ajax_icons_autocomplete:
+#  path: 'admin/ajax/nd_visualshortcodes/icons_autocomplete'
+#  defaults:
+#    _controller: '\Drupal\nd_visualshortcodes\Controller\nd_visualshortcodesController::nd_visualshortcodes_ajax_icons_autocomplete'
+#  requirements:
+#    _permission: 'use nd nd_visualshortcodes'
 
 nd_visualshortcodes_ajax_node_autocomplete:
   path: 'admin/ajax/nd_visualshortcodes/node_autocomplete'

@@ -14,11 +14,14 @@ shortcodes:
     js/jquery.colorpicker.js: {}
     js/switchery.js: {}
     js/easypaginate.js: {}
+
   dependencies:
-    - core/jquery.ui
-    - core/jquery.ui.dialog
+    - core/jquery
+    - core/drupal
     - core/drupal.ajax
     - core/drupalSettings
-    - core/jquery.once
-    - core/jquery.form
+    - core/once
+    - core/internal.jquery.form
     - core/drupal.vertical-tabs
+    - jquery_ui/jquery_ui
+    - jquery_ui/jquery_ui_dialog

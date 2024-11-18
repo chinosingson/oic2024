@@ -21,7 +21,7 @@ class FeatureBlockContainerShortcode extends ShortcodeBase {
   /**
    * {@inheritdoc}
    */
-  public function process(array $attrs = array(), $text, $langcode = Language::LANGCODE_NOT_SPECIFIED) {
+  public function process(array $attrs, $text, $langcode = Language::LANGCODE_NOT_SPECIFIED) {
 
     $attrs['class'] = (isset($attrs['class']) ? $attrs['class'] : '');
 

@@ -2,12 +2,13 @@
 
 namespace Drupal\shortcode\Plugin;
 
-use Drupal\media\Entity\Media;
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\UrlHelper;
+use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\Core\Url;
-use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\UrlHelper;
+use Drupal\media\Entity\Media;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -49,13 +50,29 @@ abstract class ShortcodeBase extends PluginBase implements ShortcodeInterface {
   public $settings = [];
 
   /**
-   * {@inheritdoc}
+   * The renderer service.
+   *
+   * @var \Drupal\Core\Render\RendererInterface
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition) {
+  protected $renderer;
+
+  /**
+   * Constructor.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin ID for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Render\RendererInterface $renderer
+   *   The renderer service.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, RendererInterface $renderer) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
+    $this->renderer = $renderer;
     $this->provider = $this->pluginDefinition['provider'];
-
     $this->setConfiguration($configuration);
   }
 
@@ -66,7 +83,8 @@ abstract class ShortcodeBase extends PluginBase implements ShortcodeInterface {
     return new static(
       $configuration,
       $plugin_id,
-      $plugin_definition
+      $plugin_definition,
+      $container->get('renderer')
     );
   }
 
@@ -283,7 +301,7 @@ abstract class ShortcodeBase extends PluginBase implements ShortcodeInterface {
     $field_media = $this->getMediaField($media_entity);
     if ($field_media) {
       $file = $field_media->entity;
-      return file_create_url($file->getFileUri());
+      return \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
     }
     return FALSE;
   }
@@ -329,7 +347,11 @@ abstract class ShortcodeBase extends PluginBase implements ShortcodeInterface {
       'alt' => '',
       'path' => '',
     ];
-    if (intval($mid)) {
+    $media_entity = NULL;
+    $field_media = NULL;
+    $file = NULL;
+
+    if ((int) $mid) {
       $media_entity = Media::load($mid);
     }
     if ($media_entity) {
@@ -385,9 +407,7 @@ abstract class ShortcodeBase extends PluginBase implements ShortcodeInterface {
    *   Element stripped of any bubbleable metadata.
    */
   public function render(array &$elements) {
-    /** @var \Drupal\Core\Render\Renderer $renderer */
-    $renderer = \Drupal::service('renderer');
-    return $renderer->renderPlain($elements);
+    return $this->renderer->renderPlain($elements);
   }
 
 }

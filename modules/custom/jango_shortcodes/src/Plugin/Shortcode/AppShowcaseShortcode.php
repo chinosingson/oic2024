@@ -26,10 +26,11 @@ class AppShowcaseShortcode extends ShortcodeBase {
     $url = '';
     if (isset($attrs['fid'])) {
       $uri = File::load($attrs['fid'])->getFileUri();
-      $url = file_create_url($uri);
+      $url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
     }
-    $theme_name = \Drupal::theme()->getActiveTheme()->getName();
-    $path_to_theme = base_path() . drupal_get_path('theme', $theme_name);
+
+    $theme = \Drupal::service('theme.manager')->getActiveTheme()->getName();
+    $path_to_theme = base_path() . \Drupal::service('extension.list.theme')->getPath($theme);
 
     if ($attrs['bg_type'] == 1) {
       $theme_array = [

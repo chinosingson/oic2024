@@ -26,7 +26,9 @@ class ParallaxBlockShortcode extends ShortcodeBase {
     $output = $text;
 
     $file = isset($attrs['fid']) && !empty($attrs['fid']) ? File::load($attrs['fid']) : '';
-    $url = !empty($file) ? file_create_url($file->getFileUri()) : '';
+    // Get the file URI.
+    $uri = $file->getFileUri();
+    $url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
 
     $content = (isset($attrs['content_align']) && $attrs['content_align'] == 'c-content-left') ? 'left' : 'right';
     $image = (isset($attrs['content_align']) && $attrs['content_align'] == 'c-content-left') ? 'right' : 'left';

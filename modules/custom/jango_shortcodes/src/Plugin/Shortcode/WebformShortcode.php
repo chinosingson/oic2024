@@ -23,13 +23,16 @@ class WebformShortcode extends ShortcodeBase {
    * {@inheritdoc}
    */
   public function process(array $attrs, $text, $langcode = Language::LANGCODE_NOT_SPECIFIED) {
+    if (!isset($attrs['webform']) || empty($attrs['webform'])) {
+      return '';
+    }
     $output[$attrs['webform']] = [
       '#type' => 'webform',
       '#webform' => $attrs['webform'],
     ];
 
     $attrs_output = _jango_shortcodes_shortcode_attributes($attrs);
-    return $attrs_output ? '<div ' . $attrs_output . '>' . render($output) . '</div>' : render($output);
+    return $attrs_output ? '<div ' . $attrs_output . '>' . $this->renderer->render($output) . '</div>' : $this->renderer->render($output);
   }
 
   /**

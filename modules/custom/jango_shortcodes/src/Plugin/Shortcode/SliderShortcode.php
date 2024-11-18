@@ -24,9 +24,12 @@ class SliderShortcode extends ShortcodeBase {
     switch ($attrs['type_slider']) {
       case 'image':
         $file = isset($attrs['fid']) ? File::load($attrs['fid']) : '';
+        // Get the file URI.
+        $file_uri = $file->getFileUri();
+        $file_path = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
         $theme_array = [
           '#theme' => 'jango_shortcodes_slider_item_image',
-          '#url' => $file ? file_create_url($file->getFileUri()) : '',
+          '#url' => $file_path,
           '#height' => isset($attrs['height']) ? $attrs['height'] : '380px',
           '#heart' => 16
         ];

@@ -27,12 +27,10 @@ class NodeShortcode extends ShortcodeBase {
       $node_name = substr($attrs['admin_url'], strpos($attrs['admin_url'], 'node/') + 5);
       $parts = explode('/', $node_name);
       $node = Node::load($parts[0]);
-      if (!empty($node)) {
-        $view_builder = \Drupal::service('entity_type.manager')->getViewBuilder('node');
-        $renderarray = $view_builder->view($node, 'full');
-        $html = \Drupal::service('renderer')->renderPlain($renderarray);
+      if (isset($node->nid) && $node->nid) {
+        $output = \Drupal::entityTypeManager()->getViewBuilder('node')->view($node, 'full');
         $attrs = _jango_shortcodes_shortcode_attributes($attrs);
-        $text = $attrs ? '<div ' . $attrs  . '>' . $html . '</div>' : $html;
+        $text = $attrs ? '<div ' . $attrs  . '>' . $output . '</div>' : $output;
       }
     }
     return $text;

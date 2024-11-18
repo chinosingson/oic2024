@@ -308,11 +308,12 @@ body.dragging, body.dragging * {
   display: none;
 }
 
-/* Add Shortcode Form */
+/* Add Shortcode Form */  
 .nd_visualshortcodes_enabled_list a{
   margin: 0 7px 10px 8px;
-  width: 176px;
-  height: 60px;
+  width: 165px;
+  height: 50px;
+  text-decoration: none;
 }
 .nd_visualshortcodes_enabled_list_search{
   margin-bottom: 15px;
@@ -322,11 +323,11 @@ body.dragging, body.dragging * {
   font-size: 16px;
   position: absolute;
   left: 0px;
-  top: 22px;
+  top: 17px;
 }
 .nd_visualshortcodes_enabled_list a span{
   width: 179px;
-  height: 60px;
+  height: 48px;
   display: table-cell;
   vertical-align: middle;
   position: relative;
@@ -433,6 +434,13 @@ html.js input.throbbing.form-control {
 }
 
 /* ColorPicker */
+.ui-colorpicker, .ui-dialog.ui-colorpicker{
+  z-index: 9999 !important;
+}
+.ui-colorpicker-rgb-container,
+.ui-colorpicker-alpha-container{
+  display: none;
+}
 .ui-colorpicker{
   background-color: #eeeeee;
   border: 1px solid #dddddd;
@@ -563,4 +571,14 @@ h4.label{
 .border-style a{
   max-width: 100%;
   height: auto;
+}
+
+#nd-visualshortcodes-shortcode-settings details.vertical-tabs__pane > .form-item,
+#nd-visualshortcodes-shortcode-settings details.vertical-tabs__pane > .image-gallery-upload {
+  padding: 0 15px;
+}
+
+.filter-guidelines__item--shortcodes,
+.filter-guidelines__item--shortcode-dynamic{
+  display: none !important;
 }

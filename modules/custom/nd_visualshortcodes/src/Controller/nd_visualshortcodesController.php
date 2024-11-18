@@ -1,47 +1,67 @@
 <?php
-/**
- * @file
- * Contains \Drupal\example\Controller\ExampleController.
- */
 
 namespace Drupal\nd_visualshortcodes\Controller;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Form\FormInterface;
+use Drupal\Core\Database\Connection;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Form\FormState;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Drupal\filter\Entity\FilterFormat;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Template\TwigEnvironment;
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax;
-use Drupal\nd_visualshortcodes\Ajax\ShortcodeSettingCommand;
-use Drupal\Core\Render\RendererInterface;
-use Drupal\shortcode\Shortcode;
+use Drupal\shortcode\ShortcodeService;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Component\Utility\Html;
-use Drupal\file\FileUsage;
 
 /**
- * Provides route responses for the Example module.
+ * nd_visualshortcodes Controller.
  */
 class nd_visualshortcodesController extends ControllerBase implements ContainerInjectionInterface {
+
   /**
+   * The Twig environment.
+   *
    * @var \Drupal\Core\Template\TwigEnvironment
    */
   protected $twig;
 
-  public function __construct(TwigEnvironment $twig) {
+  /**
+   * The database connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $conn;
+
+  /**
+   * The Shortcode service.
+   *
+   * @var \Drupal\shortcode\ShortcodeService
+   */
+  protected $shortcode;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(TwigEnvironment $twig, Connection $database, ShortcodeService $shortcode) {
     $this->twig = $twig;
+    $this->conn = $database;
+    $this->shortcode = $shortcode;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('twig')
+      $container->get('twig'),
+      $container->get('database'),
+      $container->get('shortcode')
     );
   }
 
@@ -56,13 +76,33 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
       //$validators = array('file_validate_extensions' => array('png gif jpg jpeg'));
       $validators = [];
 
+      $entity_type = 'nd_visualshortcodes';
+      $entity_id = 'file_ajax';
+      if(isset($_SERVER['HTTP_REFERER'])) {
+        preg_match_all("/\/(\d+)/", $_SERVER['HTTP_REFERER'], $matches);
+        $entity_id = $matches[1][0];
+        if (strpos($_SERVER['HTTP_REFERER'], 'node') !== FALSE) {
+          $entity_type = 'node';
+        }
+        elseif (strpos($_SERVER['HTTP_REFERER'], 'block') !== FALSE) {
+          $entity_type = 'block';
+        }
+      }
+
+      return new JsonResponse(array(
+        'id' => 0,
+        'error' => $entity_type . ':' . $entity_id
+      ));
+
+
       if ($file = file_save_upload('style_background_image', $validators, 'public://', \Drupal\Core\File\FileSystemInterface::EXISTS_RENAME)) {
-        \Drupal::service('file.usage')->add($file, 'file', 'nd_visualshortcodes', 'file_ajax', 1);
+        \Drupal::service('file.usage')->add($file, 'file',  $entity_type, $entity_id, 1);
         $filename = $file->getFileUri();
         $medium = ImageStyle::load('thumbnail')->buildUrl($filename);
         return new JsonResponse(array(
           'id' => $file->id(),
-          'url' => $filename
+          'url' => $filename,
+          'entity:id' => $entity_type . ':' . $entity_id
         ));
       }
       else {
@@ -74,17 +114,21 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
     }
   }
 
+  /**
+   *
+   */
   public function nd_visualshortcodes_ajax_backend_layout() {
     $config = $this->config('nd_visualshortcodes.settings');
     if (!isset($_POST['code'])) {
       return new Response("");
     }
-    $shortcodes = $this->nd_visualshortcodes_process_shortcodes($_POST['code'], $_POST['format']);
-    $live_preview = $config->get("live_preview");
 
-    $template = $this->twig->loadTemplate(
-      drupal_get_path('module', 'nd_visualshortcodes') . '/templates/nd_visualshortcodes.html.twig'
-    );
+    $shortcodes = $this->nd_visualshortcodes_process_shortcodes($_POST['code'], $_POST['format']);
+    $live_preview = $config->get('live_preview');
+
+    $path = \Drupal::service('extension.list.module')->getPath('nd_visualshortcodes');
+    $path .= '/templates/nd_visualshortcodes.html.twig';
+    $template = $this->twig->load($path);
 
     $markup = $template->render([
       'output' => $shortcodes,
@@ -92,11 +136,10 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
     ]);
 
     return new Response($markup);
-
   }
 
   public function nd_visualshortcodes_media_upload_image() {
-    $query = \Drupal::entityQuery('file')->sort('fid', 'DESC')->range(0, 500);
+    $query = \Drupal::entityQuery('file')->accessCheck(FALSE)->sort('fid', 'DESC')->range(0, 500);
     $entitys = $query->execute();
     $output = '<div class="nd-visualshortcodes-gallery-links">';
     $output .= '<form id="ajax-dackend-image-form"><div class="js-form-item form-item js-form-type-file form-type-file js-form-item-files-style-background-image form-item-files-style-background-image">
@@ -107,7 +150,7 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
     foreach ($entitys as $file) {
       $img = File::load($file);
       if ($img) {
-        if (! \Drupal\Core\File\FileSystemInterface::getDestinationFilename($img->getFileUri(), FILE_EXISTS_ERROR)){ //if (!file_destination()) {
+        if (!\Drupal::service('file_system')->getDestinationFilename($img->getFileUri(), FileSystemInterface::EXISTS_ERROR)) {
           if ($img->getMimeType() == "image/jpeg" || $img->getMimeType() == "image/png" || $img->getMimeType() == "image/gif") {
             $filename = $img->getFileUri();
             $medium = ImageStyle::load('thumbnail')->buildUrl($filename);
@@ -119,71 +162,72 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
       }
     }
     $output .= '</ul></div><script>jQuery(function($){
-	
-	$("ul#list-item-images").easyPaginate({
-		step:16,nextprev:false
-	});
-	
-});</script>';
-    return new Response($output);
+    	$("ul#list-item-images").easyPaginate({
+		    step:16,nextprev:false
+	    });
+    });</script>';
 
+    return new Response($output);
   }
 
-  function nd_visualshortcodes_ajax_shortcodes_list_add() {
-    $type = $_POST['shortcode'];
-    // if($type=="nd_save"){
-    // return new Response($element);
+  function nd_visualshortcodes_ajax_shortcodes_list_add(Request $request) {
+//    $type = $_POST['shortcode'];
+    $type = \Drupal::request()->request->get('shortcode');
+
+    // if ($type=="nd_save"){
+    //   return new Response($element);
     // }
-    $shortcodeService = \Drupal::service('shortcode');
-    $shortcodes = $shortcodeService->loadShortcodePlugins();
+    $shortcodes = $this->shortcode->loadShortcodePlugins();
     // $shortcode = $shortcodes[$_POST['shortcode']];
     $function = '_nd_visualshortcodes_backend_element';
     if (isset($shortcodes[$type]['process_backend_callback'])) {
-      $element = call_user_func($shortcodes[$type]['process_backend_callback'], array(), '', $type);
+      $element = call_user_func($shortcodes[$type]['process_backend_callback'], [], '', $type);
       return new Response($element);
     }
+
     $class = $shortcodes[$type]['class'];
     $method = 'process';
     if (method_exists($class, $method)) {
       // $function="$class::$method" ;
     }
-    // echo $function;
-    $element = call_user_func($function, array(), '', $type);
+
+    $element = call_user_func($function, [], '', $type);
     return new Response($element);
 
   }
 
+  /**
+   * Shortcodes list and filter (shown in pop-up).
+   */
   function nd_visualshortcodes_ajax_shortcodes_list() {
-    $shortcodeService = \Drupal::service('shortcode');
-    $shortcodes = $shortcodeService->loadShortcodePlugins();
-    // print_r($shortcodes);
-    $query = \Drupal::database()->select('nd_visualshortcodes_saved', 'n');
+    $shortcodes = $this->shortcode->loadShortcodePlugins();
+
+    $query = $this->conn->select('nd_visualshortcodes_saved', 'n');
     $query->fields('n', ['id', 'name']);
     $saved = $query->execute()->fetchAllKeyed(0, 1);
 
-    $template = $this->twig->loadTemplate(
-      drupal_get_path('module', 'nd_visualshortcodes') . '/templates/filtre-popup-list.html.twig'
-    );
+    $path = \Drupal::service('extension.list.module')->getPath('nd_visualshortcodes');
+    $path .= '/templates/filter-popup-list.html.twig';
+    $template = $this->twig->load($path);
 
-    $child = !empty($_POST['shortcode']) && isset($shortcodes[$_POST['shortcode']]['child_shortcode']) ? $shortcodes[$_POST['shortcode']]['child_shortcode'] : '';
+    $child = !empty($_POST['shortcode']) && isset($shortcodes[$_POST['shortcode']]['child_shortcode'])
+      ? $shortcodes[$_POST['shortcode']]['child_shortcode']
+      : '';
 
-    $value = $child ? ' value="' . $shortcodes[$child]['title'] . '" data-exactly = "1"' : '';
-    // $value ="";
     $markup = $template->render([
       'shortcodes' => $shortcodes,
-      "value" => $child,
-      'saved' => $saved
+      'value' => $child,
+      'saved' => $saved,
     ]);
 
     return new Response($markup);
   }
 
-  /*
+  /**
    * AJAX "admin_ajax/nd_visualshortcodes/ajax_backend_shortcode"
    * Return Form Ajax
-  */
+   */
   function nd_visualshortcodes_ajax_backend_shortcode() {
-
     $form = \Drupal::formBuilder()
       ->getForm('Drupal\nd_visualshortcodes\Form\AjaxDackendShortcodeForm', $_POST);
 
@@ -198,6 +242,9 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
 
   }
 
+  /**
+   *
+   */
   function nd_visualshortcodes_process_shortcodes($text, $format) {
     $text = trim($text);
     // Wrap any code in begining of the text, search to first shortcode
@@ -230,8 +277,8 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
         }
       }
     }
-    return $text;
 
+    return $text;
   }
 
   /**
@@ -240,8 +287,8 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
   function _nd_visualshortcodes_backend_process($text, $filter) {
     $shortcodeService = \Drupal::service('shortcode');
     $shortcodes = $shortcodeService->loadShortcodePlugins();
-    $shortcodes_enabled = array();
-// print_r($filter);
+    $shortcodes_enabled = [];
+
     foreach ($filter->settings as $name => $value) {
       // print_r($shortcodes[$name]["status"]);
       if ($value && !empty($shortcodes[$name]['status'])) {
@@ -250,7 +297,7 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
         );
       }
     }
-// print_r($shortcodes_enabled);
+
     if (empty($shortcodes_enabled)) {
       return $text;
     }
@@ -268,7 +315,7 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
       if (!$c) {
         continue;
       }
-      // print_r($c);
+
       $escaped = FALSE;
 
       if ((substr($c, 0, 2) == '[[') && (substr($c, -2, 2) == ']]')) {
@@ -321,7 +368,7 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
             NULL,
             '',
           );
-          // print_r($m);
+
           array_unshift($heap_index, '_string_');
           // $str = _nd_visualshortcodes_backend_element($m[4], $original_text, $el = '') ;
           // echo $ts."-".$tag;
@@ -332,10 +379,6 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
           else {
             array_unshift($heap, _nd_visualshortcodes_backend_element($ts, $original_text, $tag));
           }
-
-
-          // print_r($m);
-          // echo "-------------";
         }
         elseif ($c[0] == '/') {
 
@@ -411,11 +454,13 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
     return (implode('', array_reverse($heap)));
   }
 
+  function nd_visualshortcodes_ajax_backend_shortcode_preview(Request $request) {
+    $data = \Drupal::request()->request->all();
+    $el = $data['shortcode'] ?? '';
+    $attrs = $data['attrs'] ?? [];
 
-  function nd_visualshortcodes_ajax_backend_shortcode_preview() {
-    $el = $_POST['shortcode'];
-    $attrs = $_POST['attrs'];
     $text = '';
+
     foreach ($attrs as $name => $value) {
       if (!$value) {
         unset($attrs[$name]);
@@ -432,34 +477,36 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
     return new Response($preview);
   }
 
+  /**
+   * Save shortcode.
+   */
   function nd_visualshortcodes_ajax_shortcodes_save(Request $request) {
-    // db_insert('nd_visualshortcodes')->fields(array('name' => $_POST['name'], 'code' => $_POST['code']))->execute();
-    $conn = \Drupal::database();
-    $conn->insert('nd_visualshortcodes_saved')->fields(
-      array(
-        'name' => $request->request->get('name'),
-        'code' => $request->request->get('code')
-      )
-
-    // array(	'name' =>"olla" ,
-    // 'code' => "[Col]"  )
-    )->execute();
-
+    // Todo: test.
+    // array('name' => 'olla', 'code' => '[Col]').
+    $this->conn->insert('nd_visualshortcodes_saved')->fields([
+      'name' => $request->request->get('name'),
+      'code' => $request->request->get('code'),
+    ])->execute();
 
     return new Response("save");
   }
 
+  /**
+   * Delete shortcode.
+   */
   function nd_visualshortcodes_ajax_shortcodes_delete_saved(Request $request) {
-    $conn = \Drupal::database();
-    $conn->delete('nd_visualshortcodes_saved')
+    $this->conn->delete('nd_visualshortcodes_saved')
       ->condition('id', $request->request->get('id'))
       ->execute();
-    return new Response("delete");
+    return new Response('delete');
   }
-
 
   function nd_visualshortcodes_ajax_icons_autocomplete() {
     $icons = array();
+    // @todo: Where these two variables should be defined?
+    $type = '';
+    $str = '';
+
     if ($type == 'font_awesome' || $type == 'all') {
       $font_awesome = nd_visualshortcodes_fontawesome_icons();
       $icons = array_merge($icons, $font_awesome);
@@ -577,14 +624,14 @@ class nd_visualshortcodesController extends ControllerBase implements ContainerI
   }
 
   function nd_visualshortcodes_ajax_node_autocomplete() {
-    $query = \Drupal::database()->select('node', 'n');
-//    $str = '';
-    $return = $query
-      ->fields('n', array('nid', 'title'))
+    $query = $this->conn->select('node', 'n');
+    // $str = '';
+    $return = $query->fields('n', ['nid', 'title'])
       ->condition('n.title', '%' . $query->escapeLike($str) . '%', 'LIKE')
       ->range(0, 15)
       ->execute();
-    $matches = array();
+
+    $matches = [];
     foreach ($return as $row) {
       $matches['node/' . $row->nid . '/edit'] = Html::escape($row->title);
     }
