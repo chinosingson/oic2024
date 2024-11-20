@@ -1,0 +1,7 @@
+views.style.flipped_table:
+  type: views.style.table
+  label: 'Flipped Table'
+  mapping:
+    flipped_table_header_first_field:
+      type: boolean
+      label: 'Show the first field as the table header'

@@ -10,7 +10,7 @@ dependencies:
   - jquery_ui_sortable
   - jquery_ui_droppable
   - jquery_ui_draggable
-# Information added by Drupal.org packaging script on 2023-12-02
-version: '1.5.0'
+# Information added by Drupal.org packaging script on 2023-12-14
+version: '1.5.4'
 project: 'md_slider'
-datestamp: 1701491593
+datestamp: 1702538789

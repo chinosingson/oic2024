@@ -127,8 +127,10 @@ class MDSliderController extends ControllerBase {
 
         else {
           $file = File::load($fid);
-          if ($file) {
-            $response = file_create_url($file->getFileUri()); //$file->url();
+          if ($file) {            
+			$response = \Drupal::hasService('file_url_generator') ? 
+			\Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()) : 
+			file_create_url($file->getFileUri());
           }
         }
         break;
@@ -201,7 +203,9 @@ class MDSliderController extends ControllerBase {
           $file_usage->add($file, 'imce', 'file', $fid);
         }
         $result['fid'] = $file->id();
-        $result['url'] = file_create_url($file->getFileUri());
+		$result['url'] = \Drupal::hasService('file_url_generator') ? 
+			\Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()) : 
+			file_create_url($file->getFileUri());
       }
     }
     echo json_encode($result);

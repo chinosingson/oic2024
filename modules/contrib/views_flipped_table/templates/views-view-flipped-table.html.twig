@@ -23,15 +23,8 @@
     {% else %}
       {{ title }}
     {% endif %}
-    {% if (summary is not empty) or (description is not empty) %}
-      <details>
-        {% if summary is not empty %}
-          <summary>{{ summary }}</summary>
-        {% endif %}
-        {% if description is not empty %}
-          {{ description }}
-        {% endif %}
-      </details>
+    {% if (summary_element is not empty) %}
+      {{ summary_element }}
     {% endif %}
     </caption>
   {% endif %}
@@ -43,7 +36,7 @@
               {%
                 set column_classes = [
                   'views-field',
-                  'views-field-' ~ flipped_header_field_name,
+                  'views-field-' ~ fields[flipped_header_field_name],
                 ]
               %}
             {% endif %}
@@ -66,14 +59,14 @@
             {%- if column.wrapper_element -%}
               <{{ column.wrapper_element }}>
                 {%- if column.url -%}
-                  <a href="{{ column.url }}" title="{{ column.title }}">{{ column.content }}{{ column.sort_indicator }}</a>
+                  <a href="{{ column.url }}" title="{{ column.title }}" rel="nofollow">{{ column.content }}{{ column.sort_indicator }}</a>
                 {%- else -%}
                   {{ column.content }}{{ column.sort_indicator }}
                 {%- endif -%}
               </{{ column.wrapper_element }}>
             {%- else -%}
               {%- if column.url -%}
-                <a href="{{ column.url }}" title="{{ column.title }}">{{ column.content }}{{ column.sort_indicator }}</a>
+                <a href="{{ column.url }}" title="{{ column.title }}" rel="nofollow">{{ column.content }}{{ column.sort_indicator }}</a>
               {%- else -%}
                 {{- column.content }}{{ column.sort_indicator }}
               {%- endif -%}
@@ -92,30 +85,30 @@
             {%
               set column_classes = [
                 'views-field',
-                'views-field-' ~ field_name,
+                'views-field-' ~ fields[field_name],
               ]
             %}
           {% endif %}
           <th{{ header_column.attributes.addClass(column_classes).setAttribute('scope', 'row') }}>
             {%- if header_column.wrapper_element -%}
               <{{ header_column.wrapper_element }}>
-              {%- if header_column.url -%}
-                <a href="{{ header_column.url }}" title="{{ header_column.title }}">{{ header_column.content }}{{ header_column.sort_indicator }}</a>
-              {%- else -%}
-                {{ header_column.content }}{{ header_column.sort_indicator }}
-              {%- endif -%}
+                {%- if header_column.url -%}
+                  <a href="{{ header_column.url }}" title="{{ header_column.title }}" rel="nofollow">{{ header_column.content }}{{ header_column.sort_indicator }}</a>
+                {%- else -%}
+                  {{ header_column.content }}{{ header_column.sort_indicator }}
+                {%- endif -%}
               </{{ header_column.wrapper_element }}>
             {%- else -%}
               {%- if header_column.url -%}
-                <a href="{{ header_column.url }}" title="{{ header_column.title }}">{{ header_column.content }}{{ header_column.sort_indicator }}</a>
+                <a href="{{ header_column.url }}" title="{{ header_column.title }}" rel="nofollow">{{ header_column.content }}{{ header_column.sort_indicator }}</a>
               {%- else -%}
                 {{- header_column.content }}{{ header_column.sort_indicator }}
               {%- endif -%}
             {%- endif -%}
           </th>
         {% endif %}
-        {% for index, item in row.columns %}
-          {% if item.default_classes %}
+        {% for index, column in row.columns %}
+          {% if column.default_classes %}
             {%
               set column_classes = [
                 'views-field'
@@ -125,8 +118,8 @@
               {% set column_classes = column_classes|merge(['views-field-' ~ field]) %}
             {% endfor %}
           {% endif %}
-          <td{{ item.attributes.addClass(column_classes) }}>
-            {% for content in item.content %}
+          <td{{ column.attributes.addClass(column_classes) }}>
+            {% for content in column.content %}
               {{ content.field_output }}
             {% endfor %}
           </td>

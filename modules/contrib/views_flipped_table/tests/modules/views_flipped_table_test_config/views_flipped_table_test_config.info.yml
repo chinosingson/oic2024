@@ -1,0 +1,12 @@
+name: 'Views Flipped Table Test Config'
+type: module
+description: 'Provides default views for tests.'
+package: Testing
+# version: VERSION
+dependencies:
+  - views_flipped_table:views_flipped_table
+
+# Information added by Drupal.org packaging script on 2024-11-17
+version: '2.0.3'
+project: 'views_flipped_table'
+datestamp: 1731870579

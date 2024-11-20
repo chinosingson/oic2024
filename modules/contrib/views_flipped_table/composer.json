@@ -1,0 +1,33 @@
+{
+    "name": "drupal/views_flipped_table",
+    "description": "Provides a Views table style with rows and columns flipped.",
+    "type": "drupal-module",
+    "homepage": "https://drupal.org/project/views_flipped_table",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Karl Shea (karlshea)",
+            "homepage": "https://www.drupal.org/u/karlshea",
+            "role": "Maintainer"
+        },
+        {
+            "name": "Karim Ratib (infojunkie)",
+            "homepage": "https://www.drupal.org/u/infojunkie",
+            "role": "Maintainer"
+        },
+        {
+            "name": "Marco (marcoka)",
+            "homepage": "https://www.drupal.org/u/marcoka",
+            "role": "Maintainer"
+        },
+        {
+            "name": "naught101",
+            "homepage": "https://www.drupal.org/u/naught101",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/views_flipped_table",
+        "source": "https://git.drupalcode.org/project/views_flipped_table"
+    }
+}

@@ -47,7 +47,12 @@ class MDSliderImport {
         // Get image content
         zip_entry_open($zip, $entry);
         $entry_content = zip_entry_read($entry, zip_entry_filesize($entry));
-        $image = file_save_data($entry_content, "{$destination_dir}/{$image_name}", \Drupal\Core\File\FileSystemInterface::EXISTS_RENAME);
+		
+		// file_save_data is deprecated in drupal 9, 10        
+        $image = \Drupal::hasService('file.repository') ? 
+	      \Drupal::service('file.repository')->writeData($entry_content, "{$destination_dir}/{$image_name}", \Drupal\Core\File\FileSystemInterface::EXISTS_RENAME) : 
+	      file_save_data($entry_content, "{$destination_dir}/{$image_name}", \Drupal\Core\File\FileSystemInterface::EXISTS_RENAME);
+
         if ($image !== FALSE)
           $images[$image_name] = $image;
         zip_entry_close($entry);

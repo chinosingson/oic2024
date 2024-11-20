@@ -143,10 +143,14 @@ class MDSliderImageForm extends FormBase {
       $file = $this->fileStorage->load($fid);
       $file->setPermanent();
       $this->fileStorage->save($file);
-      $file_url = file_create_url($file->getFileUri());
+	  $file_url = \Drupal::hasService('file_url_generator') ? 
+			\Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()) : 
+			file_create_url($file->getFileUri());
       // Transform absolute image URLs to relative image URLs: prevent problems
       // on multisite set-ups and prevent mixed content errors.
-      $file_url = file_url_transform_relative($file_url);
+	  $file_url = \Drupal::hasService('file_url_generator') ? 
+	   \Drupal::service('file_url_generator')->transformRelative($file_url) : 
+	   file_url_transform_relative($file_url);
       $form_state->setValue(array('attributes', 'src'), $file_url);
       $form_state->setValue(array('attributes', 'data-entity-uuid'), $file->uuid());
       $form_state->setValue(array('attributes', 'data-entity-type'), 'file');
