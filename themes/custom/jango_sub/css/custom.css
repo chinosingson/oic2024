@@ -224,6 +224,43 @@ ul.quicktabs-tabs .library-nav-quicktabs {
   line-height: 1;
 }
 
+.tb-megamenu-subnav {
+  padding-left: 0;
+}
+
+.megamenu-column {
+  padding: 0;
+}
+
+.mega-nav li {
+  padding: 9px 25px;
+  white-space: normal;
+  list-style: none;
+}
+
+.mega-nav li a {
+  letter-spacing: 1px;
+  font-size: 12px;
+  text-transform: uppercase;
+  line-height: 15px;
+  color: #7d8691;
+  font-weight: 500;
+}
+
+.mega-nav .mega-caption {
+  padding: 0 25px;
+}
+
+.mega-nav h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #cbd2d9;
+  font-weight: 500;
+  margin-top: 0;
+}
+
+
 /* Translation Pages */
 body #gt-nvframe {
   position: fixed !important;
@@ -1843,4 +1880,6 @@ nav.pagers {text-align: center;}
     width: 1000px;
   }
 }
+
+
 

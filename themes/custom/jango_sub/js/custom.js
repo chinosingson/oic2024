@@ -965,7 +965,6 @@
   Drupal.behaviors.projectsImageSlider = {
     attach: function (context, settings) {
       $(".node-nd-project .cbp-slider-wrap:not(.cbp-wrapper)", context)
-        .once()
         .owlCarousel({
           items: 1,
           dots: true,
@@ -976,7 +975,6 @@
         });
 
       $(".slideshow-items > ul", context)
-        .once()
         .owlCarousel({
           items: 1,
           dots: false,

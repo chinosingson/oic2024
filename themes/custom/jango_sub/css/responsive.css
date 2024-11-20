@@ -30,7 +30,6 @@
   transform: translateY(-10px);
 }
 .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li > .dropdown-menu.c-menu-type-classic {
-  right: 15px;
   min-width: 400px;
 }
 .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark > .nav.navbar-nav > li:hover > .dropdown-menu,
