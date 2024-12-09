@@ -309,6 +309,9 @@ function jango_cms_preprocess_views_view(&$variables) {
         case 'classic_porfolio_page':
         case 'page_2col_portfolio':
         case 'page_index_gallery':
+        case 'page_index_gallery_2':
+        case 'page_index_gallery_3':
+        case 'page_index_gallery_4':
         case 'page_lightbox_gallery':
         case 'page_masonry_portfolio':
         case 'page_1':
