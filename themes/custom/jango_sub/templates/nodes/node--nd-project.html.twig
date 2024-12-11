@@ -116,7 +116,7 @@
             <span>{{ 'Description'|t }}</span>
           </div>
           <div class="cbp-l-project-desc-text">
-            {{ content|without('field_images', 'field_small_description', 'field_client', 'field_categories', 'field_comments', 'links', 'field_start_date', 'field_end_date', 'field_contact_person_s', 'field_url_the_site', 'field_beneficiary_country_ies', 'field_oic_grant_usd', 'field_co_financing_usd', 'field_short_title', 'field_featured_image') }}
+            {{ content|without('field_images', 'field_small_description', 'field_client', 'field_categories', 'field_comments', 'links', 'field_start_date', 'field_end_date', 'field_contact_person_s', 'field_url_the_site', 'field_beneficiary_country_ies', 'field_oic_grant_usd', 'field_co_financing_usd', 'field_short_title', 'field_featured_image', 'field_sdg_14_themes', 'field_sdg_themes') }}
           </div>
         </div>
         <div class="cbp-l-project-details">
@@ -156,8 +156,20 @@
               <strong>{{ 'Focal Point'|t }}</strong>
               {{ content.field_contact_person_s }}
             </li>
+            {% if content.field_sdg_14_themes['#object'] or content.field_sdg_themes['#object'] %}
+            <li>
+              <strong>{{ 'Relevant SDGs'|t }}</strong>
+              <div class="cbp-l-project-sdg-14-themes">
+              {% if content.field_sdg_14_themes['#object'] %}
+                {{ content.field_sdg_14_themes }}
+              {% endif %}
+              {% if content.field_sdg_themes['#object'] %}
+                {{ content.field_sdg_themes }}
+              {% endif %}
+              </div>
+            </li>
+            {% endif %}
           </ul>
-        
           {# {% set site_url = content.field_url_the_site|render|striptags %}
           {% if site_url is not empty %}
             <a href="{{- content.field_url_the_site|field_value -}}" target="_blank"
