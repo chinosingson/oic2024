@@ -16,7 +16,6 @@ function jango_sub_preprocess_html(&$variables) {
  * {@inheritdoc}
  */
 function jango_sub_theme_suggestions_taxonomy_term_alter(&$suggestions, $variables, $hook){
-  dpm($variables);
   if($variables['elements']['#view_mode'] == 'icon_only'){
     $suggestions[] = 'taxonomy_term__icon_only';
   }
