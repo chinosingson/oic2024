@@ -106,7 +106,7 @@
   <article{{ attributes.addClass('node-nd-project') }}>
     <div class="cbp-popup-content">
 
-      <div class="cbp-l-project-container">
+      <div class="cbp-l-project-container container">
         <h3 class="c-font c-font-bold short-title">{{- content.field_short_title|field_value -}}</h3>
         <div class="cbp-l-project-desc">
           <div class="featured-image show-on-xs hidden">
@@ -116,7 +116,7 @@
             <span>{{ 'Description'|t }}</span>
           </div>
           <div class="cbp-l-project-desc-text">
-            {{ content|without('field_images', 'field_small_description', 'field_client', 'field_categories', 'field_comments', 'links', 'field_start_date', 'field_end_date', 'field_contact_person_s', 'field_url_the_site', 'field_beneficiary_country_ies', 'field_oic_grant_usd', 'field_co_financing_usd', 'field_short_title', 'field_featured_image', 'field_sdg_14_themes', 'field_sdg_themes') }}
+            {{ content|without('field_images', 'field_small_description', 'field_client', 'field_categories', 'field_comments', 'links', 'field_start_date', 'field_end_date', 'field_contact_person_s', 'field_url_the_site', 'field_beneficiary_country_ies', 'field_oic_grant_usd', 'field_co_financing_usd', 'field_short_title', 'field_featured_image', 'field_sdg_14_themes', 'field_sdg_themes', 'field_video_embed') }}
           </div>
         </div>
         <div class="cbp-l-project-details">
@@ -180,13 +180,21 @@
         </div>
       </div>
 
+      {% if content.field_video_embed %}
+      <div class="cbp-l-project-video hero-video-block">
+      {{ content.field_video_embed }}
+      </div>
+      {% endif %}
+
       {% if not node.get('field_small_description').isEmpty() %}
       <div class="cbp-l-project-subtitle">
         {{ content.field_small_description }}
       </div>
       {% endif %}
 
+      <div class="cbp-l-project-images container">
       {{ content.field_images }}
+      </div>
 
     </div>
   </article>
