@@ -109,7 +109,11 @@ h3.c-font-uppercase.c-font-sbold {
 .cbp-popup-content ul.tabs.primary {
   margin-top: 3em;
 }
-#block-jango-sub-local-tasks ul.tabs.primary {
+.cbp-popup-content #block-jango-sub-local-tasks {
+  position: relative;
+  top: 7rem;
+}
+.cbp-popup-content #block-jango-sub-local-tasks ul.tabs.primary {
   padding: 0;
 }
 
@@ -755,7 +759,11 @@ ul.c-links.c-theme-ul,
 
 /* Gallery Index Project overrides */
 .cbp-popup-singlePage .cbp-popup-navigation-wrap {background: linear-gradient(320deg, #006bb5 0%, #52c9ba 100%);}
-.cbp-popup-singlePage .cbp-popup-content {margin-top: 3.75em;}
+.cbp-popup-singlePage .cbp-popup-content {
+  margin-top: 5rem;
+  max-width: unset;
+  width: 100%;
+}
 .cbp-l-project-subtitle {margin: 0 auto 2em;}
 .nd-region.content-section .cbp-l-grid-agency-title {
   white-space: normal;
