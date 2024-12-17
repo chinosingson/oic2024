@@ -968,9 +968,10 @@
         .owlCarousel({
           items: 1,
           dots: true,
+          loop: true,
           nav: true,
           navText: "",
-          autoplay: true,
+          autoplay: false,
           autoplayTimeout: 6000,
         });
 
