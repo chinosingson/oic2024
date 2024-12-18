@@ -689,18 +689,21 @@ body #gt-nvframe {
 .slideshow-items .owl-carousel .owl-nav {
   padding: 0 50px;
 }
-.node-nd-project .owl-dots {
-  bottom: 15px;
+.node-nd-project .owl-dots,
+.node-nd-project .cbp-nav-pagination {
+  bottom: 9px;
   right: 15px;
   position: absolute;
 }
-.node-nd-project .owl-carousel .owl-controls .owl-dot {
-  width: 10px;
-  height: 10px;
+.node-nd-project .owl-carousel .owl-controls .owl-dot,
+.node-nd-project .cbp-slider .cbp-nav .cbp-nav-pagination-item {
+  width: 20px;
+  height: 20px;
   background: #C2C2C2;
   margin: 0 4px;
 }
-.node-nd-project .owl-carousel .owl-controls .owl-dot.active {
+.node-nd-project .owl-carousel .owl-controls .owl-dot.active,
+.node-nd-project .cbp-slider .cbp-nav .cbp-nav-pagination-item.cbp-nav-pagination-active {
   background: #797979;
 }
 .node-nd-project .owl-prev,

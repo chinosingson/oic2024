@@ -970,6 +970,7 @@
           dots: true,
           loop: true,
           nav: true,
+          autoHeight: true,
           navText: "",
           autoplay: false,
           autoplayTimeout: 6000,
