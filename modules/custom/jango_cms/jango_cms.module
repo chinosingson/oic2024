@@ -312,6 +312,8 @@ function jango_cms_preprocess_views_view(&$variables) {
         case 'page_index_gallery_2':
         case 'page_index_gallery_3':
         case 'page_index_gallery_4':
+          jango_cms_view_tabs_transfer($variables, 'field_categories', $vid);
+          break;
         case 'page_index_gallery_sdg':
           jango_cms_view_tabs_transfer($variables, 'field_sdg_themes', $vid);
           break;
