@@ -651,6 +651,24 @@ body #gt-nvframe {
   font-size: 16px;
 }
 
+.node-nd-project .field--name-field-sdg-themes .sdg-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.node-nd-project .field--name-field-sdg-themes .sdg-14 {
+  margin-bottom: 5px;
+}
+.node-nd-project .field--name-field-sdg-themes .sdg-14 .field__label {
+  display: none;
+}
+
+.node-nd-project .field--name-field-sdg-themes .sdg-row .field__item img {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+
 /* Owl Carousel Projects */
 .slideshow-items .hero-copy .container {
   max-width: 1060px;
