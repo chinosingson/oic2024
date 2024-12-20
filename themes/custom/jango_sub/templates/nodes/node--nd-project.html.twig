@@ -156,13 +156,10 @@
               <strong>{{ 'Focal Point'|t }}</strong>
               {{ content.field_contact_person_s }}
             </li>
-            {% if content.field_sdg_14_themes['#object'] or content.field_sdg_themes['#object'] %}
+            {% if content.field_sdg_themes['#object'] %}
             <li>
               <strong>{{ 'Relevant SDGs'|t }}</strong>
               <div class="cbp-l-project-sdg-14-themes">
-              {% if content.field_sdg_14_themes['#object'] %}
-                {{ content.field_sdg_14_themes }}
-              {% endif %}
               {% if content.field_sdg_themes['#object'] %}
                 {{ content.field_sdg_themes }}
               {% endif %}
