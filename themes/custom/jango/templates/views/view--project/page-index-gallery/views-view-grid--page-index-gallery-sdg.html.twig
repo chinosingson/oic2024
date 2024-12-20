@@ -69,7 +69,7 @@
               <div class="cbp-filter-counter"></div>
             </div>
             {% for key, tab in rows.view_tabs['#tabs'] %}
-              <div data-filter=".{{ key }}" class="cbp-filter-item">{{ tab|striptags|replace({' ':''})|trim|t }}<div class="cbp-filter-counter"></div>
+              <div data-filter=".{{ key }}" class="cbp-filter-item">{{ tab|striptags|trim|t }}<div class="cbp-filter-counter"></div>
               </div>
             {% endfor %}
           {% endif %}
