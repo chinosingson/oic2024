@@ -77,7 +77,7 @@ function commerce_variation_cart_form_commerce_product_variation_view(array &$bu
     $order_item_storage = \Drupal::service('entity_type.manager')->getStorage('commerce_order_item');
     $order_item = $order_item_storage->createFromPurchasableEntity($entity);
     $product = $entity->getProduct();
-    $active = $entity->isActive();
+    $active = $entity->isPublished();
     $form_state_additions = [
       'product' => $product,
       'selected_variation' => $entity->id(),

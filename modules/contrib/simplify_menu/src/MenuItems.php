@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Drupal\simplify_menu;
 
+use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Menu\MenuLinkTreeInterface;
 use Drupal\Core\Menu\MenuTreeParameters;
-use Drupal\Core\Access\AccessResultInterface;
 
 /**
- * Class MenuItems.
+ * Class for menu items.
  *
  * @package \Drupal\simplify_menu
  */
@@ -57,7 +57,7 @@ class MenuItems {
       // getMenuTree, "inaccessible links are *not* removed; it's up to the code
       // doing something with the tree to exclude inaccessible links, just like
       // MenuLinkTree::build() does" - whose code we replicate here.
-
+      //
       /** @var \Drupal\Core\Menu\MenuLinkInterface $link */
       $link = $item->link;
       // Generally we only deal with visible links, but just in case.
@@ -90,7 +90,7 @@ class MenuItems {
         $simplifiedLink['active'] = TRUE;
       }
 
-      /* @var string $plugin_id */
+      /** @var string $plugin_id */
       $plugin_id = $item->link->getPluginId();
       if (isset($this->activeMenuTree[$plugin_id]) && $this->activeMenuTree[$plugin_id] == TRUE) {
         $simplifiedLink['active_trail'] = TRUE;

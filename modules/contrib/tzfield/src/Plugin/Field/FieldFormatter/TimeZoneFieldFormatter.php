@@ -33,7 +33,7 @@ class TimeZoneFieldFormatter extends FormatterBase implements TrustedCallbackInt
   /**
    * {@inheritdoc}
    *
-   * @phpstan-ignore-next-line Core has not yet documented this method properly.
+   * @phpstan-ignore missingType.generics,missingType.iterableValue,missingType.iterableValue
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $element = [];
@@ -70,7 +70,7 @@ class TimeZoneFieldFormatter extends FormatterBase implements TrustedCallbackInt
   /**
    * {@inheritdoc}
    *
-   * @phpstan-ignore-next-line Core has not yet documented this method properly.
+   * @phpstan-ignore missingType.iterableValue
    */
   public static function defaultSettings() {
     return [
@@ -81,7 +81,7 @@ class TimeZoneFieldFormatter extends FormatterBase implements TrustedCallbackInt
   /**
    * {@inheritdoc}
    *
-   * @phpstan-ignore-next-line Core has not yet documented this method properly.
+   * @phpstan-ignore missingType.iterableValue,missingType.iterableValue
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
     $form = parent::settingsForm($form, $form_state);

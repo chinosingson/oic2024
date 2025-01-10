@@ -22,7 +22,7 @@ class TimeZoneWithOffsetWidget extends WidgetBase {
   /**
    * {@inheritdoc}
    *
-   * @phpstan-ignore-next-line Core has not yet documented this method properly.
+   * @phpstan-ignore missingType.generics,missingType.iterableValue,missingType.iterableValue,missingType.iterableValue,missingType.iterableValue
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $element['value'] = $element + [

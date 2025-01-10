@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Drupal\simplify_menu\TwigExtension;
 
 use Drupal\simplify_menu\MenuItems;
-use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
- * Class MenuItemsTwigExtension.
+ * Twig extension for MenuItems.
  *
  * @package Drupal\simplify_menu
  */
