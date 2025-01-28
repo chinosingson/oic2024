@@ -17,6 +17,7 @@ use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Drupal\group\Entity\GroupContent;
 use Drupal\group\Entity\GroupRelationship;
 use Drupal\node\Entity\Node;
+use Drupal\Core\Render\Markup;
 
 /**
  * Builds entity forms.
@@ -153,8 +154,8 @@ class QuickNodeCloneEntityFormBuilder extends EntityFormBuilder {
 
       $translated_node->setTitle($this->t('@prepend_text@title',
         [
-          '@prepend_text' => $prepend_text,
-          '@title' => $translated_node->getTitle(),
+          '@prepend_text' => Markup::create($prepend_text),
+          '@title' => Markup::create($translated_node->getTitle()),
         ],
         [
           'langcode' => $langcode,
@@ -206,15 +207,15 @@ class QuickNodeCloneEntityFormBuilder extends EntityFormBuilder {
               $value->entity = $value->entity->createDuplicate();
               foreach ($value->entity->getFieldDefinitions() as $field_definition) {
                 $field_storage_definition = $field_definition->getFieldStorageDefinition();
-                $pfield_settings = $field_storage_definition->getSettings();
-                $pfield_name = $field_storage_definition->getName();
+                $paragraph_field_settings = $field_storage_definition->getSettings();
+                $paragraph_field_name = $field_storage_definition->getName();
 
                 // Check whether this field is excluded and if so unset.
-                if ($this->excludeParagraphField($pfield_name, $value->entity->bundle())) {
-                  unset($value->entity->{$pfield_name});
+                if ($this->excludeParagraphField($paragraph_field_name, $value->entity->bundle())) {
+                  unset($value->entity->{$paragraph_field_name});
                 }
 
-                $this->moduleHandler->alter('cloned_node_paragraph_field', $value->entity, $pfield_name, $pfield_settings);
+                $this->moduleHandler->alter('cloned_node_paragraph_field', $value->entity, $paragraph_field_name, $paragraph_field_settings);
               }
             }
           }

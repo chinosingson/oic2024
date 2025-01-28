@@ -6,10 +6,9 @@
  */
 
 /**
- * Setting the default value for the new "create_group_relationships" option.
+ * Clears the cache. Optional service dependency is injected.
  */
-function quick_node_clone_update_9000(&$sandbox) {
-  \Drupal::configFactory()->getEditable('quick_node_clone.settings')
-    ->set('create_group_relationships', TRUE)
-    ->save();
+function quick_node_clone_update_8119(&$sandbox) {
+  // Clear cache.
+  drupal_flush_all_caches();
 }
