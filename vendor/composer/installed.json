@@ -7514,6 +7514,58 @@
             "install-path": "../../modules/contrib/simple_iframe"
         },
         {
+            "name": "drupal/simple_media_bulk_upload",
+            "version": "2.0.0",
+            "version_normalized": "2.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/simple_media_bulk_upload.git",
+                "reference": "2.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/simple_media_bulk_upload-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "58660193c242b67a9afdc3963e57ffa3909fed7f"
+            },
+            "require": {
+                "drupal/core": "^10.2 || ^11",
+                "drupal/dropzonejs": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0",
+                    "datestamp": "1727354010",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "installation-source": "dist",
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "bkosborne",
+                    "homepage": "https://www.drupal.org/user/788032"
+                },
+                {
+                    "name": "nagy.balint",
+                    "homepage": "https://www.drupal.org/user/1763952"
+                }
+            ],
+            "description": "Provides a form to upload many media items at once.",
+            "homepage": "https://www.drupal.org/project/simple_media_bulk_upload",
+            "support": {
+                "source": "https://git.drupalcode.org/project/simple_media_bulk_upload"
+            },
+            "install-path": "../../modules/contrib/simple_media_bulk_upload"
+        },
+        {
             "name": "drupal/simplify_menu",
             "version": "3.3.0",
             "version_normalized": "3.3.0.0",

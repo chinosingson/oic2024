@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e37dc98606871123a5239f31c30ea3a",
+    "content-hash": "5e35f8fc752ada0020be57a310e69a8f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -7189,6 +7189,55 @@
             "homepage": "https://www.drupal.org/project/simple_iframe",
             "support": {
                 "source": "https://git.drupalcode.org/project/simple_iframe"
+            }
+        },
+        {
+            "name": "drupal/simple_media_bulk_upload",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/simple_media_bulk_upload.git",
+                "reference": "2.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/simple_media_bulk_upload-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "58660193c242b67a9afdc3963e57ffa3909fed7f"
+            },
+            "require": {
+                "drupal/core": "^10.2 || ^11",
+                "drupal/dropzonejs": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0",
+                    "datestamp": "1727354010",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "bkosborne",
+                    "homepage": "https://www.drupal.org/user/788032"
+                },
+                {
+                    "name": "nagy.balint",
+                    "homepage": "https://www.drupal.org/user/1763952"
+                }
+            ],
+            "description": "Provides a form to upload many media items at once.",
+            "homepage": "https://www.drupal.org/project/simple_media_bulk_upload",
+            "support": {
+                "source": "https://git.drupalcode.org/project/simple_media_bulk_upload"
             }
         },
         {
