@@ -1,0 +1,19 @@
+uuid: b716c53f-2e1c-4e0e-928b-dc006896590d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_beneficiary_country_ies
+    - node.type.nd_project
+id: node.nd_project.field_beneficiary_country_ies
+field_name: field_beneficiary_country_ies
+entity_type: node
+bundle: nd_project
+label: 'Beneficiary country/ies'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

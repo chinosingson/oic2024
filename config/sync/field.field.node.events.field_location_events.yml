@@ -1,0 +1,47 @@
+uuid: ee27cd38-4e24-4959-b180-7e7b20453fc2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_location_events
+    - node.type.events
+  module:
+    - address
+id: node.events.field_location_events
+field_name: field_location_events
+entity_type: node
+bundle: events
+label: Venue
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  available_countries: {  }
+  langcode_override: ''
+  field_overrides:
+    givenName:
+      override: hidden
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+    organization:
+      override: hidden
+    addressLine1:
+      override: optional
+    addressLine2:
+      override: optional
+    postalCode:
+      override: hidden
+    sortingCode:
+      override: hidden
+    dependentLocality:
+      override: hidden
+    locality:
+      override: optional
+    administrativeArea:
+      override: optional
+  fields: {  }
+field_type: address

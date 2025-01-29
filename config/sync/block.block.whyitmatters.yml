@@ -1,0 +1,38 @@
+uuid: 16e6b6b4-6224-4be0-84a0-51cd6ede25be
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:06d33f2d-f6ae-4e36-8f9d-50c6f06f7193'
+  module:
+    - block_class
+    - block_content
+    - block_id
+    - system
+  theme:
+    - jango_sub
+third_party_settings:
+  block_class:
+    classes: 'container why-it-matters'
+  block_id:
+    id: why_it_matters
+id: whyitmatters
+theme: jango_sub
+region: content
+weight: -48
+provider: null
+plugin: 'block_content:06d33f2d-f6ae-4e36-8f9d-50c6f06f7193'
+settings:
+  id: 'block_content:06d33f2d-f6ae-4e36-8f9d-50c6f06f7193'
+  label: 'Why it matters'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: '<front>'

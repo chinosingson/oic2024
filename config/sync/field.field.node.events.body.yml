@@ -1,0 +1,23 @@
+uuid: b1ad307c-e42d-4d1a-90a6-3914be84c3e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.events
+  module:
+    - text
+id: node.events.body
+field_name: body
+entity_type: node
+bundle: events
+label: Body
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: true
+field_type: text_with_summary

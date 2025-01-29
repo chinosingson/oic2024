@@ -1,0 +1,11 @@
+uuid: 5a4057a0-aa69-49cc-9955-0f721719fb70
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.sdg_themes
+id: taxonomy_term.sdg_themes
+target_entity_type_id: taxonomy_term
+target_bundle: sdg_themes
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,21 @@
+uuid: 8e3bf97d-6133-42f2-816f-c2ba77880a55
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_challenge
+    - node.type.solutions_brief
+  module:
+    - text
+id: node.solutions_brief.field_challenge
+field_name: field_challenge
+entity_type: node
+bundle: solutions_brief
+label: Challenge
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

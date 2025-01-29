@@ -1,0 +1,48 @@
+uuid: c9c67898-6677-469d-9fc1-2f4f76199be9
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:a4b544b1-907b-45f3-8960-32d37728795e'
+  module:
+    - block_class
+    - block_content
+    - block_id
+    - system
+    - user
+  theme:
+    - jango_sub
+third_party_settings:
+  block_class:
+    classes: hero-video
+  block_id:
+    id: hero_video
+id: herovideohomepagedemo
+theme: jango_sub
+region: header
+weight: -27
+provider: null
+plugin: 'block_content:a4b544b1-907b-45f3-8960-32d37728795e'
+settings:
+  id: 'block_content:a4b544b1-907b-45f3-8960-32d37728795e'
+  label: 'Hero Video (Homepage Demo)'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: '<front>'
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      anonymous: anonymous
+      authenticated: authenticated
+      administrator: administrator

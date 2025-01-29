@@ -1,0 +1,25 @@
+uuid: 131aacd2-1d83-46b6-aa86-e1054184e71f
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:19bb2f97-93a5-4a50-a57e-31e349244a98'
+  module:
+    - block_content
+  theme:
+    - jango_sub
+id: mailchimpmodal
+theme: jango_sub
+region: content
+weight: -52
+provider: null
+plugin: 'block_content:19bb2f97-93a5-4a50-a57e-31e349244a98'
+settings:
+  id: 'block_content:19bb2f97-93a5-4a50-a57e-31e349244a98'
+  label: 'Mailchimp Modal'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

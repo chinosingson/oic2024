@@ -1,0 +1,7 @@
+uuid: 9df9694f-a9e6-4851-8799-2a631879f4ac
+langcode: en
+status: false
+dependencies: {  }
+formId: webform_submission_subscribe_inline_node_255_add_form
+captchaType: image_captcha/Image
+label: webform_submission_subscribe_inline_node_255_add_form

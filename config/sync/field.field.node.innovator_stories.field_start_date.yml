@@ -1,0 +1,21 @@
+uuid: 8f237a76-fab0-467a-ba53-fe45b92bbf17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_start_date
+    - node.type.innovator_stories
+  module:
+    - datetime
+id: node.innovator_stories.field_start_date
+field_name: field_start_date
+entity_type: node
+bundle: innovator_stories
+label: 'Date Published'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,30 @@
+uuid: abe4c775-84be-403e-ad87-3f3cd25f72c5
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - quicktabs
+    - system
+  theme:
+    - jango_sub
+third_party_settings:
+  block_class:
+    classes: container
+id: library_navigation_quicktabs
+theme: jango_sub
+region: content_full
+weight: -49
+provider: null
+plugin: 'quicktabs_block:library_navigation_quicktabs'
+settings:
+  id: 'quicktabs_block:library_navigation_quicktabs'
+  label: 'Library Navigation - Quicktabs'
+  label_display: '0'
+  provider: quicktabs
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: '/library/*'

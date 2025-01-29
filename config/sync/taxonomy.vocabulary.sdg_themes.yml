@@ -1,0 +1,9 @@
+uuid: 70b8b6b1-f3cc-43ed-8028-c548efe486b4
+langcode: en
+status: true
+dependencies: {  }
+name: 'SDG Themes'
+vid: sdg_themes
+description: 'United Nations Sustainable Development Goals'
+weight: 0
+new_revision: false

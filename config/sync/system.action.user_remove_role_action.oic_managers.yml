@@ -1,0 +1,14 @@
+uuid: 525ffbe6-e4eb-40f6-b2ec-4951065345de
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.oic_managers
+  module:
+    - user
+id: user_remove_role_action.oic_managers
+label: 'Remove the OIC Managers role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: oic_managers

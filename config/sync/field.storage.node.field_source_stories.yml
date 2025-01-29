@@ -1,0 +1,19 @@
+uuid: 93c814c4-c1ac-4db9-ad30-5ae66ea2e667
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.field_source_stories
+field_name: field_source_stories
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

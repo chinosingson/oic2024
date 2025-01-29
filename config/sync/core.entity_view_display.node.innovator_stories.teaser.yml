@@ -1,0 +1,43 @@
+uuid: 54f9a67e-5105-4798-af5a-2fedb0165af4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.innovator_stories.body
+    - field.field.node.innovator_stories.field_file_pdf_test
+    - field.field.node.innovator_stories.field_iframe_stories
+    - field.field.node.innovator_stories.field_image_stories
+    - field.field.node.innovator_stories.field_smart_date
+    - field.field.node.innovator_stories.field_source_stories
+    - field.field.node.innovator_stories.field_start_date
+    - node.type.innovator_stories
+  module:
+    - text
+    - user
+id: node.innovator_stories.teaser
+targetEntityType: node
+bundle: innovator_stories
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_file_pdf_test: true
+  field_iframe_stories: true
+  field_image_stories: true
+  field_smart_date: true
+  field_source_stories: true
+  field_start_date: true
+  langcode: true

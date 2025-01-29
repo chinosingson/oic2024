@@ -1,0 +1,35 @@
+uuid: 9074f169-56fc-40e6-8231-a7271cb1bf40
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:8175aea0-dee3-4e17-8819-99e42dee3a61'
+  module:
+    - block_class
+    - block_content
+    - system
+  theme:
+    - jango_sub
+third_party_settings:
+  block_class:
+    classes: 'container sdg-14-block-home'
+id: sdg14blockhomepage
+theme: jango_sub
+region: content
+weight: -47
+provider: null
+plugin: 'block_content:8175aea0-dee3-4e17-8819-99e42dee3a61'
+settings:
+  id: 'block_content:8175aea0-dee3-4e17-8819-99e42dee3a61'
+  label: 'SDG 14 (Block Homepage) '
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: '<front>'

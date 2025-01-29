@@ -1,0 +1,27 @@
+uuid: b2d90216-f32c-4aa3-a9e8-4b7c316f5adc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_file_pdf_test
+    - node.type.innovator_stories
+  module:
+    - file
+id: node.innovator_stories.field_file_pdf_test
+field_name: field_file_pdf_test
+entity_type: node
+bundle: innovator_stories
+label: 'File PDF'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: stories
+  file_extensions: pdf
+  max_filesize: ''
+  description_field: false
+field_type: file

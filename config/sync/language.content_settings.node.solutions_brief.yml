@@ -1,0 +1,11 @@
+uuid: e85e323f-2034-405e-8f19-a8451445ffc8
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.solutions_brief
+id: node.solutions_brief
+target_entity_type_id: node
+target_bundle: solutions_brief
+default_langcode: site_default
+language_alterable: false

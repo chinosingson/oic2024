@@ -1,0 +1,23 @@
+uuid: 52dddfb9-f1f5-47a7-8579-33d2be6386cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.innovator_stories
+  module:
+    - text
+id: node.innovator_stories.body
+field_name: body
+entity_type: node
+bundle: innovator_stories
+label: Body
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: true
+field_type: text_with_summary

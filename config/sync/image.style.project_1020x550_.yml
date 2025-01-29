@@ -1,0 +1,15 @@
+uuid: c8f9004b-0277-459e-8fd6-1002b4a9a907
+langcode: en
+status: true
+dependencies: {  }
+name: project_1020x550_
+label: 'Project (1020x550)'
+effects:
+  055b15c0-2417-4833-8f01-6633c939e2f8:
+    uuid: 055b15c0-2417-4833-8f01-6633c939e2f8
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1020
+      height: 550
+      anchor: center-center

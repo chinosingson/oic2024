@@ -1,0 +1,29 @@
+uuid: 6dab9fb6-88b2-41dd-b2a1-3a43368d4ec8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_profile_pdf
+    - media.type.document
+    - node.type.nd_project
+id: node.nd_project.field_profile_pdf
+field_name: field_profile_pdf
+entity_type: node
+bundle: nd_project
+label: 'Profile PDF'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      document: document
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

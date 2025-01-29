@@ -1,0 +1,14 @@
+uuid: 29ca1341-4a92-4dc3-b697-6159ad5ecab7
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.oic_managers
+  module:
+    - user
+id: user_add_role_action.oic_managers
+label: 'Add the OIC Managers role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: oic_managers

@@ -1,0 +1,11 @@
+uuid: 9fa75b33-c4c3-4b24-93ec-a6a56657367e
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.ocean_innovators_cohort
+id: taxonomy_term.ocean_innovators_cohort
+target_entity_type_id: taxonomy_term
+target_bundle: ocean_innovators_cohort
+default_langcode: site_default
+language_alterable: false

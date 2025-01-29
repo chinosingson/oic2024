@@ -1,0 +1,23 @@
+uuid: 3ce8b732-6e55-4491-a97d-9293617f72ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_news_source
+    - node.type.nd_blog
+  module:
+    - link
+id: node.nd_blog.field_news_source
+field_name: field_news_source
+entity_type: node
+bundle: nd_blog
+label: Source
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

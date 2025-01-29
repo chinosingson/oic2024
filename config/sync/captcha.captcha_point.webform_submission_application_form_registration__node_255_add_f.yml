@@ -1,0 +1,7 @@
+uuid: a59ce12c-4412-43ed-b487-109a278a318b
+langcode: en
+status: false
+dependencies: {  }
+formId: webform_submission_application_form_registration__node_255_add_f
+captchaType: image_captcha/Image
+label: webform_submission_application_form_registration__node_255_add_form

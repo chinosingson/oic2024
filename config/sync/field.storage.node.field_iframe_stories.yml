@@ -1,0 +1,19 @@
+uuid: 6e05ba0f-6ae3-4b2c-9b29-1a7628145504
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_iframe_stories
+field_name: field_iframe_stories
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

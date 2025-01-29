@@ -1,0 +1,35 @@
+uuid: df3db15e-4f44-4c72-849f-df439cfb345c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:472d5b91-5c5f-4fb5-be6a-c2ca6039b945'
+  module:
+    - block_class
+    - block_content
+    - system
+  theme:
+    - jango_sub
+third_party_settings:
+  block_class:
+    classes: second-call-types-innovation
+id: typesofinnovations2ndcall
+theme: jango_sub
+region: content_full
+weight: -56
+provider: null
+plugin: 'block_content:472d5b91-5c5f-4fb5-be6a-c2ca6039b945'
+settings:
+  id: 'block_content:472d5b91-5c5f-4fb5-be6a-c2ca6039b945'
+  label: 'Types of innovations (2nd Call)'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/node/248\r\n/call-for-innovations/2nd-call-sustainable-fisheries"

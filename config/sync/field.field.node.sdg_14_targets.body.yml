@@ -1,0 +1,23 @@
+uuid: f4efd1e5-fd71-4cc5-86bc-70ee6c52f6ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.sdg_14_targets
+  module:
+    - text
+id: node.sdg_14_targets.body
+field_name: body
+entity_type: node
+bundle: sdg_14_targets
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

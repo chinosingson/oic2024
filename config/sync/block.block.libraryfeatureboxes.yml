@@ -1,0 +1,31 @@
+uuid: 558c4c90-f84f-4bfb-9ac8-0024f087de56
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:9f0e5cdd-6c42-48d8-a5c3-4cdfc3c6fede'
+  module:
+    - block_content
+    - system
+  theme:
+    - jango_sub
+id: libraryfeatureboxes
+theme: jango_sub
+region: content_full
+weight: -48
+provider: null
+plugin: 'block_content:9f0e5cdd-6c42-48d8-a5c3-4cdfc3c6fede'
+settings:
+  id: 'block_content:9f0e5cdd-6c42-48d8-a5c3-4cdfc3c6fede'
+  label: Library
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "<front>\r\n/test-page"

@@ -1,0 +1,23 @@
+uuid: 8525ce19-42bf-479b-9290-f3389f99edd7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.slideshow
+  module:
+    - text
+id: node.slideshow.body
+field_name: body
+entity_type: node
+bundle: slideshow
+label: Body
+description: 'This will serve as the content of the slideshow following the formatting preferred - headings 1 or 2, paragraph format, etc.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+field_type: text_with_summary

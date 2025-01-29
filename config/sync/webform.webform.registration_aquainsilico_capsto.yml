@@ -1,0 +1,374 @@
+uuid: f7976477-10f8-4a05-84a0-b143d75e8f3a
+langcode: en
+status: open
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 106
+template: false
+archive: false
+id: registration_aquainsilico_capsto
+title: 'REGISTRATION: AquaInSilico Capstone Event'
+description: 'Form where invited participants can confirm their participation for AQUA&#39;s 13 April event.'
+categories: {  }
+elements: |-
+  note_register:
+    '#type': processed_text
+    '#text': |-
+      <div class="container-fluid" data-bootstrap-contains="containers">
+      <div class="container">
+      <div class="row">
+      <div class="col-12">
+      <p><img alt="" data-entity-type="file" data-entity-uuid="75cac362-5376-4d18-a11d-8492514b2d27" height="2325" src="/sites/default/files/2023/Phos-ValueMediaCard_V5.png" width="3277" /></p>
+
+      <p><strong>Date:</strong>&nbsp;Thursday, 13 April 2023<br />
+      <strong>Time:</strong> <span><span><span><span><span lang="EN-US" xml:lang="EN-US">17:00 Istanbul / 16:00 Central Europe / 15:00 Portugal / 13:00&nbsp; Cape Verde / 10:00 New York</span></span></span></span></span></p>
+
+      <blockquote>
+      <p><span><span><span><span><span lang="EN-US" xml:lang="EN-US"><strong>Connect on Zoom:</strong>&nbsp;</span></span></span></span></span><a href="https://undp.zoom.us/j/82073533437">https://undp.zoom.us/j/82073533437</a></p>
+      </blockquote>
+
+      <p><em><u><font color="#000000" face="Arial, sans-serif"><span style="font-size: 14.6667px;">*</span></font>The main language for the event is English with live interpretation in Portuguese.</u></em></p>
+
+      <p>&nbsp;</p>
+
+      <p><span><span><span><span><span lang="EN-GB" xml:lang="EN-GB">Cape Verde is a country deeply affected by water scarcity. The increased droughts and sea level rise that is causing the salination of the groundwater will have deep effects in the archipelago’s water reserves. For this reason, the improvement of wastewater treatment is of upmost importance to increase water availability for non-potable applications, such as the irrigation of fields and green spaces, street and car washing, among others.</span></span></span></span></span></p>
+
+      <p><span><span><span><span><span lang="EN-GB" xml:lang="EN-GB">Phos-Value is an innovative project implemented by AquaInSilico, that</span>&nbsp;worked on developing the capacity of<span lang="EN-GB" xml:lang="EN-GB">&nbsp;Cape Verde’s wastewater treatment sector to improve its water quality&nbsp;using&nbsp;AquaInSilico’s pioneering digital intelligence tool - UPWATER<sup>®</sup> - and</span> <span lang="EN-GB" xml:lang="EN-GB">the industry’s best practices. AquaInSilico and its PhosValue project is one of the first cohort of eight innovations selected in 2021 and supported by UNDP, with funding from Sida and Norad, to help accelerate SDG 14 target 1 - Reduce marine pollution.&nbsp;</span></span></span></span></span></p>
+
+      <p><span><span><span><span><span lang="EN-GB" xml:lang="EN-GB">To increase the impact and outreach of the project, a consortium was formed composed of Portuguese and Cape Verdean entities including&nbsp;</span><i><span lang="PT" xml:lang="PT">Agência Nacional de Água e Saneamento</span></i><span lang="PT" xml:lang="PT"> (ANAS), </span><i><span lang="PT" xml:lang="PT">Águas de Santiago</span></i><span lang="PT" xml:lang="PT"> (AdS), Águas</span><i><span lang="PT" xml:lang="PT"> de Portugal</span></i><span lang="PT" xml:lang="PT"> Internacional (AdPI),</span><span lang="PT" xml:lang="PT"> NOVA University of Lisbon and Portuguese Water Partnership (PWP)</span><span lang="EN-US" xml:lang="EN-US">.</span></span></span></span></span></p>
+
+      <p><span><span><span><span><span lang="EN-GB" xml:lang="EN-GB">The two-year implementation of Phos-Value solutions in the pilot wastewater treatment plant in Santa Catarina, Cape Verde </span><b><span lang="EN-GB" xml:lang="EN-GB">enabled a significant reduction of pollutant emissions</span></b><span lang="EN-GB" xml:lang="EN-GB"> to water bodies, preventing eutrophication and contributing to better ocean and human health. Additionally, the project was able to gather insights on how to achieve a </span><b><span lang="EN-GB" xml:lang="EN-GB">circular economy</span></b><span lang="EN-GB" xml:lang="EN-GB"> through the </span><b><span lang="EN-GB" xml:lang="EN-GB">reuse of treated water</span></b><span lang="EN-GB" xml:lang="EN-GB"> and other </span><b><span lang="EN-GB" xml:lang="EN-GB">value-added products</span></b><span lang="EN-GB" xml:lang="EN-GB">, such as </span><b><span lang="EN-GB" xml:lang="EN-GB">biofertilizers</span></b><span lang="EN-GB" xml:lang="EN-GB">, that could be used to </span><b><span lang="EN-GB" xml:lang="EN-GB">promote new revenue streams and business models</span></b><span lang="EN-GB" xml:lang="EN-GB">. Phos-Value deeply focused on capacitating the technical teams, equipment acquisition for laboratory analysis, and control of plant operation. The results achieved so far is beginning to create a positive impact on the social, environmental, and economic sectors in Cape Verde.&nbsp; </span></span></span></span></span></p>
+
+      <p>AquaInSilico is delighted to present, through this capstone event, the results achieved by the implementation of Phos-Value sustainable solutions over these two years in Santa Catarina, Cape Verde, and to help increase awareness on the importance of the wastewater treatment, and promote a circular model in wastewater sector, transforming this into a more sustainable and greener sector.</p>
+
+      <p>&nbsp;</p>
+
+      <p><span><span><span><span><b><span lang="EN-GB" xml:lang="EN-GB"><span>Objectives</span></span></b></span></span></span></span></p>
+
+      <p><span><span><span><span><span lang="EN-GB" xml:lang="EN-GB">The capstone event aims to:</span></span></span></span></span></p>
+
+      <ul>
+      	<li><span><span><span><span><span lang="EN-GB" xml:lang="EN-GB">Present the outcomes of the Phos-Value project, the benefits accomplished and its impact on Cape Verdean wastewater sector and economy; &nbsp;</span></span></span></span></span></li>
+      	<li><span><span><span><span><span lang="EN-GB" xml:lang="EN-GB">Show the potential of UPWATER<sup>®</sup> in improving the wastewater treatment sector through reduced&nbsp;operational costs and enhanced efficiency, and how this digital tool facilitates the replication of Phos-Value in other wastewater treatment plants;</span></span></span></span></span></li>
+      	<li><span><span><span><span><span lang="EN-GB" xml:lang="EN-GB">Clarify how the wastewater treatment sector is a key actor in addressing ocean pollution and water scarcity,&nbsp;and in promoting circular economy. </span></span></span></span></span></li>
+      </ul>
+
+      <h4>&nbsp;</h4>
+
+      <h3><b>Please fill in the short form below to register.</b></h3>
+
+      <h6><b>Your details will only be used for the purpose of this registration and event.</b></h6>
+      </div>
+      </div>
+      </div>
+      </div>
+      <script src="//cdn.public.n1ed.com/N1D8N1ED/widgets.js"></script>
+    '#format': ckeditor
+  e_mail_register:
+    '#type': email
+    '#title': 'E-mail *'
+    '#required': true
+  title_mr_ms_dr_prof_etc_:
+    '#type': textfield
+    '#title': 'Title (Mr. / Ms. / Dr. / Prof., etc.)'
+  first_name_:
+    '#type': textfield
+    '#title': 'First Name *'
+    '#required': true
+  full_name_register:
+    '#type': textfield
+    '#title': 'Last Name *'
+    '#required': true
+  organization_register:
+    '#type': textfield
+    '#title': 'Organization *'
+    '#required': true
+  position_:
+    '#type': textfield
+    '#title': 'Job Title'
+  processed_text_02:
+    '#type': processed_text
+    '#text': |
+      <p><strong>My selection(s):</strong></p>
+    '#format': ckeditor
+  please_select_your_option_s_:
+    '#type': checkboxes
+    '#title': 'Please select your option(s):'
+    '#options':
+      'I would like to join the online event.': 'Please send me the Save-the-Date and connection details.'
+      'I am interested to join the event but I am not available on this day.': 'I am interested to join the event but I am not available on this day. Please send me more information about AquaInSilico''s Phos Value: Sustainable Solutions for Nutrient Recycling.'
+    '#required': true
+  any_questions_you_might_have_about_the_topic_:
+    '#type': textfield
+    '#title': 'Any questions you might have about the topic? Please let us know so we can provide the answers in the webinar.'
+    '#counter_type': word
+    '#counter_maximum': 200
+  processed_text_03:
+    '#type': processed_text
+    '#text': |
+      <p>We will not sign you up to our mailing list. If you are an existing UNDP OIC Quarterly Updates subscriber, signing up to this event will not affect your subscription preferences.</p>
+    '#format': ckeditor
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: jango_sub
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: true
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: inline
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: "Thank you for your interest in the online event showcasing AquaInSilico&#39;s learnings and key insights gathered from the unique innovative project, <strong>Phos Value: Sustainable Solutions for Nutrient Recycling.&nbsp;</strong><br />\r\n<br />\r\nPlease check your email to view the Zoom link and/or the requested information."
+  confirmation_attributes: {  }
+  confirmation_back: false
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: true
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: Email
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: oic.info@undp.org
+      to_options: {  }
+      bcc_mail: khristine.gudczinski@undp.org
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: oic.info@undp.org
+      from_options: {  }
+      from_name: 'UNDP Ocean Innovation Challenge (OIC)'
+      reply_to: '[webform_submission:values:e_mail_register:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  _current_user_account_name_email_to_user:
+    id: email
+    handler_id: _current_user_account_name_email_to_user
+    label: 'Email to user'
+    notes: 'Sends email to the user who submitted the form'
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:e_mail_register:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: khristine.gudczinski@undp.org
+      cc_options: {  }
+      from_mail: contact@oceaninnovationchallenge.org
+      from_options: {  }
+      from_name: 'UNDP Ocean Innovation Challenge (OIC)'
+      reply_to: oic.info@undp.org
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: "Thank you for your interest in UNDP Ocean Innovator AquaInsilico's Phos Value - Sustainable Solutions for Nutrient Cycling"
+      body: "<p>Dear&nbsp;[webform_submission:values:first_name_],<br />\r\n<br />\r\nThank you for your interest in UNDP Ocean Innovator AquaInsilico and their ocean innovation <em>Phos Value: Sustainable Solutions for Nutrient Recycling</em>. Click <a href=\"https://oceaninnovationchallenge.org/ocean-innovators#cbp=/ocean-innovations/phos-value-sustainable-solutions-nutrient-recycling\">here</a> to know more about their work, or visit them at&nbsp;https://aquainsilico.com/.&nbsp;<br />\r\n<br />\r\nKindly refer to the below information for the connection details of the capstone event:</p>\r\n\r\n<ul>\r\n\t<li><strong>Event Title</strong>: Phos Value: Sustainable Solutions for Nutrient Recycling - A Capstone Event</li>\r\n\t<li><strong>Date:</strong>&nbsp;Thursday, 13 April 2023</li>\r\n\t<li><strong>Time:</strong>&nbsp;17:00 Istanbul / 16:00 Central European / 15:00 Portugal / 13:00&nbsp; Cabe Verde / 10:00 New York</li>\r\n\t<li><strong>Zoom Link</strong>:&nbsp;<a href=\"https://undp.zoom.us/j/82073533437\">https://undp.zoom.us/j/82073533437</a>.&nbsp;</li>\r\n</ul>\r\n<br />\r\n<span style=\"font-size:14.6667px\">*</span>The main language for the event is English with live interpretation in Portuguese. We look forward to welcoming you on this event!&nbsp;\r\n\r\n<p><br />\r\nVisit us at <strong><a href=\"https://oceaninnovationchallenge.org\">https://oceaninnovationchallenge.org</a></strong> to know more about the&nbsp;Ocean Innovation Challenge&nbsp;(OIC) and the ocean innovators.<br />\r\n&nbsp;</p>\r\n\r\n<p>Best regards,<br />\r\nUNDP OIC Secretariat</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

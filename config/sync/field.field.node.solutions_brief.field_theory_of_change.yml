@@ -1,0 +1,21 @@
+uuid: 5f3cf19a-bbb6-47b5-a16a-9906e8a0b4ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_theory_of_change
+    - node.type.solutions_brief
+  module:
+    - text
+id: node.solutions_brief.field_theory_of_change
+field_name: field_theory_of_change
+entity_type: node
+bundle: solutions_brief
+label: 'Theory of Change'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

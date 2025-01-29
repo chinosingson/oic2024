@@ -1,0 +1,38 @@
+uuid: 5f801b89-62a6-46c3-aeea-fcf2ab1e6ed7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.sdg_14_targets.body
+    - field.field.node.sdg_14_targets.field_card_image
+    - field.field.node.sdg_14_targets.field_sdgb_card_url
+    - image.style.thumbnail_80_w_x_auto_h
+    - node.type.sdg_14_targets
+  module:
+    - field_formatter_class
+    - image
+    - user
+id: node.sdg_14_targets.teaser
+targetEntityType: node
+bundle: sdg_14_targets
+mode: teaser
+content:
+  field_card_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: thumbnail_80_w_x_auto_h
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 0
+    region: content
+hidden:
+  body: true
+  field_sdgb_card_url: true
+  langcode: true
+  links: true

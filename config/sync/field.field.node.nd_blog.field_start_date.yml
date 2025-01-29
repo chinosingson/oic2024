@@ -1,0 +1,21 @@
+uuid: 2a4fac65-21ad-49f0-8947-b09235562383
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_start_date
+    - node.type.nd_blog
+  module:
+    - datetime
+id: node.nd_blog.field_start_date
+field_name: field_start_date
+entity_type: node
+bundle: nd_blog
+label: 'Date Published'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

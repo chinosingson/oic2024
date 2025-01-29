@@ -1,0 +1,11 @@
+uuid: 5cb2afd1-b2d6-4539-8c28-83f4adc52e9b
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.innovator_stories
+id: node.innovator_stories
+target_entity_type_id: node
+target_bundle: innovator_stories
+default_langcode: site_default
+language_alterable: false

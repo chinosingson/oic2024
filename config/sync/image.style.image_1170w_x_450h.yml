@@ -1,0 +1,15 @@
+uuid: 3bff3ceb-f077-4ad7-a2ff-787ca1fd7dee
+langcode: en
+status: true
+dependencies: {  }
+name: image_1170w_x_450h
+label: 'Image 1170W x 450H'
+effects:
+  9878c3ef-7c98-4471-b4a7-b65e6e13a881:
+    uuid: 9878c3ef-7c98-4471-b4a7-b65e6e13a881
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1170
+      height: 450
+      anchor: center-center

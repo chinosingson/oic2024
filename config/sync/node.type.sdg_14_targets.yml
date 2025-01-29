@@ -1,0 +1,17 @@
+uuid: 67143a86-5355-4257-a496-f9b394de1891
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'SDG 14 Targets'
+type: sdg_14_targets
+description: null
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

@@ -1,0 +1,37 @@
+uuid: 12ce67c5-d46e-4edc-8c37-2df0414eecee
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.blocks_view_for_nodes
+  module:
+    - block_class
+    - block_id
+    - system
+    - views
+  theme:
+    - jango_sub
+third_party_settings:
+  block_class:
+    classes: hero-video
+  block_id:
+    id: hero_video
+id: views_block_homepage_slider
+theme: jango_sub
+region: header
+weight: 11
+provider: null
+plugin: 'views_block:blocks_view_for_nodes-block_homepage_slider'
+settings:
+  id: 'views_block:blocks_view_for_nodes-block_homepage_slider'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "<front>\r\n/slideshow/*\r\n/test/homepage/slideshow\r\n"

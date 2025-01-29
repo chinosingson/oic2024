@@ -1,0 +1,19 @@
+uuid: 56f8a4ac-789d-4cbc-87c4-a66ca304d43b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_innovator_name
+    - node.type.solutions_brief
+id: node.solutions_brief.field_innovator_name
+field_name: field_innovator_name
+entity_type: node
+bundle: solutions_brief
+label: 'Innovator Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,42 @@
+uuid: 768d6d17-ec4c-4f52-8549-9517933721b1
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:204e649f-4bc7-4d01-8d76-0f72fa2cd016'
+  module:
+    - block_content
+    - system
+    - user
+  theme:
+    - jango_sub
+id: footerundpoceaninnovationsandtwitter
+theme: jango_sub
+region: footer
+weight: -43
+provider: null
+plugin: 'block_content:204e649f-4bc7-4d01-8d76-0f72fa2cd016'
+settings:
+  id: 'block_content:204e649f-4bc7-4d01-8d76-0f72fa2cd016'
+  label: 'Footer - UNDP Ocean Innovations + Twitter'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: '<front>'
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      anonymous: anonymous
+      authenticated: authenticated
+      oic_managers: oic_managers
+      administrator: administrator

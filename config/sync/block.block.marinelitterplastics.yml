@@ -1,0 +1,31 @@
+uuid: 70d5e1e8-ddae-48f6-bec2-08a5e9d272f7
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:22d11eab-f9ce-4f8d-b5b9-0d6a124cae8f'
+  module:
+    - block_content
+    - system
+  theme:
+    - jango_sub
+id: marinelitterplastics
+theme: jango_sub
+region: content_full
+weight: -58
+provider: null
+plugin: 'block_content:22d11eab-f9ce-4f8d-b5b9-0d6a124cae8f'
+settings:
+  id: 'block_content:22d11eab-f9ce-4f8d-b5b9-0d6a124cae8f'
+  label: 'Marine Litter/Plastics'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /node/249

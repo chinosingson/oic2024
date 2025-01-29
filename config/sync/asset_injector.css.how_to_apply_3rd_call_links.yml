@@ -1,0 +1,26 @@
+uuid: 67040e94-e0eb-47a8-b575-88418058e4b6
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: how_to_apply_3rd_call_links
+label: 'how to apply 3rd call - links'
+code: |-
+  #block-howtoapply3rdcall a {
+      color: #1da695;
+      word-wrap: break-word;
+  }
+
+  #block-howtoapply3rdcall a:hover, #block-howtoapply3rdcall a:focus {
+      color: #5b9836;
+  }
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /node/328
+contexts: {  }
+conditions_require_all: true

@@ -1,0 +1,19 @@
+uuid: a098239d-ec12-44eb-8b2a-bde350213860
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_support_amount
+    - node.type.solutions_brief
+id: node.solutions_brief.field_support_amount
+field_name: field_support_amount
+entity_type: node
+bundle: solutions_brief
+label: 'Support Amount'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

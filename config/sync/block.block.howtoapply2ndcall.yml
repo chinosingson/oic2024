@@ -1,0 +1,31 @@
+uuid: 0b309083-59ed-4abc-98a1-939e56236bf6
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:04aee5db-01e8-411b-9823-6c3a1dcc527f'
+  module:
+    - block_content
+    - system
+  theme:
+    - jango_sub
+id: howtoapply2ndcall
+theme: jango_sub
+region: content_full
+weight: -55
+provider: null
+plugin: 'block_content:04aee5db-01e8-411b-9823-6c3a1dcc527f'
+settings:
+  id: 'block_content:04aee5db-01e8-411b-9823-6c3a1dcc527f'
+  label: 'How to Apply (2nd Call)'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/node/248\r\n#/node/251\r\n#/node/246"

@@ -1,0 +1,150 @@
+uuid: 2aa734da-20b3-4c3c-a888-ac5241707c35
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.events.body
+    - field.field.node.events.field_end_date
+    - field.field.node.events.field_image_events
+    - field.field.node.events.field_location_events
+    - field.field.node.events.field_meta_tags
+    - field.field.node.events.field_smart_date
+    - field.field.node.events.field_start_date
+    - field.field.node.events.field_timezone
+    - field.field.node.events.field_website_url_events
+    - image.style.thumbnail
+    - node.type.events
+  module:
+    - address
+    - image
+    - imce
+    - link
+    - metatag
+    - path
+    - smart_date
+    - text
+    - tzfield
+id: node.events.default
+targetEntityType: node
+bundle: events
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 5
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_image_events:
+    type: image_image
+    weight: 1
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings:
+      imce:
+        enabled: true
+  field_location_events:
+    type: address_default
+    weight: 4
+    region: content
+    settings:
+      wrapper_type: details
+    third_party_settings: {  }
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 13
+    region: content
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+  field_smart_date:
+    type: smartdate_default
+    weight: 2
+    region: content
+    settings:
+      modal: false
+      default_duration: 60
+      default_duration_increments: |-
+        30
+        60|1 hour
+        90
+        120|2 hours
+        custom
+      show_extra: true
+      hide_date: false
+    third_party_settings: {  }
+  field_timezone:
+    type: tzfield_default
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_website_url_events:
+    type: link_default
+    weight: 6
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 12
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 10
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 7
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  field_end_date: true
+  field_start_date: true
+  langcode: true

@@ -1,0 +1,19 @@
+uuid: e1064c6e-845e-4d97-bcbe-c08ecba8d8ec
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.field_slideshow_cta
+field_name: field_slideshow_cta
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

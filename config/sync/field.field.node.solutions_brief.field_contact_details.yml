@@ -1,0 +1,19 @@
+uuid: 3430f5a2-abb2-4b1a-9b8d-974e942ef426
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_details
+    - node.type.solutions_brief
+id: node.solutions_brief.field_contact_details
+field_name: field_contact_details
+entity_type: node
+bundle: solutions_brief
+label: 'Contact Details'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

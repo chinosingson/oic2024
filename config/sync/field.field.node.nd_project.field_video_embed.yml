@@ -1,0 +1,29 @@
+uuid: bade3085-7e8d-4a2e-9115-02137dc98712
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_video_embed
+    - media.type.remote_video
+    - node.type.nd_project
+id: node.nd_project.field_video_embed
+field_name: field_video_embed
+entity_type: node
+bundle: nd_project
+label: 'Video Embed'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      remote_video: remote_video
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

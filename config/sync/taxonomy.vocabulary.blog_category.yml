@@ -1,0 +1,9 @@
+uuid: 57df8376-3454-4675-960b-8f55b013f82e
+langcode: en
+status: true
+dependencies: {  }
+name: 'News Category'
+vid: blog_category
+description: null
+weight: -9
+new_revision: false

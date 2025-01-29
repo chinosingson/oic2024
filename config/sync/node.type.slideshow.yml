@@ -1,0 +1,18 @@
+uuid: e29576da-f795-401f-a23b-9bb4e3ee6178
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: Slideshow
+type: slideshow
+description: 'Slideshow item that showcases either an image or a video (URL provided) and a CTA button/text linked accordingly to a URL or webpage.'
+help: null
+new_revision: false
+preview_mode: 0
+display_submitted: false

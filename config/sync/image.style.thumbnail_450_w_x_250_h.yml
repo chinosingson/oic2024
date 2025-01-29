@@ -1,0 +1,15 @@
+uuid: 3e6c7de6-d356-4f07-b0c1-92c127efc8d9
+langcode: en
+status: true
+dependencies: {  }
+name: thumbnail_450_w_x_250_h
+label: 'Thumbnail (450 W x 250 H)'
+effects:
+  e2d35c41-8015-4406-ab49-d6f79e8970e5:
+    uuid: e2d35c41-8015-4406-ab49-d6f79e8970e5
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 450
+      height: 250
+      anchor: center-center

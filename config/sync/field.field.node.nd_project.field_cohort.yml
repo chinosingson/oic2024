@@ -1,0 +1,29 @@
+uuid: 1b96adee-631c-468e-9500-6b4f5acb2102
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cohort
+    - node.type.nd_project
+    - taxonomy.vocabulary.ocean_innovators_cohort
+id: node.nd_project.field_cohort
+field_name: field_cohort
+entity_type: node
+bundle: nd_project
+label: Cohort
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      ocean_innovators_cohort: ocean_innovators_cohort
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

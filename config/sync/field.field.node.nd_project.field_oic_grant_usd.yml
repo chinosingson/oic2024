@@ -1,0 +1,19 @@
+uuid: 834cdc12-bf93-4cbe-a148-b154212f50d0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_oic_grant_usd
+    - node.type.nd_project
+id: node.nd_project.field_oic_grant_usd
+field_name: field_oic_grant_usd
+entity_type: node
+bundle: nd_project
+label: 'OIC Financing (USD $)'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,21 @@
+uuid: ee4b03be-d5d9-4a05-8162-4a159e7b90ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_replication_scalability
+    - node.type.solutions_brief
+  module:
+    - text
+id: node.solutions_brief.field_replication_scalability
+field_name: field_replication_scalability
+entity_type: node
+bundle: solutions_brief
+label: 'Replication and Scalability'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,154 @@
+uuid: f17f6ff5-5193-445d-b382-d15c9de6809a
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.ckeditor
+    - filter.format.full_html
+    - filter.format.html
+    - filter.format.restricted_html
+    - filter.format.shortcode_dynamic
+    - node.type.article
+    - node.type.nd_blog
+    - node.type.nd_project
+    - node.type.page
+    - node.type.sdg_14_targets
+    - node.type.webform
+    - taxonomy.vocabulary.keywords
+  module:
+    - block
+    - block_content
+    - captcha
+    - commerce_checkout
+    - commerce_order
+    - commerce_product
+    - contextual
+    - file
+    - file_entity
+    - filter
+    - flag
+    - help
+    - nd_visualshortcodes
+    - nikadevs_cms
+    - node
+    - path
+    - quick_node_clone
+    - save_edit
+    - search
+    - shortcut
+    - system
+    - taxonomy
+    - toolbar
+    - webform
+    - webform_node
+    - webform_submission_log
+id: oic_managers
+label: 'OIC Managers'
+weight: -8
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access any webform configuration'
+  - 'access block library'
+  - 'access checkout'
+  - 'access content'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access help pages'
+  - 'access own webform configuration'
+  - 'access shortcuts'
+  - 'access site in maintenance mode'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'access webform help'
+  - 'access webform overview'
+  - 'access webform submission log'
+  - 'access webform submission user'
+  - 'administer block content'
+  - 'administer block types'
+  - 'administer blocks'
+  - 'administer nd nd_visualshortcodes'
+  - 'administer nodes'
+  - 'administer webform'
+  - 'administer webform element access'
+  - 'administer webform submission'
+  - 'bypass file access'
+  - 'bypass node access'
+  - 'clone article content'
+  - 'clone nd_blog content'
+  - 'clone nd_project content'
+  - 'clone page content'
+  - 'clone sdg_14_targets content'
+  - 'create terms in keywords'
+  - 'create url aliases'
+  - 'create webform'
+  - 'delete any webform'
+  - 'delete any webform submission'
+  - 'delete own files'
+  - 'delete own webform'
+  - 'delete own webform submission'
+  - 'delete terms in keywords'
+  - 'delete webform submissions any node'
+  - 'delete webform submissions own node'
+  - 'edit any article content'
+  - 'edit any nd_blog content'
+  - 'edit any nd_project content'
+  - 'edit any page content'
+  - 'edit any sdg_14_targets content'
+  - 'edit any webform'
+  - 'edit any webform submission'
+  - 'edit own article content'
+  - 'edit own nd_blog content'
+  - 'edit own nd_project content'
+  - 'edit own page content'
+  - 'edit own sdg_14_targets content'
+  - 'edit own webform'
+  - 'edit own webform submission'
+  - 'edit terms in keywords'
+  - 'edit webform assets'
+  - 'edit webform source'
+  - 'edit webform submissions any node'
+  - 'edit webform submissions own node'
+  - 'edit webform twig'
+  - 'edit webform variants'
+  - 'flag compare'
+  - 'flag wishlist'
+  - 'revert article revisions'
+  - 'revert nd_blog revisions'
+  - 'revert nd_project revisions'
+  - 'revert page revisions'
+  - 'revert sdg_14_targets revisions'
+  - 'search content'
+  - 'skip CAPTCHA'
+  - 'unflag compare'
+  - 'unflag wishlist'
+  - 'use nd nd_visualshortcodes'
+  - 'use nikadevs cms'
+  - 'use save and edit'
+  - 'use text format basic_html'
+  - 'use text format ckeditor'
+  - 'use text format full_html'
+  - 'use text format html'
+  - 'use text format restricted_html'
+  - 'use text format shortcode_dynamic'
+  - 'view all revisions'
+  - 'view any webform submission'
+  - 'view article revisions'
+  - 'view commerce_product'
+  - 'view commerce_product_attribute'
+  - 'view files'
+  - 'view nd_blog revisions'
+  - 'view nd_project revisions'
+  - 'view own commerce_order'
+  - 'view own files'
+  - 'view own private files'
+  - 'view own unpublished content'
+  - 'view own webform submission'
+  - 'view page revisions'
+  - 'view private files'
+  - 'view sdg_14_targets revisions'
+  - 'view the administration theme'
+  - 'view webform revisions'
+  - 'view webform submissions any node'
+  - 'view webform submissions own node'

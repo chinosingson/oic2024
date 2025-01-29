@@ -1,0 +1,15 @@
+uuid: 068d6945-c4d3-4988-9b00-2c4f2d2f2f48
+langcode: en
+status: true
+dependencies: {  }
+id: compact_military_time
+label: 'Compact Military Time'
+date_format: 'j F Y'
+time_format: 'G:i A'
+time_hour_format: 'G:i A'
+allday_label: 'All day'
+separator: ' - '
+join: ', '
+ampm_reduce: '1'
+date_first: '1'
+site_time_toggle: '0'

@@ -1,0 +1,31 @@
+uuid: c37a8b5b-a7a5-4fcb-8fc5-6df0331fdb70
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:2ed3bb84-0883-48b9-a07c-49f0eb164456'
+  module:
+    - block_content
+    - system
+  theme:
+    - jango_sub
+id: bannerundpoceaninnovationsstaticmap
+theme: jango_sub
+region: footer
+weight: -36
+provider: null
+plugin: 'block_content:2ed3bb84-0883-48b9-a07c-49f0eb164456'
+settings:
+  id: 'block_content:2ed3bb84-0883-48b9-a07c-49f0eb164456'
+  label: 'Banner - UNDP Ocean Innovations Static Map'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: ''

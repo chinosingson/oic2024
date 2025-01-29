@@ -1,0 +1,22 @@
+uuid: 552a3ab8-4a74-4764-991f-ad0b7f4022c1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: innovator_stories
+label: 'Innovator Stories'
+type: 'canonical_entities:node'
+pattern: 'library/stories/[node:title]'
+selection_criteria:
+  1069c5d9-fff3-493f-90bc-165d54e09dcb:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 1069c5d9-fff3-493f-90bc-165d54e09dcb
+    context_mapping:
+      node: node
+    bundles:
+      innovator_stories: innovator_stories
+selection_logic: and
+weight: -5
+relationships: {  }

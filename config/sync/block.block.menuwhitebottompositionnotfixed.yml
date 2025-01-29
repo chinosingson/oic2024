@@ -1,0 +1,31 @@
+uuid: 7a1331a9-b2eb-4ac4-b3a5-e63682355665
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:7bec26ee-4277-4ad2-84b2-b90bc68c43c8'
+  module:
+    - block_content
+    - system
+  theme:
+    - jango_sub
+id: menuwhitebottompositionnotfixed
+theme: jango_sub
+region: header
+weight: -36
+provider: null
+plugin: 'block_content:7bec26ee-4277-4ad2-84b2-b90bc68c43c8'
+settings:
+  id: 'block_content:7bec26ee-4277-4ad2-84b2-b90bc68c43c8'
+  label: 'Menu White Bottom Position Not Fixed'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /node/118/inner-header/v4

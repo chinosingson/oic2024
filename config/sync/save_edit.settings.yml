@@ -1,0 +1,26 @@
+langcode: en
+_core:
+  default_config_hash: nNcqzC75Ga_iQShU0PBJRKk48eiw1ArP7A3xAL5Lveg
+button_value: 'Save & Edit'
+button_weight: '-1'
+gin_primary: false
+unpublish: false
+unpublish_new_only: false
+hide_default_save: false
+hide_default_publish: false
+hide_default_preview: false
+hide_default_delete: false
+enable_node_types_automatically: false
+node_types:
+  article: article
+  events: events
+  innovator_stories: innovator_stories
+  nd_blog: nd_blog
+  nd_project: nd_project
+  nd_service: nd_service
+  nd_team: nd_team
+  page: page
+  sdg_14_targets: sdg_14_targets
+  slideshow: slideshow
+  videos: videos
+  webform: webform

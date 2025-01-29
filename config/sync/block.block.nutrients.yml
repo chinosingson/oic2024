@@ -1,0 +1,31 @@
+uuid: c005000a-6798-436a-ae0a-e1276f7f427b
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:056e482a-1631-4231-ab42-e7946fe680f1'
+  module:
+    - block_content
+    - system
+  theme:
+    - jango_sub
+id: nutrients
+theme: jango_sub
+region: content_full
+weight: -57
+provider: null
+plugin: 'block_content:056e482a-1631-4231-ab42-e7946fe680f1'
+settings:
+  id: 'block_content:056e482a-1631-4231-ab42-e7946fe680f1'
+  label: Nutrients
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /node/249

@@ -1,0 +1,15 @@
+uuid: 64fe07fd-6628-46d0-9bc6-a0dfb4cb9594
+langcode: en
+status: true
+dependencies: {  }
+name: project_600x400
+label: 'Project (600x400)'
+effects:
+  d1e94a30-b2d5-49ff-bf8f-af27c8215e0f:
+    uuid: d1e94a30-b2d5-49ff-bf8f-af27c8215e0f
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 600
+      height: 400
+      anchor: center-center

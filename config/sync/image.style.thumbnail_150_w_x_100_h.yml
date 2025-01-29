@@ -1,0 +1,15 @@
+uuid: b6ab19af-4f45-4e40-b09f-1f35d5e499c8
+langcode: en
+status: true
+dependencies: {  }
+name: thumbnail_150_w_x_100_h
+label: 'Thumbnail (150 W × 100 H)'
+effects:
+  3b481697-acac-4642-a6b6-0f105a07026f:
+    uuid: 3b481697-acac-4642-a6b6-0f105a07026f
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 150
+      height: 100
+      anchor: center-center

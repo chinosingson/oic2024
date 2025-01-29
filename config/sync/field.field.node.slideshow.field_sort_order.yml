@@ -1,0 +1,23 @@
+uuid: 0a4e14c5-a290-48e7-8fad-f706caefb7bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sort_order
+    - node.type.slideshow
+id: node.slideshow.field_sort_order
+field_name: field_sort_order
+entity_type: node
+bundle: slideshow
+label: Sort/Order
+description: 'Set the number for the sorting order of the items - e.g. 1,2,3,4,5, etc. where 1 will be the first, default slider appearing on first load.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

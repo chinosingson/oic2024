@@ -1,0 +1,33 @@
+uuid: 2715f158-f7ad-480e-b40e-ec48b7a3cf66
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.library
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - jango_sub
+third_party_settings:
+  block_class:
+    classes: 'container library-form-filter-block'
+id: library_all_filter
+theme: jango_sub
+region: header
+weight: -6
+provider: null
+plugin: 'views_exposed_filter_block:library-page_all_filter'
+settings:
+  id: 'views_exposed_filter_block:library-page_all_filter'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: 'Select to filter resources'
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/library\r\n/library/stories\r\n/library/news\r\n/library/events\r\n/library/videos"

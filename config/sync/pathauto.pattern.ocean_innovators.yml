@@ -1,0 +1,22 @@
+uuid: 9e97e5ce-2e73-468c-9f4b-530c259146a1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: ocean_innovators
+label: 'Ocean Innovators'
+type: 'canonical_entities:node'
+pattern: 'ocean-innovations/[node:title]'
+selection_criteria:
+  81494623-48f9-4d21-8b60-4f3fb4b188d5:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 81494623-48f9-4d21-8b60-4f3fb4b188d5
+    context_mapping:
+      node: node
+    bundles:
+      nd_project: nd_project
+selection_logic: and
+weight: -5
+relationships: {  }

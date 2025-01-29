@@ -1,0 +1,11 @@
+uuid: 00bcf480-ddbf-4bd1-a685-387be4421fb7
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.sdg_14_targets
+id: node.sdg_14_targets
+target_entity_type_id: node
+target_bundle: sdg_14_targets
+default_langcode: site_default
+language_alterable: false

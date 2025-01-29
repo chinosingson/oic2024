@@ -1,0 +1,26 @@
+uuid: 2decd3a9-f2f2-4abe-aed2-a5b4d9d1a160
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 1noCXlegCr5HFehQRF1ViXy1jhU1jZ_sNN99a8Sj5jo
+id: front
+label: 'Front page'
+tags:
+  title: '[site:name]'
+  description: "Ocean Innovation Challenge (OIC) is a unique new mechanism designed to accelerate progress on SDG14 by identifying, financing, advising and mentoring truly innovative, entrepreneurial and creative approaches to ocean and coastal restoration and protection that sustains livelihoods and advances the 'blue economy.'"
+  shortlink: '[site:url]'
+  canonical_url: '[site:url]'
+  image_src: 'https://oceaninnovationchallenge.org/sites/default/files/ocean-innovation-challenge-OIC-UNDP-1200x630.png'
+  abstract: 'Ocean Innovation Challenge (OIC) is a mechanism designed to accelerate progress on SDG14 by identifying, financing, advising and mentoring truly innovative, entrepreneurial and creative approaches to ocean and coastal restoration and protection.'
+  og_title: '[site:name]'
+  og_image_secure_url: 'https://oceaninnovationchallenge.org/sites/default/files/ocean-innovation-challenge-OIC-UNDP-1200x630.png'
+  og_site_name: '[site:name]'
+  og_url: '[site:url]'
+  og_image_url: 'https://oceaninnovationchallenge.org/sites/default/files/ocean-innovation-challenge-OIC-UNDP-1200x630.png'
+  og_image: 'https://oceaninnovationchallenge.org/sites/default/files/ocean-innovation-challenge-OIC-UNDP-1200x630.png'
+  og_description: 'Ocean Innovation Challenge (OIC) is a mechanism to accelerate progress on SDG14 by identifying, financing, advising and mentoring truly innovative, entrepreneurial and creative approaches to ocean and coastal restoration and protection.'
+  twitter_cards_type: summary_large_image
+  twitter_cards_image: 'https://oceaninnovationchallenge.org/sites/default/files/ocean-innovation-challenge-OIC-UNDP-800x418.png'
+  twitter_cards_description: 'Ocean Innovation Challenge (OIC) is a mechanism designed to accelerate progress on SDG14 by identifying, financing, advising and mentoring truly innovative, entrepreneurial and creative approaches to ocean and coastal restoration and protection.'
+  twitter_cards_title: '[site:name]'

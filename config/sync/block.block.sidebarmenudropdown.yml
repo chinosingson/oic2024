@@ -1,0 +1,31 @@
+uuid: f1049dab-5f48-480d-8b3b-fd40cfe3ce05
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:df39f550-95cd-4326-b111-aca04af95f8c'
+  module:
+    - block_content
+    - system
+  theme:
+    - jango_sub
+id: sidebarmenudropdown
+theme: jango_sub
+region: sidebar
+weight: -54
+provider: null
+plugin: 'block_content:df39f550-95cd-4326-b111-aca04af95f8c'
+settings:
+  id: 'block_content:df39f550-95cd-4326-b111-aca04af95f8c'
+  label: 'Sidebar Menu - DropDown'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/product-list/left-sidebar\r\n/shop-product-grid/left-sidebar"

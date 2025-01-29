@@ -1,0 +1,19 @@
+uuid: 14c0b4e0-a6f0-494a-b724-d3489430caf1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_short_title
+    - node.type.nd_project
+id: node.nd_project.field_short_title
+field_name: field_short_title
+entity_type: node
+bundle: nd_project
+label: 'Short Title'
+description: 'Enter a short title version, optional if applicable.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,388 @@
+uuid: 6bc2c905-8afa-4998-a3ca-f8345d3ddb44
+langcode: en
+status: closed
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 106
+template: false
+archive: false
+id: registration_for_undp_events_at_
+title: 'Registration: UNDP signature event at the UN Water Conference 2023'
+description: "Form where invited participants can confirm their participation for the UN 2023 Water Conference UNDP signature event event.<br />\r\nThis form will be used to send updates to interested participants.<br />\r\n&nbsp;"
+categories: {  }
+elements: |-
+  note_register:
+    '#type': processed_text
+    '#text': |-
+      <div class="container-fluid" data-bootstrap-contains="containers">
+      <div class="container">
+      <div class="row">
+      <div class="col-12">
+      <p><img alt="UNDP side event at the UN Water Conference" data-align="left" data-entity-type="file" data-entity-uuid="829d5bd0-4021-4e66-ae0e-2f279aea9385" src="/sites/default/files/inline-images/side-event%20lt%20blue%20signature%20WEB%20final.png"></p>
+
+      <p>&nbsp;</p>
+
+      <p>Taking a whole of SDG approach, UNDP together with governments and partners across the world, from local to national, regional to global, tests and delivers solutions in inclusive water resources management for upscaling and replication.  &nbsp;</p>
+
+      <p>Our work on integrated water management is anchored in three pillars of: (1) water access, (2) water security, and (3) water quality. To improve development around these issues, our work features cross cutting approaches, including: institutional support and governance; sustainable capacity development; data and information management; water economics and valuation; finance for water management; and, innovation and nature based solutions. &nbsp;</p>
+
+      <p>These solutions address on-the-ground needs and have high potential for upscaling and replication. Examples presented cover nature-based solutions and innovative approaches that have demonstrated results, tailor-fit to specific development needs, and strengthened by expert guidance on financial resource mobilization and capacity development.  &nbsp;</p>
+
+      <p>This side event will showcase commitments and present innovative tested solutions to the Water Action Agenda, to meet water challenges exacerbated by climate change and affecting freshwater ecosystems, and to accelerate sustainable development for all, leaving no one behind. &nbsp;</p>
+
+      <p>The main language for the event is English with interpretation in French and Spanish. Interpretation available for the live event for in-venue participants only.</p>
+
+      <p><strong>To watch the event live on UN Web TV</strong>:&nbsp;<a href="https://media.un.org/en/asset/k1h/k1h1qvr9rg">https://media.un.org/en/asset/k1h/k1h1qvr9rg</a></p>
+
+      <p><strong>OBJECTIVES</strong>&nbsp;</p>
+
+      <p>This high-level event aims to: &nbsp;</p>
+
+      <ul>
+      	<li>Reinforce cooperation to increase water access, strengthen water security, and improve water quality for all;&nbsp;</li>
+      	<li>Share replicable and scalable solutions through cross cutting approaches and best practices;&nbsp;</li>
+      	<li>Inspire new commitments, partnerships and investments to support integrated water management and innovative approaches and solutions at all levels; and</li>
+      	<li>Launch exciting inclusive knowledge management platforms for a Water Secure World.</li>
+      </ul>
+
+      <p><strong>AGENDA&nbsp;</strong><em>&nbsp;</em></p>
+
+      <p><strong>I. Welcome remarks and keynote address</strong> (3 mins): Usha Rao-Monari, Associate Administrator, UNDP&nbsp;</p>
+
+      <p><strong>II. High-level panel discussion</strong> (30 mins):&nbsp; Distinguished leaders on water management&nbsp;</p>
+
+      <ul>
+      	<li><strong>H.E. Sandra Vilardy</strong>, Viceministra de Políticas y Normalización Ambiental, Colombia</li>
+      	<li><strong>H.E. Amatlain E. Kabua</strong>, Ambassador &amp; Permanent Representative of the&nbsp;Republic of the Marshall Islands to the United Nations</li>
+      	<li><strong>H.E. Josephine Napwon</strong>, Minister of Environment, South Sudan</li>
+      	<li><strong>H.E. Daniel Westlén</strong>, Vice-minister for Climate and the Environment, Sweden</li>
+      </ul>
+
+      <p><strong>III. What is your aqua challenge? We've got solutions!&nbsp;</strong>(30 mins)</p>
+
+      <p>This segment will showcase solutions addressing on-the-ground needs and have high potential for replication and upscaling, and can be customized based on unique, individual needs. They include nature-based solutions and innovative approaches that have demonstrated results and strengthened by expert guidance on financial resource mobilization and capacity development. Presenters will highlight concrete results and impacts emerging from these solutions.</p>
+
+      <p><strong>Segment moderator</strong>: Shomy Chowdhury, Generation17 young leader and WASH advocate&nbsp;<br>
+      &nbsp;</p>
+
+      <p><strong>1.&nbsp;&nbsp; &nbsp;Inclusive knowledge management for a Water Secure World</strong><br>
+      Presenter: <strong>Jaehyang So</strong>, GWPTEC Chair, Global Water Partnership&nbsp;<br>
+      <strong>2.&nbsp;&nbsp; &nbsp;Transboundary waters management cooperation, integrated water resource management approaches and tools, and a global knowledge platform</strong><br>
+      Presenter(s): &nbsp;<strong>Astrid Hillers</strong>, Sr. Environmental Specialist and Program Manager of the International Waters portfolio at the Global Environment Facility&nbsp;<br>
+      <strong>Birgit Vogel</strong>, International Commission on the Protection of the Danube River (ICPDR)<br>
+      <strong>3.&nbsp;&nbsp; &nbsp;Private sector partnerships on water for development&nbsp;</strong><br>
+      Presenter: <strong>Henri Bruxelles</strong>, Executive Vice President and Global Head of Sustainability and Strategic Business Development, Danone<br>
+      &nbsp;</p>
+
+      <p><strong>IV. Wrap up and closing</strong></p>
+
+      <p><strong>Program Moderator: Mary Matthews</strong>, Senior Technical Advisor Water &amp; Ocean a.i. and Ocean Advisor &amp; Ocean Innovation Challenge Manager, UNDP</p>
+
+      <p>&nbsp;</p>
+
+      <p>Please take note of the following:</p>
+
+      <ul>
+      	<li>UNDP and any of its partner organizers do&nbsp;not provide visa application and travel support.</li>
+      	<li>Only participants registered for the UN Water Conference may attend the onsite events within UNHQ.</li>
+      	<li>Seats are on a first come-first serve basis.</li>
+      	<li>UN Web TV coverage is available for virtual participation.</li>
+      </ul>
+
+      <p>We will get in touch with you shortly with more details and updates on this event.</p>
+      </div>
+      </div>
+      </div>
+      </div><script src="//cdn.public.n1ed.com/N1D8N1ED/widgets.js"></script>
+    '#format': full_html
+  e_mail_register:
+    '#type': email
+    '#title': 'E-mail *'
+    '#required': true
+  title_mr_ms_dr_prof_etc_:
+    '#type': textfield
+    '#title': 'Title (Mr. / Ms. / Dr. / Prof., etc.)'
+  first_name_:
+    '#type': textfield
+    '#title': 'First Name *'
+    '#required': true
+  full_name_register:
+    '#type': textfield
+    '#title': 'Last Name *'
+    '#required': true
+  organization_register:
+    '#type': textfield
+    '#title': 'Organization *'
+    '#required': true
+  position_:
+    '#type': textfield
+    '#title': 'Job Title'
+  questions_you_might_want_to_ask:
+    '#type': textfield
+    '#title': 'Questions you might want to ask'
+    '#description': 'Are there any questions you would like us to address during the event? Please let us know here.'
+    '#description_display': before
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: /UNWaterConference23reg
+  page_confirm_path: ''
+  page_theme_name: jango_sub
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: true
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: inline
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: "Thank you for registering for UNDP&#39;s side event at the UN 2023 Water Conference. We will get in touch with you shortly with the full details and/or event link for this event.<br />\r\n<br />\r\nVisit us at <a href=\"https://undp.org/water\">https://undp.org/water</a> or know more about UNDP Water."
+  confirmation_attributes: {  }
+  confirmation_back: false
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: true
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: Email
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:e_mail_register:raw]'
+      to_options: {  }
+      bcc_mail: 'yasmina.rais@cap-net.org, khristine.gudczinski@undp.org'
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: oic.info@undp.org
+      from_options: {  }
+      from_name: 'UNDP signature side event at UN 2023 Water Conference'
+      reply_to: khristine.gudczinski@undp.org
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_1:
+    id: email
+    handler_id: email_1
+    label: '[current-user:account-name]Email to user'
+    notes: 'Sends email to the user who submitted the form'
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:e_mail_register:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: contact@oceaninnovationchallenge.org
+      from_options: {  }
+      from_name: 'UNDP Water through the Ocean Innovation Challenge (OIC)'
+      reply_to: khristine.gudczinski@undp.org
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: "Thank you for registering to UNDP's signature event at the UN 2023 UN Water Conference"
+      body: "<p>Dear&nbsp;[webform_submission:values:first_name_],<br />\r\n<br />\r\n&nbsp;<br />\r\nThank you for registering to UNDP&#39;s signature event at the&nbsp;UN 2023 Ocean Conference: Accelerating Sustainable Development Through Water Innovations and Solutions taking place on Thu 23 March, 13:15 - 14:30&nbsp;at&nbsp; Conference Room 2 in UN HQ, New York, with live telecast on UN Web TV.</p>\r\n\r\n<p>Please take note of the following:</p>\r\n\r\n<ul>\r\n\t<li>UNDP and any of its partner organizers do&nbsp;not provide visa application and travel support.</li>\r\n\t<li>Only participants registered for the UN Water Conference may attend the onsite events within UN HQ.</li>\r\n\t<li>Seats are on a first come-first serve basis.</li>\r\n\t<li>UN Web TV coverage is available for virtual participation.</li>\r\n</ul>\r\n\r\n<p><br />\r\nWe will get in touch with you shortly with the full details and/or event link for online participation.<br />\r\n<br />\r\n<strong>Visit us at <a href=\"https://undp.org/water\">https://undp.org/water</a>&nbsp;</strong>to know more about UNDP&#39;s work and partnerships on water .</p>\r\n\r\n<p>Best regards,<br />\r\nUNDP Water Team</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

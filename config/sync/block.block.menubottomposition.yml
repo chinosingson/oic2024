@@ -1,0 +1,31 @@
+uuid: f30e23f5-4421-44e2-b6c9-deb223910301
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:77b776ca-b403-4911-8bbf-46a5e27241be'
+  module:
+    - block_content
+    - system
+  theme:
+    - jango_sub
+id: menubottomposition
+theme: jango_sub
+region: header
+weight: -43
+provider: null
+plugin: 'block_content:77b776ca-b403-4911-8bbf-46a5e27241be'
+settings:
+  id: 'block_content:77b776ca-b403-4911-8bbf-46a5e27241be'
+  label: 'Menu Bottom Position'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/node/170/header/v7\r\n/shop-home-5\r\n/shop-home-6\r\n/home-version-4"

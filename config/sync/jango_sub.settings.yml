@@ -1,0 +1,646 @@
+features:
+  node_user_picture: 1
+  comment_user_picture: 1
+  comment_user_verification: 1
+  favicon: 1
+logo:
+  use_default: 0
+  path: 'public://logo.svg'
+favicon:
+  use_default: 0
+  path: 'public://favicon.ico'
+  mimetype: image/vnd.microsoft.icon
+retina: 0
+loader_image: 1
+phone: ''
+404_bg: {  }
+maintenance_bg:
+  - '254'
+gmap_key: ''
+nikadevs_cms_layout:
+  layout-default:
+    name: Default
+    pages: ''
+    rows:
+      id-1:
+        name: Header
+        attributes:
+          id: id-1
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+          class: header-section
+      id-2:
+        name: Content
+        attributes:
+          id: id-2
+          class:
+            - row
+        settings:
+          tag: div
+          bg_image_type: '0'
+          class: content-section
+      id-3:
+        name: 'Content Full Width'
+        attributes:
+          id: id-3
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+          class: content-full-section
+      id-4:
+        name: Footer
+        attributes:
+          id: id-4
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+          class: footer-section
+      id-0:
+        name: Hidden
+        attributes:
+          id: id-0
+          class:
+            - row
+            - sortable-parent
+    regions:
+      header:
+        row_id: id-1
+        name: Header
+        attributes:
+          id: header
+          class:
+            2: col-md-12
+        settings:
+          class: section-spacing-bottom-small
+      highlighted:
+        row_id: id-2
+        name: Highlighted
+        attributes:
+          id: highlighted
+          class:
+            - col-md-12
+      page_top:
+        row_id: id-2
+        name: 'Page Top'
+        attributes:
+          id: page_top
+          class:
+            - col-md-12
+      content:
+        row_id: id-2
+        name: Content
+        attributes:
+          id: content
+          class:
+            - col-md-12
+      sidebar:
+        row_id: id-2
+        name: Sidebar
+        attributes:
+          id: sidebar
+          class:
+            - col-md-12
+      page_bottom:
+        row_id: id-2
+        name: 'Page Bottom'
+        attributes:
+          id: page_bottom
+          class:
+            - col-md-12
+      content_full:
+        row_id: id-3
+        name: 'Content Full Width'
+        attributes:
+          id: content_full
+          class:
+            - col-md-12
+      footer:
+        row_id: id-4
+        name: Footer
+        attributes:
+          id: footer
+          class:
+            - col-md-12
+        settings:
+          class: section-spacing-top
+  layout-right-sidebar:
+    name: 'Right Sidebar'
+    pages: |-
+      /blog/*
+      /blog-list-view
+      /blog-grid-view
+    rows:
+      id-1:
+        name: Header
+        attributes:
+          id: id-1
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+      id-2:
+        name: Content
+        attributes:
+          id: id-2
+          class:
+            - row
+        settings:
+          tag: div
+          bg_image_type: '0'
+      id-3:
+        name: 'Content Full Width'
+        attributes:
+          id: id-3
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+      id-4:
+        name: Footer
+        attributes:
+          id: id-4
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+      id-0:
+        name: Hidden
+        attributes:
+          id: id-0
+          class:
+            - row
+            - sortable-parent
+    regions:
+      header:
+        row_id: id-1
+        name: Header
+        attributes:
+          id: header
+          class:
+            - col-md-12
+      highlighted:
+        row_id: id-2
+        name: Highlighted
+        attributes:
+          id: highlighted
+          class:
+            - col-md-12
+      page_top:
+        row_id: id-2
+        name: 'Page Top'
+        attributes:
+          id: page_top
+          class:
+            - col-md-12
+      content:
+        row_id: id-2
+        name: Content
+        attributes:
+          id: content
+          class:
+            - col-md-8
+        settings:
+          padding_top: '60'
+          padding_bottom: '40'
+      sidebar:
+        row_id: id-2
+        name: Sidebar
+        attributes:
+          id: sidebar
+          class:
+            - col-md-3
+            - col-md-offset-1
+        settings:
+          padding_top: '60'
+          padding_bottom: '40'
+      page_bottom:
+        row_id: id-2
+        name: 'Page Bottom'
+        attributes:
+          id: page_bottom
+          class:
+            - col-md-12
+      content_full:
+        row_id: id-3
+        name: 'Content Full Width'
+        attributes:
+          id: content_full
+          class:
+            - col-md-12
+      footer:
+        row_id: id-4
+        name: Footer
+        attributes:
+          id: footer
+          class:
+            - col-md-12
+  layout-full-width:
+    name: 'Full Width'
+    pages: |-
+      <front>
+      /ocean-innovations/*
+      /elements-blog
+      /node/139
+      /products-split
+      /shop-components-1
+      /shop-components-2
+      /node/102
+      /shop-components-5
+      /shop-components-6
+      /shop-components-7
+      *shop-home*
+      /parallax-blocks-2
+      /parallax-blocks-1
+      /counters
+      /steps
+      /pricing-tables-1
+      /pricing-tables-2
+      /feature-blocks
+      /feature-blocks-2
+      /engage-bars
+      /testimonials
+      /testimonials-2
+      /services
+      /accordion-contents
+      /app-showcase
+      /page-fullwidth-gallery
+      /node/96
+      /node/97
+      /animated-progress-bars
+      /product-launch
+      /tabbed-contents
+      /engage-bars-0
+      /about-us-*
+      /contact-us-*
+      /team
+      /blog-elements
+      /tiles
+      /meet-team
+      /home-*
+      /node/118
+      /node/118/*
+      /node/170/*
+      /node/170
+      /latest-items
+      /onepage-version*
+    rows:
+      id-1:
+        name: Header
+        attributes:
+          id: id-1
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+          class: header-section
+      id-2:
+        name: Content
+        attributes:
+          id: id-2
+          class:
+            - row
+        settings:
+          tag: div
+          bg_image_type: '0'
+          full_width: '1'
+          class: content-section
+      id-3:
+        name: 'Content Full Width'
+        attributes:
+          id: id-3
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+          class: content-full-section
+      id-4:
+        name: Footer
+        attributes:
+          id: id-4
+          class:
+            - row
+            - row-setting-open
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+          class: footer-section
+      id-0:
+        name: Hidden
+        attributes:
+          id: id-0
+          class:
+            - row
+            - sortable-parent
+    regions:
+      header:
+        row_id: id-1
+        name: Header
+        attributes:
+          id: header
+          class:
+            - col-md-12
+        settings:
+          class: section-spacing-bottom-small
+      highlighted:
+        row_id: id-2
+        name: Highlighted
+        attributes:
+          id: highlighted
+          class:
+            - col-md-12
+      page_top:
+        row_id: id-2
+        name: 'Page Top'
+        attributes:
+          id: page_top
+          class:
+            - col-md-12
+      content:
+        row_id: id-2
+        name: Content
+        attributes:
+          id: content
+          class:
+            - col-md-12
+      sidebar:
+        row_id: id-2
+        name: Sidebar
+        attributes:
+          id: sidebar
+          class:
+            - col-md-12
+      page_bottom:
+        row_id: id-2
+        name: 'Page Bottom'
+        attributes:
+          id: page_bottom
+          class:
+            - col-md-12
+      content_full:
+        row_id: id-3
+        name: 'Content Full Width'
+        attributes:
+          id: content_full
+          class:
+            - col-md-12
+      footer:
+        row_id: id-4
+        name: Footer
+        attributes:
+          id: footer
+          class:
+            - col-md-12
+        settings:
+          class: section-spacing-top
+  layout-left-sidebar:
+    name: 'Left Sidebar'
+    pages: |-
+      /*/left-sidebar
+      /user/*
+    rows:
+      id-1:
+        name: Header
+        attributes:
+          id: id-1
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+      id-2:
+        name: Content
+        attributes:
+          id: id-2
+          class:
+            - row
+        settings:
+          tag: div
+          bg_image_type: '0'
+      id-3:
+        name: 'Content Full Width'
+        attributes:
+          id: id-3
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+      id-4:
+        name: Footer
+        attributes:
+          id: id-4
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+      id-0:
+        name: Hidden
+        attributes:
+          id: id-0
+          class:
+            - row
+            - sortable-parent
+    regions:
+      header:
+        row_id: id-1
+        name: Header
+        attributes:
+          id: header
+          class:
+            - col-md-12
+      highlighted:
+        row_id: id-2
+        name: Highlighted
+        attributes:
+          id: highlighted
+          class:
+            - col-md-12
+      page_top:
+        row_id: id-2
+        name: 'Page Top'
+        attributes:
+          id: page_top
+          class:
+            - col-md-12
+      sidebar:
+        row_id: id-2
+        name: Sidebar
+        attributes:
+          id: sidebar
+          class:
+            - col-md-3
+        settings:
+          padding_top: '30'
+          padding_bottom: '40'
+      content:
+        row_id: id-2
+        name: Content
+        attributes:
+          id: content
+          class:
+            - col-md-9
+        settings:
+          padding_top: '30'
+          padding_bottom: '40'
+      page_bottom:
+        row_id: id-2
+        name: 'Page Bottom'
+        attributes:
+          id: page_bottom
+          class:
+            - col-md-12
+      content_full:
+        row_id: id-3
+        name: 'Content Full Width'
+        attributes:
+          id: content_full
+          class:
+            - col-md-12
+      footer:
+        row_id: id-4
+        name: Footer
+        attributes:
+          id: footer
+          class:
+            - col-md-12
+  layout-content-paddings:
+    name: 'Content Paddings'
+    pages: |-
+      /shop-components*
+      /product/*
+    rows:
+      id-1:
+        name: Header
+        attributes:
+          id: id-1
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+      id-2:
+        name: Content
+        attributes:
+          id: id-2
+          class:
+            - row
+        settings:
+          tag: div
+          bg_image_type: '0'
+          padding_top: '60'
+          padding_bottom: '60'
+      id-3:
+        name: 'Content Full Width'
+        attributes:
+          id: id-3
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+      id-4:
+        name: Footer
+        attributes:
+          id: id-4
+          class:
+            - row
+        settings:
+          tag: div
+          full_width: '1'
+          bg_image_type: '0'
+      id-0:
+        name: Hidden
+        attributes:
+          id: id-0
+          class:
+            - row
+            - sortable-parent
+    regions:
+      header:
+        row_id: id-1
+        name: Header
+        attributes:
+          id: header
+          class:
+            - col-md-12
+      highlighted:
+        row_id: id-2
+        name: Highlighted
+        attributes:
+          id: highlighted
+          class:
+            - col-md-12
+      page_top:
+        row_id: id-2
+        name: 'Page Top'
+        attributes:
+          id: page_top
+          class:
+            - col-md-12
+      content:
+        row_id: id-2
+        name: Content
+        attributes:
+          id: content
+          class:
+            - col-md-12
+      sidebar:
+        row_id: id-2
+        name: Sidebar
+        attributes:
+          id: sidebar
+          class:
+            - col-md-12
+      page_bottom:
+        row_id: id-2
+        name: 'Page Bottom'
+        attributes:
+          id: page_bottom
+          class:
+            - col-md-12
+      content_full:
+        row_id: id-3
+        name: 'Content Full Width'
+        attributes:
+          id: content_full
+          class:
+            - col-md-12
+      footer:
+        row_id: id-4
+        name: Footer
+        attributes:
+          id: footer
+          class:
+            - col-md-12
+_core:
+  default_config_hash: S3jbiou5JJDwvQLD_WfeQ6ztXR9CEVOiLKrl0soDYfM
+skin: default
+pagination_type: 'pagination pagination-sm'
+mega_menu_bg_color: dark

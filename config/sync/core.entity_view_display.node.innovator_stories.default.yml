@@ -1,0 +1,78 @@
+uuid: dfb927bd-c808-4bda-bb5a-b08f81bef699
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.innovator_stories.body
+    - field.field.node.innovator_stories.field_file_pdf_test
+    - field.field.node.innovator_stories.field_iframe_stories
+    - field.field.node.innovator_stories.field_image_stories
+    - field.field.node.innovator_stories.field_smart_date
+    - field.field.node.innovator_stories.field_source_stories
+    - field.field.node.innovator_stories.field_start_date
+    - node.type.innovator_stories
+  module:
+    - datetime
+    - field_formatter_class
+    - link
+    - smart_date
+    - text
+    - user
+id: node.innovator_stories.default
+targetEntityType: node
+bundle: innovator_stories
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_smart_date:
+    type: smartdate_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+      format: date_only
+      force_chronological: false
+      add_classes: false
+      time_wrapper: true
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 3
+    region: content
+  field_source_stories:
+    type: link_separate
+    label: hidden
+    settings:
+      trim_length: 360
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: _blank
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 1
+    region: content
+  field_start_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: day_month_and_year
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 2
+    region: content
+hidden:
+  field_file_pdf_test: true
+  field_iframe_stories: true
+  field_image_stories: true
+  langcode: true
+  links: true

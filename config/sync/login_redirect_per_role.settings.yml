@@ -1,0 +1,26 @@
+login:
+  authenticated:
+    redirect_url: ''
+    allow_destination: false
+    weight: 0
+  oic_managers:
+    redirect_url: /
+    allow_destination: true
+    weight: 0
+  administrator:
+    redirect_url: /
+    allow_destination: true
+    weight: 0
+logout:
+  authenticated:
+    redirect_url: ''
+    allow_destination: false
+    weight: 0
+  oic_managers:
+    redirect_url: /
+    allow_destination: true
+    weight: 0
+  administrator:
+    redirect_url: /
+    allow_destination: true
+    weight: 0

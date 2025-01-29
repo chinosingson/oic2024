@@ -1,0 +1,348 @@
+uuid: 58f9b973-be19-4905-b90b-1c146876d42c
+langcode: en
+status: closed
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 106
+template: false
+archive: false
+id: registration_forum_for_the_futur
+title: "REGISTRATION: Forum for the Future's Capstone Event"
+description: 'Form where invited participants can confirm their participation for Forum&#39;s 13 February event.'
+categories: {  }
+elements: |-
+  note_register:
+    '#type': processed_text
+    '#text': |
+      <p>&nbsp;<img alt="Forum for the Future Capstone event" data-entity-type="file" data-entity-uuid="6feae8db-e1fd-46b7-8f12-ffa0ba291ac5" src="/sites/default/files/inline-images/reg-image.png" /></p>
+
+      <p><strong>Date:</strong>&nbsp;Monday, 13 February 2023<br />
+      <strong>Time:</strong> 2000–2115 Singapore / 1500–1615 Istanbul / 1300-1415 Paris / 0700-0815 New York</p>
+
+      <p>An estimated 35 percent of all plastics in our oceans come from textile microfibres, posing a significant –but not fully understood – impact to human and marine health. While there are consumer solutions that can reduce the amount of microfibres shedding,&nbsp;how can we look upstream at the manufacturing process and truly tackle this problem from end-to-end?</p>
+
+      <p>Forum for the Future and UNDP are delighted to <b>share the findings from the study of microfibre shedding in textile manufacturing processes</b> at this webinar. Together with Forum's project partners Ramatex Group, Nanyang Environment and Water Resources Institute (NEWRI), and Universiti Teknologi Malaysia (UTM), this ocean innovation project, <a href="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.forumforthefuture.org%2Ftackling-microfibres-at-source&amp;data=05%7C01%7Calmary.paigao%40undp.org%7C6ef4598634cf48eec33a08db03771f10%7Cb3e5db5e2944483799f57488ace54319%7C0%7C0%7C638107583522239048%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000%7C%7C%7C&amp;sdata=zE8uNcXLv5hjlWP7vQOu1HvNjClFmmipJOPazZVNgGw%3D&amp;reserved=0" title="https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.forumforthefuture.org%2Ftackling-microfibres-at-source&amp;data=05%7C01%7Calmary.paigao%40undp.org%7C6ef4598634cf48eec33a08db03771f10%7Cb3e5db5e2944483799f57488ace54319%7C0%7C0%7C6381075835"><i>Tackling Microfibres at Source</i></a>, set out to understand the impact of various textile manufacturing processes on microfibre shedding, and explore solutions that reduce shedding upstream.&nbsp;</p>
+
+      <p>This capstone event for ocean innovator Forum for the Future aims for participants to:</p>
+
+      <ul>
+      	<li>Gain insights into the urgency of the microfibre pollution problem;</li>
+      	<li>Learn how it is linked to textile manufacturing through our project’s research methodology and results; and&nbsp;</li>
+      	<li>Understand how the textile industry can take action to adopt transformational solutions that lead to long-term meaningful change, that not only reduces microfibre pollution but also shifts the fashion industry to one that is socially just and regenerative for all.</li>
+      </ul>
+
+      <p><b>&nbsp;</b></p>
+
+      <p><b>Please fill in the short form below to register.</b></p>
+
+      <h5><b>Your details will only be used for the purpose of this registration and event.</b></h5>
+    '#format': ckeditor
+  e_mail_register:
+    '#type': email
+    '#title': 'E-mail *'
+    '#required': true
+  title_mr_ms_dr_prof_etc_:
+    '#type': textfield
+    '#title': 'Title (Mr. / Ms. / Dr. / Prof., etc.)'
+  first_name_:
+    '#type': textfield
+    '#title': 'First Name *'
+    '#required': true
+  full_name_register:
+    '#type': textfield
+    '#title': 'Last Name *'
+    '#required': true
+  organization_register:
+    '#type': textfield
+    '#title': 'Organization *'
+    '#required': true
+  position_:
+    '#type': textfield
+    '#title': 'Job Title'
+  processed_text_02:
+    '#type': processed_text
+    '#text': |
+      <p><strong>My selection(s):</strong></p>
+    '#format': ckeditor
+  please_select_your_option_s_:
+    '#type': checkboxes
+    '#title': 'Please select your option(s):'
+    '#options':
+      'I would like to join the online event.': 'Please send me the Save-the-Date and connection details.'
+      'I am interested to join the event but I am not available on this day.': 'I am interested to join the event but I am not available on this day. Please send me more information about Forum for the Future''s Tackling Microfibres at Source.'
+      'I am interested to receive more information about Forum for the Future''s Tackling Microfibres at Source.': 'I am interested to receive more information about Forum for the Future''s Tackling Microfibres at Source.'
+    '#required': true
+  any_questions_you_might_have_about_the_topic_:
+    '#type': textfield
+    '#title': 'Any questions you might have about the topic? Please let us know so we can provide the answers in the webinar.'
+    '#counter_type': word
+    '#counter_maximum': 200
+  processed_text_03:
+    '#type': processed_text
+    '#text': |
+      <p>We will not sign you up to our mailing list. If you are an existing UNDP OIC Quarterly Updates subscriber, signing up to this event will not affect your subscription preferences.</p>
+    '#format': ckeditor
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: /reg-forumFeb13
+  page_confirm_path: ''
+  page_theme_name: jango_sub
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: true
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: inline
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: "Thank you for registering to the online event showcasing Forum for the Future&#39;s learnings and key insights gathered from the unique collaborative project,&nbsp;<strong><a href=\"https://oceaninnovationchallenge.org/ocean-innovators#cbp=/ocean-innovations/tackling-microfibres-source-investigating-opportunities-reduce-microfibre\">Tackling Microfibres at Source.</a></strong><br />\r\n<br />\r\nPlease check your email to view the Zoom link and/or the requested information."
+  confirmation_attributes: {  }
+  confirmation_back: false
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: true
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: Email
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: oic.info@undp.org
+      to_options: {  }
+      bcc_mail: khristine.gudczinski@undp.org
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: oic.info@undp.org
+      from_options: {  }
+      from_name: 'UNDP Ocean Innovation Challenge (OIC)'
+      reply_to: '[webform_submission:values:e_mail_register:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  _current_user_account_name_email_to_user:
+    id: email
+    handler_id: _current_user_account_name_email_to_user
+    label: '[current-user:account-name]Email to user'
+    notes: 'Sends email to the user who submitted the form'
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:e_mail_register:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: khristine.gudczinski@undp.org
+      cc_options: {  }
+      from_mail: contact@oceaninnovationchallenge.org
+      from_options: {  }
+      from_name: 'UNDP Ocean Innovation Challenge (OIC)'
+      reply_to: oic.info@undp.org
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: "Thank you for registering to UNDP OIC's event: Forum for the Future's Tackling Microfibre at Source"
+      body: "<p>Dear&nbsp;[webform_submission:values:first_name_],<br />\r\n<br />\r\n&nbsp;<br />\r\nThank you for registering to UNDP Ocean Innovation Challenge&#39;s culminating&nbsp;event for ocean innovator Forum for the Future.&nbsp;<br />\r\n<br />\r\nUse this Zoom link to join the webinar/capstone event on <strong>13 February</strong>:&nbsp;<strong><a data-auth=\"Verified\" data-linkindex=\"0\" data-ogsc=\"\" data-safelink=\"true\" href=\"https://us06web.zoom.us/j/87146472830?pwd=MFVkL1VHM2RDS2ltQU5GWWdOSElQQT09\" originalsrc=\"https://us06web.zoom.us/j/87146472830?pwd=MFVkL1VHM2RDS2ltQU5GWWdOSElQQT09\" rel=\"noopener noreferrer\" shash=\"SvW0duw+GFhZqkT8S9wVgAzrUbFp1Lmpbtmy8B5gltJSz9mE2L6OOAoT5aTm5/au9Weu33/+HpqQbXS4Zbk2tXlr5M83TP2Wv0Wj6qBaRf1JuSvFcaSM49w5Dp4M9CINDrTg7YsiULUrcR6zogOkDrluGYZ/uS3BpOxUGnLxKqc=\" target=\"_blank\" title=\"Original URL: https://us06web.zoom.us/j/87146472830?pwd=MFVkL1VHM2RDS2ltQU5GWWdOSElQQT09. Click or tap if you trust this link.\">https://us06web.zoom.us/j/87146472830?pwd=MFVkL1VHM2RDS2ltQU5GWWdOSElQQT09</a></strong><br />\r\n<br />\r\nVisit us at <strong><a href=\"https://oceaninnovationchallenge.org\">https://oceaninnovationchallenge.org</a></strong> to know more about the&nbsp;Ocean Innovation Challenge&nbsp;(OIC) and the ocean innovators.</p>\r\n\r\n<p>Best regards,<br />\r\nUNDP OIC Secretariat</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

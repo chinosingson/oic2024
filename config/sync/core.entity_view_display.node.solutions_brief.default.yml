@@ -1,0 +1,173 @@
+uuid: 80e71bb8-37bd-4dbe-b8cf-ddb64146768d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.solutions_brief.field_beneficiary_countries
+    - field.field.node.solutions_brief.field_challenge
+    - field.field.node.solutions_brief.field_contact_details
+    - field.field.node.solutions_brief.field_cover_photo
+    - field.field.node.solutions_brief.field_implementation_period
+    - field.field.node.solutions_brief.field_innovator_name
+    - field.field.node.solutions_brief.field_introduction
+    - field.field.node.solutions_brief.field_keywords
+    - field.field.node.solutions_brief.field_main_results
+    - field.field.node.solutions_brief.field_methodology
+    - field.field.node.solutions_brief.field_potential_impacts
+    - field.field.node.solutions_brief.field_replication_scalability
+    - field.field.node.solutions_brief.field_sdg_14_themes
+    - field.field.node.solutions_brief.field_sdg_themes
+    - field.field.node.solutions_brief.field_solution
+    - field.field.node.solutions_brief.field_support_amount
+    - field.field.node.solutions_brief.field_theory_of_change
+    - node.type.solutions_brief
+  module:
+    - field_formatter_class
+    - image
+    - options
+    - text
+    - user
+id: node.solutions_brief.default
+targetEntityType: node
+bundle: solutions_brief
+mode: default
+content:
+  field_beneficiary_countries:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  field_challenge:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_contact_details:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 16
+    region: content
+  field_cover_photo:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_implementation_period:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 15
+    region: content
+  field_innovator_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_introduction:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_keywords:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 1
+    region: content
+  field_main_results:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_methodology:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_potential_impacts:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_replication_scalability:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_sdg_14_themes:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 3
+    region: content
+  field_sdg_themes:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 2
+    region: content
+  field_solution:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_support_amount:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  field_theory_of_change:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+hidden:
+  langcode: true
+  links: true

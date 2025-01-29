@@ -1,0 +1,20 @@
+uuid: 83adb206-3c11-4ef3-87c4-e5a4aa158f80
+langcode: en
+status: true
+dependencies:
+  module:
+    - addtoany
+  theme:
+    - jango_sub
+id: addtoanybuttons
+theme: jango_sub
+region: footer
+weight: -41
+provider: null
+plugin: addtoany_block
+settings:
+  id: addtoany_block
+  label: 'AddToAny buttons'
+  label_display: '0'
+  provider: addtoany
+visibility: {  }

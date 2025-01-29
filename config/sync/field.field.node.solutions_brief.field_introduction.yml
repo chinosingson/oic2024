@@ -1,0 +1,21 @@
+uuid: 917a283b-c23e-4a4d-b744-60b7f32b1889
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_introduction
+    - node.type.solutions_brief
+  module:
+    - text
+id: node.solutions_brief.field_introduction
+field_name: field_introduction
+entity_type: node
+bundle: solutions_brief
+label: Introduction
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

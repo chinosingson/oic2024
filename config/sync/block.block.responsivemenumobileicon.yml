@@ -1,0 +1,20 @@
+uuid: b1d0b619-fbdf-45b5-a98a-c6c4fd149823
+langcode: en
+status: false
+dependencies:
+  module:
+    - responsive_menu
+  theme:
+    - jango_sub
+id: responsivemenumobileicon
+theme: jango_sub
+region: header
+weight: 3
+provider: null
+plugin: responsive_menu_toggle
+settings:
+  id: responsive_menu_toggle
+  label: 'Responsive menu mobile icon'
+  label_display: visible
+  provider: responsive_menu
+visibility: {  }

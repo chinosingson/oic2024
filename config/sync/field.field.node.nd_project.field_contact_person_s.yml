@@ -1,0 +1,19 @@
+uuid: 1a3073b9-d576-4e10-b5dc-fdf8aa1713cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_person_s
+    - node.type.nd_project
+id: node.nd_project.field_contact_person_s
+field_name: field_contact_person_s
+entity_type: node
+bundle: nd_project
+label: 'Contact Person/s'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,23 @@
+uuid: 39a46a69-1d3e-4637-9b16-e1d654768f2a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.videos
+  module:
+    - text
+id: node.videos.body
+field_name: body
+entity_type: node
+bundle: videos
+label: Body
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: true
+field_type: text_with_summary

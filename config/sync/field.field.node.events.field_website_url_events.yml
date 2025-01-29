@@ -1,0 +1,23 @@
+uuid: 840d6981-e68d-4112-98b5-811c1fe56003
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_website_url_events
+    - node.type.events
+  module:
+    - link
+id: node.events.field_website_url_events
+field_name: field_website_url_events
+entity_type: node
+bundle: events
+label: 'Website / URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

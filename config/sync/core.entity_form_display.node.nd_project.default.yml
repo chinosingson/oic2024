@@ -1,0 +1,244 @@
+uuid: e2379169-73ed-489d-afd7-69802b56ee2d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.nd_project.body
+    - field.field.node.nd_project.field_beneficiary_country_ies
+    - field.field.node.nd_project.field_categories
+    - field.field.node.nd_project.field_client
+    - field.field.node.nd_project.field_co_financing_usd
+    - field.field.node.nd_project.field_cohort
+    - field.field.node.nd_project.field_contact_person_s
+    - field.field.node.nd_project.field_end_date
+    - field.field.node.nd_project.field_featured_image
+    - field.field.node.nd_project.field_images
+    - field.field.node.nd_project.field_oic_grant_usd
+    - field.field.node.nd_project.field_profile_pdf
+    - field.field.node.nd_project.field_sdg_14_themes
+    - field.field.node.nd_project.field_sdg_themes
+    - field.field.node.nd_project.field_short_title
+    - field.field.node.nd_project.field_small_description
+    - field.field.node.nd_project.field_start_date
+    - field.field.node.nd_project.field_url_the_site
+    - field.field.node.nd_project.field_video
+    - field.field.node.nd_project.field_video_embed
+    - image.style.thumbnail
+    - node.type.nd_project
+  module:
+    - datetime
+    - image
+    - imce
+    - media_library
+    - path
+    - text
+id: node.nd_project.default
+targetEntityType: node
+bundle: nd_project
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 13
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_beneficiary_country_ies:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_categories:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_client:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_co_financing_usd:
+    type: string_textfield
+    weight: 8
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_cohort:
+    type: options_buttons
+    weight: 24
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_contact_person_s:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_end_date:
+    type: datetime_datelist
+    weight: 10
+    region: content
+    settings:
+      increment: 15
+      date_order: MDY
+      time_type: none
+    third_party_settings: {  }
+  field_featured_image:
+    type: image_image
+    weight: 14
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: medium
+    third_party_settings:
+      imce:
+        enabled: false
+  field_images:
+    type: image_image
+    weight: 16
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings:
+      imce:
+        enabled: false
+  field_oic_grant_usd:
+    type: string_textfield
+    weight: 7
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_profile_pdf:
+    type: media_library_widget
+    weight: 26
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_sdg_themes:
+    type: options_buttons
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_short_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_small_description:
+    type: text_textarea
+    weight: 11
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_start_date:
+    type: datetime_datelist
+    weight: 9
+    region: content
+    settings:
+      increment: 15
+      date_order: MDY
+      time_type: none
+    third_party_settings: {  }
+  field_url_the_site:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_video_embed:
+    type: media_library_widget
+    weight: 15
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 17
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 22
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 20
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 23
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 21
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 18
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  field_sdg_14_themes: true
+  field_video: true

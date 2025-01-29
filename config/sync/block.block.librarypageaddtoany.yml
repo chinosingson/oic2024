@@ -1,0 +1,31 @@
+uuid: 3b2a11ed-5232-4997-9904-ed3b807562f2
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:579378cc-6512-40b0-a071-cdbcfdfc32e4'
+  module:
+    - block_content
+    - system
+  theme:
+    - jango_sub
+id: librarypageaddtoany
+theme: jango_sub
+region: content
+weight: -51
+provider: null
+plugin: 'block_content:579378cc-6512-40b0-a071-cdbcfdfc32e4'
+settings:
+  id: 'block_content:579378cc-6512-40b0-a071-cdbcfdfc32e4'
+  label: 'Library Page AddToAny'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /library

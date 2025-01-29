@@ -1,0 +1,15 @@
+uuid: abfe63a5-b91f-4e97-bffe-dcc21c84b09d
+langcode: en
+status: true
+dependencies:
+  config:
+    - flag.flag.wishlist
+  module:
+    - flag
+id: flag_action.wishlist_flag
+label: '+ Wishlist'
+type: commerce_product
+plugin: 'flag_action:wishlist_flag'
+configuration:
+  flag_id: wishlist
+  flag_action: flag

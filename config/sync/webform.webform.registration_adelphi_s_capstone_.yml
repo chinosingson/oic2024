@@ -1,0 +1,430 @@
+uuid: 6764a5a4-f402-4ea5-8976-e6a12eec24f0
+langcode: en
+status: closed
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 106
+template: false
+archive: false
+id: registration_adelphi_s_capstone_
+title: "REGISTRATION: adelphi's Capstone Event"
+description: 'Form where invited participants can confirm their participation for adelphi&#39;s August capstone event.'
+categories: {  }
+elements: |-
+  note_register:
+    '#type': processed_text
+    '#text': |-
+      <div class="container-fluid" data-bootstrap-contains="containers">
+      <div class="container">
+      <div class="row">
+      <div class="col-12">
+      <p><img alt="adelphi capstone registration" data-entity-type="file" data-entity-uuid="804d221d-ea09-4857-9dd6-f0ba5bfe3e90" src="/sites/default/files/inline-images/adelphi%20-%20registration.png" /></p>
+
+      <p><strong>Date:</strong>&nbsp; Wednesday, 16 August 2023<br />
+      <strong>Time:</strong>&nbsp; <span><span><span><span><span lang="EN-US" xml:lang="EN-US">08:00 Central Europe / 11:00 Maldives&nbsp; / 18:00 Fiji</span></span></span></span></span></p>
+
+      <p>&nbsp;</p>
+
+      <p>Every year, the Maldives generates nearly 22,000 tons of plastic waste, and, due to poor waste management practices, as much as a third of it ends up in our coastal areas. With support from the OIC and in cooperation with Zero Waste Maldives, adelphi GmbH helped the Government of the Maldives put in place a national Extended Producer Responsibility (EPR) framework that will help the Maldives to close the loop on plastics wastes to reduce ocean pollution.</p>
+
+      <p>We invite you to join us in an online event on&nbsp;<strong>16 August 2023 (</strong>09:00&nbsp;Istanbul / 08:00 Central Europe / 11:00 Maldives&nbsp; / 18:00 Fiji) to discuss the waste management challenges faced by small island developing states (SIDS) while shedding light on the effectiveness of EPR as an adequate policy solution.</p>
+
+      <p>Drawing from the experiences and lessons learned from the Maldives, adelphi and Zero Waste Maldives will share valuable insights and guidance to empower other SIDS in their efforts to combat plastic pollution and improve waste management practices. One of the key outcomes of the project, the&nbsp;<strong><a href="https://adelphi.de/en/publications/extended-producer-responsibility-implications-on-small-island-developing-states-sids">EPR manual for SIDS</a></strong>, which has been prepared specifically for SIDS countries as a guiding document, will be launched globally for the first time.</p>
+
+      <p>During the event, this manual will be presented, providing practical information on implementing EPR frameworks in SIDS. Experts, practitioners, and stakeholders in the field of waste management will gather at this event in a unique opportunity to gain valuable insights, share experiences, and collectively work towards effective solutions for plastic pollution in SIDS.</p>
+
+      <table aria-rowcount="7" border="1" data-tablelook="1184" data-tablestyle="MsoTableGrid">
+      	<tbody>
+      		<tr>
+      			<td colspan="2" data-celllook="65536" role="rowheader"><strong>Provisional Agenda</strong>&nbsp;(as of 31 July 2023)</td>
+      		</tr>
+      		<tr aria-rowindex="2" role="row">
+      			<td data-celllook="65536" role="rowheader">
+      			<p paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{78}" paraid="293487441">5 minutes&nbsp;</p>
+      			</td>
+      			<td data-celllook="0">
+      			<p paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{85}" paraid="795958387"><strong>Opening Remarks&nbsp;&nbsp;</strong></p>
+      			</td>
+      		</tr>
+      		<tr aria-rowindex="3" role="row">
+      			<td data-celllook="65536" role="rowheader">
+      			<p paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{115}" paraid="419143385">12 minutes&nbsp;</p>
+      			</td>
+      			<td data-celllook="0">
+      			<p paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{124}" paraid="456438978"><strong>Overview of Waste Management in SIDS&nbsp;&nbsp;</strong></p>
+
+      			<ul role="list">
+      				<li aria-setsize="-1" data-aria-level="1" data-aria-posinset="1" data-font="Symbol" data-leveltext="" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559684&quot;:-2,&quot;335559685&quot;:360,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-listid="10" role="listitem">
+      				<p paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{131}" paraid="1136991977">Overview of challenges and unique circumstances faced by SIDS regarding waste management&nbsp;&nbsp;</p>
+      				</li>
+      				<li aria-setsize="-1" data-aria-level="1" data-aria-posinset="2" data-font="Symbol" data-leveltext="" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559684&quot;:-2,&quot;335559685&quot;:360,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-listid="10" role="listitem">
+      				<p paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{138}" paraid="601925304">Brief discussions on the environmental and socio-economic impacts of improper waste management &nbsp;</p>
+      				</li>
+      				<li aria-setsize="-1" data-aria-level="1" data-aria-posinset="3" data-font="Symbol" data-leveltext="" data-list-defn-props="{&quot;335552541&quot;:1,&quot;335559684&quot;:-2,&quot;335559685&quot;:360,&quot;335559991&quot;:360,&quot;469769226&quot;:&quot;Symbol&quot;,&quot;469769242&quot;:[8226],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-listid="10" role="listitem">
+      				<p paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{146}" paraid="134851091">Situation in the Maldives - opportunities, challenges, lessons learnt, during the UNDP OIC incubator&nbsp;&nbsp;</p>
+      				</li>
+      			</ul>
+      			</td>
+      		</tr>
+      		<tr aria-rowindex="4" role="row">
+      			<td data-celllook="65536" role="rowheader">
+      			<p paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{172}" paraid="1546424089">20 minutes&nbsp;</p>
+      			</td>
+      			<td data-celllook="0">
+      			<p paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{179}" paraid="880450913"><strong>Experts panel on waste management in SIDS&nbsp;</strong>reflecting experience from the&nbsp;Pacific, African and Caribbean SIDS, looking at the country and regional level</p>
+
+      			<ul>
+      				<li paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{179}" paraid="880450913">Chris Corbin, Programme Manager for the Assessment and Management of Environmental Pollution (AMEP) Sub-Programme, UNEP Caribbean Environment Programme</li>
+      				<li paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{179}" paraid="880450913">Yuvan Beejadhur, Senior Adviser to the Director General of the World Trade Organization</li>
+      				<li paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{179}" paraid="880450913">Speaker from the Pacific (To be confirmed)</li>
+      			</ul>
+      			</td>
+      		</tr>
+      		<tr aria-rowindex="5" role="row">
+      			<td data-celllook="65536" role="rowheader">
+      			<p paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{202}" paraid="1571528052">10 minutes&nbsp;</p>
+      			</td>
+      			<td data-celllook="0">
+      			<p paraeid="{a25b98c9-fffe-40fb-a566-13053cd41baa}{209}" paraid="330853116"><strong>Presentation of EPR manual developed as guiding document for stakeholders in SIDS&nbsp;</strong></p>
+      			</td>
+      		</tr>
+      		<tr aria-rowindex="6" role="row">
+      			<td data-celllook="65536" role="rowheader">
+      			<p paraeid="{ea6c0722-7632-4ddb-9e58-1a98dc3b3933}{4}" paraid="1068093205">10 minutes&nbsp;&nbsp;</p>
+      			</td>
+      			<td data-celllook="0">
+      			<p paraeid="{ea6c0722-7632-4ddb-9e58-1a98dc3b3933}{15}" paraid="1995797408"><strong>Q&amp;A</strong></p>
+      			</td>
+      		</tr>
+      		<tr aria-rowindex="7" role="row">
+      			<td data-celllook="65536" role="rowheader">
+      			<p paraeid="{ea6c0722-7632-4ddb-9e58-1a98dc3b3933}{34}" paraid="1622026479">3 minutes&nbsp;&nbsp;</p>
+      			</td>
+      			<td data-celllook="0">
+      			<p paraeid="{ea6c0722-7632-4ddb-9e58-1a98dc3b3933}{43}" paraid="342179496"><strong>Closing remarks</strong>&nbsp;</p>
+      			</td>
+      		</tr>
+      	</tbody>
+      </table>
+
+      <p>&nbsp;</p>
+
+      <h4>&nbsp;</h4>
+
+      <h3><b>Please fill in the short form below to register.</b></h3>
+
+      <h6><b>Your details will only be used for the purpose of this registration and event.</b></h6>
+      </div>
+      </div>
+      </div>
+      </div>
+      <script src="//cdn.public.n1ed.com/N1D8N1ED/widgets.js"></script>
+    '#format': ckeditor
+  e_mail_register:
+    '#type': email
+    '#title': 'E-mail *'
+    '#required': true
+  title_mr_ms_dr_prof_etc_:
+    '#type': textfield
+    '#title': 'Title (Mr. / Ms. / Dr. / Prof., etc.)'
+  first_name_:
+    '#type': textfield
+    '#title': 'First Name *'
+    '#required': true
+  full_name_register:
+    '#type': textfield
+    '#title': 'Last Name *'
+    '#required': true
+  organization_register:
+    '#type': textfield
+    '#title': 'Organization *'
+    '#required': true
+  position_:
+    '#type': textfield
+    '#title': 'Job Title'
+  processed_text_02:
+    '#type': processed_text
+    '#text': |
+      <p><strong>My selection(s):</strong></p>
+    '#format': ckeditor
+  please_select_your_option_s_:
+    '#type': checkboxes
+    '#title': 'Please select your option(s):'
+    '#options':
+      'I would like to join the online event.': 'Please send me the Save-the-Date and connection details.'
+      'I am interested to join the event but I am not available on this day.': 'I am interested to join the event but I am not available on this day. Please send me more information about adelphi''s EPR Scheme for plastic and packaging wastes in the Maldives'
+    '#required': true
+  any_questions_you_might_have_about_the_topic_:
+    '#type': textfield
+    '#title': 'Any questions you might have about the topic? Please let us know so we can provide the answers in the webinar.'
+    '#counter_type': word
+    '#counter_maximum': 200
+  processed_text_03:
+    '#type': processed_text
+    '#text': |
+      <p>We will not sign you up to our mailing list. If you are an existing UNDP OIC Quarterly Updates subscriber, signing up to this event will not affect your subscription preferences.</p>
+    '#format': ckeditor
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: jango_sub
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: ''
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: true
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: inline
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: "Thank you for your interest in <a href=\"https://oceaninnovationchallenge.org/ocean-innovators#cbp=/ocean-innovations/developing-epr-scheme-plastic-and-packaging-waste-maldives\">Ocean Innovator adelphi</a>&#39;s online event entitled &quot;<strong><em>Extended Producer Responsibility (EPR): A &lsquo;plastic waste management&rsquo; policy solution for SIDS, with lessons learnt from EPR Maldives</em>&quot;.&nbsp;</strong><br />\r\n<br />\r\nPlease check your email to view the Zoom link and/or the requested information."
+  confirmation_attributes: {  }
+  confirmation_back: false
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: true
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: Email
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: oic.info@undp.org
+      to_options: {  }
+      bcc_mail: khristine.gudczinski@undp.org
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: oic.info@undp.org
+      from_options: {  }
+      from_name: 'UNDP Ocean Innovation Challenge (OIC)'
+      reply_to: '[webform_submission:values:e_mail_register:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  _current_user_account_name_email_to_user:
+    id: email
+    handler_id: _current_user_account_name_email_to_user
+    label: 'Email to user'
+    notes: 'Sends email to the user who submitted the form'
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:e_mail_register:raw]'
+      to_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      cc_mail: khristine.gudczinski@undp.org
+      cc_options: {  }
+      from_mail: contact@oceaninnovationchallenge.org
+      from_options: {  }
+      from_name: 'UNDP Ocean Innovation Challenge (OIC)'
+      reply_to: oic.info@undp.org
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: "Thank you for your interest in UNDP Ocean Innovator adelphi's EPR Scheme for plastic and packaging wastes"
+      body: "<p>Dear&nbsp;[webform_submission:values:first_name_],<br />\r\n<br />\r\nThank you for your interest in UNDP Ocean Innovator adelphi and their online capstone event&nbsp;<strong><em>Extended Producer Responsibility (EPR): A &lsquo;plastic waste management&rsquo; policy solution for SIDS, with lessons learnt from EPR Maldives</em></strong><em>.</em> Click <a href=\"https://oceaninnovationchallenge.org/ocean-innovators#cbp=/ocean-innovations/developing-epr-scheme-plastic-and-packaging-waste-maldives\">here</a> to know more about their work, or visit them at <a href=\"https://adelphi.de\">https://adelphi.de</a>.&nbsp;<br />\r\n<br />\r\nKindly refer to the below information for the connection details of the capstone event:</p>\r\n\r\n<ul>\r\n\t<li><strong>Event Title</strong>: Extended Producer Responsibility (EPR) as a policy &lsquo;plastic waste management&rsquo; solution for SIDS, with lessons learnt from EPR Maldives - A Capstone Event</li>\r\n\t<li><strong>Date:</strong>&nbsp;Wednesday, 16&nbsp;August 2023</li>\r\n\t<li><strong>Time:</strong>&nbsp;09:00 Istanbul / 08:00 Central European / 18:00 Fiji / 11:00 Maldives</li>\r\n\t<li><strong>Zoom Link</strong>:&nbsp;https://undp.zoom.us/j/81229730990&nbsp;</li>\r\n</ul>\r\nWe will send a calendar invite and reminder closer to the event.\r\n\r\n<p>Visit us at <strong><a href=\"https://oceaninnovationchallenge.org\">https://oceaninnovationchallenge.org</a></strong> to know more about the&nbsp;Ocean Innovation Challenge&nbsp;(OIC) and innovators, and the ongoing <a href=\"https://bit.ly/UNDPOICCoh4\"><strong>4th Call for Proposals</strong></a> on SIDS and coastal least developed countries (LDCs) Blue Economy.<br />\r\n&nbsp;</p>\r\n\r\n<p>Best regards,<br />\r\nUNDP OIC Secretariat</p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

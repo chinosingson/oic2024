@@ -1,0 +1,35 @@
+uuid: 5c3bb08f-93bb-4bf1-805d-ceff7b08cf8f
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:22d11eab-f9ce-4f8d-b5b9-0d6a124cae8f'
+  module:
+    - block_content
+    - block_id
+    - system
+  theme:
+    - jango
+third_party_settings:
+  block_id:
+    id: block_list_marine_litter
+id: marinelitterplastics_2
+theme: jango
+region: content_full
+weight: 0
+provider: null
+plugin: 'block_content:22d11eab-f9ce-4f8d-b5b9-0d6a124cae8f'
+settings:
+  id: 'block_content:22d11eab-f9ce-4f8d-b5b9-0d6a124cae8f'
+  label: 'Marine Litter/Plastics'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/node/249\r\n/call-for-innovations/1st-call-marine-pollution-reduction\r\n"

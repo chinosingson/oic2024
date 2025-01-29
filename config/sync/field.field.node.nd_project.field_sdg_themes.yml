@@ -1,0 +1,29 @@
+uuid: 08a76062-ba4e-4edc-9485-39cf43625f6c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sdg_themes
+    - node.type.nd_project
+    - taxonomy.vocabulary.sdg_themes
+id: node.nd_project.field_sdg_themes
+field_name: field_sdg_themes
+entity_type: node
+bundle: nd_project
+label: 'SDG Themes'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      sdg_themes: sdg_themes
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,24 @@
+uuid: 2077ab03-8d3e-4c93-b19e-19c36847d5c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_iframe_code_videos
+    - node.type.videos
+  module:
+    - text
+id: node.videos.field_iframe_code_videos
+field_name: field_iframe_code_videos
+entity_type: node
+bundle: videos
+label: 'iFrame Code'
+description: "Copy and paste iframe code here. The code should start with an opening <iframe> and end with a closing </iframe> tag.\r\nUse the example provided in the placeholder; simply replace the URL for the external resource, while retaining the rest of the code especially the width and the height of the iFrame."
+required: true
+translatable: false
+default_value:
+  -
+    value: '<iframe width="100%" height="450" src="https://www.youtube.com/embed/hFu4tjkrtKY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+    format: html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

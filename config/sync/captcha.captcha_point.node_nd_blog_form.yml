@@ -1,0 +1,7 @@
+uuid: 70660a22-205b-4b56-9d99-a6c91eafe1ba
+langcode: en
+status: false
+dependencies: {  }
+formId: node_nd_blog_form
+captchaType: default
+label: node_nd_blog_form

@@ -1,0 +1,29 @@
+uuid: a36b7a8d-b609-472a-be75-2eb8feee0a17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_keywords
+    - node.type.solutions_brief
+    - taxonomy.vocabulary.keywords
+id: node.solutions_brief.field_keywords
+field_name: field_keywords
+entity_type: node
+bundle: solutions_brief
+label: Keywords
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      keywords: keywords
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

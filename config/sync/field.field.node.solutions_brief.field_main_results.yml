@@ -1,0 +1,21 @@
+uuid: 9a95a35c-b4f1-48db-84ee-983165237271
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_main_results
+    - node.type.solutions_brief
+  module:
+    - text
+id: node.solutions_brief.field_main_results
+field_name: field_main_results
+entity_type: node
+bundle: solutions_brief
+label: 'Main Results'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

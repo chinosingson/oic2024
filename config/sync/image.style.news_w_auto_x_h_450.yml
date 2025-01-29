@@ -1,0 +1,15 @@
+uuid: e67269e6-8596-4a05-b870-e785fdb2cbb7
+langcode: en
+status: true
+dependencies: {  }
+name: news_w_auto_x_h_450
+label: 'News (W auto x H 450)'
+effects:
+  522bd5c7-aea3-4720-bd79-91cfcd72ba82:
+    uuid: 522bd5c7-aea3-4720-bd79-91cfcd72ba82
+    id: image_scale
+    weight: 1
+    data:
+      width: null
+      height: 450
+      upscale: true

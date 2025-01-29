@@ -1,0 +1,31 @@
+uuid: 5add0f54-bb70-4d96-875e-e72d2ad39373
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:6079ab0d-3d7b-4d3c-99db-8522bcc63796'
+  module:
+    - block_content
+    - system
+  theme:
+    - jango_sub
+id: howtoapply3rdcall
+theme: jango_sub
+region: content_full
+weight: -52
+provider: null
+plugin: 'block_content:6079ab0d-3d7b-4d3c-99db-8522bcc63796'
+settings:
+  id: 'block_content:6079ab0d-3d7b-4d3c-99db-8522bcc63796'
+  label: 'How to Apply (3rd Call)'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /node/328

@@ -1,0 +1,21 @@
+uuid: 25c996ae-0a0d-448f-9f63-e476c8484018
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: types_of_innovations_3rd_call_list_bullets
+label: 'types of innovations 3rd call - list bullets'
+code: |-
+  #block-typesofinnovations3rdcall .c-feature-13-container, #block-howtoapply3rdcall > h3 {
+      color: #ffffff;
+  }
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /node/328
+contexts: {  }
+conditions_require_all: true

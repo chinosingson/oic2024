@@ -1,0 +1,21 @@
+uuid: 74b6863d-6b67-429a-9a60-82b00788d06e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_beneficiary_countries
+    - node.type.solutions_brief
+  module:
+    - options
+id: node.solutions_brief.field_beneficiary_countries
+field_name: field_beneficiary_countries
+entity_type: node
+bundle: solutions_brief
+label: 'Beneficiary Countries'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,25 @@
+uuid: 4b4c5964-0dfe-4aef-8835-78c48ec37587
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.library
+  module:
+    - views
+  theme:
+    - jango_sub
+id: views_block__library_innovator_iframe_embed_block
+theme: jango_sub
+region: content_full
+weight: -50
+provider: null
+plugin: 'views_block:library-innovator_iframe_embed_block'
+settings:
+  id: 'views_block:library-innovator_iframe_embed_block'
+  label: ''
+  label_display: '0'
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility: {  }

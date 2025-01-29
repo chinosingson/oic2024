@@ -1,0 +1,507 @@
+uuid: ca9b0169-f4f5-49fb-89ac-82a6a7c0873e
+langcode: en
+status: closed
+dependencies: {  }
+weight: 0
+open: null
+close: null
+uid: 1
+template: false
+archive: false
+id: application_form
+title: 'Application Form'
+description: ''
+categories: {  }
+elements: |-
+  divider_2:
+    '#type': processed_text
+    '#text': '<div class="c-content-divider c-icon-bg"> <i class="icon-drop c-rounded c-font-white"></i> </div>'
+    '#format': html
+  project_information_section:
+    '#type': webform_section
+    '#title': 'About the Innovation'
+    '#attributes':
+      class:
+        - section-spacing-bottom-small
+    project_title:
+      '#type': textfield
+      '#title': 'Innovation Title *'
+      '#required': true
+    project_time_frame_12_24_months_:
+      '#type': textfield
+      '#title': 'Time frame (12 - 24 months) *'
+      '#required': true
+    oic_budget_request_50_000_usd_250_000_usd_:
+      '#type': textfield
+      '#title': 'OIC Budget Request (50,000 USD - 250,000 USD) *'
+      '#required': true
+    co_financing_provided_by_proponent_usd_:
+      '#type': textfield
+      '#title': 'Co-financing provided by proponent (USD)'
+    beneficiary_countries:
+      '#type': label
+      '#title': 'Beneficiary Countries * Type the first three letters to get suggestions. Only developing countries qualify as beneficiary country/ies. ''Global'' and ''Regional'' are included in the list.'
+      '#description': 'Type the first few letters to get suggestions. Only least develop countries qualify as beneficiary country/ies.'
+    container:
+      '#type': container
+      '#attributes':
+        class:
+          - row
+      country_1_beneficiary_search:
+        '#type': webform_autocomplete
+        '#title': 'Country 1: *'
+        '#prepopulate': true
+        '#required': true
+        '#wrapper_attributes':
+          class:
+            - 'col-md-6 col-sm-12'
+        '#attributes':
+          class:
+            - 'form-control input-lg'
+        '#autocomplete_items': beneficiary_countries_custom_lis
+      country_2_:
+        '#type': webform_autocomplete
+        '#title': 'Country 2:'
+        '#prepopulate': true
+        '#wrapper_attributes':
+          class:
+            - 'col-md-6 col-sm-12'
+        '#attributes':
+          class:
+            - 'form-control input-lg'
+        '#autocomplete_items': beneficiary_countries_custom_lis
+      country_3_:
+        '#type': webform_autocomplete
+        '#title': 'Country 3:'
+        '#prepopulate': true
+        '#wrapper_attributes':
+          class:
+            - 'col-md-6 col-sm-12'
+        '#attributes':
+          class:
+            - 'form-control input-lg'
+        '#autocomplete_items': beneficiary_countries_custom_lis
+      country_4_beneficiary:
+        '#type': webform_autocomplete
+        '#title': 'Country 4:'
+        '#prepopulate': true
+        '#wrapper_attributes':
+          class:
+            - 'col-md-6 col-sm-12'
+        '#attributes':
+          class:
+            - 'form-control input-lg'
+        '#autocomplete_items': beneficiary_countries_custom_lis
+      country_5_beneficiary:
+        '#type': webform_autocomplete
+        '#title': 'Country 5:'
+        '#prepopulate': true
+        '#wrapper_attributes':
+          class:
+            - 'col-md-6 col-sm-12'
+        '#attributes':
+          class:
+            - 'form-control input-lg'
+        '#autocomplete_items': beneficiary_countries_custom_lis
+      country_6_beneficiary:
+        '#type': webform_autocomplete
+        '#title': 'Country 6:'
+        '#prepopulate': true
+        '#wrapper_attributes':
+          class:
+            - 'col-md-6 col-sm-12'
+        '#attributes':
+          class:
+            - 'form-control input-lg'
+        '#autocomplete_items': beneficiary_countries_custom_lis
+    brief_description_of_project_up_to_500_words_:
+      '#type': textarea
+      '#title': 'Description of innovation (up to 500 words)  *'
+      '#required': true
+      '#counter_type': word
+      '#counter_maximum': 500
+    describe_how_project_address_sustainable_fisheries:
+      '#type': textarea
+      '#title': 'Describe specifically how the innovation will address Sustainable Fisheries - SDGs 14.4, 14.7, 14.b. (250 words) *'
+      '#required': true
+      '#counter_type': word
+      '#counter_maximum': 250
+    describe_how_project_innovative_appropriate:
+      '#type': textarea
+      '#title': 'Innovativeness/Transformational (250 words) * '
+      '#placeholder': 'Describe how it is innovative and, as appropriate, potentially transformational (250 words)'
+      '#required': true
+      '#counter_type': word
+      '#counter_maximum': 250
+    describe_how_project_sustained_after_initial_grant:
+      '#type': textarea
+      '#title': 'Sustainability (250 words) * '
+      '#placeholder': 'Briefly describe how the innovation would be sustained after the initial OIC support'
+      '#required': true
+      '#counter_type': word
+      '#counter_maximum': 250
+    explain_how_project_demonstrated_replicated_scaled_up:
+      '#type': textarea
+      '#title': 'Replicability & Upscaling (250 words) * '
+      '#placeholder': 'Explain how the innovation, once demonstrated, could be replicated and scaled up '
+      '#required': true
+      '#counter_type': word
+      '#counter_maximum': 250
+    list_key_project_stakeholders_brief_description_roles:
+      '#type': textarea
+      '#title': 'List key stakeholders and brief description of their roles (150 words) *'
+      '#required': true
+      '#counter_type': word
+      '#counter_maximum': 150
+    briefly_describe_project_management_arrangements:
+      '#type': textarea
+      '#title': 'Briefly describe how the innovation will be managed (150 words) *'
+      '#required': true
+      '#counter_type': word
+      '#counter_maximum': 150
+    briefly_describe_how_project_could_impact_poverty_reduction:
+      '#type': textarea
+      '#title': 'Briefly describe how the innovation will impact poverty reduction, livelihoods creation, and/or gender equity (150 words)*'
+      '#required': true
+      '#counter_type': word
+      '#counter_maximum': 150
+  divider_1:
+    '#type': processed_text
+    '#text': '<div class="c-content-divider c-icon-bg"> <i class="icon-drop c-rounded c-font-white"></i> </div>'
+    '#format': html
+  project_proponent_organization_section:
+    '#type': webform_section
+    '#title': 'Project Proponent Organization '
+    '#attributes':
+      class:
+        - section-spacing-top-small
+    name_project_proponent_organization:
+      '#type': textfield
+      '#title': 'Name of proponent organization *'
+      '#required': true
+    _location_country:
+      '#type': label
+      '#title': 'Proponent Country  (may be in either developing or developed countries) :*'
+    country_all_countries_listed_:
+      '#type': webform_autocomplete
+      '#title': 'Type the first three letters to get suggestions.'
+      '#prepopulate': true
+      '#required': true
+      '#attributes':
+        class:
+          - 'form-control input-lg'
+      '#autocomplete_items': countries_undp
+    address_street_city_state_province_postal_code:
+      '#type': textarea
+      '#title': 'Address (street, city, state/province, postal code) *'
+      '#rows': 2
+      '#placeholder': 'Address (street, city, state/province, postal code)'
+      '#autocomplete': ''
+      '#required': true
+    name_of_individual_submitting_proposal_on_behalf_of_the_organiza:
+      '#type': textfield
+      '#title': 'Name of individual submitting proposal on behalf of the organization *'
+      '#required': true
+    title_e_g_project_manager_technical_advisor_proprietor_etc_:
+      '#type': textfield
+      '#title': 'Title (e.g., Project Manager, Technical Advisor, Proprietor, etc.) *'
+      '#required': true
+    e_mail:
+      '#type': email
+      '#title': 'E-mail *'
+      '#required': true
+    telephone:
+      '#type': textfield
+      '#title': 'Telephone/Mobile Number'
+      '#required': true
+    project_partners:
+      '#type': textfield
+      '#title': 'Project partners (if any)'
+      '#multiple': 20
+  agree_get_updates:
+    '#type': webform_terms_of_service
+    '#title': 'I would like to get updates in the future by subscribing to the UNDP OIC updates (you may unsubscribe at anytime).'
+    '#required': true
+    '#terms_title': 'Terms title'
+    '#terms_content': 'Terms content'
+  _indicate_required_fields_and_must_be_completed_:
+    '#type': label
+    '#title': '* indicate required fields and must be completed.'
+    '#attributes':
+      class:
+        - required-fields-text
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+  for_additional_info:
+    '#type': processed_text
+    '#wrapper_attributes':
+      class:
+        - for-additional-inquiries-border-left
+    '#display_on': both
+    '#text': |
+      <div class="c-content-title-3 c-border-green c-left c-title">
+            <h4 class="c-left c-font ">Contact us by email (oic.info@undp.org) for any problems or questions.</h4>
+
+            <h4 class="c-left c-font ">Please add the OIC email (oic.info@undp.org) to your 'Safe senders list' or address book to make sure you are able to receive upcoming updates and future communications from us.</h4>
+      </div>
+    '#format': html
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: jango_sub
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_open_message: ''
+  form_close_message: "<p>STATUS (Updated 15 May 2023):</p>\r\nThe selected innovators for this Call 3 will be launched on 8 June 2023.<br />\r\n<br />\r\nWe appreciate everyone&rsquo;s enthusiasm, patience, and understanding.\r\n<p>&nbsp;</p>"
+  form_exception_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_disable_remote_addr: false
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_reset: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  wizard_page_type: container
+  wizard_page_title_tag: h2
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_url: ''
+  confirmation_title: ''
+  confirmation_message: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  token_delete: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    handler_id: email
+    label: Email
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: oic.info@undp.org
+      to_options: {  }
+      bcc_mail: admin@ibuild.ph
+      bcc_options: {  }
+      cc_mail: 'mary.matthews@undp.org,khristine.gudczinski@undp.org'
+      cc_options: {  }
+      from_mail: oic.info@undp.org
+      from_options: {  }
+      from_name: 'Ocean Innovation Challenge (OIC)'
+      reply_to: '[webform_submission:values:e_mail:raw]'
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+  email_to_user:
+    id: email
+    handler_id: email_to_user
+    label: 'Email to user'
+    notes: ''
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:e_mail:raw]'
+      to_options: {  }
+      bcc_mail: admin@ibuild.ph
+      bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      from_mail: contact@oceaninnovationchallenge.org
+      from_options: {  }
+      from_name: 'Ocean Innovation Challenge (OIC)'
+      reply_to: oic.info@undp.org
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      subject: 'Thank you for submitting your application!'
+      body: "Dear&nbsp;[webform_submission:values:name_of_individual_submitting_proposal_on_behalf_of_the_organiza],<br />\r\n<br />\r\nThank you for submitting your application. The OIC Secretariat shall be in touch with you shortly.\r\n<p><strong>Please add the OIC email (oic.info@undp.org) to your &#39;Safe senders list&#39; or address book to make sure you are able to receive upcoming updates and future communications from us.</strong></p>\r\n\r\n<p>Best regards,<br />\r\nTine</p>\r\n\r\n<p><strong>Khristine Gudczinski</strong><br />\r\non behalf of the UNDP Ocean Innovation Challenge (OIC) Team</p>\r\n\r\n<p>Follow us:<br />\r\n<a href=\"https://www.oceaninnovationchallenge.org\">https://www.oceaninnovationchallenge.org</a>&nbsp; |&nbsp; <a href=\"https://twitter.com/UNDPOceanInnov\">#OceanInnovationChallenge</a><br />\r\n<a href=\"https://www.oceanactionhub.org\">https://www.oceanactionhub.org</a>&nbsp; |&nbsp;&nbsp;<a href=\"https://twitter.com/oceanactionhub\">@OceanActionHub</a></p>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      theme_name: ''
+      parameters: {  }
+      debug: false
+variants: {  }

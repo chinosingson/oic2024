@@ -1,0 +1,15 @@
+uuid: 13d9cc44-823a-47ce-8c62-dafa597aa16e
+langcode: en
+status: true
+dependencies: {  }
+name: news_1110_x_450
+label: 'News (1110 x 450)'
+effects:
+  63d747a1-8a79-48e5-b993-07ca2b41d47a:
+    uuid: 63d747a1-8a79-48e5-b993-07ca2b41d47a
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1110
+      height: 450
+      anchor: center-center

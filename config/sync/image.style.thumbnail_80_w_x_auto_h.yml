@@ -1,0 +1,15 @@
+uuid: a9c52ef5-47bb-4bf4-9b02-8920eb8d9189
+langcode: en
+status: true
+dependencies: {  }
+name: thumbnail_80_w_x_auto_h
+label: 'Thumbnail (80 W x Auto H)'
+effects:
+  b38d3995-c15f-4086-9095-53a26f76163f:
+    uuid: b38d3995-c15f-4086-9095-53a26f76163f
+    id: image_scale
+    weight: 1
+    data:
+      width: 80
+      height: null
+      upscale: true

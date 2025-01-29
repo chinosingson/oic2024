@@ -1,0 +1,23 @@
+uuid: 24678c2e-83ed-4c6a-a98b-a7de5d406fdf
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - node
+id: node.field_file_pdf_test
+field_name: field_file_pdf_test
+entity_type: node
+type: file
+settings:
+  target_type: file
+  display_field: false
+  display_default: false
+  uri_scheme: public
+module: file
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

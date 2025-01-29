@@ -1,0 +1,26 @@
+uuid: cf2aa2d0-bea1-41d7-9d3d-7e85efc8bcc9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_smart_date
+    - node.type.innovator_stories
+  module:
+    - smart_date
+id: node.innovator_stories.field_smart_date
+field_name: field_smart_date
+entity_type: node
+bundle: innovator_stories
+label: 'Date Published'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    default_duration: 0
+    default_duration_increments: "0|None\r\n30\r\n60|1 hour\r\n90\r\n120|2 hours\r\ncustom"
+    default_date_type: now
+    default_date: ''
+default_value_callback: ''
+settings: {  }
+field_type: smartdate

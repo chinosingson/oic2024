@@ -1,0 +1,31 @@
+uuid: a7f81823-47c6-47aa-bfa8-61a4a608b775
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:010b2527-ddc7-4023-9ebf-8fb28f3aac1e'
+  module:
+    - block_content
+    - system
+  theme:
+    - jango_sub
+id: footer62columnsdescriptionandtweets
+theme: jango_sub
+region: footer
+weight: -49
+provider: null
+plugin: 'block_content:010b2527-ddc7-4023-9ebf-8fb28f3aac1e'
+settings:
+  id: 'block_content:010b2527-ddc7-4023-9ebf-8fb28f3aac1e'
+  label: 'Footer 6 - 2 Columns, Description and Tweets'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /node/118/footer-6

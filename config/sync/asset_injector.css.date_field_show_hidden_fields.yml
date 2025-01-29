@@ -1,0 +1,35 @@
+uuid: d44ce5f5-e6be-48d4-8514-e3d36856f425
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - user
+id: date_field_show_hidden_fields
+label: 'date field show hidden fields'
+code: |+
+  #edit-field-smart-date-0-end-value,
+  #edit-field-smart-date-0 > div > h4:nth-child(1),
+  #edit-field-smart-date-0 > div > h4:nth-child(3),
+  #edit-field-smart-date-0-end-value-date,
+  #edit-field-smart-date-0-end-value-time {
+  	display: inline-block !important; 
+  }
+
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/node/*/edit\r\n/node/add/*"
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      oic_managers: oic_managers
+      administrator: administrator
+contexts: {  }
+conditions_require_all: true

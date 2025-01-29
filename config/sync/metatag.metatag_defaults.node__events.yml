@@ -1,0 +1,22 @@
+uuid: ebf1f09f-dd6e-4a7c-8019-8837b722366f
+langcode: en
+status: true
+dependencies: {  }
+id: node__events
+label: 'Content: Events'
+tags:
+  title: '[node:title] | [site:name]'
+  description: '[node:summary]'
+  image_src: '[node:field_image_events]'
+  abstract: '[node:summary]'
+  og_image_alt: '[node:title] | [site:name]'
+  og_title: '[node:title] | [site:name]'
+  og_image_secure_url: '[node:field_image_events]'
+  og_image_url: '[node:field_image_events]'
+  og_image: '[node:field_image_events]'
+  og_description: '[node:summary]'
+  twitter_cards_type: summary_large_image
+  twitter_cards_image_alt: '[node:title] | [site:name]'
+  twitter_cards_image: '[node:field_image_events]'
+  twitter_cards_description: '[node:summary]'
+  twitter_cards_title: '[node:title] | [site:name]'

@@ -1,0 +1,64 @@
+uuid: 17903588-f52b-4625-97c0-5147c86c8c33
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.videos.body
+    - field.field.node.videos.field_iframe_code_videos
+    - field.field.node.videos.field_smart_date
+    - field.field.node.videos.field_start_date
+    - node.type.videos
+  module:
+    - datetime
+    - field_formatter_class
+    - smart_date
+    - text
+    - user
+id: node.videos.default
+targetEntityType: node
+bundle: videos
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_iframe_code_videos:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_smart_date:
+    type: smartdate_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+      format: date_only
+      force_chronological: true
+      add_classes: true
+      time_wrapper: true
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 3
+    region: content
+  field_start_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: day_month_and_year
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 1
+    region: content
+hidden:
+  langcode: true
+  links: true

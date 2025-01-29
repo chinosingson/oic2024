@@ -1,0 +1,25 @@
+uuid: ed5fa961-8368-4eda-8874-349400a6e49a
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:93d1e3d0-2373-4e8a-bff7-a1abd4be63dc'
+  module:
+    - block_content
+  theme:
+    - jango_sub
+id: applicationforminstructions
+theme: jango_sub
+region: content
+weight: -45
+provider: null
+plugin: 'block_content:93d1e3d0-2373-4e8a-bff7-a1abd4be63dc'
+settings:
+  id: 'block_content:93d1e3d0-2373-4e8a-bff7-a1abd4be63dc'
+  label: 'Application Form Instructions'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

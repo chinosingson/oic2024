@@ -1,0 +1,29 @@
+uuid: e1088841-9bcb-4804-8bf0-c2b93f93e0b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sdg_14_themes
+    - node.type.sdg_14_targets
+    - node.type.solutions_brief
+id: node.solutions_brief.field_sdg_14_themes
+field_name: field_sdg_14_themes
+entity_type: node
+bundle: solutions_brief
+label: 'SDG 14 Themes'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      sdg_14_targets: sdg_14_targets
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

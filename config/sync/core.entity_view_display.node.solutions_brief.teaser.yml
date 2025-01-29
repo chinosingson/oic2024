@@ -1,0 +1,55 @@
+uuid: 044d7d7e-4fe6-4249-8add-97d7d9e547f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.solutions_brief.field_beneficiary_countries
+    - field.field.node.solutions_brief.field_challenge
+    - field.field.node.solutions_brief.field_contact_details
+    - field.field.node.solutions_brief.field_cover_photo
+    - field.field.node.solutions_brief.field_implementation_period
+    - field.field.node.solutions_brief.field_innovator_name
+    - field.field.node.solutions_brief.field_introduction
+    - field.field.node.solutions_brief.field_keywords
+    - field.field.node.solutions_brief.field_main_results
+    - field.field.node.solutions_brief.field_methodology
+    - field.field.node.solutions_brief.field_potential_impacts
+    - field.field.node.solutions_brief.field_replication_scalability
+    - field.field.node.solutions_brief.field_sdg_14_themes
+    - field.field.node.solutions_brief.field_sdg_themes
+    - field.field.node.solutions_brief.field_solution
+    - field.field.node.solutions_brief.field_support_amount
+    - field.field.node.solutions_brief.field_theory_of_change
+    - node.type.solutions_brief
+  module:
+    - user
+id: node.solutions_brief.teaser
+targetEntityType: node
+bundle: solutions_brief
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_beneficiary_countries: true
+  field_challenge: true
+  field_contact_details: true
+  field_cover_photo: true
+  field_implementation_period: true
+  field_innovator_name: true
+  field_introduction: true
+  field_keywords: true
+  field_main_results: true
+  field_methodology: true
+  field_potential_impacts: true
+  field_replication_scalability: true
+  field_sdg_14_themes: true
+  field_sdg_themes: true
+  field_solution: true
+  field_support_amount: true
+  field_theory_of_change: true
+  langcode: true

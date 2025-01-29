@@ -1,0 +1,15 @@
+uuid: 41d83319-5152-4fad-8298-6682ad0d59f1
+langcode: en
+status: true
+dependencies: {  }
+name: thumbnail_420_w_x_auto_h
+label: 'Thumbnail (420 W x Auto H)'
+effects:
+  37f9035a-6675-44a9-9d5e-3bd698e8d6ba:
+    uuid: 37f9035a-6675-44a9-9d5e-3bd698e8d6ba
+    id: image_scale
+    weight: 1
+    data:
+      width: 420
+      height: null
+      upscale: true

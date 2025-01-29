@@ -1,0 +1,35 @@
+uuid: e0daf4e6-c435-453f-97bb-ba3c1f5cb82e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:76a47385-09a5-49c1-b0ed-87ec7a87399f'
+  module:
+    - block_class
+    - block_content
+    - system
+  theme:
+    - jango_sub
+third_party_settings:
+  block_class:
+    classes: second-call-types-innovation
+id: typesofinnovations3rdcall
+theme: jango_sub
+region: content_full
+weight: -53
+provider: null
+plugin: 'block_content:76a47385-09a5-49c1-b0ed-87ec7a87399f'
+settings:
+  id: 'block_content:76a47385-09a5-49c1-b0ed-87ec7a87399f'
+  label: 'Types of Innovations (3rd Call)'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /node/328

@@ -1,0 +1,25 @@
+uuid: 26bc0a43-4f12-441c-96bd-732ef532a4e0
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:9136e22d-bc8d-4acb-9f7e-22488cb9b7e4'
+  module:
+    - block_content
+  theme:
+    - jango_sub
+id: footerlogosnewsletterlinks
+theme: jango_sub
+region: footer
+weight: -42
+provider: null
+plugin: 'block_content:9136e22d-bc8d-4acb-9f7e-22488cb9b7e4'
+settings:
+  id: 'block_content:9136e22d-bc8d-4acb-9f7e-22488cb9b7e4'
+  label: 'Footer Global - Logos + Newsletter + Links'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

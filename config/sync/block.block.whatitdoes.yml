@@ -1,0 +1,31 @@
+uuid: c9fe0d96-cb00-4cf4-87db-be86fb72dfd2
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:75cfe4f7-4ec0-454f-8741-5d57e60ae5ec'
+  module:
+    - block_content
+    - system
+  theme:
+    - jango_sub
+id: whatitdoes
+theme: jango_sub
+region: content
+weight: -49
+provider: null
+plugin: 'block_content:75cfe4f7-4ec0-454f-8741-5d57e60ae5ec'
+settings:
+  id: 'block_content:75cfe4f7-4ec0-454f-8741-5d57e60ae5ec'
+  label: 'What it does'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: '<front>'

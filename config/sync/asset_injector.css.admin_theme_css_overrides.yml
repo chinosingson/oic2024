@@ -1,0 +1,33 @@
+uuid: 1eee35da-6a74-4030-b734-4f873c87dada
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: admin_theme_css_overrides
+label: 'Admin Theme CSS Overrides'
+code: |-
+  .node-form:not([class^="node-events-"]) .field--type-smartdate .duration-wrapper,
+  .node-form:not([class^="node-events-"]) .field--type-smartdate .time-end,
+  .node-form:not([class^="node-events-"]) .field--type-smartdate h4.label {
+    display: none !important;
+  }
+  .node-form:not([class^="node-events-"]) .field--type-smartdate .allday-label {
+    margin: 0;
+  }
+  .node-form:not([class^="node-events-"]) .field--type-smartdate .allday {
+    margin-left: 0;
+  }
+  .node-form input[type="date"] {
+    line-height: initial;
+  }
+media: all
+preprocess: true
+conditions:
+  current_theme:
+    id: current_theme
+    theme:
+      seven: seven
+    negate: false
+contexts: {  }
+conditions_require_all: true

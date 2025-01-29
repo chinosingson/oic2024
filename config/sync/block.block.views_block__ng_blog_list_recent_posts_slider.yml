@@ -1,0 +1,42 @@
+uuid: bc8fceb2-0513-48d8-863a-42878f80d41e
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.ng_blog_list
+  module:
+    - block_class
+    - system
+    - user
+    - views
+  theme:
+    - jango_sub
+third_party_settings:
+  block_class:
+    classes: container
+id: views_block__ng_blog_list_recent_posts_slider
+theme: jango_sub
+region: content
+weight: -53
+provider: null
+plugin: 'views_block:ng_blog_list-recent_posts_slider'
+settings:
+  id: 'views_block:ng_blog_list-recent_posts_slider'
+  label: 'Latest News'
+  label_display: visible
+  provider: views
+  views_label: 'Latest News'
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: '<front>'
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator

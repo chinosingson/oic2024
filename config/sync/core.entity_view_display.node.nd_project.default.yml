@@ -1,0 +1,200 @@
+uuid: 4400a719-3366-47e0-b47b-d35650078b44
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.nd_project.body
+    - field.field.node.nd_project.field_beneficiary_country_ies
+    - field.field.node.nd_project.field_categories
+    - field.field.node.nd_project.field_client
+    - field.field.node.nd_project.field_co_financing_usd
+    - field.field.node.nd_project.field_cohort
+    - field.field.node.nd_project.field_contact_person_s
+    - field.field.node.nd_project.field_end_date
+    - field.field.node.nd_project.field_featured_image
+    - field.field.node.nd_project.field_images
+    - field.field.node.nd_project.field_oic_grant_usd
+    - field.field.node.nd_project.field_profile_pdf
+    - field.field.node.nd_project.field_sdg_14_themes
+    - field.field.node.nd_project.field_sdg_themes
+    - field.field.node.nd_project.field_short_title
+    - field.field.node.nd_project.field_small_description
+    - field.field.node.nd_project.field_start_date
+    - field.field.node.nd_project.field_url_the_site
+    - field.field.node.nd_project.field_video
+    - field.field.node.nd_project.field_video_embed
+    - image.style.project_1020x550_
+    - image.style.project_600x400
+    - node.type.nd_project
+  module:
+    - datetime
+    - field_formatter_class
+    - image
+    - jango_cms
+    - text
+    - user
+id: node.nd_project.default
+targetEntityType: node
+bundle: nd_project
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_beneficiary_country_ies:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_categories:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 7
+    region: content
+  field_client:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_contact_person_s:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_end_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: month_and_year
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 12
+    region: content
+  field_featured_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: project_600x400
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 14
+    region: content
+  field_images:
+    type: jango_cms_project_image_slider
+    label: hidden
+    settings:
+      image_style: project_1020x550_
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 1
+    region: content
+  field_oic_grant_usd:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_profile_pdf:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 15
+    region: content
+  field_sdg_14_themes:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 5
+    region: content
+  field_sdg_themes:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: icon_only
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 3
+    region: content
+  field_short_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_start_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: month_and_year
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 11
+    region: content
+  field_url_the_site:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_video_embed:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 13
+    region: content
+hidden:
+  field_co_financing_usd: true
+  field_cohort: true
+  field_small_description: true
+  field_video: true
+  langcode: true
+  links: true

@@ -1,0 +1,97 @@
+uuid: 61aab1e5-376b-4343-97a6-3546228f89a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.nd_project.body
+    - field.field.node.nd_project.field_beneficiary_country_ies
+    - field.field.node.nd_project.field_categories
+    - field.field.node.nd_project.field_client
+    - field.field.node.nd_project.field_co_financing_usd
+    - field.field.node.nd_project.field_cohort
+    - field.field.node.nd_project.field_contact_person_s
+    - field.field.node.nd_project.field_end_date
+    - field.field.node.nd_project.field_featured_image
+    - field.field.node.nd_project.field_images
+    - field.field.node.nd_project.field_oic_grant_usd
+    - field.field.node.nd_project.field_profile_pdf
+    - field.field.node.nd_project.field_sdg_14_themes
+    - field.field.node.nd_project.field_sdg_themes
+    - field.field.node.nd_project.field_short_title
+    - field.field.node.nd_project.field_small_description
+    - field.field.node.nd_project.field_start_date
+    - field.field.node.nd_project.field_url_the_site
+    - field.field.node.nd_project.field_video
+    - field.field.node.nd_project.field_video_embed
+    - image.style.project__600x300_
+    - node.type.nd_project
+  module:
+    - jango_cms
+    - text
+    - user
+id: node.nd_project.teaser
+targetEntityType: node
+bundle: nd_project
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_client:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_images:
+    type: jango_cms_images_slider
+    label: hidden
+    settings:
+      image_style: project__600x300_
+      height: '500'
+      image_link: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_short_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_url_the_site:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  field_beneficiary_country_ies: true
+  field_categories: true
+  field_co_financing_usd: true
+  field_cohort: true
+  field_contact_person_s: true
+  field_end_date: true
+  field_featured_image: true
+  field_oic_grant_usd: true
+  field_profile_pdf: true
+  field_sdg_14_themes: true
+  field_sdg_themes: true
+  field_small_description: true
+  field_start_date: true
+  field_video: true
+  field_video_embed: true
+  langcode: true
+  links: true

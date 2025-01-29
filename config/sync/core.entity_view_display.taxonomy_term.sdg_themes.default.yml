@@ -1,0 +1,32 @@
+uuid: fef4a96f-c456-4d84-992e-be00a3290da4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.sdg_themes.field_icon
+    - image.style.project__80x80_
+    - taxonomy.vocabulary.sdg_themes
+  module:
+    - field_formatter_class
+    - image
+id: taxonomy_term.sdg_themes.default
+targetEntityType: taxonomy_term
+bundle: sdg_themes
+mode: default
+content:
+  field_icon:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: project__80x80_
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    weight: 0
+    region: content
+hidden:
+  description: true
+  langcode: true

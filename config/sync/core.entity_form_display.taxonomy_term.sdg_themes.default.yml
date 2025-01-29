@@ -1,0 +1,68 @@
+uuid: f3429038-ad1b-47b3-b71b-af4a2119e962
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.sdg_themes.field_icon
+    - image.style.thumbnail
+    - taxonomy.vocabulary.sdg_themes
+  module:
+    - field_formatter_class
+    - image
+    - imce
+    - path
+    - text
+id: taxonomy_term.sdg_themes.default
+targetEntityType: taxonomy_term
+bundle: sdg_themes
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_icon:
+    type: image_image
+    weight: 2
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+      imce:
+        enabled: true
+  langcode:
+    type: language_select
+    weight: 3
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden: {  }

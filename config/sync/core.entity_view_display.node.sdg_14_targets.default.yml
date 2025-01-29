@@ -1,0 +1,56 @@
+uuid: ead54223-860c-49e6-ae2a-8a300263bb97
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.sdg_14_targets.body
+    - field.field.node.sdg_14_targets.field_card_image
+    - field.field.node.sdg_14_targets.field_sdgb_card_url
+    - node.type.sdg_14_targets
+  module:
+    - image
+    - link
+    - text
+    - user
+id: node.sdg_14_targets.default
+targetEntityType: node
+bundle: sdg_14_targets
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_card_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_sdgb_card_url:
+    type: link
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  langcode: true

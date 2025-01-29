@@ -1,0 +1,13 @@
+contexts:
+  -
+    context: ''
+    translations:
+      -
+        source: PrivateSector
+        translation: 'Private Sector'
+      -
+        source: UnitedNations(UN)
+        translation: 'United Nations (UN)'
+      -
+        source: Non-GovernmentalOrganization(NGO)
+        translation: 'Non-Governmental Organization (NGO)'
