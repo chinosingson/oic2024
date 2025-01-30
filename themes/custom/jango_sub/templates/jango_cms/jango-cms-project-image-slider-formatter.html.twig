@@ -3,7 +3,7 @@
     {% for image in images %}
       <li class="cbp-slider-item">
         {% set link = image['#item'].getValue()['title'] %}
-        {% if link %}
+        {% if link is not empty and (link starts with 'http://' or link starts with 'https://') %}
         <a class="a" href="{{ image['#item'].getValue()['title'] }}">{{ image }}</a>
         {% else %}
           {{ image }}
