@@ -1929,4 +1929,9 @@ nav.pagers {text-align: center;}
 }
 
 
-
+#views-exposed-form-project-page-index-gallery-sdg [id^=edit-actions],
+#views-exposed-form-project-page-index-gallery-sdg > div.form-group.js-form-item.form-item.js-form-type-select.form-item-field-sdg-themes-target-id.js-form-item-field-sdg-themes-target-id,
+#views-exposed-form-project-page-index-gallery-sdg #edit-actions {
+  display: none;
+  visibility: hidden;
+}
