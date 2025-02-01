@@ -68,12 +68,14 @@
             <div data-filter="*" class="cbp-filter-item-active cbp-filter-item"> {{ "All"|t }}
               <div class="cbp-filter-counter"></div>
             </div>
+          {% if rows.view_tabs is defined and rows.view_tabs['#tabs'] is not empty %}
             {% for key, tab in rows.view_tabs['#tabs'] %}
               {% if tab starts with '14.' %}
               <div data-filter=".{{ key }}" class="cbp-filter-item">{{ tab|striptags|trim|t }}<div class="cbp-filter-counter"></div>
               </div>
               {% endif %}
             {% endfor %}
+            {% endif %}
           {% endif %}
         </div>
         <div id="grid-container" class="cbp cbp-l-grid-agency" data-columns="{{ columns }}">
