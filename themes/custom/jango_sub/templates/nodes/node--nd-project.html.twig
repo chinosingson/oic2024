@@ -188,12 +188,6 @@
         </div>
       </div>
 
-      {% if content.field_video_embed %}
-      <div class="cbp-l-project-video">
-      {{ content.field_video_embed }}
-      </div>
-      {% endif %}
-
       {% if not node.get('field_small_description').isEmpty() %}
       <div class="cbp-l-project-subtitle">
         {{ content.field_small_description }}
@@ -203,6 +197,12 @@
       <div class="cbp-l-project-images container">
       {{ content.field_images }}
       </div>
+
+      {% if content.field_video_embed %}
+      <div class="cbp-l-project-video">
+      {{ content.field_video_embed }}
+      </div>
+      {% endif %}
 
     </div>
   </article>
