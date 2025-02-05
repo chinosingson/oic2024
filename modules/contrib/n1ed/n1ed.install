@@ -166,8 +166,12 @@ function n1ed_install() {
   $config->set('useLegacyFlmngrBackend', FALSE);
   $config->set('apiKey', 'N1D824RR');
   $config->set('integrationType', 'n1ed');
-  $config->set('installedAt', time());
+  $installed_at = time();
+  $config->set('installedAt', $installed_at);
   $config->save(TRUE);
+
+  error_log("N1ED module has been installed. N1ED installation time = " . $installed_at);
+
   n1ed_update_text_formats(TRUE);
 }
 

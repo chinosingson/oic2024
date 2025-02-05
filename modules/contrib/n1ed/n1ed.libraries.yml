@@ -30,3 +30,11 @@ drupal.n1ed.filefield:
   dependencies:
     - core/drupal
     - core/drupalSettings
+
+n1ed_plugin:
+  version: 1.x
+  js:
+    libraries/ckeditor4_plugins/N1ED-editor/plugin.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery

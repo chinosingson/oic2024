@@ -51,12 +51,3 @@ n1ed.useLegacyFlmngrBackend:
   methods: [POST]
   requirements:
     _permission: 'administer n1ed configuration'
-
-n1ed.plugin:
-  path: '/n1ed-plugin'
-  defaults:
-    _controller: '\Drupal\n1ed\Controller\N1EDController::getPluginJs'
-    _title: 'Get JS of the plugin'
-    methods: [GET]
-  requirements:
-    _permission: 'access content'

@@ -162,22 +162,15 @@ function n1ed_get_integration_type($editor_title) {
   // Do not use n1ed_get_api_key() to avoid recursive call
   $api_key = \Drupal::config('n1ed.settings')->get('apikey') ?: NULL;
 
-  $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL,"https://cloud.n1ed.com/api/v1/conf/get-integration-type");
-  curl_setopt($ch, CURLOPT_POST, 1);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('apiKey' => $api_key)));
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($ch, CURLOPT_TIMEOUT,3000);
-  $json = curl_exec($ch);
-  $isError = curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200;
-  curl_close($ch);
+  $contents = file_get_contents("https://cloud.n1ed.com/a/" . $api_key . "/config-integration-type.json");
+  if ($contents === FALSE) {
+    $isError = TRUE;
+  }
+  $json = json_decode($contents);
+  if ($json === NULL || !(isset($json->data)) || (isset($json->error) && $json->error !== NULL))
+    $isError = TRUE;
 
   $config = \Drupal::service('config.factory')->getEditable('n1ed.settings');
-  if (!$isError) {
-      $json = json_decode($json);
-      if (!(isset($json->data)) || (isset($json->error) && $json->error !== NULL))
-          $isError = TRUE;
-  }
   if (!$isError) {
       $n1ed_cached_integration_type = $json->data;
       $config->set('integrationType', $n1ed_cached_integration_type);

@@ -35,7 +35,7 @@ class N1ED extends CKEditor5PluginDefault implements CKEditor5PluginConfigurable
     $static_plugin_config["flmngr"]["options"]["apiKey"] = n1ed_get_api_key("CKEditor");
 
     $static_plugin_config["flmngr"]["options"]["urlFileManager"] = Url::fromRoute(
-      \Drupal::config('n1ed.settings')->get('useLegacyFlmngrBackend') != 1 ? 'n1ed.flmngr' : 'n1ed.flmngrLegacy'
+      /*\Drupal::config('n1ed.settings')->get('useLegacyFlmngrBackend') != 1 ?*/ 'n1ed.flmngr' /*: 'n1ed.flmngrLegacy'*/
     )->toString();
     $static_plugin_config["flmngr"]["options"]["urlFileManager__CSRF"] = "drupal8";
 

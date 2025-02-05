@@ -52,42 +52,19 @@ class N1EDController extends ControllerBase {
    */
   public function setApiKey() {
     $apiKey = $this->requestStack->getCurrentRequest()->request->get("n1edApiKey");
-    $token = $this->requestStack->getCurrentRequest()->request->get("n1edToken");
 
-    if ($apiKey == NULL || $token == NULL) {
+    if ($apiKey == NULL) {
       throw new AccessDeniedHttpException();
     }
 
     $config = $this->configFactory->getEditable('n1ed.settings');
     $config->set('apikey', $apiKey);
-    $config->set('token', $token);
+    $config->set('token', null); // no token since long (24) API keys
     $config->set('integrationType', 'n1ed');
     $config->save(TRUE);
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL,"https://cloud.n1ed.com/api/v1/conf/get-integration-type");
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('apiKey' => $apiKey)));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT,3000);
-    $json = curl_exec($ch);
-    $isError = curl_getinfo($ch, CURLINFO_HTTP_CODE) !== 200;
-    curl_close($ch);
-
-    if (!$isError) {
-      $json = json_decode($json);
-      if (!(isset($json->data)) || (isset($json->error) && $json->error !== NULL)) {
-        error_log("Unable to parse a response with integrationType");
-        $isError = TRUE;
-      }
-    } else {
-      error_log("Unable get a response with integrationType");
-    }
-    if (!$isError) {
-      $config = $this->configFactory->getEditable('n1ed.settings');
-      $config->set('integrationType', $json->data);
-      $config->save(TRUE);
-    }
+    // Force caching the value
+    n1ed_get_integration_type(null);
 
     return new Response();
   }
@@ -112,15 +89,6 @@ class N1EDController extends ControllerBase {
     $config->set('useLegacyFlmngrBackend', $useLegacyFlmngrBackend);
     $config->save(TRUE);
     return new Response();
-  }
-
-  public function getPluginJs() {
-    $name = __DIR__ . '/../../js/ckeditor4_plugins/N1ED-editor/plugin.js';
-    $fp = fopen($name, 'rb');
-    header("Content-Type: text/javascript");
-    header("Content-Length: " . filesize($name));
-    fpassthru($fp);
-    exit;
   }
 
 }

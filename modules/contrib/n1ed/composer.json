@@ -20,7 +20,6 @@
     "require": {
       "drupal/core": "^8 || ^9 || ^10 || ^11",
       "ext-json": "*",
-      "ext-gd": "*",
-      "ext-curl": "*"
+      "ext-gd": "*"
     }
 }

@@ -43,7 +43,12 @@ class N1ED extends CKEditorPluginBase implements CKEditorPluginConfigurableInter
    * {@inheritdoc}
    */
   public function getFile() {
-    return Url::fromRoute('n1ed.plugin')->toString();
+
+    $module_path = \Drupal::service('extension.list.module')->getPath('n1ed');
+    $library_path = $module_path . '/libraries/ckeditor4_plugins/N1ED-editor/plugin.js';
+    return Url::fromUri('base:' . $library_path)->toString();
+
+    //return Url::fromRoute('n1ed.plugin')->toString();
 
     /*
     $settings = \Drupal::config('n1ed.settings');
@@ -153,7 +158,7 @@ class N1ED extends CKEditorPluginBase implements CKEditorPluginConfigurableInter
     $settings["urlSetApiKeyAndToken__CSRF"] = "drupal8";
 
     $settings["Flmngr"]["urlFileManager"] = Url::fromRoute(
-      \Drupal::config('n1ed.settings')->get('useLegacyFlmngrBackend') != 1 ? 'n1ed.flmngr' : 'n1ed.flmngrLegacy'
+      /*\Drupal::config('n1ed.settings')->get('useLegacyFlmngrBackend') != 1 ?*/ 'n1ed.flmngr' /*: 'n1ed.flmngrLegacy'*/
     )->toString();
     $settings["Flmngr"]["urlFileManager__CSRF"] = "drupal8";
 
