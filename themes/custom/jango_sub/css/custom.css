@@ -302,7 +302,7 @@ body #gt-nvframe {
 .c-layout-header .c-navbar .c-logo img {
   width: 100% !important;
   max-width: 100% !important;
-  max-height: 122px !important;
+  max-height: none !important;
 }
 .frontpage .c-layout-header .c-navbar .c-logo {
   width: 215px;
@@ -1815,6 +1815,10 @@ nav.pagers {text-align: center;}
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li > .c-link {
     font-size: 15px;
     padding: 41px 10px 39px 10px;
+  }
+  .c-layout-header.c-layout-header-4 .c-navbar {
+    background: #ffffff;
+    min-height: 95px !important;
   }
   .c-page-on-scroll.c-layout-header-fixed .c-layout-header .c-topbar {
     display: block;
