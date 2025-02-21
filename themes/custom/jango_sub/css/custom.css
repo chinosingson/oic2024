@@ -302,7 +302,7 @@ body #gt-nvframe {
 .c-layout-header .c-navbar .c-logo img {
   width: 100% !important;
   max-width: 100% !important;
-  max-height: none !important;
+  max-height: 122px !important;
 }
 .frontpage .c-layout-header .c-navbar .c-logo {
   width: 215px;
