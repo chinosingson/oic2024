@@ -1972,3 +1972,13 @@ nav.pagers {text-align: center;}
   margin: 0 16px;
   font-size: 25.8px;
 }
+
+@media screen and (max-width: 992px) {
+  .undp-wordmark p {
+    font-size: 20px;
+  }
+
+  .c-navbar .c-logo  img.c-mobile-logo{
+    max-height: 78px !important;
+  }
+}
