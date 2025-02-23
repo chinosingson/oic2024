@@ -1,4 +1,4 @@
-views_year_filter.settings_form:
+views_year_filter.settings:
   path: '/admin/config/views-year-filter/settings'
   defaults:
     _form: '\Drupal\views_year_filter\Form\SettingsForm'
