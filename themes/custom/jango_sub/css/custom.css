@@ -1975,6 +1975,7 @@ nav.pagers {text-align: center;}
 
 .funded-by h3 {
   font-family: 'Metropolis Regular';
+  font-weight: normal;
 }
 
 @media screen and (max-width: 992px) {
