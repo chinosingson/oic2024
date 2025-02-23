@@ -1939,3 +1939,36 @@ nav.pagers {text-align: center;}
   display: none;
   visibility: hidden;
 }
+
+.flag-logos {
+  display:flex !important;
+  align-items: anchor-center;
+  justify-content: space-between;
+}
+
+.flag-logo {
+  display: block;
+  width: 50%;
+}
+
+#norway-logo {
+  padding-right: 16px;
+}
+
+.undp-wordmark p {
+  color: white;
+  -webkit-font-smoothing: antialiased;
+
+  font: inherit;
+  line-height: 1.15;
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  background: transparent;
+  font-weight: normal;
+  overflow-wrap: break-word;
+  margin: 0 16px;
+  font-size: 25.8px;
+}
