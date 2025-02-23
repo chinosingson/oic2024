@@ -1973,6 +1973,10 @@ nav.pagers {text-align: center;}
   font-size: 25.8px;
 }
 
+.funded-by h3 {
+  font-family: 'Metropolis Regular';
+}
+
 @media screen and (max-width: 992px) {
   .undp-wordmark p {
     font-size: 20px;
