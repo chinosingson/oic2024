@@ -37,14 +37,14 @@ function block_id_block_presave(BlockInterface $entity) {
     $entity->unsetThirdPartySetting('block_id', 'id');
   }
   // Add Block Classes
-  if (empty($entity->getThirdPartySetting('block_classes', 'title_class'))) {
-    $entity->unsetThirdPartySetting('block_classes', 'title_class');
+  if (empty($entity->getThirdPartySetting('block_id', 'title_class'))) {
+    $entity->unsetThirdPartySetting('block_id', 'title_class');
   }
-  if (empty($entity->getThirdPartySetting('block_classes', 'content_class'))) {
-    $entity->unsetThirdPartySetting('block_classes', 'content_class');
+  if (empty($entity->getThirdPartySetting('block_id', 'content_class'))) {
+    $entity->unsetThirdPartySetting('block_id', 'content_class');
   }
-  if (empty($entity->getThirdPartySetting('block_classes', 'block_class'))) {
-    $entity->unsetThirdPartySetting('block_classes', 'block_class');
+  if (empty($entity->getThirdPartySetting('block_id', 'block_class'))) {
+    $entity->unsetThirdPartySetting('block_id', 'block_class');
   }
 
 }
@@ -66,23 +66,23 @@ function block_id_form_block_form_alter(&$form, FormStateInterface $form_state, 
       '#description' => t("If you put a value here it'll replace the block's id."),
       '#default_value' => $block->getThirdPartySetting('block_id', 'id'),
     ];
-    $form['third_party_settings']['block_classes']['title_class'] = [
+    $form['third_party_settings']['block_id']['title_class'] = [
       '#type' => 'textfield',
       '#title' => t('Title CSS class(es)'),
-      '#default_value' => $block->getThirdPartySetting('block_classes', 'title_class'),
+      '#default_value' => $block->getThirdPartySetting('block_id', 'title_class'),
       '#maxlength' => 255,
     ];
-    $form['third_party_settings']['block_classes']['content_class'] = [
+    $form['third_party_settings']['block_id']['content_class'] = [
       '#type' => 'textfield',
       '#title' => t('Content CSS class(es)'),
-      '#default_value' => $block->getThirdPartySetting('block_classes', 'content_class'),
+      '#default_value' => $block->getThirdPartySetting('block_id', 'content_class'),
       '#maxlength' => 255,
     ];
-    $form['third_party_settings']['block_classes']['block_class'] = [
+    $form['third_party_settings']['block_id']['block_class'] = [
       '#type' => 'textfield',
       '#title' => t('Block CSS class(es)'),
       '#description' => t('Customize the styling of this block by adding CSS classes. You can add one or more class by adding space between class.'),
-      '#default_value' => $block->getThirdPartySetting('block_classes', 'block_class'),
+      '#default_value' => $block->getThirdPartySetting('block_id', 'block_class'),
       '#maxlength' => 255,
     ];
 
@@ -140,19 +140,19 @@ function block_id_preprocess_block(&$variables) {
       $id_array = explode(' ', $ids);
       $variables['attributes']['id'] = $id_array;
     }
-    if ($block && $classes = $block->getThirdPartySetting('block_classes', 'title_class')) {
+    if ($block && $classes = $block->getThirdPartySetting('block_id', 'title_class')) {
       $classes_array = explode(' ', $classes);
       foreach ($classes_array as $class) {
         $variables['title_attributes']['class'][] = Html::cleanCssIdentifier($class, []);
       }
     }
-    if ($block && $classes = $block->getThirdPartySetting('block_classes', 'content_class')) {
+    if ($block && $classes = $block->getThirdPartySetting('block_id', 'content_class')) {
       $classes_array = explode(' ', $classes);
       foreach ($classes_array as $class) {
         $variables['content_attributes']['class'][] = Html::cleanCssIdentifier($class, []);
       }
     }
-    if ($block && $classes = $block->getThirdPartySetting('block_classes', 'block_class')) {
+    if ($block && $classes = $block->getThirdPartySetting('block_id', 'block_class')) {
       $classes_array = explode(' ', $classes);
       foreach ($classes_array as $class) {
         $variables['attributes']['class'][] = Html::cleanCssIdentifier($class, []);

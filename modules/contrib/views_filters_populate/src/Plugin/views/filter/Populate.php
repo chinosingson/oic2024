@@ -4,11 +4,9 @@ namespace Drupal\views_filters_populate\Plugin\views\filter;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\views\Plugin\views\HandlerBase;
 use Drupal\views\Plugin\views\filter\FilterPluginBase;
 use Drupal\views\Plugin\views\filter\NumericFilter;
 use Drupal\views\Plugin\views\filter\StringFilter;
-use Drupal\views_filters_populate\Plugin\views\filter\PopulateRemoveEmptyFilterMock;
 
 /**
  * Filter handler which allows to search on multiple fields.
@@ -20,15 +18,17 @@ use Drupal\views_filters_populate\Plugin\views\filter\PopulateRemoveEmptyFilterM
 class Populate extends FilterPluginBase {
 
   /**
+   * {@inheritdoc}
+   *
    * Because access() on filters are run earlier than the preQuery(), we use
-   * that method to add a mock filter array at the end so that the next iteration
-   * of filters, will trigger our mocked filter and that filter will take care
-   * of removing both itself and the filters that it should populate so that
-   * they behave as optional exposed filters (no added where condition).
+   * that method to add a mock filter array at the end so that the next
+   * iteration of filters, will trigger our mocked filter and that filter will
+   * take care of removing both itself and the filters that it should populate
+   * so that they behave as optional exposed filters (no added where condition).
    *
    * We couldn't do this on preQuery() - we tried. The reason is that preQuery()
    * is not able to unset filters unless they are in the end, otherwise the
-   * interation on the filters array will continue and a preQuery will bne run
+   * iteration on the filters array will continue and a preQuery will bne run
    * on a null object.
    *
    * @see \Drupal\views\ViewExecutable::_initHandler()
@@ -40,7 +40,7 @@ class Populate extends FilterPluginBase {
     $value = $this->value;
 
     // If exposed, take data from input, as this hasn't reached the views
-    // object yet
+    // object yet.
     if ($this->options['exposed']) {
       $input = $this->view->getExposedInput();
       $identifier = $this->options['expose']['identifier'];
@@ -125,11 +125,11 @@ class Populate extends FilterPluginBase {
    * {@inheritdoc}
    */
   public function preQuery() {
-    // start with default value
+    // Start with default value.
     $value = $this->value;
 
     // If exposed, take data from input, as this hasn't reached the views
-    // object yet
+    // object yet.
     if ($this->options['exposed']) {
       $input = $this->view->getExposedInput();
       $identifier = $this->options['expose']['identifier'];
@@ -155,7 +155,7 @@ class Populate extends FilterPluginBase {
    * {@inheritdoc}
    */
   public function query() {
-    // do nothing
+    // Do nothing.
   }
 
   /**
@@ -165,19 +165,27 @@ class Populate extends FilterPluginBase {
     $errors = parent::validate();
     $filters = $this->displayHandler->getHandlers('filter');
 
-    // Only perform these validatiosn if the query is not being built
+    // Only perform these validations if the query is not being built.
     // @see ViewExecutable::build()
     if (empty($this->view->build_info)) {
       foreach ($this->options['filters'] as $id) {
-        // Make sure are populate filters are properly configured/available
+        // Make sure are populate filters are properly configured/available.
         if (!isset($filters[$id])) {
-          $errors[] = $this->t('%display: Filter %filter set in %name is not available.', ['%filter' => $id, '%name' => $this->adminLabel(), '%display' => $this->displayHandler->display['display_title']]);
+          $errors[] = $this->t('%display: Filter %filter set in %name is not available.', [
+            '%filter' => $id,
+            '%name' => $this->adminLabel(),
+            '%display' => $this->displayHandler->display['display_title'],
+          ]);
         }
         else {
           $filter = $filters[$id];
 
           if ($filter->options['exposed']) {
-            $errors[] = $this->t('%display: Filter %filter set in %name is not usable when exposed.', ['%filter' => $filter->adminLabel(), '%name' => $this->adminLabel(), '%display' => $this->displayHandler->display['display_title']]);
+            $errors[] = $this->t('%display: Filter %filter set in %name is not usable when exposed.', [
+              '%filter' => $filter->adminLabel(),
+              '%name' => $this->adminLabel(),
+              '%display' => $this->displayHandler->display['display_title'],
+            ]);
           }
         }
       }
@@ -187,7 +195,7 @@ class Populate extends FilterPluginBase {
   }
 
   /**
-   * Provide a simple textfield for equality
+   * Provide a simple textfield for equality.
    *
    * @see \Drupal\views\Plugin\views\filter\StringFilter;
    */
@@ -222,4 +230,5 @@ class Populate extends FilterPluginBase {
       ];
     }
   }
+
 }

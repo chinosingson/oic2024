@@ -58,6 +58,14 @@ function save_edit_form_alter(&$form, FormStateInterface $form_state) {
         $form['actions']['save_edit']['#gin_action_item'] = TRUE;
       }
       unset($form['actions']['save_edit']['#button_type']);
+      
+      // Override the default Save button text if not hidden
+      if (!$config->get('hide_default_save') && isset($form['actions']['submit'])) {
+        $save_button_text = $config->get('save_button_text');
+        if (!empty($save_button_text)) {
+          $form['actions']['submit']['#value'] = $save_button_text;
+        }
+      }
       if ($config->get('hide_default_save')) {
         $form['actions']['unpublish']['#access'] = FALSE;
         $form['actions']['submit']['#access'] = FALSE;

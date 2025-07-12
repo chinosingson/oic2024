@@ -37,3 +37,6 @@ save_edit.settings:
       type: sequence
       sequence:
         type: string
+    save_button_text:
+      label: 'Text to use for default Save button'
+      type: label    

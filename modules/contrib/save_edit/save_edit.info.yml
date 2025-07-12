@@ -4,7 +4,7 @@ description: Gives a "Save & Edit" button on node pages.
 core_version_requirement: ^8 || ^9 || ^10 || ^11
 configure: save_edit.save_edit_settings_form
 
-# Information added by Drupal.org packaging script on 2024-07-19
-version: '8.x-1.8'
+# Information added by Drupal.org packaging script on 2025-07-11
+version: '8.x-1.9'
 project: 'save_edit'
-datestamp: 1721431989
+datestamp: 1752272087

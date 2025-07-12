@@ -74,6 +74,15 @@ class SettingsForm extends ConfigFormBase {
       '#size' => 64,
       '#default_value' => $config->get('button_value'),
     ];
+    // Default Save button text
+    $form['save_button_text'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Text to use for default Save button'),
+      '#description' => $this->t('This is the text that will be used for the default Save button at the bottom of the node form. Leave blank to use the default "<strong>Save</strong>".'),
+      '#maxlength' => 64,
+      '#size' => 64,
+      '#default_value' => $config->get('save_button_text'),
+    ];
     $form['button_weight'] = [
       '#type' => 'select',
       '#title' => $this->t('Save & Edit Button Weight'),
@@ -157,6 +166,7 @@ class SettingsForm extends ConfigFormBase {
 
     $this->config('save_edit.settings')
       ->set('button_value', $form_state->getValue('button_value'))
+      ->set('save_button_text', $form_state->getValue('save_button_text'))
       ->set('button_weight', $form_state->getValue('button_weight'))
       ->set('gin_primary', !is_null($form_state->getValue('gin_primary')) ? $form_state->getValue('gin_primary') : FALSE)
       ->set('hide_default_save', $form_state->getValue('hide_default_save'))
